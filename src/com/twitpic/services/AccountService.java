@@ -16,4 +16,6 @@ public interface AccountService {
 	 */
 	public boolean act_user(String ac,String at)throws Exception;
 	
+	public void send_ac_mail(com.twitpic.db.model.Users user,String email);
+	
 }
