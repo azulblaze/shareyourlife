@@ -1,0 +1,31 @@
+<!DOCTYPE tiles-definitions PUBLIC   
+         "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"   
+         "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="layout" template="/WEB-INF/pages/layouts/layout.jsp">
+		<put-attribute name="title" type="string" value="欢迎"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/pages/tiles/header.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/pages/tiles/footer.jsp"></put-attribute>
+	</definition>
+	<definition name="page.index" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/index.jsp"></put-attribute>
+	</definition>
+	<definition name="page.login" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/login.jsp"></put-attribute>
+	</definition>
+	<definition name="page.reg" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/reg.jsp"></put-attribute>
+	</definition>
+	<definition name="page.main" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/main.jsp"></put-attribute>
+	</definition>
+	<definition name="page.error_email_not_valid" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/error_email_not_valid.jsp"></put-attribute>
+	</definition>
+	<definition name="page.error_been_closed" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/error_been_closed.jsp"></put-attribute>
+	</definition>
+	<definition name="page.re_act" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/re_act.jsp"></put-attribute>
+	</definition>
+</tiles-definitions>

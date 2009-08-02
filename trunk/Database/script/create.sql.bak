@@ -1,0 +1,118 @@
+
+//CREATE SCHEMA IF NOT EXISTS mydb DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+
+//USE mydb;
+
+-- -----------------------------------------------------
+-- Table users
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS users ;
+
+CREATE  TABLE IF NOT EXISTS users (
+  account VARCHAR(100) NOT NULL ,
+  name VARCHAR(100) NOT NULL ,
+  email VARCHAR(200) NOT NULL ,
+  password VARCHAR(200) NOT NULL ,
+  status INT NULL DEFAULT 1 ,
+  PRIMARY KEY (account) )
+ENGINE = MyISAM;
+
+CREATE UNIQUE INDEX UNIQUE_EMAIL ON users (email ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table pictures
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS pictures ;
+
+CREATE  TABLE IF NOT EXISTS pictures (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  min VARCHAR(400) NULL ,
+  thumb VARCHAR(400) NULL ,
+  large VARCHAR(400) NULL ,
+  full VARCHAR(400) NULL ,
+  PRIMARY KEY (id) )
+ENGINE = MyISAM;
+
+
+-- -----------------------------------------------------
+-- Table pictures_parameter
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS pictures_parameter ;
+
+CREATE  TABLE IF NOT EXISTS pictures_parameter (
+  id_pictures BIGINT NOT NULL ,
+  upload_account VARCHAR(100) NOT NULL ,
+  upload_time TIMESTAMP NULL ,
+  status INT NULL DEFAULT 1 ,
+  description VARCHAR(1000) NULL ,
+  addtion_info TEXT NULL ,
+  PRIMARY KEY (id_pictures) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table users_profile
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS users_profile ;
+
+CREATE  TABLE IF NOT EXISTS users_profile (
+  account VARCHAR(100) NOT NULL ,
+  location VARCHAR(200) NULL ,
+  picture VARCHAR(400) NULL ,
+  signature VARCHAR(100) NULL ,
+  self_introduction VARCHAR(1000) NULL ,
+  theme INT NULL DEFAULT 1 ,
+  login_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (account) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table comments
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS comments ;
+
+CREATE  TABLE IF NOT EXISTS comments (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  account VARCHAR(100) NOT NULL ,
+  comment TEXT NULL ,
+  comment_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table tags
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS tags ;
+
+CREATE  TABLE IF NOT EXISTS tags (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  name VARCHAR(50) NOT NULL ,
+  description VARCHAR(200) NULL ,
+  account VARCHAR(100) NULL ,
+  status INT NULL ,
+  create_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX UNIQUE_TAG ON tags (name ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table tags_rel
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS tags_rel ;
+
+CREATE  TABLE IF NOT EXISTS tags_rel (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  account VARCHAR(100) NOT NULL ,
+  id_pictures BIGINT NULL ,
+  id_tags BIGINT NULL ,
+  tag_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX UNIQUE_TAG_REL ON tags_rel (id_pictures ASC, id_tags ASC, account ASC) ;
+

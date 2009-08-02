@@ -1,0 +1,45 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+
+
+	<package name="default" extends="tiles-default">
+		<!-- 
+		<global-results>
+			<result name="exception" type="tiles">error_404</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+		 -->
+		 
+		<global-results>
+			<result name="error" type="redirect-action">/WEB-INF/pages/tiles/json_response_tile.jsp</result>
+			<result name="json">/WEB-INF/pages/tiles/json_response_tile.jsp</result>	
+			<result name="home" type="redirect-action">index</result>
+			<result name="login" type="redirect-action">login</result>			
+		</global-results>
+		 <action name="index" class="homeAction" method="index">
+		 	<result name="success" type="tiles">page.index</result>
+		 </action>
+		 <action name="main" class="homeAction" method="index">
+		 	<result name="success" type="tiles">page.main</result>
+		 </action>
+		<action name="login" class="accountAction" method="login" >
+			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
+			<result name="been_closed" type="tiles">page.error_been_closed</result>
+			<result name="input" type="tiles">page.login</result>
+			<result name="success" type="redirect-action">main</result>
+		</action>
+		<action name="reg" class="accountAction" method="register" >
+			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
+			<result name="input" type="tiles">page.reg</result>
+		</action>
+		<action name="act" class="accountAction" method="activity" >
+			<result name="re_act" type="tiles">page.re_act</result>
+			<result name="login" type="tiles">page.login</result>
+		</action>
+	</package>
+</struts>
