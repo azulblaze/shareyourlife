@@ -4,6 +4,7 @@ import com.twitpic.db.model.Users;
 import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.services.AccountService;
+import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
 
 @SuppressWarnings("serial")
@@ -41,6 +42,10 @@ public class AccountAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String login() throws Exception{
+		clearSession(ConsVar.SESSION_USER);
+		if(formLogin==null){
+			formLogin = new FormLogin();
+		}
 		String submit = this.getRequestParameter("submit");
 		if(submit==null||!submit.equals("true")){
 			return INPUT;
@@ -73,6 +78,10 @@ public class AccountAction extends BaseAction {
 	 */
 	public String register() throws Exception{
 		clearSession(ConsVar.SESSION_USER);
+		if(formRegister==null){
+			formRegister = new FormRegister();
+		}
+		this.setValue("formRegister", formRegister);
 		String submit = this.getRequestParameter("submit");
 		if(submit==null||!submit.equals("true")){
 			return INPUT;
@@ -103,7 +112,31 @@ public class AccountAction extends BaseAction {
 				return "re_act";
 			}
 		}
-		return this.ERROR;
+		return ERROR;
+	}
+	
+	public String reSendMail()throws Exception{
+		Users user = (Users)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
+		if(user!=null){
+			if(user.getStatus()==Users.STATUS_VALID){
+				return "home";
+			}
+			String mail = this.getRequestParameter("mail");
+			if(mail!=null){
+				mail = mail.trim();
+				if(mail.length()>0){
+					if(!CommonMethod.validEmail(mail)){
+						addActionError("无效的邮箱");
+						return "email_valid";
+					}
+				}
+			}
+			accountService.send_ac_mail(user, mail);
+			this.addActionMessage("激活链接已经发送到您的邮箱，请确认。");
+			return "email_valid";
+		}
+		this.addActionMessage("请先登录");
+		return LOGIN;
 	}
 	
 	/**
@@ -112,9 +145,6 @@ public class AccountAction extends BaseAction {
 	 * @throws Exception
 	 */
 	private boolean validLogin() throws Exception{
-		if(formLogin==null){
-			throw new java.lang.Exception("请输入帐户信息");
-		}
 		if(formLogin.getName()==null||formLogin.getName().trim().length()<1){
 			throw new java.lang.Exception("请输入帐号");
 		}
@@ -124,10 +154,6 @@ public class AccountAction extends BaseAction {
 		return true;
 	}
 	private boolean validRegister() throws Exception{
-		this.setValue("formRegister", formRegister);
-		if(formRegister==null){
-			throw new java.lang.Exception("请输入注册信息");
-		}
 		if(formRegister.getAccount()==null||formRegister.getAccount().trim().length()<1){
 			throw new java.lang.Exception("请输入帐号");
 		}

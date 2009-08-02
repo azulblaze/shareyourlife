@@ -74,6 +74,7 @@ public class MailThread extends Thread {
 				helper.setText(mail.getContent(), false);
 			}
 			mailSender.send(msg);
+			log.info("Send Mail:"+mail.toString());
 		} catch (Exception e) {
 			log.info("Send Email Exception:",e);
 		}
