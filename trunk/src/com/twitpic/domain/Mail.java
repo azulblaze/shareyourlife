@@ -44,6 +44,11 @@ public class Mail {
 		this.subject = subject;
 	}
 	
-	
+	public String toString(){
+		return "subject:"+subject
+				+" type:"+type
+				+" toAddr:"+toAddr
+				+" content:"+content;
+	}
 	
 }
