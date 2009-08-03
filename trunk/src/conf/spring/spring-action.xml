@@ -5,4 +5,5 @@
 <beans default-lazy-init="false" default-dependency-check="none" default-autowire="byName">
 	<bean id="homeAction" name="homeAction" class="com.twitpic.actions.HomeAction" />
 	<bean id="accountAction" name="accountAction" class="com.twitpic.actions.AccountAction" />
+	<bean id="pictureAction" name="pictureAction" class="com.twitpic.actions.PictureAction" />
 </beans>

@@ -6,4 +6,5 @@ public final class ConsVar {
 	
 	public static String REQUEST_JSON = "json";
 	
+	public static int []IMG_WITH = {100,400,600};
 }
