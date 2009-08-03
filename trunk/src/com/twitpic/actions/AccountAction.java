@@ -70,6 +70,15 @@ public class AccountAction extends BaseAction {
 		}
 		return "home";
 	}
+	/**
+	 * action:logout
+	 * @return
+	 * @throws Exception
+	 */
+	public String logout()throws Exception{
+		clearSession(ConsVar.SESSION_USER);
+		return "home";
+	}
 	
 	/**
 	 * action:user register page
@@ -95,6 +104,41 @@ public class AccountAction extends BaseAction {
 			this.addActionError(e.getMessage());
 			return INPUT;
 		}
+	}
+	
+	/**
+	 * action:edit user's profile,ajax
+	 * @return
+	 * @throws Exception
+	 */
+	public String edit_profile()throws Exception{
+		return "json";
+	}
+	
+	/**
+	 * change user's head picture,ajax
+	 * @return
+	 * @throws Exception
+	 */
+	public String edit_header()throws Exception{
+		return "json";
+	}
+	/**
+	 * change user's password,ajax
+	 * @return
+	 * @throws Exception
+	 */
+	public String edit_password()throws Exception{
+		return "json";
+	}
+	
+	/**
+	 * action:user's profile manage page
+	 * @return
+	 * @throws Exception
+	 */
+	public String profile() throws Exception{
+		return SUCCESS;
 	}
 	
 	public String activity()throws Exception{

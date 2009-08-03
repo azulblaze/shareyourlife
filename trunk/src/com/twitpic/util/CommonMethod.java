@@ -87,8 +87,20 @@ public class CommonMethod {
 		String path[] = new String[4];
 		String base_name = getFileName();
 		path[3] = dir+base_name+"_full."+filetype;
-		File _file = new File(root_path+path[4]);
-		file.renameTo(_file);
+		File _file = new File(root_path+path[3]);
+		File folder = _file.getParentFile();
+		if(!folder.exists()){
+			folder.mkdirs();
+		}
+		boolean tag = false;
+		try{
+			tag = file.renameTo(_file);
+		}catch(Exception e){
+			throw e;
+		}
+		if(!tag){
+			throw new Exception("保存文件失败");
+		}
 		//Secend:large  check if the picture's with bigger than given,if bigger need to resize, then save
 		path[2] = path[3];
 		//Secend:thumb  check if the picture's with bigger than given,if bigger need to resize, then save
@@ -105,4 +117,10 @@ public class CommonMethod {
 		return m.find();
 	}
 
+	public static void main(String args[])throws Exception{
+		File f = new File("F:/Program Files/Tomcat 6.0/webapps/twitpic/upload/images/pic/20090803/MTA1NTM0OTcyMTE0_full.jpg");
+		System.out.println(f.getParent());
+		//f.mkdirs();
+		//f.createNewFile();
+	}
 }

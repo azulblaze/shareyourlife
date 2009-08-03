@@ -53,7 +53,7 @@ public class PictureAction extends BaseAction {
 
 	private static String getExtention(String fileName) {
 		int pos = fileName.lastIndexOf(".");
-		return fileName.substring(pos);
+		return fileName.substring(pos+1);
 	}
 
 	public String upload() throws Exception{
