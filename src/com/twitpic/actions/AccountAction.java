@@ -131,7 +131,12 @@ public class AccountAction extends BaseAction {
 					}
 				}
 			}
-			accountService.send_ac_mail(user, mail);
+			try{
+				accountService.send_ac_mail(user, mail);
+			}catch(Exception e){
+				addActionError(e.getMessage());
+				return "email_valid";
+			}
 			this.addActionMessage("激活链接已经发送到您的邮箱，请确认。");
 			return "email_valid";
 		}

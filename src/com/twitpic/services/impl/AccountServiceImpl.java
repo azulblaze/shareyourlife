@@ -13,18 +13,25 @@ import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.domain.Mail;
 import com.twitpic.services.AccountService;
+import com.twitpic.system.config.SystemConfig;
 import com.twitpic.system.email.MailServices;
 import com.twitpic.util.CommonMethod;
 
 public class AccountServiceImpl implements AccountService {
 	
-	private MailServices mailServices = null;
+	private SystemConfig systemConfig;
+	
+	private MailServices mailServices;
 	
 	private UsersDAO usersDAO;
 	
 	private UsersProfileDAO usersProfileDAO;
 	
 	private PlatformTransactionManager m_db_tx_manager;
+	
+	public void setSystemConfig(SystemConfig systemConfig) {
+		this.systemConfig = systemConfig;
+	}
 	
 	public void setMailServices(MailServices mailServices) {
 		this.mailServices = mailServices;
@@ -128,17 +135,24 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void send_ac_mail(Users user, String email) {
+	public void send_ac_mail(Users user, String email) throws Exception {
 		if(email!=null&&email.length()>0&&!user.getEmail().equals(email)){
+			UsersExample example = new UsersExample();
+			example.createCriteria().andEmailEqualTo(email);
+			java.util.List<Users> tmp = usersDAO.selectByExample(example);
+			if(tmp.size()>0){
+				throw new java.lang.Exception("邮箱已经被注册");
+			}
 			user.setEmail(email);
 			usersDAO.updateByPrimaryKey(user);
 		}
 		Mail mail = new Mail();
-		String link = "http://localhost:911/act.do?ac="+user.getAccount()+"&at="+user.getActivityCode();
+		String link = systemConfig.getDomain()+"/act.do?ac="+user.getAccount()+"&at="+user.getActivityCode();
 		mail.setContent("使用下面的链接来激活您的帐号。<br/><a href=\""+link+"\">"+link+"</a>");
 		mail.setToAddr(user.getEmail());
 		mail.setSubject("激活您的帐号");
 		mail.setType(Mail.MAIL_TYPE_HTML);
 		mailServices.sendMail(mail);
 	}
+
 }
