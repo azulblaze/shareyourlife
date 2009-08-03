@@ -45,5 +45,11 @@
 			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
 			<result name="login" type="tiles">page.login</result>
 		</action>
+		
+		<action name="upload_pic" class="pictureAction" method="upload" >
+			<result name="input" type="tiles">page.uploadpic</result>
+			<result name="success" type="tiles">page.uploadsucess</result>
+		</action>
+		
 	</package>
 </struts>

@@ -2,6 +2,8 @@ package com.twitpic.db.dao;
 
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesExample;
+import com.twitpic.domain.PictureInfo;
+
 import java.util.List;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -151,4 +153,20 @@ public class PicturesDAOImpl extends SqlMapClientDaoSupport implements PicturesD
             return record;
         }
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PictureInfo> findPicturesInfo(int id, String account, Integer status) {
+		java.util.Map parameters = new java.util.HashMap();
+		parameters.put(id, id);
+		parameters.put("upload_account", account);
+		parameters.put("status", status);
+		List<PictureInfo> list = (List<PictureInfo>) getSqlMapClientTemplate().queryForList("pictures.pictures_infomation", parameters);
+        return list;
+	}
+
+	@Override
+	public Long insert_return_id(Pictures record) {
+		return (Long)getSqlMapClientTemplate().insert("pictures.insert_return_id", record);
+	}
 }

@@ -1,36 +1,56 @@
 package com.twitpic.util;
 
 import java.awt.Color;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * <code>CommonMethod.java</code>
  * 
- * @author  Andy Chen
+ * @author Andy Chen
  * @version 1.0, 2009-3-6
  */
 public class CommonMethod {
-	
-	public synchronized static String GenActivtyCode(int len){
-		String result =  GenRandomStr(10)+System.currentTimeMillis() + GenRandomStr(34);
+
+	private CommonMethod() {
+
+	}
+
+	private static CommonMethod instance = new CommonMethod();
+
+	public static CommonMethod getInstance() {
+		return instance;
+	}
+
+	public static CommonMethod newInstance() {
+		return new CommonMethod();
+	}
+
+	public synchronized String GenActivtyCode(int len) {
+		String result = GenRandomStr(10) + System.currentTimeMillis()
+				+ GenRandomStr(34);
 		result = new String(MIMEBase64.encode(result.getBytes()));
-		if(result.length()>len){
-			result = result.substring(0,len);
+		if (result.length() > len) {
+			result = result.substring(0, len);
 		}
 		return result;
 	}
-	
-	public synchronized static String GenRandomStr(int len){
+
+	public synchronized String GenRandomStr(int len) {
 		String result = "";
-		for(int i=0;i<len;i++){
-			result = result + MIMEBase64.encodingTable[new Random().nextInt(64)];
+		for (int i = 0; i < len; i++) {
+			result = result
+					+ MIMEBase64.encodingTable[new Random().nextInt(64)];
 		}
 		return result;
 	}
-	
-	public synchronized static  Color getRandColor(int fc, int bc) {
+
+	public synchronized Color getRandColor(int fc, int bc) {
 		Random random = new Random();
 		if (fc > 255)
 			fc = 255;
@@ -41,57 +61,48 @@ public class CommonMethod {
 		int b = fc + random.nextInt(bc - fc);
 		return new Color(r, g, b);
 	}
-	
-	public static void main(String args[]){
-		//for(int i=0;i<10;i++){
-			System.out.println(CommonMethod.getEmailAcitivity("http://www.go.com/"));
-		//}
+
+	public synchronized String getFileName() {
+		String tmp = "/";
+		Calendar calender = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		tmp = tmp + format.format(calender.getTime());
+		tmp = tmp + "/" + GenActivtyCode(16);
+		return tmp;
 	}
-	
-	@SuppressWarnings("deprecation")
-	public static String getEmailAcitivity(String addr){
-		String result = Email_Activity.replaceAll("acitivity_addr",addr);
-		result = result.replaceAll("Time",new java.util.Date().toLocaleString());
-		return result;
+
+	/**
+	 * array:min thumb large full
+	 * of course,if the image's with smaller than given, no need to resize and no need to save a copy, just give the address.
+	 * @param file The source file
+	 * @param root_path the web content's root path
+	 * @param dir upload file's save folder
+	 * @param with the images's with array:min thumb large
+	 * @param filetype file type,like jpg,gif,bmp...
+	 * @return String[] the path that saved
+	 * @throws Exception
+	 */
+	public synchronized String[] saveImg(File file,String root_path,String dir,int with[],String filetype)throws Exception{
+		//First we save full image to disk
+		String path[] = new String[4];
+		String base_name = getFileName();
+		path[3] = dir+base_name+"_full."+filetype;
+		File _file = new File(root_path+path[4]);
+		file.renameTo(_file);
+		//Secend:large  check if the picture's with bigger than given,if bigger need to resize, then save
+		path[2] = path[3];
+		//Secend:thumb  check if the picture's with bigger than given,if bigger need to resize, then save
+		path[1] = path[3];
+		//Secend:min  check if the picture's with bigger than given,if bigger need to resize, then save
+		path[0] = path[3];
+		return path;
 	}
-	
-	public static boolean validEmail(String email){
+
+	public synchronized boolean validEmail(String email) {
 		String regex = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(email);
 		return m.find();
 	}
-	
-	private static String Email_Activity = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
-											+"<html xmlns=\"http://www.w3.org/1999/xhtml\">"
-											+"<head>"
-											+"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"
-											+"<title>易效项目管理系统 - 索普科技</title>"
-											+"<style>"
-											+"body{"
-											+"	font-size:12px;"
-											+"	font-family:Verdana, Geneva, sans-serif;"
-											+"}"
-											+"</style>"
-											+"</head>"
-											+"<body>"
-											+"<div>"
-											+"<pre>"
-											+"    亲爱的用户："
-											+""
-											+"    由于您的注册邮箱将成为您享受服务的保证之一，请认证新注册邮。"
-											+"    请立即点击如下链接，完成认证邮箱的操作："
-											+""
-											+"    <a href=\"acitivity_addr\">acitivity_addr</a>"
-											+""
-											+"    （如果您无法点击以上的链接，请直接将此链接复制到浏览器的地址栏后，再进行访问）"
-											+"      "
-											+""
-											+""
-											+"    索普科技"
-											+"    Time"
-											+"</pre>"
-											+"</div>"
-											+"</body>"
-											+"</html>";
+
 }

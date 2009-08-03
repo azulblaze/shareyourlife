@@ -125,7 +125,7 @@ public class AccountAction extends BaseAction {
 			if(mail!=null){
 				mail = mail.trim();
 				if(mail.length()>0){
-					if(!CommonMethod.validEmail(mail)){
+					if(!CommonMethod.getInstance().validEmail(mail)){
 						addActionError("无效的邮箱");
 						return "email_valid";
 					}
