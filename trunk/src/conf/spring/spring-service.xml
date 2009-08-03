@@ -37,4 +37,8 @@
 		<property name="senderName" value="EasyEffective" />
 		<property name="senderAddr" value="noreply.sop@gmail.com" />
 	</bean>
+	
+	<bean name="systemConfig" class="com.twitpic.system.config.SystemConfig" >
+		<property name="domain" value="http://localhost:8080" />
+	</bean>
 </beans>
