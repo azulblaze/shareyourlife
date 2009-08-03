@@ -93,7 +93,7 @@ public class AccountServiceImpl implements AccountService {
 		}
 		user = new Users();
 		user.setAccount(formRegister.getAccount());
-		user.setActivityCode(CommonMethod.GenActivtyCode(30));
+		user.setActivityCode(CommonMethod.getInstance().GenActivtyCode(30));
 		user.setEmail(formRegister.getEmail());
 		user.setName(formRegister.getName());
 		user.setPassword(formRegister.getPassword1());

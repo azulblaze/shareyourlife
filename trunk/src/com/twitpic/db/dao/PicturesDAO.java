@@ -84,4 +84,8 @@ public interface PicturesDAO {
      * @abatorgenerated Sun Aug 02 17:41:31 CST 2009
      */
     int updateByExample(Pictures record, PicturesExample example);
+    
+    java.util.List<com.twitpic.domain.PictureInfo> findPicturesInfo(int id,String account,Integer status);
+    
+    Long insert_return_id(Pictures record);
 }

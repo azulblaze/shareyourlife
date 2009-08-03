@@ -194,4 +194,6 @@ public class PicturesParameter {
     public void setAddtionInfo(String addtionInfo) {
         this.addtionInfo = addtionInfo;
     }
+    
+    public static final int STATUS_ALL = 1;
 }

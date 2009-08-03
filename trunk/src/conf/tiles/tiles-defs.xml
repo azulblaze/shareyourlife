@@ -28,4 +28,10 @@
 	<definition name="page.re_act" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/pages/tiles/re_act.jsp"></put-attribute>
 	</definition>
+	<definition name="page.uploadpic" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/uploadpic.jsp"></put-attribute>
+	</definition>
+	<definition name="page.uploadsucess" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/uploadsuccess.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
