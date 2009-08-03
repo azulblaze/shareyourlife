@@ -2,6 +2,8 @@ package com.twitpic.util;
 
 import java.awt.Color;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <code>CommonMethod.java</code>
@@ -54,7 +56,10 @@ public class CommonMethod {
 	}
 	
 	public static boolean validEmail(String email){
-		return true;
+		String regex = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(email);
+		return m.find();
 	}
 	
 	private static String Email_Activity = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
