@@ -7,7 +7,7 @@
      ====================================================================== -->
 <project basedir="." >
 	
-	<property name="project.name" value="t1smbpf-web" />
+	<property name="project.name" value="twitpic" />
 	<property name="project.isdebug" value="true" />
 	<property name="project.source" value="1.5" />
 	<property name="project.encode" value="UTF-8" />
