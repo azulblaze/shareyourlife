@@ -33,7 +33,7 @@
 		<property name="session" ref="mailSession" />
 	</bean>
 	
-	<bean name="mailThread" class="com.twitpic.system.email.MailThread" >
+	<bean name="mailServices" class="com.twitpic.system.email.MailServices" >
 		<property name="senderName" value="EasyEffective" />
 		<property name="senderAddr" value="noreply.sop@gmail.com" />
 	</bean>

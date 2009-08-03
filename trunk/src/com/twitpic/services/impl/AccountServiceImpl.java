@@ -13,12 +13,12 @@ import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.domain.Mail;
 import com.twitpic.services.AccountService;
-import com.twitpic.system.email.MailThread;
+import com.twitpic.system.email.MailServices;
 import com.twitpic.util.CommonMethod;
 
 public class AccountServiceImpl implements AccountService {
 	
-	private MailThread mailThread = null;
+	private MailServices mailServices = null;
 	
 	private UsersDAO usersDAO;
 	
@@ -26,8 +26,8 @@ public class AccountServiceImpl implements AccountService {
 	
 	private PlatformTransactionManager m_db_tx_manager;
 	
-	public void setMailThread(MailThread mailThread) {
-		this.mailThread = mailThread;
+	public void setMailServices(MailServices mailServices) {
+		this.mailServices = mailServices;
 	}
 	
 	public void setTxManager(PlatformTransactionManager tx){
@@ -139,7 +139,6 @@ public class AccountServiceImpl implements AccountService {
 		mail.setToAddr(user.getEmail());
 		mail.setSubject("激活您的帐号");
 		mail.setType(Mail.MAIL_TYPE_HTML);
-		mailThread.setMail(mail);
-		mailThread.start();
+		mailServices.sendMail(mail);
 	}
 }
