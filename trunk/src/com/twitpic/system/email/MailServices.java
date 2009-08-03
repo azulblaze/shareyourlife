@@ -57,10 +57,10 @@ private JavaMailSender mailSender = null;
 		}
 
 		public void run() {
-			sendMail();
+			send();
 		}
 		
-		private void sendMail(){
+		private void send(){
 			MimeMessage msg = mailSender.createMimeMessage();
 			try {
 				MimeMessageHelper helper = new MimeMessageHelper(msg, true,
