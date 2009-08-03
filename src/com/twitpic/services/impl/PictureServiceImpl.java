@@ -66,8 +66,8 @@ public class PictureServiceImpl implements PictureService {
 			Pictures p = new Pictures();
 			p.setMin(path[0]);
 			p.setThumb(path[1]);
-			p.setMin(path[2]);
-			p.setMin(path[3]);
+			p.setLarge(path[2]);
+			p.setFull(path[3]);
 			Long id = picturesDAO.insert_return_id(p);
 			p.setId(id);
 			PicturesParameter pp = new PicturesParameter();
@@ -77,14 +77,14 @@ public class PictureServiceImpl implements PictureService {
 			pp.setUploadTime(new java.util.Date());
 			pp.setStatus(PicturesParameter.STATUS_ALL);
 			picturesParameterDAO.insert(pp);
-			m_db_tx_manager.commit(status);
+			this.m_db_tx_manager.commit(status);
 			//return the picture info
 			PictureInfo pi = new PictureInfo();
 			pi.setPictures(p);
 			pi.setPicturesParameter(pp);
 			return pi;
 		}catch(Exception e){
-			m_db_tx_manager.rollback(status);
+			this.m_db_tx_manager.rollback(status);
 			throw new java.lang.Exception(e.getMessage());
 		}
 	}
