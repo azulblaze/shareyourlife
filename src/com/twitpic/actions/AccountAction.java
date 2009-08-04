@@ -1,6 +1,7 @@
 package com.twitpic.actions;
 
 import com.twitpic.db.model.Users;
+import com.twitpic.domain.Account;
 import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.services.AccountService;
@@ -52,7 +53,7 @@ public class AccountAction extends BaseAction {
 		}
 		try{
 			validLogin();
-			Users user = accountService.user_login(formLogin);
+			Account user = accountService.user_login(formLogin);
 			this.getHttpSession().setAttribute(ConsVar.SESSION_USER, user);
 			switch(user.getStatus()){
 			case Users.STATUS_EMAIL_NOTVALID:
@@ -97,7 +98,7 @@ public class AccountAction extends BaseAction {
 		}
 		try{
 			validRegister();
-			Users user = accountService.reg_user(formRegister);
+			Account user = accountService.reg_user(formRegister);
 			this.getHttpSession().setAttribute(ConsVar.SESSION_USER, user);
 			return "email_valid";
 		}catch(Exception e){
@@ -160,7 +161,7 @@ public class AccountAction extends BaseAction {
 	}
 	
 	public String reSendMail()throws Exception{
-		Users user = (Users)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
+		Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
 		if(user!=null){
 			if(user.getStatus()==Users.STATUS_VALID){
 				return "home";

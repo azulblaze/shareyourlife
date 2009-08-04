@@ -24,7 +24,7 @@
 		 <action name="index" class="homeAction" method="index">
 		 	<result name="success" type="tiles">page.index</result>
 		 </action>
-		 <action name="main" class="homeAction" method="index">
+		 <action name="main" class="homeAction" method="main">
 		 	<result name="success" type="tiles">page.main</result>
 		 </action>
 		<action name="login" class="accountAction" method="login" >
@@ -33,6 +33,10 @@
 			<result name="input" type="tiles">page.login</result>
 			<result name="success" type="redirect-action">main</result>
 		</action>
+		
+		<action name="logout" class="accountAction" method="logout" >
+		</action>
+		
 		<action name="reg" class="accountAction" method="register" >
 			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
 			<result name="input" type="tiles">page.reg</result>

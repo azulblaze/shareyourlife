@@ -2,7 +2,7 @@ package com.twitpic.db.model;
 
 import java.util.Date;
 
-public class UsersProfile {
+public class UsersProfile  extends BaseModel{
 	
 	public static final String DEFAULT_PICTURE = "/images/system/header.gif";
 	
