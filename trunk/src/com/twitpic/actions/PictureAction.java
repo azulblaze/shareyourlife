@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.struts2.ServletActionContext;
 
 import com.twitpic.db.model.Users;
+import com.twitpic.domain.Account;
 import com.twitpic.services.PictureService;
 import com.twitpic.util.ConsVar;
 
@@ -67,7 +68,7 @@ public class PictureAction extends BaseAction {
 		}
 		try{
 			System.out.println(picContentType);
-			Users user = (Users)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
+			Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
 			pictureService.savePicture(user, root_path, pic, getExtention(picFileName), description);
 			return SUCCESS;
 		}catch(Exception e){

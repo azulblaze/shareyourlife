@@ -11,8 +11,8 @@ import com.twitpic.db.dao.PicturesDAO;
 import com.twitpic.db.dao.PicturesParameterDAO;
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesParameter;
-import com.twitpic.db.model.Users;
 import com.twitpic.domain.PictureInfo;
+import com.twitpic.domain.Account;
 import com.twitpic.services.PictureService;
 import com.twitpic.system.config.SystemConfig;
 import com.twitpic.util.CommonMethod;
@@ -55,7 +55,7 @@ public class PictureServiceImpl implements PictureService {
 	}
 
 	@Override
-	public PictureInfo savePicture(Users user, String root_path, File file,String filetype,String description)
+	public PictureInfo savePicture(Account user, String root_path, File file,String filetype,String description)
 			throws Exception {
 		TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
 		try{
@@ -89,5 +89,19 @@ public class PictureServiceImpl implements PictureService {
 		}
 	}
 
+	@Override
+	public List<PictureInfo> loadLatestPictures(long from_id) {
+		return picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, null, null, from_id, null, null, null);
+	}
+
+	@Override
+	public List<PictureInfo> loadMoretPictures(long to_id, int size) {
+		return picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, null, null, null, to_id, 0, size);
+	}
+
+	@Override
+	public List<PictureInfo> loadHomePictures(int size) {
+		return picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, null, null, null, null, 0, size);
+	}
 
 }

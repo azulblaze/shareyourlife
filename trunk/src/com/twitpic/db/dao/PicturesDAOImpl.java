@@ -158,7 +158,7 @@ public class PicturesDAOImpl extends SqlMapClientDaoSupport implements PicturesD
 	@Override
 	public List<PictureInfo> findPicturesInfo(int id, String account, Integer status) {
 		java.util.Map parameters = new java.util.HashMap();
-		parameters.put(id, id);
+		parameters.put("id", id);
 		parameters.put("upload_account", account);
 		parameters.put("status", status);
 		List<PictureInfo> list = (List<PictureInfo>) getSqlMapClientTemplate().queryForList("pictures.pictures_infomation", parameters);
@@ -168,5 +168,19 @@ public class PicturesDAOImpl extends SqlMapClientDaoSupport implements PicturesD
 	@Override
 	public Long insert_return_id(Pictures record) {
 		return (Long)getSqlMapClientTemplate().insert("pictures.insert_return_id", record);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PictureInfo> findPicturesInfo(Integer status,Long id,String upload_account,Long from_id,Long to_id,Integer start_index,Integer end_index){
+		java.util.Map parameters = new java.util.HashMap();
+		parameters.put("status", status);
+		parameters.put("id", id);
+		parameters.put("upload_account", upload_account);
+		parameters.put("from_id", from_id);
+		parameters.put("to_id", to_id);
+		parameters.put("start_index", start_index);
+		parameters.put("end_index", end_index);
+		List<PictureInfo> list = (List<PictureInfo>) getSqlMapClientTemplate().queryForList("pictures.pictures_infomation_withuser", parameters);
+		return list;
 	}
 }
