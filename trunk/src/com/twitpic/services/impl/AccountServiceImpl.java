@@ -12,6 +12,7 @@ import com.twitpic.db.model.UsersProfile;
 import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.domain.Mail;
+import com.twitpic.domain.Account;
 import com.twitpic.services.AccountService;
 import com.twitpic.system.config.SystemConfig;
 import com.twitpic.system.email.MailServices;
@@ -52,17 +53,19 @@ public class AccountServiceImpl implements AccountService {
 
 
 	@Override
-	public Users user_login(FormLogin formLogin)throws Exception{
+	public Account user_login(FormLogin formLogin)throws Exception{
 		Users user = usersDAO.selectByPrimaryKey(formLogin.getName());
 		if(user!=null){
 			if(user.getPassword().equals(formLogin.getPassword())){
-				if(user.getStatus()==Users.STATUS_VALID){
-					UsersProfile up = new UsersProfile();
-					up.setAccount(user.getAccount());
+				Account _account = new Account();
+				_account.setUsers(user);
+				if(_account.getStatus()==Users.STATUS_VALID){
+					UsersProfile up = usersProfileDAO.selectByPrimaryKey(_account.getAccount());
 					up.setLoginTime(new java.util.Date());
-					usersProfileDAO.updateByPrimaryKey(up);
+					usersProfileDAO.updateByPrimaryKeySelective(up);
+					_account.setUsersProfile(up);
 				}
-				return user;
+				return _account;
 			}else{
 				throw new java.lang.Exception("密码错误");
 			}
@@ -73,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
 
 
 	@Override
-	public Users reg_user(FormRegister formRegister) throws Exception {
+	public Account reg_user(FormRegister formRegister) throws Exception {
 		Users user = usersDAO.selectByPrimaryKey(formRegister.getAccount());
 		if(user!=null){
 			throw new java.lang.Exception("帐号已经被注册");
@@ -101,7 +104,9 @@ public class AccountServiceImpl implements AccountService {
 		user.setStatus(Users.STATUS_EMAIL_NOTVALID);
 		usersDAO.insert(user);
 		send_ac_mail(user,null);
-		return user;
+		Account _account = new Account();
+		_account.setUsers(user);
+		return _account;
 	}
 	
 	
@@ -118,7 +123,7 @@ public class AccountServiceImpl implements AccountService {
 				try{
 					user.setStatus(Users.STATUS_VALID);
 					user.setRegTime(new java.util.Date());
-					usersDAO.updateByPrimaryKey(user);
+					usersDAO.updateByPrimaryKeySelective(user);
 					UsersProfile up = new UsersProfile();
 					up.setAccount(user.getAccount());
 					up.setPicture(UsersProfile.DEFAULT_PICTURE);
@@ -135,7 +140,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void send_ac_mail(Users user, String email) throws Exception {
+	public void send_ac_mail(Account _user, String email) throws Exception {
+		Users user = usersDAO.selectByPrimaryKey(_user.getAccount());
+		send_ac_mail(user,email);
+	}
+
+	private void send_ac_mail(Users user, String email) throws Exception {
 		if(email!=null&&email.length()>0&&!user.getEmail().equals(email)){
 			UsersExample example = new UsersExample();
 			example.createCriteria().andEmailEqualTo(email);
@@ -144,7 +154,7 @@ public class AccountServiceImpl implements AccountService {
 				throw new java.lang.Exception("邮箱已经被注册");
 			}
 			user.setEmail(email);
-			usersDAO.updateByPrimaryKey(user);
+			usersDAO.updateByPrimaryKeySelective(user);
 		}
 		Mail mail = new Mail();
 		String link = systemConfig.getDomain()+"/act.do?ac="+user.getAccount()+"&at="+user.getActivityCode();
@@ -154,5 +164,4 @@ public class AccountServiceImpl implements AccountService {
 		mail.setType(Mail.MAIL_TYPE_HTML);
 		mailServices.sendMail(mail);
 	}
-
 }

@@ -17,7 +17,7 @@ CREATE  TABLE IF NOT EXISTS users (
   activity_code VARCHAR(100) NULL ,
   reg_time TIMESTAMP NULL DEFAULT current_timestamp ,
   PRIMARY KEY (account) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 go
 CREATE UNIQUE INDEX UNIQUE_EMAIL ON users (email ASC) ;
 go

@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.twitpic.db.model.Users;
+import com.twitpic.domain.Account;
 import com.twitpic.util.ConsVar;
 
 /**
@@ -51,7 +52,7 @@ public abstract class BaseAction extends ActionSupport {
 	protected boolean isLogin(){
 		boolean result = false;
 		try{
-			Users user = (Users)ServletActionContext.getRequest().getSession().getAttribute(ConsVar.SESSION_USER);
+			Account user = (Account)ServletActionContext.getRequest().getSession().getAttribute(ConsVar.SESSION_USER);
 			if(user.getStatus()==Users.STATUS_VALID){
 				result = true;
 			}

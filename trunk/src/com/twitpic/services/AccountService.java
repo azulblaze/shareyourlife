@@ -4,9 +4,9 @@ import com.twitpic.domain.FormLogin;
 
 public interface AccountService {
 	
-	public com.twitpic.db.model.Users user_login(FormLogin formLogin)throws Exception;
+	public com.twitpic.domain.Account user_login(FormLogin formLogin)throws Exception;
 	
-	public com.twitpic.db.model.Users reg_user(com.twitpic.domain.FormRegister formRegister) throws Exception;
+	public com.twitpic.domain.Account reg_user(com.twitpic.domain.FormRegister formRegister) throws Exception;
 	/**
 	 * 
 	 * @param ac account
@@ -16,6 +16,6 @@ public interface AccountService {
 	 */
 	public boolean act_user(String ac,String at)throws Exception;
 	
-	public void send_ac_mail(com.twitpic.db.model.Users user,String email)throws Exception ;
+	public void send_ac_mail(com.twitpic.domain.Account user,String email)throws Exception ;
 	
 }

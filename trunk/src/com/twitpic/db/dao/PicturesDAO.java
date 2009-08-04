@@ -2,6 +2,7 @@ package com.twitpic.db.dao;
 
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesExample;
+
 import java.util.List;
 
 public interface PicturesDAO {
@@ -88,4 +89,16 @@ public interface PicturesDAO {
     java.util.List<com.twitpic.domain.PictureInfo> findPicturesInfo(int id,String account,Integer status);
     
     Long insert_return_id(Pictures record);
+    /**
+     * load picture information and user information
+     * @param status
+     * @param id :picture id
+     * @param upload_account :upload user account
+     * @param from_time :upload_time >= #from_time:TIMESTAMP#
+     * @param to_time :upload_time < #to_time:TIMESTAMP#
+     * @param start_index :page index start
+     * @param end_index : page index end, appeared in twins with start_index
+     * @return
+     */
+    public List<com.twitpic.domain.PictureInfo> findPicturesInfo(Integer status,Long id,String upload_account,Long from_id,Long to_id,Integer start_index,Integer end_index);
 }

@@ -26,6 +26,12 @@ public class PictureServiceImplTest extends TestCase {
 		super.tearDown();
 	}
 
+	public void testLoadHomePic() {
+		PictureService service = (PictureService) this.m_context.getBean("pictureService");
+		java.util.List<com.twitpic.domain.PictureInfo> pics = service.loadLatestPictures(0);
+		System.out.println(pics.size());
+	}
+	/**
 	public void testSavePicture() {
 		
 		PictureService service = (PictureService) this.m_context.getBean("pictureService");
@@ -42,8 +48,6 @@ public class PictureServiceImplTest extends TestCase {
 			e.printStackTrace();
 			System.err.println("ERROR");
 		}
-		
-		
 	}
-
+	**/
 }
