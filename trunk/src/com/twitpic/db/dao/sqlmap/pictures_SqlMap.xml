@@ -211,4 +211,9 @@
     </isNotNull>
     order by upload_time desc
   </select>
+  
+  <select id="">
+  	select * from pictures p left join pictures_parameter pp on p.id = pp.id_pictures left join users u on pp.upload_account=u.account left join users_profile up on u.account=up.account
+  	where u.status = 1
+  </select>
 </sqlMap>
