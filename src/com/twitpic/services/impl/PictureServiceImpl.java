@@ -7,10 +7,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.twitpic.db.dao.CommentsDAO;
 import com.twitpic.db.dao.PicturesDAO;
 import com.twitpic.db.dao.PicturesParameterDAO;
+import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesParameter;
+import com.twitpic.domain.FormComment;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.domain.Account;
 import com.twitpic.services.PictureService;
@@ -30,6 +33,8 @@ public class PictureServiceImpl implements PictureService {
 	
 	private PicturesDAO picturesDAO;
 	
+	private CommentsDAO commentsDAO;
+	
 	private PicturesParameterDAO picturesParameterDAO;
 	
 	public void setSystemConfig(SystemConfig systemConfig) {
@@ -44,6 +49,10 @@ public class PictureServiceImpl implements PictureService {
 		this.picturesDAO = picturesDAO;
 	}
 
+	public void setCommentsDAO(CommentsDAO commentsDAO){
+		this.commentsDAO = commentsDAO;
+	}
+	
 	public void setPicturesParameterDAO(PicturesParameterDAO picturesParameterDAO) {
 		this.picturesParameterDAO = picturesParameterDAO;
 	}
@@ -55,7 +64,7 @@ public class PictureServiceImpl implements PictureService {
 	}
 
 	@Override
-	public PictureInfo savePicture(Account user, String root_path, File file,String filetype,String description)
+	public PictureInfo savePicture(Account user, String root_path, File file,String filetype,String description,String title)
 			throws Exception {
 		if(file.length()>systemConfig.getUpload_pic_maxlength()){
 			throw new Exception("上次文件大小超过"+systemConfig.getUpload_pic_maxlength()/(1024*1024)+"MB限制");
@@ -76,6 +85,7 @@ public class PictureServiceImpl implements PictureService {
 			PicturesParameter pp = new PicturesParameter();
 			pp.setIdPictures(id);
 			pp.setDescription(description);
+			pp.setTitle(title);
 			pp.setUploadAccount(user.getAccount());
 			pp.setUploadTime(new java.util.Date());
 			pp.setStatus(PicturesParameter.STATUS_ALL);
@@ -93,18 +103,45 @@ public class PictureServiceImpl implements PictureService {
 	}
 
 	@Override
-	public List<PictureInfo> loadLatestPictures(long from_id) {
+	public List<PictureInfo> loadLatestPictures(long from_id) throws Exception{
 		return picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, null, null, from_id, null, null, null);
 	}
 
 	@Override
-	public List<PictureInfo> loadMoretPictures(long to_id, int size) {
+	public List<PictureInfo> loadMoretPictures(long to_id, int size) throws Exception{
 		return picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, null, null, null, to_id, 0, size);
 	}
 
 	@Override
-	public List<PictureInfo> loadHomePictures(int size) {
+	public List<PictureInfo> loadHomePictures(int size) throws Exception{
 		return picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, null, null, null, null, 0, size);
 	}
 
+	@Override
+	public Comments comment(Account account, FormComment formComment) throws Exception{
+		List<PictureInfo> list = picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, formComment.getId_pictures(), null, null, null, null, null);
+		if(list.size()>0){
+			Comments c = new Comments();
+			c.setAccount(account.getAccount());
+			c.setComment(formComment.getComment());
+			c.setIdPictures(formComment.getId_pictures());
+			c.setCommentTime(new java.util.Date());
+			Long id = commentsDAO.insert_return_id(c);
+			c.setId(id);
+			return c;
+		}else{
+			throw new Exception("您要评论的图片不存在");
+		}	
+	}
+
+	@Override
+	public PictureInfo loadPicture(long id_picture) throws Exception {
+		List<PictureInfo> list = picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, id_picture, null, null, null, null, null);
+		if(list.size()>0){
+			return list.get(0);
+		}
+		throw new Exception("未找到该图片，可能已经被删除");
+	}
+
+	
 }
