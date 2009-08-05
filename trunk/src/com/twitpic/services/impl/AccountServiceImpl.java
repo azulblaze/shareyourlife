@@ -1,22 +1,29 @@
 package com.twitpic.services.impl;
 
+import java.io.File;
+
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.twitpic.db.dao.UsersDAO;
 import com.twitpic.db.dao.UsersProfileDAO;
+import com.twitpic.db.model.Pictures;
+import com.twitpic.db.model.PicturesParameter;
 import com.twitpic.db.model.Users;
 import com.twitpic.db.model.UsersExample;
 import com.twitpic.db.model.UsersProfile;
 import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
+import com.twitpic.domain.FormUserProfile;
 import com.twitpic.domain.Mail;
 import com.twitpic.domain.Account;
+import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.AccountService;
 import com.twitpic.system.config.SystemConfig;
 import com.twitpic.system.email.MailServices;
 import com.twitpic.util.CommonMethod;
+import com.twitpic.util.ConsVar;
 
 public class AccountServiceImpl implements AccountService {
 	
@@ -163,5 +170,63 @@ public class AccountServiceImpl implements AccountService {
 		mail.setSubject("激活您的帐号");
 		mail.setType(Mail.MAIL_TYPE_HTML);
 		mailServices.sendMail(mail);
+	}
+
+	@Override
+	public Account editHeader(com.twitpic.domain.Account account,java.io.File file,String rootpath,String filetype) throws Exception {
+		// TODO Auto-generated method stub
+		if(file.length()>systemConfig.getUpload_header_maxlength()){
+			throw new Exception("上次文件大小超过"+systemConfig.getUpload_header_maxlength()/1024+"KB限制");
+		}
+		TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
+		try{
+			//First save image to disk
+			CommonMethod cm = CommonMethod.newInstance();
+			String[] path = cm.saveImg(file, rootpath,systemConfig.getUpload_header(),null,filetype);
+			//Save picture path to user_property
+			UsersProfile up = new UsersProfile();
+			up.setAccount(account.getAccount());
+			up.setPicture(path[0]);
+			usersProfileDAO.updateByPrimaryKeySelective(up);
+			this.m_db_tx_manager.commit(status);
+			//return the account info
+			if(account.getPicture()!=null&&!account.getPicture().equals(UsersProfile.DEFAULT_PICTURE)){
+				cm.deleteFile(rootpath+account.getPicture());
+			}
+			account.setPicture(path[0]);
+			return account;
+		}catch(Exception e){
+			this.m_db_tx_manager.rollback(status);
+			throw new java.lang.Exception(e.getMessage());
+		}
+	}
+
+	@Override
+	public Account editPassword(Account account, FormUserProfile formUserProfile)
+			throws Exception {
+		Users u = usersDAO.selectByPrimaryKey(account.getAccount());
+		if(!formUserProfile.getOldpassword().equals(u.getPassword())){
+			throw new Exception("原始密码不正确");
+		}
+		//the new password is same to old password,no need to change 
+		if(formUserProfile.getPassword1().equals(u.getPassword())){
+			return account;
+		}
+		u.setPassword(formUserProfile.getPassword1());
+		usersDAO.updateByPrimaryKey(u);
+		account.setUsers(u);
+		return account;
+	}
+
+	@Override
+	public Account editProfile(Account account, FormUserProfile formUserProfile)
+			throws Exception {
+		UsersProfile up = usersProfileDAO.selectByPrimaryKey(account.getAccount());
+		up.setLocation(formUserProfile.getLocation());
+		up.setSelfIntroduction(formUserProfile.getSelf_introduction());
+		up.setSignature(formUserProfile.getSignature());
+		usersProfileDAO.updateByPrimaryKey(up);
+		account.setUsersProfile(up);
+		return account;
 	}
 }

@@ -1,21 +1,30 @@
 package com.twitpic.actions;
 
+import java.io.File;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.twitpic.db.model.Users;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
+import com.twitpic.domain.FormUserProfile;
 import com.twitpic.services.AccountService;
+import com.twitpic.system.config.SystemConfig;
 import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
 
 @SuppressWarnings("serial")
 public class AccountAction extends BaseAction {
-	
 	private AccountService accountService;
 	
 	//form bean
 	private FormLogin formLogin;
 	private FormRegister formRegister;
+	private FormUserProfile formUserProfile;
+	
+	private File header;
+	private String headerContentType;
 	
 	public FormRegister getFormRegister() {
 		return formRegister;
@@ -32,10 +41,36 @@ public class AccountAction extends BaseAction {
 	public void setFormLogin(FormLogin formLogin) {
 		this.formLogin = formLogin;
 	}
+	
+	public FormUserProfile getFormUserProfile() {
+		return formUserProfile;
+	}
+	
+	public File getHeader() {
+		return header;
+	}
 
+	
+	public void setHeader(File header) {
+		this.header = header;
+	}
+
+	public String getHeaderContentType() {
+		return headerContentType;
+	}
+
+	public void setHeaderContentType(String headerContentType) {
+		this.headerContentType = headerContentType;
+	}
+	
+	public void setFormUserProfile(FormUserProfile formUserProfile) {
+		this.formUserProfile = formUserProfile;
+	}
+	
 	public void setAccountService(AccountService accountService) {
 		this.accountService = accountService;
 	}
+	
 
 	/**
 	 * action:login check
@@ -60,8 +95,6 @@ public class AccountAction extends BaseAction {
 				return "email_valid";
 			case Users.STATUS_CLOSED:
 				return "been_closed";
-			case Users.STATUS_VALID:
-				return SUCCESS;
 			default:
 				break;
 			}
@@ -69,7 +102,7 @@ public class AccountAction extends BaseAction {
 			this.addActionError(e.getMessage());
 			return INPUT;
 		}
-		return "home";
+		return SUCCESS;
 	}
 	/**
 	 * action:logout
@@ -78,7 +111,7 @@ public class AccountAction extends BaseAction {
 	 */
 	public String logout()throws Exception{
 		clearSession(ConsVar.SESSION_USER);
-		return "home";
+		return "index";
 	}
 	
 	/**
@@ -113,6 +146,21 @@ public class AccountAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String edit_profile()throws Exception{
+		if(formUserProfile==null){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"'}");
+		}
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		Account account = loadAccount();
+		try{
+			account = accountService.editProfile(account, formUserProfile);
+			this.getHttpSession().setAttribute(ConsVar.SESSION_USER, account);
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'更新成功'}");
+		}catch(Exception e){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'"+e.getMessage()+"'}");
+		}
 		return "json";
 	}
 	
@@ -122,6 +170,27 @@ public class AccountAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String edit_header()throws Exception{
+		if(headerContentType==null||headerContentType.trim().length()<1||header==null){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"'}");
+			return "json";
+		}
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		String root_path = ServletActionContext.getServletContext().getRealPath("/");
+		String ext_type = CommonMethod.getInstance().isAllowedPicture(headerContentType);
+		if(ext_type==null){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"',"+ConsVar.JSON_ACTION_NOTICE_MSG+":'保存失败，不支持该文件格式'}");
+		}
+		Account account = this.loadAccount();
+		try{
+			account = accountService.editHeader(account, header, root_path, ext_type);
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"',"+ConsVar.JSON_ACTION_NOTICE_MSG+":'保存成功',data:'"+account.getPicture()+"'}");
+		}catch(Exception e){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"',"+ConsVar.JSON_ACTION_NOTICE_MSG+":'保存失败，"+e.getMessage()+"'}");
+			return "json";
+		}
 		return "json";
 	}
 	/**
@@ -130,6 +199,34 @@ public class AccountAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String edit_password()throws Exception{
+		if(formUserProfile==null){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"'}");
+			return "json";
+		}
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		Account account = loadAccount();
+		if(formUserProfile.getOldpassword()==null||formUserProfile.getOldpassword().trim().length()<6){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'更新失败，请输入正确的原始密码'}");
+			return "json";
+		}
+		if(formUserProfile.getPassword1()==null||formUserProfile.getPassword1().trim().length()<6||formUserProfile.getPassword2()==null||formUserProfile.getPassword2().trim().length()<6){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'更新失败，请输入正确格式的新密码'}");
+			return "json";
+		}
+		if(!formUserProfile.getPassword1().equals(formUserProfile.getPassword2())){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'更新失败，两次输入的新密码不相同'}");
+			return "json";
+		}
+		try{
+			account = accountService.editPassword(account, formUserProfile);
+			this.getHttpSession().setAttribute(ConsVar.SESSION_USER, account);
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'更新成功，请妥善保管您的密码'}");
+		}catch(Exception e){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'更新失败，"+e.getMessage()+"'}");
+		}
 		return "json";
 	}
 	
@@ -139,7 +236,10 @@ public class AccountAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String profile() throws Exception{
-		return SUCCESS;
+		if(isLogin()){
+			return SUCCESS;
+		}
+		return LOGIN;
 	}
 	
 	public String activity()throws Exception{
@@ -164,7 +264,7 @@ public class AccountAction extends BaseAction {
 		Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
 		if(user!=null){
 			if(user.getStatus()==Users.STATUS_VALID){
-				return "home";
+				return "index";
 			}
 			String mail = this.getRequestParameter("mail");
 			if(mail!=null){
@@ -224,5 +324,6 @@ public class AccountAction extends BaseAction {
 		}
 		return true;
 	}
+
 	
 }

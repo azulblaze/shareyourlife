@@ -16,9 +16,18 @@ import java.util.regex.Pattern;
  * @version 1.0, 2009-3-6
  */
 public class CommonMethod {
+	
+	private static java.util.Map<String,String> picture_type = new java.util.HashMap<String,String>();
+	
+	static{
+		picture_type.put("image/bmp", "bmp");
+		picture_type.put("image/png", "png");
+		picture_type.put("image/gif", "gif");
+		picture_type.put("image/jpeg", "jpg");
+	}
 
 	private CommonMethod() {
-
+		
 	}
 
 	private static CommonMethod instance = new CommonMethod();
@@ -84,30 +93,40 @@ public class CommonMethod {
 	 */
 	public synchronized String[] saveImg(File file,String root_path,String dir,int with[],String filetype)throws Exception{
 		//First we save full image to disk
-		String path[] = new String[4];
+		String path[] = null;
+		if(with!=null){
+			path = new String[with.length+1];
+		}else{
+			path = new String[1];
+		}
 		String base_name = getFileName();
-		path[3] = dir+base_name+"_full."+filetype;
-		File _file = new File(root_path+path[3]);
+		path[path.length-1] = dir+base_name+"_"+path.length+"."+filetype;
+		File _file = new File(root_path+path[path.length-1]);
 		File folder = _file.getParentFile();
 		if(!folder.exists()){
 			folder.mkdirs();
 		}
-		boolean tag = false;
 		try{
-			tag = file.renameTo(_file);
+			file.renameTo(_file);
 		}catch(Exception e){
-			throw e;
-		}
-		if(!tag){
 			throw new Exception("保存文件失败");
 		}
-		//Secend:large  check if the picture's with bigger than given,if bigger need to resize, then save
-		path[2] = path[3];
-		//Secend:thumb  check if the picture's with bigger than given,if bigger need to resize, then save
-		path[1] = path[3];
-		//Secend:min  check if the picture's with bigger than given,if bigger need to resize, then save
-		path[0] = path[3];
+		//save the resize image
+		for(int i=(path.length-2);i>=0;i--){
+			path[i] = path[i+1];
+		}
 		return path;
+	}
+	
+	public synchronized void deleteFile(String file){
+		try{
+			File _file = new File(file);
+			if(_file.exists()&&_file.isFile()){
+				_file.delete();
+			}
+		}catch(Exception e){
+			
+		}
 	}
 
 	public synchronized boolean validEmail(String email) {
@@ -116,11 +135,12 @@ public class CommonMethod {
 		Matcher m = p.matcher(email);
 		return m.find();
 	}
+	
+	public synchronized String isAllowedPicture(String type) {
+		return picture_type.get(type);
+	}
 
 	public static void main(String args[])throws Exception{
-		File f = new File("F:/Program Files/Tomcat 6.0/webapps/twitpic/upload/images/pic/20090803/MTA1NTM0OTcyMTE0_full.jpg");
-		System.out.println(f.getParent());
-		//f.mkdirs();
-		//f.createNewFile();
+		
 	}
 }

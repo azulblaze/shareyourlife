@@ -4,9 +4,9 @@ import java.io.File;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.twitpic.db.model.Users;
 import com.twitpic.domain.Account;
 import com.twitpic.services.PictureService;
+import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
 
 /**
@@ -18,8 +18,6 @@ import com.twitpic.util.ConsVar;
 public class PictureAction extends BaseAction {
 	private File pic;
 	private String picContentType;
-	private String picFileName;
-	private String imageFileName;
 	private String description;
 	private PictureService pictureService;
 	
@@ -37,24 +35,12 @@ public class PictureAction extends BaseAction {
 		this.picContentType = picContentType;
 	}
 
-	public void setPicFileName(String picFileName) {
-		this.picFileName = picFileName;
-	}
-	public String getImageFileName() {
-		return imageFileName;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	private static String getExtention(String fileName) {
-		int pos = fileName.lastIndexOf(".");
-		return fileName.substring(pos+1);
 	}
 
 	public String upload() throws Exception{
@@ -67,9 +53,14 @@ public class PictureAction extends BaseAction {
 			return INPUT;
 		}
 		try{
-			System.out.println(picContentType);
+			String ext_type = CommonMethod.getInstance().isAllowedPicture(picContentType);
+			if(ext_type==null){
+				this.addActionError("不支持您上传的文件格式");
+				return INPUT;
+			}
+			System.out.println("file size:"+pic.length());
 			Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
-			pictureService.savePicture(user, root_path, pic, getExtention(picFileName), description);
+			pictureService.savePicture(user, root_path, pic, ext_type, description);
 			return SUCCESS;
 		}catch(Exception e){
 			this.addActionError(e.getMessage());

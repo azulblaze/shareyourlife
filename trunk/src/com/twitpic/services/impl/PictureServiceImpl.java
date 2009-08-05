@@ -57,6 +57,9 @@ public class PictureServiceImpl implements PictureService {
 	@Override
 	public PictureInfo savePicture(Account user, String root_path, File file,String filetype,String description)
 			throws Exception {
+		if(file.length()>systemConfig.getUpload_pic_maxlength()){
+			throw new Exception("上次文件大小超过"+systemConfig.getUpload_pic_maxlength()/(1024*1024)+"MB限制");
+		}
 		TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
 		try{
 			//First save image to disk
