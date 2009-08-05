@@ -66,8 +66,8 @@
 		</action>
 		<action name="comment" class="pictureAction" method="comment" >
 		</action>
-		
-		
+		<action name="tag" class="pictureAction" method="tag" >
+		</action>
 		
 	</package>
 </struts>

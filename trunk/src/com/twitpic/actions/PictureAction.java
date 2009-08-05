@@ -5,8 +5,10 @@ import java.io.File;
 import org.apache.struts2.ServletActionContext;
 
 import com.twitpic.db.model.Comments;
+import com.twitpic.db.model.Tags;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.FormComment;
+import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.PictureService;
 import com.twitpic.util.CommonMethod;
@@ -25,13 +27,13 @@ public class PictureAction extends BaseAction {
 	private String title;
 	private PictureService pictureService;
 	private FormComment formComment;
+	private FormTag formTag;
 	private Long id_picture;
 	
 
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
 	}
-
 	
 	public void setPic(File pic) {
 		this.pic = pic;
@@ -70,7 +72,12 @@ public class PictureAction extends BaseAction {
 	public void setId_picture(Long id_picture) {
 		this.id_picture = id_picture;
 	}
-	
+	public FormTag getFormTag(){
+		return formTag;
+	}
+	public void setFormTag(FormTag formTag){
+		this.formTag = formTag;
+	}
 	public String upload() throws Exception{
 		if(!isLogin()){
 			return LOGIN;
@@ -111,6 +118,26 @@ public class PictureAction extends BaseAction {
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'评论成功',data:'"+comments.to_json()+"'}");
 		}catch(Exception e){
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'提交失败,"+e.getMessage()+"'}");
+			return "json";
+		}
+		return "json";
+	}
+	
+	public String tag() throws Exception {
+		if(formTag==null||formTag.getName()==null||formTag.getName().trim().length()<1||formTag.getId_pictures()==null||formTag.getId_pictures()<1){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
+			return "json";
+		}
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		try{
+			Account account = loadAccount();
+			Tags tags = pictureService.Tag(account, formTag);
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记成功',data:'"+tags.to_json()+"'}");
+		}catch(Exception e){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记失败,"+e.getMessage()+"'}");
 			return "json";
 		}
 		return "json";

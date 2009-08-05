@@ -10,7 +10,6 @@ import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.domain.FormUserProfile;
 import com.twitpic.services.AccountService;
-import com.twitpic.system.config.SystemConfig;
 import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
 

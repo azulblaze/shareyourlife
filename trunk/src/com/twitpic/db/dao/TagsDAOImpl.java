@@ -151,4 +151,9 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
             return record;
         }
     }
+
+	@Override
+	public Long insert_return_id(Tags record) {
+		return (Long)getSqlMapClientTemplate().insert("tags.insert_return_id", record);
+	}
 }

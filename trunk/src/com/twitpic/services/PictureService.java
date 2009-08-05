@@ -33,5 +33,7 @@ public interface PictureService {
 	
 	public com.twitpic.db.model.Comments comment(com.twitpic.domain.Account account,com.twitpic.domain.FormComment formComment)throws Exception;
 	
+	public com.twitpic.db.model.Tags Tag(com.twitpic.domain.Account account,com.twitpic.domain.FormTag formTag)throws Exception;
+	
 	public com.twitpic.domain.PictureInfo loadPicture(long id_picture)throws Exception;
 }

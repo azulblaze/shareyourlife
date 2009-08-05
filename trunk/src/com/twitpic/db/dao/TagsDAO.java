@@ -84,4 +84,6 @@ public interface TagsDAO {
      * @abatorgenerated Sun Aug 02 17:41:31 CST 2009
      */
     int updateByExample(Tags record, TagsExample example);
+    
+    Long insert_return_id(Tags record);
 }
