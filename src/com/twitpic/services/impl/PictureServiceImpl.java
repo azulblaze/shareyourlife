@@ -10,10 +10,17 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import com.twitpic.db.dao.CommentsDAO;
 import com.twitpic.db.dao.PicturesDAO;
 import com.twitpic.db.dao.PicturesParameterDAO;
+import com.twitpic.db.dao.TagsDAO;
+import com.twitpic.db.dao.TagsRelDAO;
 import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesParameter;
+import com.twitpic.db.model.Tags;
+import com.twitpic.db.model.TagsExample;
+import com.twitpic.db.model.TagsRel;
+import com.twitpic.db.model.TagsRelExample;
 import com.twitpic.domain.FormComment;
+import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.domain.Account;
 import com.twitpic.services.PictureService;
@@ -37,6 +44,16 @@ public class PictureServiceImpl implements PictureService {
 	
 	private PicturesParameterDAO picturesParameterDAO;
 	
+	private TagsDAO tagsDAO;
+	
+	private TagsRelDAO tagsRelDAO;
+	
+	public void setTagsRelDAO(TagsRelDAO tagsRelDAO){
+		this.tagsRelDAO = tagsRelDAO;
+	}
+	public void setTagsDAO(TagsDAO tagsDAO){
+		this.tagsDAO = tagsDAO;
+	}
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
 	}
@@ -131,7 +148,7 @@ public class PictureServiceImpl implements PictureService {
 			return c;
 		}else{
 			throw new Exception("您要评论的图片不存在");
-		}	
+		}
 	}
 
 	@Override
@@ -143,5 +160,55 @@ public class PictureServiceImpl implements PictureService {
 		throw new Exception("未找到该图片，可能已经被删除");
 	}
 
-	
+	@Override
+	public Tags Tag(Account account, FormTag formTag) throws Exception {
+		List<PictureInfo> list = picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, formTag.getId_pictures(), null, null, null, null, null);
+		if(list.size()>0){
+			TagsExample te = new TagsExample();
+			te.createCriteria().andNameEqualTo(formTag.getName());
+			List<Tags> tags = tagsDAO.selectByExample(te);
+			if(tags.size()>0){
+				saveTagRel(account,formTag.getId_pictures(),tags.get(0).getId());
+				return tags.get(0);
+			}else{
+				TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
+				try{
+					Tags tag = new Tags();
+					tag.setAccount(account.getAccount());
+					tag.setCreateTime(new java.util.Date());
+					tag.setDescription("");
+					tag.setName(formTag.getName());
+					tag.setStatus(Tags.STATUS_USER);
+					Long id = tagsDAO.insert_return_id(tag);
+					tag.setId(id);
+					saveTagRel(account,formTag.getId_pictures(),tag.getId());
+					this.m_db_tx_manager.commit(status);
+					return tag;
+				}catch(Exception e){
+					this.m_db_tx_manager.rollback(status);
+					throw new Exception("标记失败");
+				}
+			}
+		}else{
+			throw new Exception("您要标记的图片不存在");
+		}
+	}
+
+	private void saveTagRel(Account account,Long id_pictures,Long id_tags){
+		TagsRelExample example = new TagsRelExample();
+		example.createCriteria().andAccountEqualTo(account.getAccount()).andIdPicturesEqualTo(id_pictures).andIdTagsEqualTo(id_tags);
+		java.util.List<TagsRel> tagsRels = tagsRelDAO.selectByExample(example);
+		if(tagsRels.size()>0){
+			TagsRel tagsRel = tagsRels.get(0);
+			tagsRel.setTagTime(new java.util.Date());
+			tagsRelDAO.updateByPrimaryKeySelective(tagsRel);
+		}else{
+			TagsRel tagsRel = new TagsRel();
+			tagsRel.setAccount(account.getAccount());
+			tagsRel.setIdPictures(id_pictures);
+			tagsRel.setIdTags(id_tags);
+			tagsRel.setTagTime(new java.util.Date());
+			tagsRelDAO.insert(tagsRel);
+		}
+	}
 }

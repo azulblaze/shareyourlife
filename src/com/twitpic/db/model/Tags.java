@@ -194,4 +194,8 @@ public class Tags  extends BaseModel{
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    
+    public static final int STATUS_SYSTEM = 0;
+    
+    public static final int STATUS_USER = 1;
 }

@@ -1,6 +1,5 @@
 package com.twitpic.services.impl;
 
-import java.io.File;
 
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -8,8 +7,6 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.twitpic.db.dao.UsersDAO;
 import com.twitpic.db.dao.UsersProfileDAO;
-import com.twitpic.db.model.Pictures;
-import com.twitpic.db.model.PicturesParameter;
 import com.twitpic.db.model.Users;
 import com.twitpic.db.model.UsersExample;
 import com.twitpic.db.model.UsersProfile;
@@ -18,12 +15,10 @@ import com.twitpic.domain.FormRegister;
 import com.twitpic.domain.FormUserProfile;
 import com.twitpic.domain.Mail;
 import com.twitpic.domain.Account;
-import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.AccountService;
 import com.twitpic.system.config.SystemConfig;
 import com.twitpic.system.email.MailServices;
 import com.twitpic.util.CommonMethod;
-import com.twitpic.util.ConsVar;
 
 public class AccountServiceImpl implements AccountService {
 	
