@@ -37,4 +37,7 @@
 	<definition name="page.profile" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/pages/tiles/update_userinfo.jsp"></put-attribute>
 	</definition>
+	<definition name="page.single_pic" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/single_pic.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

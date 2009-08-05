@@ -16,7 +16,7 @@
   	<result column="user_account" property="account" jdbcType="VARCHAR"/>
   	<result column="user_name" property="name" jdbcType="VARCHAR"/>
   	<result column="user_picture" property="picture" jdbcType="VARCHAR"/>
-  	 <result column="full" property="pictures.full" jdbcType="VARCHAR"/>
+  	<result column="full" property="pictures.full" jdbcType="VARCHAR"/>
     <result column="id" property="pictures.id" jdbcType="BIGINT"/>
     <result column="min" property="pictures.min" jdbcType="VARCHAR"/>
     <result column="thumb" property="pictures.thumb" jdbcType="VARCHAR"/>
@@ -26,6 +26,7 @@
     <result column="upload_account" property="picturesParameter.uploadAccount" jdbcType="VARCHAR"/>
     <result column="upload_time" property="picturesParameter.uploadTime" jdbcType="TIMESTAMP"/>
     <result column="status" property="picturesParameter.status" jdbcType="INTEGER"/>
+    <result column="title" property="picturesParameter.title" jdbcType="VARCHAR"/>
     <result column="description" property="picturesParameter.description" jdbcType="VARCHAR"/>
   </resultMap>
   

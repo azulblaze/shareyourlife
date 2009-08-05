@@ -1,6 +1,7 @@
 package com.twitpic.actions;
 
 import com.twitpic.services.PictureService;
+import com.twitpic.util.ConsVar;
 
 @SuppressWarnings("serial")
 public class HomeAction extends BaseAction {
@@ -40,27 +41,25 @@ public class HomeAction extends BaseAction {
 	}
 	
 	public String main_more()throws Exception{
-		if(isLogin()){
-			if(to_id!=null&&to_id.longValue()>0){
-				java.util.List<com.twitpic.domain.PictureInfo> pictures = pictureService.loadMoretPictures(to_id, 5);
-				this.setValue("pictures", pictures);
-			}
-			
-		}else{
-			
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		if(to_id!=null&&to_id.longValue()>0){
+			java.util.List<com.twitpic.domain.PictureInfo> pictures = pictureService.loadMoretPictures(to_id, 5);
+			this.setValue("pictures", pictures);
 		}
 		return "json";
 	}
 	
 	public String main_latest()throws Exception{
-		if(isLogin()){
-			if(from_id!=null&&from_id.longValue()>0){
-				java.util.List<com.twitpic.domain.PictureInfo> pictures = pictureService.loadLatestPictures(from_id);
-				this.setValue("pictures", pictures);
-			}
-			
-		}else{
-			
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		if(from_id!=null&&from_id.longValue()>0){
+			java.util.List<com.twitpic.domain.PictureInfo> pictures = pictureService.loadLatestPictures(from_id);
+			this.setValue("pictures", pictures);
 		}
 		return "json";
 	}
