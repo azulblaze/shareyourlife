@@ -61,4 +61,8 @@ public abstract class BaseAction extends ActionSupport {
 		}
 		return result;
 	}
+	
+	protected Account loadAccount(){
+		return (Account)ServletActionContext.getRequest().getSession().getAttribute(ConsVar.SESSION_USER);
+	}
 }

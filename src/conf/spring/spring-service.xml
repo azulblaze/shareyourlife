@@ -42,6 +42,8 @@
 	<bean name="systemConfig" class="com.twitpic.system.config.SystemConfig" >
 		<property name="domain" value="http://localhost:8080" />
 		<property name="upload_pic" value="/upload/images/pic" />
+		<property name="upload_pic_maxlength" value="4194304" />
 		<property name="upload_header" value="/upload/images/header" />
+		<property name="upload_header_maxlength" value="16384" />
 	</bean>
 </beans>
