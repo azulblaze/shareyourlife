@@ -21,17 +21,18 @@
 			<result name="index" type="redirect-action">index</result>
 			<result name="login" type="redirect-action">login</result>			
 		</global-results>
+		
 		 <action name="index" class="homeAction" method="index">
 		 	<result name="welcome" type="tiles">page.index</result>
 		 	<result name="success" type="tiles">page.main</result>
 		 </action>
+		 
 		<action name="login" class="accountAction" method="login" >
 			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
 			<result name="been_closed" type="tiles">page.error_been_closed</result>
 			<result name="input" type="tiles">page.login</result>
 			<result name="success" type="redirect-action">index</result>
 		</action>
-		
 		<action name="logout" class="accountAction" method="logout" >
 		</action>
 		<action name="edit_password" class="accountAction" method="edit_password" >
@@ -40,7 +41,6 @@
 		</action>
 		<action name="edit_profile" class="accountAction" method="edit_profile" >
 		</action>
-		
 		<action name="reg" class="accountAction" method="register" >
 			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
 			<result name="input" type="tiles">page.reg</result>
@@ -61,6 +61,13 @@
 			<result name="input" type="tiles">page.uploadpic</result>
 			<result name="success" type="tiles">page.uploadsucess</result>
 		</action>
+		<action name="picture" class="pictureAction" method="single_pic" >
+			<result name="success" type="tiles">page.single_pic</result>
+		</action>
+		<action name="comment" class="pictureAction" method="comment" >
+		</action>
+		
+		
 		
 	</package>
 </struts>

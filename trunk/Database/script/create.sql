@@ -47,6 +47,7 @@ CREATE  TABLE IF NOT EXISTS pictures_parameter (
   upload_account VARCHAR(100) NOT NULL ,
   upload_time TIMESTAMP NULL ,
   status INT NULL DEFAULT 1 ,
+  title VARCHAR(100) NULL ,
   description VARCHAR(1000) NULL ,
   addtion_info TEXT NULL ,
   PRIMARY KEY (id_pictures) )
@@ -77,6 +78,7 @@ DROP TABLE IF EXISTS comments ;
 go
 CREATE  TABLE IF NOT EXISTS comments (
   id BIGINT NOT NULL AUTO_INCREMENT ,
+  id_pictures BIGINT NOT NULL ,
   account VARCHAR(100) NOT NULL ,
   comment TEXT NULL ,
   comment_time TIMESTAMP NULL DEFAULT current_timestamp ,
