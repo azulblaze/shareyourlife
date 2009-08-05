@@ -15,5 +15,11 @@
    评论<textarea name="formComment.comment"></textarea>
    <input type="submit" value="提交"/>
    </form>
+   
+  标记<form action="/tag.do" method="posts">
+  <input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>"/>
+  <input type="text" name="formTag.name">
+  <input type="submit" value="提交"/>
+  </form>
 </body>
 </html>
