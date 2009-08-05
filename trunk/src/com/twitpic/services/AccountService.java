@@ -7,6 +7,12 @@ public interface AccountService {
 	public com.twitpic.domain.Account user_login(FormLogin formLogin)throws Exception;
 	
 	public com.twitpic.domain.Account reg_user(com.twitpic.domain.FormRegister formRegister) throws Exception;
+	
+	public com.twitpic.domain.Account editProfile(com.twitpic.domain.Account account,com.twitpic.domain.FormUserProfile formUserProfile) throws Exception;
+	
+	public com.twitpic.domain.Account editPassword(com.twitpic.domain.Account account,com.twitpic.domain.FormUserProfile formUserProfile) throws Exception;
+	
+	public com.twitpic.domain.Account editHeader(com.twitpic.domain.Account account,java.io.File file,String rootpath,String filetype) throws Exception;
 	/**
 	 * 
 	 * @param ac account

@@ -3,7 +3,7 @@ package com.twitpic.domain;
 import com.twitpic.db.model.Users;
 import com.twitpic.db.model.UsersProfile;
 
-public class Account {
+public class Account extends com.twitpic.db.model.BaseModel{
 	
 	private String account;
 	

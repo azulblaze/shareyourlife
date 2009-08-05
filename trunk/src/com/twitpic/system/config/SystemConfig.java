@@ -9,7 +9,11 @@ public class SystemConfig {
 	
 	private String upload_header;
 	
+	private long upload_header_maxlength;
+	
 	private String upload_pic;
+	
+	private long upload_pic_maxlength;
 
 	/**
 	 * @return the domain
@@ -51,6 +55,34 @@ public class SystemConfig {
 	 */
 	public void setUpload_pic(String upload_pic) {
 		this.upload_pic = upload_pic;
+	}
+
+	/**
+	 * @return the upload_header_maxlength
+	 */
+	public long getUpload_header_maxlength() {
+		return upload_header_maxlength;
+	}
+
+	/**
+	 * @param upload_header_maxlength the upload_header_maxlength to set
+	 */
+	public void setUpload_header_maxlength(long upload_header_maxlength) {
+		this.upload_header_maxlength = upload_header_maxlength;
+	}
+
+	/**
+	 * @return the upload_pic_maxlength
+	 */
+	public long getUpload_pic_maxlength() {
+		return upload_pic_maxlength;
+	}
+
+	/**
+	 * @param upload_pic_maxlength the upload_pic_maxlength to set
+	 */
+	public void setUpload_pic_maxlength(long upload_pic_maxlength) {
+		this.upload_pic_maxlength = upload_pic_maxlength;
 	}
 	
 	

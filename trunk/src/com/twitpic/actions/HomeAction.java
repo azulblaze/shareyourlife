@@ -32,15 +32,11 @@ public class HomeAction extends BaseAction {
 	}
 
 	public String index() throws Exception{
-		return SUCCESS;
-	}
-	
-	public String main() throws Exception{
 		if(isLogin()){
 			this.setValue("pictures", pictureService.loadHomePictures(15));
 			return SUCCESS;
 		}
-		return LOGIN;
+		return "welcome";
 	}
 	
 	public String main_more()throws Exception{
