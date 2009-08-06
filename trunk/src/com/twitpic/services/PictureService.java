@@ -1,4 +1,5 @@
 package com.twitpic.services;
+
 /**
  * <code>PictureService.java</code>
  * @version 1.0, 2009-8-3
@@ -33,7 +34,11 @@ public interface PictureService {
 	
 	public com.twitpic.db.model.Comments comment(com.twitpic.domain.Account account,com.twitpic.domain.FormComment formComment)throws Exception;
 	
+	public boolean delComment(com.twitpic.domain.Account account,Long id_comment)throws Exception;
+	
 	public com.twitpic.db.model.Tags Tag(com.twitpic.domain.Account account,com.twitpic.domain.FormTag formTag)throws Exception;
 	
 	public com.twitpic.domain.PictureInfo loadPicture(long id_picture)throws Exception;
+	
+	public boolean delPicture(com.twitpic.domain.Account account,Long id_picture,String root_path)throws Exception;
 }

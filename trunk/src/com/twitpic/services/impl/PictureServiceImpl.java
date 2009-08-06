@@ -13,6 +13,7 @@ import com.twitpic.db.dao.PicturesParameterDAO;
 import com.twitpic.db.dao.TagsDAO;
 import com.twitpic.db.dao.TagsRelDAO;
 import com.twitpic.db.model.Comments;
+import com.twitpic.db.model.CommentsExample;
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesParameter;
 import com.twitpic.db.model.Tags;
@@ -210,5 +211,55 @@ public class PictureServiceImpl implements PictureService {
 			tagsRel.setTagTime(new java.util.Date());
 			tagsRelDAO.insert(tagsRel);
 		}
+	}
+	@Override
+	public boolean delComment(Account account, Long idComment) throws Exception {
+		Comments c = commentsDAO.selectByPrimaryKey(idComment);
+		if(c==null){
+			throw new Exception("评论不存在");
+		}
+		if(!c.getAccount().equals(account.getAccount())){
+			commentsDAO.deleteByPrimaryKey(idComment);
+		}else{
+			throw new Exception("您只能删除您自己发表的评论");
+		}
+		return true;
+	}
+	@Override
+	public boolean delPicture(Account account, Long idPicture,String root_path) throws Exception {
+		Pictures pictures = picturesDAO.selectByPrimaryKey(idPicture);
+		if(pictures==null){
+			throw new Exception("图片不存在");
+		}
+		PicturesParameter picturesParameter = picturesParameterDAO.selectByPrimaryKey(idPicture);
+		if(!picturesParameter.getUploadAccount().equals(account.getAccount())){
+			throw new Exception("您只能删除您自己上传的图片");
+		}
+		TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
+		try{
+			//delete comment
+			CommentsExample ce = new CommentsExample();
+			ce.createCriteria().andIdPicturesEqualTo(idPicture);
+			commentsDAO.deleteByExample(ce);
+			//delete tagrel
+			TagsRelExample te = new TagsRelExample();
+			te.createCriteria().andIdPicturesEqualTo(idPicture);
+			tagsRelDAO.deleteByExample(te);
+			//delete picturesParameter
+			picturesParameterDAO.deleteByPrimaryKey(idPicture);
+			//delete pictures
+			picturesDAO.deleteByPrimaryKey(idPicture);
+			//delete file
+			CommonMethod cm = CommonMethod.newInstance();
+			cm.deleteFile(root_path+pictures.getMin());
+			cm.deleteFile(root_path+pictures.getThumb());
+			cm.deleteFile(root_path+pictures.getLarge());
+			cm.deleteFile(root_path+pictures.getFull());
+			this.m_db_tx_manager.commit(status);
+		}catch(Exception e){
+			this.m_db_tx_manager.rollback(status);
+			throw e;
+		}
+		return true;
 	}
 }

@@ -11,6 +11,7 @@ import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.PictureService;
+import com.twitpic.system.struts.ProgressMonitor;
 import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
 
@@ -29,7 +30,15 @@ public class PictureAction extends BaseAction {
 	private FormComment formComment;
 	private FormTag formTag;
 	private Long id_picture;
+	private Long id_comment;
 	
+	public Long getId_comment() {
+		return id_comment;
+	}
+
+	public void setId_comment(Long idComment) {
+		id_comment = idComment;
+	}
 
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
@@ -150,10 +159,80 @@ public class PictureAction extends BaseAction {
 				this.setValue("picture", pi);
 			}catch(Exception e){
 				this.addActionError(e.getMessage());
+				return ERROR;
 			}
 			return SUCCESS;
 		}
 		return ERROR;
 	}
 
+	public String delete_pic() throws Exception{
+		if(id_picture==null||id_picture.longValue()<1){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
+			return "json";
+		}
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		try{
+			Account account = loadAccount();
+			String root_path = ServletActionContext.getServletContext().getRealPath("/");
+			pictureService.delPicture(account, id_picture, root_path);
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除成功'}");
+		}catch(Exception e){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除失败,"+e.getMessage()+"'}");
+			return "json";
+		}
+		return "json";
+	}
+	
+	public String delete_comment() throws Exception{
+		if(id_comment!=null||id_comment.longValue()<1){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
+			return "json";
+		}
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		try{
+			Account account = loadAccount();
+			pictureService.delComment(account, id_comment);
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除成功'}");
+		}catch(Exception e){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除失败,"+e.getMessage()+"'}");
+			return "json";
+		}
+		return "json";
+	}
+	
+	public String upload_info() throws Exception{
+		if(!isLogin()){
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			return "json";
+		}
+		ProgressMonitor pm = (ProgressMonitor)ServletActionContext.getRequest().getSession().getAttribute(ProgressMonitor.SESSION_PROGRESS_MONITOR);
+		if(pm!=null){
+			if(pm.isStillProcessing()){
+				this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传中...',length:'"
+						+pm.getBytesLength()+"',read:'"+pm.getBytesRead()
+						+"',percent:'"+pm.percentComplete()+"'}");
+			}else{
+				if(pm.percentComplete().equals(100)){
+					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传成功',length:'"
+							+pm.getBytesLength()+"',read:'"+pm.getBytesRead()
+							+"',percent:'"+pm.percentComplete()+"'}");
+				}else{
+					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传失败，请重新尝试',length:'"
+							+pm.getBytesLength()+"',read:'"+pm.getBytesRead()
+							+"',percent:'"+pm.percentComplete()+"'}");
+				}
+				clearSession(ProgressMonitor.SESSION_PROGRESS_MONITOR);
+			}
+		}else{
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'没有上传文件'}");
+		}
+		return "json";
+	}
 }
