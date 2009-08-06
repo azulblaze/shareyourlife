@@ -2,6 +2,7 @@ package com.twitpic.db.model;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
@@ -9,10 +10,22 @@ import net.sf.json.JSONObject;
 
 public abstract class BaseModel {
 	
+	public SimpleDateFormat getFormat() {
+		return format;
+	}
+
+
+	public void setFormat(SimpleDateFormat format) {
+		this.format = format;
+	}
+
+	protected SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+	
 	/**
 	 * @param field  make sure the field'Accessible is true!
 	 * @return the field's value
 	 */
+	
     public Object getFieldValue(Field field){
     	try {
 			Object obj = field.get(this);
@@ -33,18 +46,19 @@ public abstract class BaseModel {
     
     }
     
-    /**
-     * Convert object to json object
-     * @return JSONObject
-     * @throws JSONException
-     */
+   
     public JSONObject to_json()throws JSONException{
     	JSONObject jo = new JSONObject();
     	Field[] fields = this.getClass().getDeclaredFields();
     	//to make the field's value can be get
     	AccessibleObject.setAccessible(fields, true);
 		for(Field field:fields){
-			jo.put(field.getName(), this.getFieldValue(field));
+			Object obj = this.getFieldValue(field);
+			if(obj!=null&&obj instanceof java.util.Date){
+				jo.put(field.getName(), format.format((java.util.Date)obj));
+			}else{
+				jo.put(field.getName(), this.getFieldValue(field));
+			}
 		}
 		AccessibleObject.setAccessible(fields, false);
 		return jo;

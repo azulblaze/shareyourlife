@@ -1,6 +1,7 @@
 package com.twitpic.domain;
 
-import org.json.JSONException;
+
+import net.sf.json.JSONException;
 
 import com.twitpic.db.model.Pictures;
 import com.twitpic.db.model.PicturesParameter;
