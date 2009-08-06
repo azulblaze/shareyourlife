@@ -93,7 +93,6 @@ public class PictureAction extends BaseAction {
 				this.addActionError("不支持您上传的文件格式");
 				return INPUT;
 			}
-			System.out.println("file size:"+pic.length());
 			Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
 			pictureService.savePicture(user, root_path, pic, ext_type, description,title);
 			return SUCCESS;
