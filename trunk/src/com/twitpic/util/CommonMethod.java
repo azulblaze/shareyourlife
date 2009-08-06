@@ -25,6 +25,8 @@ public class CommonMethod {
 		picture_type.put("image/png", "png");
 		picture_type.put("image/gif", "gif");
 		picture_type.put("image/jpeg", "jpg");
+		picture_type.put("image/pjpeg", "jpg");
+		picture_type.put("image/x-png", "png");
 	}
 
 	private CommonMethod() {
