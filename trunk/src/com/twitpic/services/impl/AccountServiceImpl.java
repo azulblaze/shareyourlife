@@ -177,7 +177,7 @@ public class AccountServiceImpl implements AccountService {
 		try{
 			//First save image to disk
 			CommonMethod cm = CommonMethod.newInstance();
-			String[] path = cm.saveImg(file, rootpath,systemConfig.getUpload_header(),null,filetype);
+			String[] path = cm.saveImg(file, rootpath,systemConfig.getUpload_header(),null,null,filetype);
 			//Save picture path to user_property
 			UsersProfile up = new UsersProfile();
 			up.setAccount(account.getAccount());

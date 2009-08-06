@@ -21,6 +21,7 @@ import com.gif4j.GifImage;
 import com.gif4j.GifTransformer;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.twitpic.services.ImageService;
 
 public class GifTest {
 
@@ -99,10 +100,7 @@ public class GifTest {
 	  
 	        BufferedImage tag= new BufferedImage((int) widthdist, (int) heightdist,   
 	                BufferedImage.TYPE_INT_RGB);   
-	  
 	        tag.getGraphics().drawImage(src.getScaledInstance(widthdist, heightdist,  Image.SCALE_SMOOTH), 0, 0,  null);   
-	///         tag.getGraphics().drawImage(src.getScaledInstance(widthdist, heightdist,  Image.SCALE_AREA_AVERAGING), 0, 0,  null);   
-	           
 	        FileOutputStream out = new FileOutputStream(imgdist);   
 	        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);   
 	        encoder.encode(tag);   
@@ -143,13 +141,15 @@ public class GifTest {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		GifTest gt = new GifTest();
+		//GifTest gt = new GifTest();
 		//gt.decode(GifTest.file);
 		//gt.addCommentToGifImage(GifTest.file, new File("F:/gif/my_gif.gif"), "Andy Chen");
 		//gt.getGifImage(GifTest.header, new File("F:/gif/my_header.gif"), 400, 400, false);
 		//gt.reduceImg("F:/gif/01.jpg", "F:/gif/01__.jpg", 400, 300);
 		//gt.reduceImg("F:/gif/png-1.png", "F:/gif/png-1_11.png", 100, 150);
-		gt.savePNG();
+		//gt.savePNG();
+		ImageService is = (ImageService)Class.forName("com.twitpic.services.impl.ImageService"+"PNG").newInstance();
+		System.out.println(is.reSizeImage(new File("F:/image/png-1.png"), "F:/image/png-22.png", 149, 0));
 	}
 
 }

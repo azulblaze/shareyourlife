@@ -9,7 +9,7 @@
 </head>
 <body>
 用户<img height="45" with="45" src="<s:property value='picture.picture'/>"/><a href="<s:property value='picture.account'/>"/><s:property value="picture.name"/></a>
-   <div><img src="<s:property value='picture.pictures.min'/>"/></div>
+   <div><img src="<s:property value='picture.pictures.thumb'/>"/></div>
    <form action="/comment.do" method="post">
    <input type="hidden" name="formComment.id_pictures" value="<s:property value='picture.pictures.id'/>"/>
    评论<textarea name="formComment.comment"></textarea>

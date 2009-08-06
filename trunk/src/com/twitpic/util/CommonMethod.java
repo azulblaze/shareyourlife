@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.twitpic.services.ImageService;
+
 
 /**
  * <code>CommonMethod.java</code>
@@ -20,7 +22,6 @@ public class CommonMethod {
 	private static java.util.Map<String,String> picture_type = new java.util.HashMap<String,String>();
 	
 	static{
-		picture_type.put("image/bmp", "bmp");
 		picture_type.put("image/png", "png");
 		picture_type.put("image/gif", "gif");
 		picture_type.put("image/jpeg", "jpg");
@@ -91,11 +92,11 @@ public class CommonMethod {
 	 * @return String[] the path that saved
 	 * @throws Exception
 	 */
-	public synchronized String[] saveImg(File file,String root_path,String dir,int with[],String filetype)throws Exception{
+	public synchronized String[] saveImg(File file,String root_path,String dir,int width[],int height[],String filetype)throws Exception{
 		//First we save full image to disk
 		String path[] = null;
-		if(with!=null){
-			path = new String[with.length+1];
+		if(width!=null){
+			path = new String[width.length+1];
 		}else{
 			path = new String[1];
 		}
@@ -111,9 +112,31 @@ public class CommonMethod {
 		}catch(Exception e){
 			throw new Exception("保存文件失败");
 		}
+		//if only save one picture,return path
+		if(path.length==1){
+			return path;
+		}
 		//save the resize image
-		for(int i=(path.length-2);i>=0;i--){
-			path[i] = path[i+1];
+		ImageService is = null;
+		try{
+			is = (ImageService)Class.forName("com.twitpic.services.impl.ImageService"+filetype.toUpperCase()).newInstance();
+		}catch(Exception e){
+			
+		}
+		if(is==null){
+			for(int i=(path.length-2);i>=0;i--){
+				path[i] = path[path.length-1];
+			}
+		}else{
+			String tmp_path = null;
+			for(int i=(path.length-2);i>=0;i--){
+				tmp_path = dir+base_name+"_"+(i+1)+"."+filetype;
+				if(is.reSizeImage(_file, root_path+tmp_path, width[i], height[i])){
+					path[i] = tmp_path;
+				}else{
+					path[i] = path[path.length-1];
+				}
+			}
 		}
 		return path;
 	}
