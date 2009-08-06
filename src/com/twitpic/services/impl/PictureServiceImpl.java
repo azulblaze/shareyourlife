@@ -90,7 +90,7 @@ public class PictureServiceImpl implements PictureService {
 		try{
 			//First save image to disk
 			CommonMethod cm = CommonMethod.newInstance();
-			String[] path = cm.saveImg(file, root_path,systemConfig.getUpload_pic(),ConsVar.IMG_WITH,filetype);
+			String[] path = cm.saveImg(file, root_path,systemConfig.getUpload_pic(),ConsVar.IMG_WIDTH,ConsVar.IMG_HIGHT,filetype);
 			//Save path and picture information to database
 			Pictures p = new Pictures();
 			p.setMin(path[0]);
