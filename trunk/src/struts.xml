@@ -33,14 +33,10 @@
 			<result name="input" type="tiles">page.login</result>
 			<result name="success" type="redirect-action">index</result>
 		</action>
-		<action name="logout" class="accountAction" method="logout" >
-		</action>
-		<action name="edit_password" class="accountAction" method="edit_password" >
-		</action>
-		<action name="edit_header" class="accountAction" method="edit_header" >
-		</action>
-		<action name="edit_profile" class="accountAction" method="edit_profile" >
-		</action>
+		<action name="logout" class="accountAction" method="logout" />
+		<action name="edit_password" class="accountAction" method="edit_password" />
+		<action name="edit_header" class="accountAction" method="edit_header" />
+		<action name="edit_profile" class="accountAction" method="edit_profile" />
 		<action name="reg" class="accountAction" method="register" >
 			<result name="email_valid" type="tiles">page.error_email_not_valid</result>
 			<result name="input" type="tiles">page.reg</result>
@@ -61,13 +57,14 @@
 			<result name="input" type="tiles">page.uploadpic</result>
 			<result name="success" type="tiles">page.uploadsucess</result>
 		</action>
+		<action name="upload_info" class="pictureAction" method="upload_info" />
 		<action name="picture" class="pictureAction" method="single_pic" >
 			<result name="success" type="tiles">page.single_pic</result>
 		</action>
-		<action name="comment" class="pictureAction" method="comment" >
-		</action>
-		<action name="tag" class="pictureAction" method="tag" >
-		</action>
+		<action name="delete_pic" class="pictureAction" method="delete_pic" />
+		<action name="comment" class="pictureAction" method="comment" />
+		<action name="delete_comment" class="pictureAction" method="delete_comment" />
+		<action name="tag" class="pictureAction" method="tag" />
 		
 	</package>
 </struts>
