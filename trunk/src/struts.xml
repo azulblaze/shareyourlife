@@ -3,8 +3,8 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 	
 <struts>
-
-
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="monitorMultiPartRequest" class="com.twitpic.system.struts.EnhancedJakartaMultiPartRequest" scope="default" optional="true" />
+	<constant name="struts.multipart.parser" value="monitorMultiPartRequest"/>
 	<package name="default" extends="tiles-default">
 		<!-- 
 		<global-results>
