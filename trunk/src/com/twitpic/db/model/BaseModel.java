@@ -3,8 +3,8 @@ package com.twitpic.db.model;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 
 
 public abstract class BaseModel {
