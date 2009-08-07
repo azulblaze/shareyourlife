@@ -218,14 +218,23 @@ public class PictureAction extends BaseAction {
 		ProgressMonitor pm = (ProgressMonitor)ServletActionContext.getRequest().getSession().getAttribute(ProgressMonitor.SESSION_PROGRESS_MONITOR);
 		if(pm!=null){
 			if(pm.isStillProcessing()){
-				this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传中...',state:'uploading',size:'"
-						+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
-						+"',percents:'"+pm.percentComplete()+"'}");
+				if(!pm.percentComplete().equals(100)){
+					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传中...',state:'uploading',size:'"
+							+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
+							+"',percents:'"+pm.percentComplete()+"'}");
+				}
+				if(pm.percentComplete().equals(100)){
+					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传成功',state:'done',size:'"
+							+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
+							+"',percents:'"+pm.percentComplete()+"'}");
+					clearSession(ProgressMonitor.SESSION_PROGRESS_MONITOR);
+				}
 			}else{
 				if(pm.percentComplete().equals(100)){
 					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传成功',state:'done',size:'"
 							+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
 							+"',percents:'"+pm.percentComplete()+"'}");
+					clearSession(ProgressMonitor.SESSION_PROGRESS_MONITOR);
 				}else{
 					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传失败，请重新尝试',state:'error',size:'"
 							+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
