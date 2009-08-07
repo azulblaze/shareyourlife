@@ -23,6 +23,7 @@
   }, options);
   
   $(function() {
+	  alert("===");
     iframe = document.createElement('iframe');
     iframe.name = "progressFrame";
     $(iframe).css({width: '0', height: '0',display:'none'});
@@ -30,8 +31,10 @@
   });
   
   return this.each(function(){
+	alert("222");
 	$(this).attr({target:iframe.name});
     $(this).bind('submit', function() {
+    	alert("333");
       var uuid = "";
       for (i = 0; i < 32; i++) { uuid += Math.floor(Math.random() * 16).toString(16); }
       /* update uuid */
@@ -52,7 +55,6 @@
   };
  
 jQuery.uploadProgress = function(e, options) {
-	alert("==1");
   jQuery.ajax({
     type: "GET",
     url: options.progressUrl + "?X-Progress-ID=" + options.uuid,
