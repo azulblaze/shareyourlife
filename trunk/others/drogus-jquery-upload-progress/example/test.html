@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <title>ajaxFileUpload</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/jquery.uploadProgress.js"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function() { 
+        $(function() {
+            $('#upload_form').uploadProgress({
+                progressBar: '#progress_indicator',
+                progressUrl: 'http://localhost:8080/upload_info.do',
+                start: function() {
+                    //$("#upload_form").hide();
+                    filename = $("#id_file").val().split(/[\/\\]/).pop();
+                    $("#progress_filename").html('Uploading ' + filename + "...");
+                    $("#progress_container").show();
+                },
+                uploading: function(upload) {
+                    if (upload.percents == 100) {
+                        window.clearTimeout(this.timer);
+                        $("#progress_filename").html('Processing ' + filename + "...");
+                    } else {
+                        $("#progress_filename").html('Uploading ' + filename + ': ' + upload.percents + '%');
+                    }
+                },
+                dataType:"json",
+                interval: 3000
+            });
+        });
+    });
+	function to_json(){
+		var _json = {action:'redirect', redirect_addr:'/login.do',state:'error'};
+		alert(_json.state);
+	}
+	function my_get(){
+		jQuery.ajax({
+		cache:false,
+		type: "post",
+		url: "http://localhost:8080/upload_info.do?X-Progress-ID=12312321",
+		dataType:"json",
+		success: function(upload) {
+			alert("==");
+			to_json();
+		  //alert( "Data Saved: " + upload.state);
+		}
+	  });
+	}
+    //]]>
+    </script>
+    <style type="text/css">
+    #progress_container {
+        font-size: .9em;
+        width: 100%;
+        height: 1.25em;
+        position: relative;
+        margin: 3em 0;
+        
+    }
+    
+    #progress_filename {
+        font-size: .9em;
+        width: 100%;
+    }
+    
+    #progress_bar {
+        width: 100%;
+        border: 1px solid #999;
+    }
+    
+    #progress_indicator {
+        background: #8a9;
+        width: 0;
+        height: 4px;
+    }
+    
+    </style>
+    </head>	
+	<body>
+        <form action="http://localhost:8080/upload_pic.do" id="upload_form" enctype="multipart/form-data">
+            <input type="text" name="go1" />
+            <input type="text" name="go2" />
+            <input type="file" id="id_file" />
+            <input type="submit" value="submit" />
+        </form>
+        <a href="javascript:to_json();">Test</a>
+        <a href="javascript:my_get();">GetData</a>
+        <div id="progress_container">
+            <div id="progress_filename"></div>
+            <div id="progress_bar">
+                <div id="progress_indicator"></div>
+            </div>
+        </div>
+	</body>
+</html>
+

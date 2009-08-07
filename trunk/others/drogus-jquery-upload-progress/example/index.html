@@ -5,16 +5,20 @@
 		<title>ajaxFileUpload</title>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script src="../lib/jquery.js"></script>
-		<script src="../jquery.uploadProgress.js"></script>
+		<script src="../lib/jquery.uploadProgress.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('form').uploadProgress({
 					/* scripts locations for safari */
 					jqueryPath: "../lib/jquery.js",
-					uploadProgressPath: "../jquery.uploadProgress.js",
-					start:function(){},
+					uploadProgressPath: "../lib/jquery.uploadProgress.js",
+					 progressUrl: 'http://localhost:8080/upload_info.do',
+					start:function(){alert("start")},
 					uploading: function(upload) {$('#percents').html(upload.percents+'%');},
-					interval: 2000
+					interval: 2000,
+					error:function(upload){
+                    	alert(upload.action);
+                	}
 			    });
 			});
 		</script>
