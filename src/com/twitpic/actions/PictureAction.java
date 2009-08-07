@@ -208,30 +208,33 @@ public class PictureAction extends BaseAction {
 	}
 	
 	public String upload_info() throws Exception{
+		/**
+		 * JSON obj: state:uploading,done,error   received  size   percents
+		 */
 		if(!isLogin()){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do',state:'error'}");
 			return "json";
 		}
 		ProgressMonitor pm = (ProgressMonitor)ServletActionContext.getRequest().getSession().getAttribute(ProgressMonitor.SESSION_PROGRESS_MONITOR);
 		if(pm!=null){
 			if(pm.isStillProcessing()){
-				this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传中...',length:'"
-						+pm.getBytesLength()+"',read:'"+pm.getBytesRead()
-						+"',percent:'"+pm.percentComplete()+"'}");
+				this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传中...',state:'uploading',size:'"
+						+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
+						+"',percents:'"+pm.percentComplete()+"'}");
 			}else{
 				if(pm.percentComplete().equals(100)){
-					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传成功',length:'"
-							+pm.getBytesLength()+"',read:'"+pm.getBytesRead()
-							+"',percent:'"+pm.percentComplete()+"'}");
+					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传成功',state:'done',size:'"
+							+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
+							+"',percents:'"+pm.percentComplete()+"'}");
 				}else{
-					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传失败，请重新尝试',length:'"
-							+pm.getBytesLength()+"',read:'"+pm.getBytesRead()
-							+"',percent:'"+pm.percentComplete()+"'}");
+					this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传失败，请重新尝试',state:'error',size:'"
+							+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
+							+"',percents:'"+pm.percentComplete()+"'}");
 				}
 				clearSession(ProgressMonitor.SESSION_PROGRESS_MONITOR);
 			}
 		}else{
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'没有上传文件'}");
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',state:'error',message:'没有上传文件'}");
 		}
 		return "json";
 	}
