@@ -70,16 +70,17 @@ jQuery.uploadProgress = function(e, options) {
         options.uploading(upload);
       }
       if (upload.state == 'done' || upload.state == 'error') {
-        window.clearInterval(options.timer);
         options.complete(upload);
       }
       if (upload.state == 'done') {
-		 if(upload.picture!=null&&upload.picture.status!='unloaded'){
-			 clearSession(options);
-		 }
+		if(upload.picture!=null&&upload.picture.status!='unloaded'){
+			clearSession(options);
+			window.clearInterval(options.timer);
+		}
         options.success(upload);
       }
       if (upload.state == 'error') {
+		window.clearInterval(options.timer);
 		clearSession(options);
         options.error(upload);
       }
