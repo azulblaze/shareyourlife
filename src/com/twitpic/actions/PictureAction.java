@@ -267,7 +267,7 @@ public class PictureAction extends BaseAction {
 			if(!pm.percentComplete().equals("100")){
 				this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'上传中...',state:'uploading',size:'"
 						+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
-						+"',percents:'"+pm.percentComplete()+"',picture:'"+jo.toString()+"'}");
+						+"',percents:'"+pm.percentComplete()+"',picture:"+jo.toString()+"}");
 			}
 			if(pm.percentComplete().equals("100")){
 				String note_msg = null;
@@ -276,9 +276,9 @@ public class PictureAction extends BaseAction {
 				}else{
 					note_msg = "上传成功，正在为图片生成缩略图";
 				}
-				this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'"+note_msg+"',state:'done',size:'"
-						+pm.getBytesLength()+"',received:'"+pm.getBytesRead()
-						+"',percents:'"+pm.percentComplete()+"',picture:'"+jo.toString()+"'}");
+				this.setValue(ConsVar.REQUEST_JSON, "{\"action\":\""+ConsVar.JSON_ACTION_NOTICE+"\",\""+ConsVar.JSON_ACTION_NOTICE_MSG+"\":\""+note_msg+"\",\"state\":\"done\",\"size\":\""
+						+pm.getBytesLength()+"\",\"received\":\""+pm.getBytesRead()
+						+"\",\"percents\":\""+pm.percentComplete()+"\",\"picture\":"+jo.toString()+"}");
 			}
 		}else{
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',state:'error',message:'没有上传文件'}");
