@@ -14,6 +14,8 @@ import java.text.NumberFormat;
 import org.apache.commons.fileupload.ProgressListener;
 import org.apache.log4j.Logger;
 
+import com.twitpic.domain.PictureInfo;
+
 /**
  * This class is used to monitor the upload of a file from web page to the
  * server
@@ -23,6 +25,7 @@ import org.apache.log4j.Logger;
 public class ProgressMonitor implements ProgressListener {
 
 	public static final String SESSION_PROGRESS_MONITOR = "com.twitpic.system.struts.ProgressMonitor";
+	public static final String SESSION_FILE_TAG = "XProgressID";
 
 	private static final Logger logger = Logger
 			.getLogger(ProgressMonitor.class);
@@ -38,6 +41,35 @@ public class ProgressMonitor implements ProgressListener {
 	private boolean aborted = false;
 
 	private String fileName = "na";
+	private PictureInfo pictureInfo;
+	
+	private String status;
+	
+	private String status_msg;
+
+	public String getStatus_msg() {
+		return status_msg;
+	}
+
+	public void setStatus_msg(String statusMsg) {
+		status_msg = statusMsg;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public PictureInfo getPictureInfo() {
+		return pictureInfo;
+	}
+
+	public void setPictureInfo(PictureInfo pictureInfo) {
+		this.pictureInfo = pictureInfo;
+	}
 
 	static {
 		fmt.setMaximumFractionDigits(0);
