@@ -12,19 +12,19 @@
   options = $.extend({
     dataType: "json",
     interval: 2000,
-    progressBar: "#progressbar",
     progressUrl: "/progress",
     start: function() {},
     uploading: function() {},
     complete: function() {},
     success: function() {},
     error: function() {},
+	frameName:"progressFrame",
     timer: ""
   }, options);
   
   $(function() {
 	iframe = document.createElement('iframe');
-    iframe.name = "progressFrame";
+    iframe.name = options.frameName;
     $(iframe).css({width: '0', height: '0',display:'none'});
     document.body.appendChild(iframe);
   });
@@ -41,23 +41,29 @@
       options.start();
  
       /* patch the form-action tag to include the progress-id if X-Progress-ID has been already added just replace it */
-      if(old_id = /X-Progress-ID=([^&]+)/.exec($(this).attr("action"))) {
+      if(old_id = /XProgressID=([^&]+)/.exec($(this).attr("action"))) {
         var action = $(this).attr("action").replace(old_id[1], uuid);
         $(this).attr("action", action);
       } else {
-       $(this).attr("action", jQuery(this).attr("action") + "?X-Progress-ID=" + uuid);
+       $(this).attr("action", jQuery(this).attr("action") + "?XProgressID=" + uuid);
       }
       var uploadProgress = jQuery.uploadProgress;
       options.timer = window.setInterval(function() { uploadProgress(this, options) }, options.interval);
     });
   });
   };
- 
+  function clearSession(options){
+	  $.ajax({
+			type: "GET",
+			cache:false,
+   			url: options.progressUrl+"?XProgressID=" + options.uuid+"&clear=true",
+		});
+  };
 jQuery.uploadProgress = function(e, options) {
   jQuery.ajax({
     type: "GET",
 	cache:false,
-    url: options.progressUrl+"?X-Progress-ID=" + options.uuid,
+    url: options.progressUrl+"?XProgressID=" + options.uuid,
     dataType: options.dataType,
     success: function(upload) {
       if (upload.state == 'uploading') {        
@@ -68,9 +74,13 @@ jQuery.uploadProgress = function(e, options) {
         options.complete(upload);
       }
       if (upload.state == 'done') {
+		 if(upload.picture!=null&&upload.picture.status!='unloaded'){
+			 clearSession(options);
+		 }
         options.success(upload);
       }
       if (upload.state == 'error') {
+		clearSession(options);
         options.error(upload);
       }
     }
