@@ -63,6 +63,12 @@ public class EnhancedJakartaMultiPartRequest extends JakartaMultiPartRequest
 	@SuppressWarnings("unchecked")
 	public void parse(HttpServletRequest servletRequest, String saveDir)
 			throws IOException {
+		String file_tag = servletRequest.getParameter(ProgressMonitor.SESSION_FILE_TAG);
+		if(file_tag==null){
+			file_tag = "";
+		}else{
+			file_tag = file_tag.trim();
+		}
 		DiskFileItemFactory fac = new DiskFileItemFactory();
 		// Make sure that the data is written to file
 		fac.setSizeThreshold(0);
@@ -77,8 +83,9 @@ public class EnhancedJakartaMultiPartRequest extends JakartaMultiPartRequest
 			upload.setSizeMax(maxSize);
 			monitor = new ProgressMonitor();
 			upload.setProgressListener(monitor);
-			servletRequest.getSession().setAttribute(ProgressMonitor.SESSION_PROGRESS_MONITOR, monitor);
+			servletRequest.getSession().setAttribute(ProgressMonitor.SESSION_PROGRESS_MONITOR+file_tag, monitor);
 			List items = upload.parseRequest(createRequestContext(servletRequest));
+			String charset = servletRequest.getCharacterEncoding();
 			for (Object item1 : items) {
 				FileItem item = (FileItem) item1;
 				if (log.isDebugEnabled())
@@ -97,7 +104,6 @@ public class EnhancedJakartaMultiPartRequest extends JakartaMultiPartRequest
 					// we're just going to try to "other" method (no idea if
 					// this
 					// will work)
-					String charset = servletRequest.getCharacterEncoding();
 					if (charset != null) {
 						values.add(item.getString(charset));
 					} else {
@@ -112,7 +118,6 @@ public class EnhancedJakartaMultiPartRequest extends JakartaMultiPartRequest
 					} else {
 						values = new ArrayList<FileItem>();
 					}
-
 					values.add(item);
 					files.put(item.getFieldName(), values);
 				}

@@ -55,7 +55,6 @@
 		
 		<action name="upload_pic" class="pictureAction" method="upload" >
 			<result name="input" type="tiles">page.uploadpic</result>
-			<result name="success" type="tiles">page.uploadsucess</result>
 		</action>
 		<action name="upload_info" class="pictureAction" method="upload_info" />
 		<action name="picture" class="pictureAction" method="single_pic" >
