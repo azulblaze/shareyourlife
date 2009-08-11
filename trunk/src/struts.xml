@@ -66,4 +66,7 @@
 		<action name="tag" class="pictureAction" method="tag" />
 		
 	</package>
+	
+	<include file="conf/struts/mobile-struts.xml"></include>
+	
 </struts>
