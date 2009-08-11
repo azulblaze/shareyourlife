@@ -15,7 +15,7 @@
 			<result name="email_valid" type="tiles">m.page.error_email_not_valid</result>
 			<result name="been_closed" type="tiles">m.page.error_been_closed</result>
 			<result name="input" type="tiles">m.page.login</result>
-			<result name="success" type="redirect-action">m/index</result>
+			<result name="success" type="redirect-action">index</result>
 		</action>	
 		
 		<action name="reg" class="accountAction" method="register" >
