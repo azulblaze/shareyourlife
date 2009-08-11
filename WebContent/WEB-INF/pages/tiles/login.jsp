@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <div>
-<a href="/reg.do">注册</a>
+<a href="reg.do">注册</a>
 <h5>登录</h5>
 <s:actionerror/>
-<form action="/login.do" method="post">
+<form action="login.do" method="post">
 <input type="hidden" name="submit" value="true"/>
 <p>
 帐号:<input type="text" name="formLogin.name"/>
