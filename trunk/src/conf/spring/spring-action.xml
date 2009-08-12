@@ -5,4 +5,5 @@
 	<bean id="homeAction" name="homeAction" class="com.twitpic.actions.HomeAction" singleton="false" />
 	<bean id="accountAction" name="accountAction" class="com.twitpic.actions.AccountAction" singleton="false"  />
 	<bean id="pictureAction" name="pictureAction" class="com.twitpic.actions.PictureAction" singleton="false"  />
+	<bean id="adminAction" name="adminAction" class="com.twitpic.actions.AdminAction" singleton="false"  />
 </beans>

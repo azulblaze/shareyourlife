@@ -4,6 +4,7 @@
 <beans default-lazy-init="false" default-dependency-check="none" default-autowire="byName">
 	<bean id="accountService" name="accountService" class="com.twitpic.services.impl.AccountServiceImpl" />
 	<bean id="pictureService" name="pictureService" class="com.twitpic.services.impl.PictureServiceImpl" />
+	<bean id="adminService" name="adminService" class="com.twitpic.services.impl.AdminServiceImpl" />
 	
 	<!-- mail service -->
 	<bean name="smtpAuthenticator"
