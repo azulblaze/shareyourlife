@@ -135,5 +135,3 @@ CREATE  TABLE IF NOT EXISTS admins (
   PRIMARY KEY (id) )
 ENGINE = InnoDB
 go
-
-select * from admins
