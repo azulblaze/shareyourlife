@@ -68,5 +68,5 @@
 	</package>
 	
 	<include file="conf/struts/mobile-struts.xml"></include>
-	
+	<include file="conf/struts/admin-struts.xml"></include>
 </struts>

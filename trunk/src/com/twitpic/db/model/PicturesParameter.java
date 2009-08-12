@@ -166,4 +166,6 @@ public class PicturesParameter extends BaseModel{
 	}
 
 	public static final int STATUS_ALL = 1;
+	
+	public static final int STATUS_DISABEL = -1;
 }

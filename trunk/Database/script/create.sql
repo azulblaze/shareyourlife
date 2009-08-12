@@ -1,7 +1,6 @@
 
-//CREATE SCHEMA IF NOT EXISTS mydb DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-
-//USE mydb;
+CREATE SCHEMA IF NOT EXISTS twitpic DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE twitpic;
 
 -- -----------------------------------------------------
 -- Table users
