@@ -120,3 +120,21 @@ ENGINE = InnoDB;
 go
 CREATE UNIQUE INDEX UNIQUE_TAG_REL ON tags_rel (id_pictures ASC, id_tags ASC, account ASC) ;
 go
+
+-- -----------------------------------------------------
+-- Table admins
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS admins ;
+go
+CREATE  TABLE IF NOT EXISTS admins (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  account VARCHAR(45) NOT NULL ,
+  name VARCHAR(45) NOT NULL ,
+  password VARCHAR(45) NOT NULL ,
+  start_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  end_time TIMESTAMP NULL,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+go
+
+select * from admins
