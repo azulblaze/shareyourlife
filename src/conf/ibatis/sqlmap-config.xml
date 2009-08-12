@@ -17,4 +17,5 @@
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/tags_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_profile_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/admins_SqlMap.xml" />
 </sqlMapConfig>

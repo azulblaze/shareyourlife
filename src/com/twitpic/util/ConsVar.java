@@ -4,6 +4,8 @@ public final class ConsVar {
 	
 	public static String SESSION_USER = "user";
 	
+	public static String SESSION_ADMIN_USER = "admin_user";
+	
 	public static String REQUEST_JSON = "json";
 	
 	/**

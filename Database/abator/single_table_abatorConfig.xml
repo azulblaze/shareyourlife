@@ -17,7 +17,7 @@
 		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
 			targetProject="twitpic/src" />
 		
-		<table tableName="pictures_parameter"/>
+		<table tableName="admins"/>
 	</abatorContext>
 	
 </abatorConfiguration>
