@@ -22,6 +22,10 @@
 			<result name="email_valid" type="tiles">m.page.error_email_not_valid</result>
 			<result name="input" type="tiles">m.page.reg</result>
 		</action>	 
+		
+		<action name="upload_pic" class="pictureAction" method="upload" >
+			<result name="input" type="tiles">m.page.uploadpic</result>
+		</action>		
 		 
 	</package>
 
