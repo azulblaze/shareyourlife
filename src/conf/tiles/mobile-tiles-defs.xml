@@ -24,5 +24,9 @@
 	<definition name="m.page.reg" template="/WEB-INF/mobile-pages/layouts/layout.jsp" extends="m.layout">
 		<put-attribute name="body" value="/WEB-INF/mobile-pages/pages/tiles/reg.jsp"></put-attribute>
 	</definition>
+
+	<definition name="m.page.uploadpic" template="/WEB-INF/mobile-pages/layouts/layout.jsp" extends="m.layout">
+		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/uploadpic.jsp"></put-attribute>
+	</definition>	
 	
 </tiles-definitions>
