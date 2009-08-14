@@ -6,6 +6,10 @@
 
 	<package name="mobile" extends="tiles-default" namespace="/m">
 	
+		<global-results>
+			<result name="msg_box" type="tiles">m.page.msg.box</result>
+		</global-results>
+	
 		<action name="index" class="homeAction" method="index">
 		 	<result name="welcome" type="tiles">m.page.index</result>
 		 	<result name="success" type="tiles">m.page.main</result>
@@ -23,9 +27,15 @@
 			<result name="input" type="tiles">m.page.reg</result>
 		</action>	 
 		
-		<action name="upload_pic" class="pictureAction" method="upload" >
+		<action name="upload_pic" class="mPictureAction" method="upload" >
 			<result name="input" type="tiles">m.page.uploadpic</result>
 		</action>		
+		
+		<action name="picture" class="pictureAction" method="single_pic" >
+			<result name="success" type="tiles">m.page.single_pic</result>
+		</action>		
+		
+		<action name="comment" class="mPictureAction" method="comment" />
 		 
 	</package>
 

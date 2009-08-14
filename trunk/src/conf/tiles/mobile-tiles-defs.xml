@@ -9,6 +9,10 @@
 		<put-attribute name="footer" value="/WEB-INF/mobile-pages/tiles/footer.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="m.page.msg.box" extends="m.layout">
+		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/msg_box.jsp" ></put-attribute>
+	</definition>
+	
 	<definition name="m.page.index" template="/WEB-INF/mobile-pages/layouts/layout.jsp" extends="m.layout">
 		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/index.jsp"></put-attribute>
 	</definition>
@@ -27,6 +31,10 @@
 
 	<definition name="m.page.uploadpic" template="/WEB-INF/mobile-pages/layouts/layout.jsp" extends="m.layout">
 		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/uploadpic.jsp"></put-attribute>
+	</definition>	
+	
+	<definition name="m.page.single_pic" template="/WEB-INF/mobile-pages/layouts/layout.jsp" extends="m.layout">
+		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/single_pic.jsp"></put-attribute>
 	</definition>	
 	
 </tiles-definitions>
