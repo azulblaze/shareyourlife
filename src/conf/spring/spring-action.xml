@@ -8,5 +8,7 @@
 	<bean id="adminAction" name="adminAction" class="com.twitpic.actions.AdminAction" singleton="false"  />
 	
 	<!-- mobile actions -->
-	<bean name="mPictureAction" class="com.twitpic.actions.m.PictureAction" singleton="false" />
+	<bean name="mPictureAction" class="com.twitpic.actions.m.PictureAction" singleton="false" >
+		<property name="mobilePictureService" ref="mPictureService"></property>
+	</bean>
 </beans>

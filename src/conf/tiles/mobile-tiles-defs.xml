@@ -37,4 +37,8 @@
 		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/single_pic.jsp"></put-attribute>
 	</definition>	
 	
+	<definition name="m.page.more.comments" extends="m.layout">
+		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/more_comments.jsp"></put-attribute>
+	</definition>
+	
 </tiles-definitions>
