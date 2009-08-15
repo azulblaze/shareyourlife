@@ -15,10 +15,25 @@
 <div class="c_b">
 	
 	<div class="c_h" >
-		此图片评论总数(<s:property value="paged_comments_total_count" />)条,当前第(<s:property value="page_index+1" />)页-共(<s:property value="page_count" />)页
+		此图片评论(<s:property value="paged_comments_total_count" />)条,
+		当前第(<s:property value="page_index+1" />)页
+		-共(<s:property value="page_count" />)页
 	</div>
 	<div class="c_h">
-		评论列表:
+		<form method="post" action="more_comments.do">
+			<input type="hidden" name="formMoreComments.pictureId" value="<s:property value='picture_id' />" />
+			评论列表:&nbsp;
+			<select name="formMoreComments.pageIndex" >
+				<s:iterator status="stat" value="(page_count).{ #this }">
+					<option value="<s:property value='#stat.index' />"
+						<s:if test="#stat.index == page_index">
+							selected="true"
+						</s:if>
+					><s:property value="#stat.count" /></option>
+				</s:iterator>
+			</select>
+			<input type="submit" value="翻页" />
+		</form>
 	</div>
 	<div>
 		<s:iterator value="paged_comments">

@@ -18,4 +18,5 @@ public class ActionConstant {
 	public static final String ARP_MORE_COMMENTS_LIST_PAGE_INDEX = "page_index";
 	public static final String ARP_MORE_COMMENTS_LIST_PAGE_COUNT = "page_count";
 	public static final String ARP_MORE_COMMENTS_LIST_TOTAL_COUNT = "paged_comments_total_count";
+	public static final String ARP_MORE_COMMENTS_LIST_PICTURE_ID = "picture_id";
 }
