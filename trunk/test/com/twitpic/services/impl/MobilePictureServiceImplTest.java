@@ -49,7 +49,7 @@ public class MobilePictureServiceImplTest extends TestCase {
 		try{
 			MobilePictureServiceImpl impl = (MobilePictureServiceImpl)m_context.getBean("mPictureService");
 			PictureInfo pi = impl.loadPicture((long)2);
-			List<Tags> list = impl.loadTagsLimitWitTopFromPicture(pi, 2);
+			List<Tags> list = impl.loadTagsLimitWitTopFromPicture(pi, 2,"andy");
 			
 			for (Tags tag : list) {
 				System.out.println(tag.getName());
