@@ -262,8 +262,11 @@ public class PictureAction extends BaseAction {
 				this.setValue("comments", comments);
 				
 				// 获取前n个标签
-				List<Tags> tags = ((MobilePictureServiceImpl) pictureService).loadTagsLimitWitTopFromPicture(pi , 6);
-				this.setValue("tags", tags);
+				Account account = loadAccount();
+				if(account!=null){
+					List<Tags> tags = ((MobilePictureServiceImpl) pictureService).loadTagsLimitWitTopFromPicture(pi , 6,account.getAccount());
+					this.setValue("tags", tags);
+				}
 				
 			}catch(Exception e){
 				this.addActionError(e.getMessage());

@@ -14,7 +14,8 @@ public interface MobilePictureService {
 	
 	public List<Tags> loadTagsLimitWitTopFromPicture(
 			PictureInfo pi, 
-			int count) ;	
+			int count,
+			String account) ;	
 	
 	public List<Comments> loadMoreCommentsWithPagableFromPictureId(
 			Long pictureId, Integer pageIndex);
