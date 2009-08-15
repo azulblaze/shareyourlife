@@ -85,12 +85,6 @@ public class ProgressMonitor implements ProgressListener {
 	 * This is called by the notifier
 	 */
 	public void update(long pBytesRead, long pContentLength, int pItems) {
-		try {
-			Thread.currentThread().sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		bytesRead = pBytesRead;
 		bytesLength = pContentLength;
 	}
