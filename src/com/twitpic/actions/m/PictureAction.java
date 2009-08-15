@@ -203,6 +203,7 @@ public class PictureAction extends BaseAction {
 		}
 		
 		if( paged_comments != null && paged_comments.size() > 0 ){
+			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_PICTURE_ID, formMoreComments.getPictureId());
 			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST, paged_comments);
 			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_PAGE_INDEX, formMoreComments.getPageIndex());
 			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_PAGE_COUNT, page_count);
