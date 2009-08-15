@@ -100,5 +100,5 @@ public interface PicturesDAO {
      * @param end_index : page index end, appeared in twins with start_index
      * @return
      */
-    public List<com.twitpic.domain.PictureInfo> findPicturesInfo(Integer status,Long id,String upload_account,Long from_id,Long to_id,Integer start_index,Integer end_index);
+    public List<com.twitpic.domain.PictureInfo> findPicturesInfo(Integer status,Long id,String upload_account,Long from_id,Long to_id,Integer start_index,Integer size);
 }
