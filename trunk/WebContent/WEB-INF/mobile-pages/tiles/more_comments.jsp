@@ -35,15 +35,28 @@
 			<input type="submit" value="翻页" />
 		</form>
 	</div>
-	<div>
-		<s:iterator value="paged_comments">
+	
+		   <form action="comment.do" method="post">
+			   	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture_id'/>"/>
+			  	<div>
+			  		<s:iterator value="paged_comments" >
 			  			<div class="c_h">
 			  				<s:property value="commentTime" /> <s:property value="account" />
 			  			</div>
 			  			<div class="c_d">
 			  				<s:property value="comment" />
 			  			</div>
-		</s:iterator>
-	</div>
+			  		</s:iterator>
+			  	</div>
+			  	<div class="c_h">
+			  		添加评论:
+			  	</div>
+			  	<div>
+			  		<textarea name="formComment.comment"></textarea>
+				</div>
+				<div>			  		
+			   		<input type="submit" value="提交"/>
+			   	</div>
+		   </form>	
 	
 </div>
