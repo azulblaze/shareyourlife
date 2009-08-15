@@ -31,6 +31,10 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 		this.more_comments_page_count = _count;
 	}
 	
+	public Integer getMoreCommentsPageCount(){
+		return this.more_comments_page_count;
+	}
+	
 	@Override
 	public Tags Tag(Account account, FormTag formTag) throws Exception {
 		
@@ -90,10 +94,28 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 	public List<Comments> loadMoreCommentsWithPagableFromPictureId(
 			Long pictureId, Integer pageIndex) {
 		
+		// 设置查询条件和排序条件
+		CommentsExample example = new CommentsExample();
+		example.createCriteria().andIdPicturesEqualTo(pictureId);
+		example.setOrderByClause("id desc");
 		
+		// 设置翻页参数
+		example.setLimit( pageIndex.intValue()*this.more_comments_page_count + 
+							"," + 
+							this.more_comments_page_count );
 		
-		return null;
+		return this.commentsDAO.selectByExampleWithBLOBs(example);
 	}
+	
+	@Override
+	public Integer loadMoreCommentsTotelCountFromPictureId(Long pictureId) {
+		
+		// 设置查询条件
+		CommentsExample example = new CommentsExample();
+		example.createCriteria().andIdPicturesEqualTo(pictureId);
+		
+		return this.commentsDAO.countByExample(example);
+	}	
 
 	
 
