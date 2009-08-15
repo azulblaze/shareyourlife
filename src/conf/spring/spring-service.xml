@@ -2,10 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
 		  "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans default-lazy-init="false" default-dependency-check="none" default-autowire="byName">
-	<bean id="accountService" name="accountService" class="com.twitpic.services.impl.AccountServiceImpl" />
-	<bean id="pictureService" name="pictureService" class="com.twitpic.services.impl.PictureServiceImpl" />
-	<bean id="adminService" name="adminService" class="com.twitpic.services.impl.AdminServiceImpl" />
-	
+
 	<!-- mail service -->
 	<bean name="smtpAuthenticator"
 		class="com.twitpic.system.email.SmtpAuthenticator">
@@ -36,18 +33,21 @@
 	</bean>
 	
 	<bean name="mailServices" class="com.twitpic.system.email.MailServices" >
-		<property name="senderName" value="EasyEffective" />
-		<property name="senderAddr" value="noreply.sop@gmail.com" />
+		<property name="senderName" value="茄子网" />
+		<property name="senderAddr" value="andy.noreply.mail@gmail.com" />
 	</bean>
 	
 	<bean name="systemConfig" class="com.twitpic.system.config.SystemConfig" >
-		<property name="domain" value="http://localhost:8080" />
+		<property name="domain" value="http://myqiezi.com" />
 		<property name="upload_pic" value="/upload/images/pic" />
 		<property name="upload_pic_maxlength" value="4194304" />
 		<property name="upload_header" value="/upload/images/header" />
 		<property name="upload_header_maxlength" value="16384" />
 	</bean>
 	
+	<bean id="accountService" name="accountService" class="com.twitpic.services.impl.AccountServiceImpl" />
+	<bean id="pictureService" name="pictureService" class="com.twitpic.services.impl.PictureServiceImpl" />
+	<bean id="adminService" name="adminService" class="com.twitpic.services.impl.AdminServiceImpl" />
 	<!-- mobile service  -->
-	<bean name="mPictureService" class="com.twitpic.services.impl.MobilePictureServiceImpl" />	
+	<bean name="mPictureService" class="com.twitpic.services.impl.MobilePictureServiceImpl" />
 </beans>
