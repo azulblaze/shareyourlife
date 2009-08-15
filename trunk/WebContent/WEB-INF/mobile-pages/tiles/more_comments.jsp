@@ -15,7 +15,7 @@
 <div class="c_b">
 	
 	<div class="c_h" >
-		此图片评论总数为(<s:property value="paged_comments_total_count" />)条,当前第(<s:property value="page_index+1" />)页-共(<s:property value="page_count" />)页
+		此图片评论总数(<s:property value="paged_comments_total_count" />)条,当前第(<s:property value="page_index+1" />)页-共(<s:property value="page_count" />)页
 	</div>
 	<div class="c_h">
 		评论列表:
