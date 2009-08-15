@@ -28,24 +28,20 @@ public class MobilePictureServiceImplTest extends TestCase {
 
 	public void testLoadCommentsLimitWitTopFromPicture() {
 		
-//		try{
-//			MobilePictureServiceImpl impl = (MobilePictureServiceImpl)m_context.getBean("mPictureService");
-//			PictureInfo pi = impl.loadPicture((long)2);
-//			List<Comments> list = impl.loadCommentsLimitWitTopFromPicture(pi, 2);
-//			
-//			for (Comments comment : list) {
-//				System.out.println(comment.getComment());
-//			}
-//			
-//		}catch(Exception ex){
-//			ex.printStackTrace();
-//			this.assertFalse("测试失败, "+ex.getMessage(), true);
-//		}
-		
-		for(int i=0; i<10; i++){
-			System.out.println(""+i%3);
+		try{
+			MobilePictureServiceImpl impl = (MobilePictureServiceImpl)m_context.getBean("mPictureService");
+			PictureInfo pi = impl.loadPicture((long)2);
+			List<Comments> list = impl.loadCommentsLimitWitTopFromPicture(pi, 2);
+			
+			for (Comments comment : list) {
+				System.out.println(comment.getComment());
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			this.assertFalse("测试失败, "+ex.getMessage(), true);
 		}
-		
+
 		System.out.println("Over");
 	}
 
@@ -67,4 +63,20 @@ public class MobilePictureServiceImplTest extends TestCase {
 		System.out.println("Over");
 	}
 
+	public void testLoadMoreCommentsWithPagableFromPictureId(){
+		try{
+			MobilePictureServiceImpl impl = (MobilePictureServiceImpl)m_context.getBean("mPictureService");
+			List<Comments> list = impl.loadMoreCommentsWithPagableFromPictureId((long)3, 1);
+			
+			for (Comments comment:list) {
+				System.out.println(comment.getComment());
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			this.assertFalse("测试失败, "+ex.getMessage(), true);
+		}
+		
+		System.out.println("Over");
+	}
 }
