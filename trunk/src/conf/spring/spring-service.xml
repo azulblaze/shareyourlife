@@ -47,4 +47,7 @@
 		<property name="upload_header" value="/upload/images/header" />
 		<property name="upload_header_maxlength" value="16384" />
 	</bean>
+	
+	<!-- mobile service  -->
+	<bean name="mPictureService" class="com.twitpic.services.impl.MobilePictureServiceImpl" />	
 </beans>

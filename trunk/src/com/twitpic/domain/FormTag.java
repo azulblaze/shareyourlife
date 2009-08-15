@@ -8,6 +8,18 @@ public class FormTag {
 	private Long id_pictures;
 	
 	private String name;
+	
+	private Long selected_tag_id;
+	
+	public void setSelectedTagId(Long _id){
+		this.selected_tag_id = _id;
+	}
+	
+	public Long getSelectedTagId(){
+		return this.selected_tag_id;
+	}
+	
+	
 
 	/**
 	 * @return the id_pictures
