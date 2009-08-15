@@ -191,9 +191,22 @@ public class PictureAction extends BaseAction {
 					formMoreComments.getPageIndex()
 				);
 		
+		// 获取评论总数
+		Integer comments_total_count = ((MobilePictureService)pictureService).loadMoreCommentsTotelCountFromPictureId(
+				formMoreComments.getPictureId());
+		
+		// 计算页面数量
+		Integer page_record_count = ((MobilePictureService)pictureService).getMoreCommentsPageCount();
+		Integer page_count = comments_total_count / page_record_count;
+		if( comments_total_count % page_record_count > 0 ){
+			page_count ++;
+		}
+		
 		if( paged_comments != null && paged_comments.size() > 0 ){
 			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST, paged_comments);
 			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_PAGE_INDEX, formMoreComments.getPageIndex());
+			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_PAGE_COUNT, page_count);
+			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_TOTAL_COUNT, comments_total_count);
 		}
 		
 		return SUCCESS;

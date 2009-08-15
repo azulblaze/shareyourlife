@@ -18,4 +18,8 @@ public interface MobilePictureService {
 	
 	public List<Comments> loadMoreCommentsWithPagableFromPictureId(
 			Long pictureId, Integer pageIndex);
+
+	public Integer loadMoreCommentsTotelCountFromPictureId(Long pictureId);
+	
+	public Integer getMoreCommentsPageCount();
 }

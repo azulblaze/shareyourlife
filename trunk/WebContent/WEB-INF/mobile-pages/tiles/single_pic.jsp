@@ -32,7 +32,7 @@
 		   <form action="comment.do" method="post">
 			   	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture.pictures.id'/>"/>
 			  	<div class="c_h">
-			  		最新评论 (<a href="more_comments.do?formComment.id_pictures=<s:property value='picture.pictures.id'/>" >更多</a>):
+			  		最新评论 (<a href="more_comments.do?formMoreComments.pictureId=<s:property value='picture.pictures.id'/>" >更多</a>):
 			  	</div>
 			  	<div>
 			  		<s:iterator value="comments" >
