@@ -64,6 +64,9 @@
       <isNotNull property="orderByClause" >
         order by $orderByClause$
       </isNotNull>
+      <isNotNull property="limit" >
+        limit $limit$
+      </isNotNull>      
     </isParameterPresent>
   </select>
   <delete id="abatorgenerated_deleteByPrimaryKey" parameterClass="com.twitpic.db.model.Tags" >

@@ -35,19 +35,19 @@ import com.twitpic.util.ConsVar;
  */
 public class PictureServiceImpl implements PictureService {
 	
-	private SystemConfig systemConfig;
+	protected SystemConfig systemConfig;
 	
-	private PlatformTransactionManager m_db_tx_manager;
+	protected PlatformTransactionManager m_db_tx_manager;
 	
-	private PicturesDAO picturesDAO;
+	protected PicturesDAO picturesDAO;
 	
-	private CommentsDAO commentsDAO;
+	protected CommentsDAO commentsDAO;
 	
-	private PicturesParameterDAO picturesParameterDAO;
+	protected PicturesParameterDAO picturesParameterDAO;
 	
-	private TagsDAO tagsDAO;
+	protected TagsDAO tagsDAO;
 	
-	private TagsRelDAO tagsRelDAO;
+	protected TagsRelDAO tagsRelDAO;
 	
 	public void setTagsRelDAO(TagsRelDAO tagsRelDAO){
 		this.tagsRelDAO = tagsRelDAO;

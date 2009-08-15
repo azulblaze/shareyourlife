@@ -1,9 +1,11 @@
 package com.twitpic.actions.m;
 
 import java.io.File;
+import java.util.List;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -12,9 +14,12 @@ import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.Tags;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.FormComment;
+import com.twitpic.domain.FormMoreComments;
 import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
+import com.twitpic.services.MobilePictureService;
 import com.twitpic.services.PictureService;
+import com.twitpic.services.impl.MobilePictureServiceImpl;
 import com.twitpic.system.struts.ProgressMonitor;
 import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
@@ -36,6 +41,16 @@ public class PictureAction extends BaseAction {
 	private PictureService pictureService;
 	private FormComment formComment;
 	private FormTag formTag;
+	private FormMoreComments formMoreComments;
+	
+	public FormMoreComments getFormMoreComments() {
+		return formMoreComments;
+	}
+
+	public void setFormMoreComments(FormMoreComments formMoreComments) {
+		this.formMoreComments = formMoreComments;
+	}
+
 	private Long id_picture;
 	private Long id_comment;
 	
@@ -47,7 +62,7 @@ public class PictureAction extends BaseAction {
 		id_comment = idComment;
 	}
 
-	public void setPictureService(PictureService pictureService) {
+	public void setMobilePictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
 	}
 	
@@ -144,11 +159,9 @@ public class PictureAction extends BaseAction {
 		try{
 			Account account = loadAccount();
 			Comments comments = pictureService.comment(account, formComment);
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'评论成功',data:'"+comments.to_json()+"'}");
 		}catch(Exception e){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'提交失败,"+e.getMessage()+"'}");
 			LOGGER.error( "评论提交失败, "+ e.getMessage(), e);
-			this.addActionMessage("请先登录后在发表评论");
+			this.addActionMessage("发表评论失败, 请联系网站管理员");
 			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}
 		
@@ -156,32 +169,89 @@ public class PictureAction extends BaseAction {
 		return ActionConstant.ACTION_RETURN_MSG_BOX;
 	}
 	
+	public String more_comments() throws Exception{
+		
+		// 检查该请求的输入参数是否合法, 如果pageIndex没有输入,那么
+		// 默认为使用第一个页面(索引为0的页面)
+		if( formMoreComments == null ||
+			formMoreComments.getPictureId() == null || 
+			formMoreComments.getPictureId() < 1){
+			this.addActionMessage("错误的请求");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}
+				
+		// 获取翻页信息,如果没有任何翻页信息,那么默认为第一页
+		if( formMoreComments.getPageIndex() == null || 
+			formMoreComments.getPageIndex() < 0 ){
+			formMoreComments.setPageIndex(0);
+		}
+
+		List<Comments> paged_comments = ((MobilePictureService)pictureService).loadMoreCommentsWithPagableFromPictureId(
+					formMoreComments.getPictureId(),
+					formMoreComments.getPageIndex()
+				);
+		
+		if( paged_comments != null && paged_comments.size() > 0 ){
+			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST, paged_comments);
+			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_PAGE_INDEX, formMoreComments.getPageIndex());
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String tag() throws Exception {
-		if(formTag==null||formTag.getName()==null||formTag.getName().trim().length()<1||formTag.getId_pictures()==null||formTag.getId_pictures()<1){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
-			return "json";
+		
+		// 判断该请求的输入的参数是否合法?
+		if(	formTag	==	null						||	
+			(StringUtils.isEmpty(formTag.getName()) && formTag.getSelectedTagId() == null)	||
+			formTag.getId_pictures() == null		||
+			formTag.getId_pictures()<1 ){
+			this.addActionMessage("错误的请求");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}
 		if(!isLogin()){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
-			return "json";
+			this.addActionMessage("请先登录后在发表评论");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}
 		try{
 			Account account = loadAccount();
 			Tags tags = pictureService.Tag(account, formTag);
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记成功',data:'"+tags.to_json()+"'}");
 		}catch(Exception e){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记失败,"+e.getMessage()+"'}");
-			return "json";
+			LOGGER.error( "标签提交失败, "+ e.getMessage(), e);
+			this.addActionMessage("提交标签失败,请联系网站管理员");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}
-		return "json";
+		
+		this.addActionMessage("恭喜,提交标签成功");
+		return ActionConstant.ACTION_RETURN_MSG_BOX;
 	}
+	
+	public String more_tags() throws Exception{
+		return SUCCESS;
+	}	
 
 	
+	/**
+	 * 该action用来响应用户显示某一图片信息,包含一些评论和标签
+	 * @return
+	 * @throws Exception
+	 */
 	public String single_pic() throws Exception{
 		if(id_picture!=null&&id_picture.longValue()>0){
 			try{
+				
+				// 获取图片信息
 				PictureInfo pi = pictureService.loadPicture(id_picture);
 				this.setValue("picture", pi);
+				
+				// 获取前n个评论
+				List<Comments> comments = ((MobilePictureServiceImpl) pictureService).loadCommentsLimitWitTopFromPicture(pi , 5);
+				this.setValue("comments", comments);
+				
+				// 获取前n个标签
+				List<Tags> tags = ((MobilePictureServiceImpl) pictureService).loadTagsLimitWitTopFromPicture(pi , 6);
+				this.setValue("tags", tags);
+				
 			}catch(Exception e){
 				this.addActionError(e.getMessage());
 				return ERROR;
@@ -289,4 +359,5 @@ public class PictureAction extends BaseAction {
 		}
 		return "json";
 	}
+	
 }

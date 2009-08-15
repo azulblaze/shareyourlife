@@ -31,12 +31,18 @@
 			<result name="input" type="tiles">m.page.uploadpic</result>
 		</action>		
 		
-		<action name="picture" class="pictureAction" method="single_pic" >
+		<action name="picture" class="mPictureAction" method="single_pic" >
 			<result name="success" type="tiles">m.page.single_pic</result>
 		</action>		
 		
 		<action name="comment" class="mPictureAction" method="comment" />
-		 
+		
+		<action name="tag" class="mPictureAction" method="tag" />
+		
+		<action name="more_comments" class="mPictureAction" method="more_comments" >
+			<result name="success" type="tiles">m.page.more.comments</result>
+		</action>
+		
 	</package>
 
 </struts>
