@@ -61,6 +61,7 @@
 				<div class="c_h">
 					标记 (<a href="">更多</a>):
 				</div>
+				<s:if test="tags!=null">
 				<div>
 					<table>
 					<s:iterator value="tags" status="status">
@@ -79,6 +80,7 @@
 					</s:iterator>
 					</table>
 				</div>
+				</s:if>
 				<div class="c_h">
 					使用新标记
 				</div>

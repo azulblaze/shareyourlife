@@ -64,10 +64,9 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 		// 设置查询条件
 		CommentsExample example = new CommentsExample();
 		example.createCriteria()
-			   .andAccountEqualTo(pi.getAccount())
 			   .andIdPicturesEqualTo(pi.getPictures().getId());
 		// 设置排序和限制(mysql语句的)
-		example.setOrderByClause("comment_time desc");
+		example.setOrderByClause("id desc");
 		example.setLimit("0, "+count);
 		
 		return this.commentsDAO.selectByExampleWithBLOBs(example);
@@ -76,15 +75,15 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 
 	public List<Tags> loadTagsLimitWitTopFromPicture(
 			PictureInfo pi, 
-			int count) {
+			int count,String account) {
 		
 		// 设置查询条件
 		TagsExample example = new TagsExample();
 		example.createCriteria()
-			   .andAccountEqualTo(pi.getAccount());
+			   .andAccountEqualTo(account);
 		
 		// 设置排序和限制(mysql语句的)
-		example.setOrderByClause("create_time desc");
+		example.setOrderByClause("id desc");
 		example.setLimit("0, "+count);
 		
 		return this.tagsDAO.selectByExample(example);
