@@ -43,6 +43,18 @@ public class PictureAction extends BaseAction {
 	private FormTag formTag;
 	private FormMoreComments formMoreComments;
 	
+	/**
+	 * 更多标签页面中一页标签列表的记录数目,默认为10条
+	 */
+	private Integer more_tags_page_count = 10;
+	
+	public void setMoreTagsPageCount(Integer _count){
+		this.more_tags_page_count = _count;
+	}
+	public Integer getMoreTagsPageCount(){
+		return this.more_tags_page_count;
+	}
+	
 	public FormMoreComments getFormMoreComments() {
 		return formMoreComments;
 	}
@@ -240,7 +252,60 @@ public class PictureAction extends BaseAction {
 		return ActionConstant.ACTION_RETURN_MSG_BOX;
 	}
 	
+	/**
+	 * 该action响应用户查询更多tags的请求, tags中需要标识出它所包含的picture的数目
+	 * @return
+	 * @throws Exception
+	 */
 	public String more_tags() throws Exception{
+		
+		if(!isLogin()){
+			this.addActionMessage("请先登录后在发表评论");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}		
+		
+		// 获取当前登录的用户
+		Account login_account = loadAccount();
+		
+		// 判断该请求的输入的参数是否合法?
+		if(	formTag	==	null						||	
+			formTag.getId_pictures() == null		||
+			formTag.getId_pictures()<1 ){
+			this.addActionMessage("错误的请求");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}
+		
+		// 获取翻页信息,如果没有任何翻页信息,那么默认为第一页
+		if( formTag.getPageIndex() == null || 
+			formTag.getPageIndex() < 0 ){
+			formTag.setPageIndex(0);
+		}
+		
+		// 获取指定的一页的tags信息(该信息包含对应图片数目)
+		List<Tags> paged_tags = ((MobilePictureService)pictureService).loadTagsWithPictureCountPagableFromAccount(
+								login_account.getAccount(),
+								formTag.getPageIndex(), 
+								more_tags_page_count);
+		
+		// 获取tags总数
+		Integer tags_total_count = ((MobilePictureService)pictureService).getTagsCountFromAccount(
+									login_account.getAccount());
+		
+		// 计算页面数量
+		Integer page_record_count = this.more_tags_page_count;
+		Integer page_count = tags_total_count / page_record_count;
+		if( tags_total_count % page_record_count > 0 ){
+			page_count ++;
+		}
+		
+		if( paged_tags != null && paged_tags.size() > 0 ){
+			this.setValue(ActionConstant.ARP_MORE_TAGS_LIST_PICTURE_ID, formTag.getId_pictures());
+			this.setValue(ActionConstant.ARP_MORE_TAGS_LIST, paged_tags);
+			this.setValue(ActionConstant.ARP_MORE_TAGS_LIST_PAGE_INDEX, formTag.getPageIndex());
+			this.setValue(ActionConstant.ARP_MORE_TAGS_LIST_PAGE_COUNT, page_count);
+			this.setValue(ActionConstant.ARP_MORE_TAGS_LIST_TOTAL_COUNT, tags_total_count);
+		}
+		
 		return SUCCESS;
 	}	
 

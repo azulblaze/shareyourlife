@@ -43,6 +43,10 @@
 			<result name="success" type="tiles">m.page.more.comments</result>
 		</action>
 		
+		<action name="more_tags" class="mPictureAction" method="more_tags">
+			<result name="success" type="tiles">m.page.more.tags</result>
+		</action>
+		
 	</package>
 
 </struts>

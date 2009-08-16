@@ -35,7 +35,6 @@
 			<input type="submit" value="翻页" />
 		</form>
 	</div>
-	
 		   <form action="comment.do" method="post">
 			   	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture_id'/>"/>
 			  	<div>

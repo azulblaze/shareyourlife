@@ -59,7 +59,7 @@
 			<form action="tag.do" method="posts">
 				<input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>" />
 				<div class="c_h">
-					标记 (<a href="">更多</a>):
+					标记 (<a href="more_tags.do?formTag.id_pictures=<s:property value='picture.pictures.id'/> ">更多</a>):
 				</div>
 				<s:if test="tags!=null">
 				<div>

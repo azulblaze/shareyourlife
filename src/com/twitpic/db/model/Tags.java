@@ -198,4 +198,15 @@ public class Tags  extends BaseModel{
     public static final int STATUS_SYSTEM = 0;
     
     public static final int STATUS_USER = 1;
+    
+    /*
+     * ===========  自定义 model 对象属性
+     */
+    private Integer picture_count;
+    public void setPictureCount(Integer _count){
+    	this.picture_count = _count;
+    }
+    public Integer getPictureCount(){
+    	return picture_count;
+    }
 }
