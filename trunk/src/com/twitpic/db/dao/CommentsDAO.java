@@ -2,6 +2,8 @@ package com.twitpic.db.dao;
 
 import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.CommentsExample;
+import com.twitpic.domain.CommentsInfo;
+
 import java.util.List;
 
 public interface CommentsDAO {
@@ -85,4 +87,6 @@ public interface CommentsDAO {
 	int updateByExampleWithoutBLOBs(Comments record, CommentsExample example);
 	
 	Long insert_return_id(Comments record);
+	
+	List<CommentsInfo> selectCommentsInfoBLOBs(Long id,String account,Long id_pictures,Long start_index,Integer size);
 }

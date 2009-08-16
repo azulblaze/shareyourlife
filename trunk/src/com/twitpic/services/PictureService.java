@@ -41,4 +41,8 @@ public interface PictureService {
 	public com.twitpic.domain.PictureInfo loadPicture(long id_picture)throws Exception;
 	
 	public boolean delPicture(com.twitpic.domain.Account account,Long id_picture,String root_path)throws Exception;
+	
+	public int countComments(Long id_picture);
+	
+	public java.util.List<com.twitpic.domain.CommentsInfo> loadComments(Long id_pictre,int c_page,int size)throws Exception;
 }
