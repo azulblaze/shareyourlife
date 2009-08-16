@@ -79,4 +79,22 @@ public class MobilePictureServiceImplTest extends TestCase {
 		
 		System.out.println("Over");
 	}
+	
+	public void testLoadTagsWithPictureCountPagableFromAccount(){
+		try{
+			MobilePictureServiceImpl impl = (MobilePictureServiceImpl)m_context.getBean("mPictureService");
+			List<Tags> list = impl.loadTagsWithPictureCountPagableFromAccount("solzhang", 0, 10);
+			
+			for (Tags tag:list) {
+				System.out.println(tag.getName()+"("+tag.getPictureCount()+")");
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			this.assertFalse("测试失败, "+ex.getMessage(), true);
+		}
+		
+		System.out.println("Over");		
+		
+	}
 }

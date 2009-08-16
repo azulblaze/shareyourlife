@@ -41,4 +41,8 @@
 		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/more_comments.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="m.page.more.tags" extends="m.layout">	
+		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/more_tags.jsp"></put-attribute>
+	</definition>
+	
 </tiles-definitions>

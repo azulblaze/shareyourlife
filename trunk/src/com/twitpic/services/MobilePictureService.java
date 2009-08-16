@@ -23,4 +23,8 @@ public interface MobilePictureService {
 	public Integer loadMoreCommentsTotelCountFromPictureId(Long pictureId);
 	
 	public Integer getMoreCommentsPageCount();
+	
+	public Integer getTagsCountFromAccount(String account);
+	
+	public List<Tags> loadTagsWithPictureCountPagableFromAccount(String account, Integer page_index, Integer page_count);
 }
