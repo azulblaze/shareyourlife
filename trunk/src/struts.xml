@@ -61,10 +61,14 @@
 			<result name="success" type="tiles">page.single_pic</result>
 		</action>
 		<action name="delete_pic" class="pictureAction" method="delete_pic" />
-		<action name="comment" class="pictureAction" method="comment" />
-		<action name="delete_comment" class="pictureAction" method="delete_comment" />
-		<action name="tag" class="pictureAction" method="tag" />
 		
+		<action name="comment" class="commentAction" method="comment" />
+		<action name="delete_comment" class="commentAction" method="delete_comment" />
+		<action name="load_comment" class="commentAction" method="load_comment" >
+			<result name="success">/WEB-INF/pages/tiles/comments_list.jsp</result>
+		</action>
+		
+		<action name="tag" class="tagAction" method="tag" />
 	</package>
 	
 	<include file="conf/struts/mobile-struts.xml"></include>

@@ -1,6 +1,5 @@
 package com.twitpic.services.impl;
 
-import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,7 +10,6 @@ import com.twitpic.db.model.CommentsExample;
 import com.twitpic.db.model.Tags;
 import com.twitpic.db.model.TagsExample;
 import com.twitpic.domain.Account;
-import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.MobilePictureService;
