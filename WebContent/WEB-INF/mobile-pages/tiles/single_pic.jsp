@@ -17,7 +17,7 @@
 			<img height="16" with="16" src="<s:property value='picture.picture'/>"/>
 			<a href="<s:property value='picture.account'/>" >
 				<s:property value="picture.name"/>
-			</a>&nbsp;上传于&nbsp;<s:property value="picture.picturesParameter.uploadTime" />
+			</a>&nbsp;上传于&nbsp;<s:date name="picture.picturesParameter.uploadTime" format="yyyy年MM月dd日 HH:mm:ss"/>
 		</div>
 	   	<div>
 	   		<img src="<s:property value='picture.pictures.thumb'/>" />
@@ -37,7 +37,7 @@
 			  	<div>
 			  		<s:iterator value="comments" >
 			  			<div class="c_h">
-			  				<s:property value="commentTime" /> <s:property value="account" />
+			  				<s:date name="commentTime" format="yyyy年MM月dd日 HH:mm:ss"/>&nbsp;<s:property value="account" />
 			  			</div>
 			  			<div class="c_d">
 			  				<s:property value="comment" />
