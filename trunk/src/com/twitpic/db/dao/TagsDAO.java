@@ -85,5 +85,19 @@ public interface TagsDAO {
      */
     int updateByExample(Tags record, TagsExample example);
     
+    /*
+     * =========== 自定义DAO方法 =======================
+     */
+    
+    /**
+     * 
+     * @param record
+     * @return
+     */
     Long insert_return_id(Tags record);
+    
+    List<Tags> selectTagsWithPictureCountPagableFromAccount(String account, Integer page_index, Integer page_count);
+    
+    Integer selectCountFromAcount(String account);
+    
 }

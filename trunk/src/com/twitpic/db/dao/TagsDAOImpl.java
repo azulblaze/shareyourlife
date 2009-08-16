@@ -1,9 +1,13 @@
 package com.twitpic.db.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.twitpic.db.model.Tags;
 import com.twitpic.db.model.TagsExample;
-import java.util.List;
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 
@@ -155,5 +159,19 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 	@Override
 	public Long insert_return_id(Tags record) {
 		return (Long)getSqlMapClientTemplate().insert("tags.insert_return_id", record);
+	}
+
+	@Override
+	public List<Tags> selectTagsWithPictureCountPagableFromAccount(
+			String account, Integer page_index, Integer page_count) {
+		Map parames = new HashMap();
+		parames.put("ACCOUNT", account);
+		parames.put("LIMIT", page_index*page_count+","+page_count);
+		return getSqlMapClientTemplate().queryForList("tags.select_tags_with_picture_count_pagable", parames);
+	}
+
+	@Override
+	public Integer selectCountFromAcount(String account) {
+		return (Integer)getSqlMapClientTemplate().queryForObject("tags.select_count_from_account", account);
 	}
 }

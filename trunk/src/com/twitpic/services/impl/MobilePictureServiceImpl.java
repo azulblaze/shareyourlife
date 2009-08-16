@@ -114,6 +114,17 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 		example.createCriteria().andIdPicturesEqualTo(pictureId);
 		
 		return this.commentsDAO.countByExample(example);
+	}
+
+	@Override
+	public Integer getTagsCountFromAccount(String account) {
+		return this.tagsDAO.selectCountFromAcount(account);
+	}
+
+	@Override
+	public List<Tags> loadTagsWithPictureCountPagableFromAccount(String account,
+			Integer page_index, Integer page_count) {
+		return this.tagsDAO.selectTagsWithPictureCountPagableFromAccount(account, page_index, page_count);
 	}	
 
 	

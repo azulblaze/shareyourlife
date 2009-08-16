@@ -11,6 +11,16 @@ public class FormTag {
 	
 	private Long selected_tag_id;
 	
+	private Integer page_index;
+	
+	public void setPageIndex(Integer _index){
+		this.page_index = _index;
+	}
+	
+	public Integer getPageIndex(){
+		return this.page_index;
+	}
+	
 	public void setSelectedTagId(Long _id){
 		this.selected_tag_id = _id;
 	}
