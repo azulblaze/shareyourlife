@@ -2,6 +2,8 @@ package com.twitpic.db.dao;
 
 import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.CommentsExample;
+import com.twitpic.domain.CommentsInfo;
+
 import java.util.List;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -168,7 +170,7 @@ public class CommentsDAOImpl extends SqlMapClientDaoSupport implements CommentsD
 			super(example);
 			this.record = record;
 		}
-
+		@SuppressWarnings("unused")
 		public Object getRecord() {
 			return record;
 		}
@@ -177,5 +179,19 @@ public class CommentsDAOImpl extends SqlMapClientDaoSupport implements CommentsD
 	@Override
 	public Long insert_return_id(Comments record) {
 		return (Long)getSqlMapClientTemplate().insert("comments.insert_return_id", record);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CommentsInfo> selectCommentsInfoBLOBs(Long id, String account,
+			Long idPictures, Long startIndex, Integer size) {
+		java.util.Map parameters = new java.util.HashMap();
+		parameters.put("id", id);
+		parameters.put("account", account);
+		parameters.put("id_pictures", idPictures);
+		parameters.put("start_index", startIndex);
+		parameters.put("end_index", size);
+		List<CommentsInfo> list = (List<CommentsInfo>) getSqlMapClientTemplate().queryForList("comments.comments_infomation_withuser", parameters);
+		return list;
 	}
 }

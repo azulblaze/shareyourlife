@@ -6,11 +6,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.twitpic.db.model.Comments;
-import com.twitpic.db.model.Tags;
 import com.twitpic.domain.Account;
-import com.twitpic.domain.FormComment;
-import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.PictureService;
 import com.twitpic.system.struts.ProgressMonitor;
@@ -29,19 +25,8 @@ public class PictureAction extends BaseAction {
 	private String description;
 	private String title;
 	private PictureService pictureService;
-	private FormComment formComment;
-	private FormTag formTag;
 	private Long id_picture;
-	private Long id_comment;
 	
-	public Long getId_comment() {
-		return id_comment;
-	}
-
-	public void setId_comment(Long idComment) {
-		id_comment = idComment;
-	}
-
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
 	}
@@ -69,13 +54,6 @@ public class PictureAction extends BaseAction {
 		this.title = title;
 	}
 	
-	public FormComment getFormComment(){
-		return formComment;
-	}
-	
-	public void setFormComment(FormComment formComment){
-		this.formComment = formComment;
-	}
 	
 	public Long getId_picture() {
 		return id_picture;
@@ -83,12 +61,7 @@ public class PictureAction extends BaseAction {
 	public void setId_picture(Long id_picture) {
 		this.id_picture = id_picture;
 	}
-	public FormTag getFormTag(){
-		return formTag;
-	}
-	public void setFormTag(FormTag formTag){
-		this.formTag = formTag;
-	}
+	
 	public String upload() throws Exception{
 		String file_tag = this.getRequestParameter(ProgressMonitor.SESSION_FILE_TAG);
 		if(file_tag==null){
@@ -132,52 +105,12 @@ public class PictureAction extends BaseAction {
 		}
 	}
 	
-	public String comment() throws Exception {
-		if(formComment==null||formComment.getComment()==null||formComment.getComment().trim().length()<1||formComment.getId_pictures()==null||formComment.getId_pictures()<1){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
-			return "json";
-		}
-		if(!isLogin()){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
-			return "json";
-		}
-		try{
-			Account account = loadAccount();
-			Comments comments = pictureService.comment(account, formComment);
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'评论成功',data:'"+comments.to_json()+"'}");
-		}catch(Exception e){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'提交失败,"+e.getMessage()+"'}");
-			return "json";
-		}
-		return "json";
-	}
-	
-	public String tag() throws Exception {
-		if(formTag==null||formTag.getName()==null||formTag.getName().trim().length()<1||formTag.getId_pictures()==null||formTag.getId_pictures()<1){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
-			return "json";
-		}
-		if(!isLogin()){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
-			return "json";
-		}
-		try{
-			Account account = loadAccount();
-			Tags tags = pictureService.Tag(account, formTag);
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记成功',data:'"+tags.to_json()+"'}");
-		}catch(Exception e){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记失败,"+e.getMessage()+"'}");
-			return "json";
-		}
-		return "json";
-	}
-
-	
 	public String single_pic() throws Exception{
 		if(id_picture!=null&&id_picture.longValue()>0){
 			try{
 				PictureInfo pi = pictureService.loadPicture(id_picture);
 				this.setValue("picture", pi);
+				this.setValue("comments_count", pictureService.countComments(id_picture));
 			}catch(Exception e){
 				this.addActionError(e.getMessage());
 				return ERROR;
@@ -200,26 +133,6 @@ public class PictureAction extends BaseAction {
 			Account account = loadAccount();
 			String root_path = ServletActionContext.getServletContext().getRealPath("/");
 			pictureService.delPicture(account, id_picture, root_path);
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除成功'}");
-		}catch(Exception e){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除失败,"+e.getMessage()+"'}");
-			return "json";
-		}
-		return "json";
-	}
-	
-	public String delete_comment() throws Exception{
-		if(id_comment!=null||id_comment.longValue()<1){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
-			return "json";
-		}
-		if(!isLogin()){
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");
-			return "json";
-		}
-		try{
-			Account account = loadAccount();
-			pictureService.delComment(account, id_comment);
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除成功'}");
 		}catch(Exception e){
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'删除失败,"+e.getMessage()+"'}");

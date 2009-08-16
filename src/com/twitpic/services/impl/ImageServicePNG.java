@@ -28,7 +28,7 @@ public class ImageServicePNG implements ImageService{
 				}
 			}else{//we make image's width to be given, the height will be changed relative
 				if(_width>width){
-					height = (int)Math.ceil(_height*width/_width);
+					height = (int)Math.ceil((float)_height*width/_width);
 				}else{
 					return false;
 				}

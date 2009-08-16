@@ -20,6 +20,7 @@ import com.twitpic.db.model.Tags;
 import com.twitpic.db.model.TagsExample;
 import com.twitpic.db.model.TagsRel;
 import com.twitpic.db.model.TagsRelExample;
+import com.twitpic.domain.CommentsInfo;
 import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
@@ -261,5 +262,19 @@ public class PictureServiceImpl implements PictureService {
 			throw e;
 		}
 		return true;
+	}
+	@Override
+	public int countComments(Long idPicture) {
+		if(idPicture==null||idPicture<1){
+			return 0;
+		}
+		CommentsExample example = new CommentsExample();
+		example.createCriteria().andIdPicturesEqualTo(idPicture.longValue());
+		return commentsDAO.countByExample(example);
+	}
+	@Override
+	public List<CommentsInfo> loadComments(Long idPictre, int cPage, int size)throws Exception {
+		long start_index = (cPage-1)*size;
+		return commentsDAO.selectCommentsInfoBLOBs(null, null, idPictre, start_index, size);
 	}
 }
