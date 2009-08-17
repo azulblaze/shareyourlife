@@ -38,5 +38,12 @@ public class TagAction extends BaseAction {
 		}
 		return "json";
 	}
-
+	
+	public String load_picture_tag() throws Exception {
+		return null;
+	}
+	
+	public String load_user_tag() throws Exception{
+		return null;
+	}
 }
