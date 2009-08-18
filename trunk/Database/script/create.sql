@@ -133,5 +133,27 @@ CREATE  TABLE IF NOT EXISTS admins (
   start_time TIMESTAMP NULL DEFAULT current_timestamp ,
   end_time TIMESTAMP NULL,
   PRIMARY KEY (id) )
-ENGINE = InnoDB
+ENGINE = InnoDB;
+go
+
+-- -----------------------------------------------------
+-- Table messages
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS messages;
+go
+CREATE  TABLE IF NOT EXISTS messages (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  from_user VARCHAR(100) NULL ,
+  to_user VARCHAR(100) NULL ,
+  type VARCHAR(50) NULL ,
+  category VARCHAR(50) NULL ,
+  status VARCHAR(50) NULL ,
+  title VARCHAR(45) NULL ,
+  content TEXT NULL ,
+  create_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  update_time TIMESTAMP NULL ,
+  PRIMARY KEY (id) ,
+  INDEX FROM_INDEX (from_user ASC) ,
+  INDEX TO_INDEX (to_user ASC) )
+ENGINE = InnoDB;
 go
