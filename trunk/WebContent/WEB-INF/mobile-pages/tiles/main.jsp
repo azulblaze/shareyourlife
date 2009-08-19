@@ -5,8 +5,7 @@
 <div> ----------------------- </div>
 <div class="div_panel">
 	欢迎您, solzhang <br />
-	系统信息(<a href="">共<s:property value="h_sys_msgs_count" />条</a> , <a href="">未读<s:property value="h_sys_msgs_unread_count" />条</a>)<br />
-	茄友信息(<a href="">共<s:property value="h_user_msgs_count" />条</a> , <a href="">未读<s:property value="h_user_msgs_unread_count" />条</a>)
+	你的信息(<a href="">共<s:property value="h_msgs_count" />条</a> , <a href="">未读<s:property value="h_msgs_unread_count" />条</a>)<br />
 </div>
 </s:if>
 <div> ----------------------- </div>

@@ -7,58 +7,36 @@ import com.twitpic.db.model.Messages;
 
 public class MessagesInfo {
 	
-	private List<Messages>	sysMessages;
-	private List<Messages> 	userMessages;
-	private List<Messages>	sysUnreadMesssages;
-	private List<Messages>	userUnreadMessages;
-	
-	public Integer getSysMessagesCount(){
-		return getSysMessages().size();
+	private List<Messages>  	messages;
+	private List<Messages> 		unreadMessages;
+
+	public List<Messages> getMessages() {
+		if( this.messages == null )
+			this.messages = new ArrayList<Messages>();
+		return messages;
+	}
+
+	public void setMessages(List<Messages> messages) {
+		this.messages = messages;
 	}
 	
-	public Integer getUserMessagesCount(){
-		return getUserUnreadMessages().size();
+	
+	public Integer getMessagesCount(){
+		return getMessages().size();
+	}
+
+	public List<Messages> getUnreadMessages() {
+		if( this.unreadMessages == null )
+			this.unreadMessages = new ArrayList<Messages>();
+		return unreadMessages;
+	}
+
+	public void setUnreadMessages(List<Messages> unreadMessages) {
+		this.unreadMessages = unreadMessages;
 	}
 	
-	public Integer getSysUnreadMessagesCount(){
-		return getSysUnreadMesssages().size();
-	}
-	
-	public Integer getUserUnreadMessagesCount(){
-		return getUserUnreadMessages().size();
-	}
-	
-	public List<Messages> getSysMessages() {
-		if( this.sysMessages == null )
-			this.sysMessages = new ArrayList<Messages>();
-		return sysMessages;
-	}
-	public void setSysMessages(List<Messages> sysMessages) {
-		this.sysMessages = sysMessages;
-	}
-	public List<Messages> getUserMessages() {
-		if( this.userMessages == null )
-			this.userMessages = new ArrayList<Messages>();
-		return userMessages;
-	}
-	public void setUserMessages(List<Messages> userMessages) {
-		this.userMessages = userMessages;
-	}
-	public List<Messages> getSysUnreadMesssages() {
-		if( this.sysUnreadMesssages == null )
-			this.sysUnreadMesssages = new ArrayList<Messages>();		
-		return sysUnreadMesssages;
-	}
-	public void setSysUnreadMesssages(List<Messages> sysUnreadMesssages) {
-		this.sysUnreadMesssages = sysUnreadMesssages;
-	}
-	public List<Messages> getUserUnreadMessages() {
-		if( this.userUnreadMessages == null )
-			this.userUnreadMessages = new ArrayList<Messages>();			
-		return userUnreadMessages;
-	}
-	public void setUserUnreadMessages(List<Messages> userUnreadMessages) {
-		this.userUnreadMessages = userUnreadMessages;
+	public Integer getUnreadMessagesCount(){
+		return getUnreadMessages().size();
 	}
 	
 	
