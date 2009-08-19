@@ -5,6 +5,12 @@
     "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<style>
+			.div_panel {
+				width:300px;
+				font-size:12px;
+			}
+		</style>	
 	</head>
 	<body>
 		<tiles:insertAttribute name="header"></tiles:insertAttribute>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="application/xhtml+xml;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<div>
-	<small>
+<div class="div_panel">
+	
 		 <a href="login.do">登录</a>
 		 <h5>注册</h5>
 		<s:actionerror/>
@@ -31,5 +31,5 @@
 				<input type="submit" value="注册"/>
 			</div>
 		</form>
-	</small>
+	
 </div>

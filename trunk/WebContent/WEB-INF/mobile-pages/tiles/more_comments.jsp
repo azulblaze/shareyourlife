@@ -2,17 +2,13 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <style>
-	.c_b {
-		width:300px;
-		font-size:12px;
-	}
 	.c_h {
 		background-color:#b694d1;
 		font-weight:bold;
 	}
 </style>
 
-<div class="c_b">
+<div class="div_panel">
 	
 	<div class="c_h" >
 		此图片评论(<s:property value="paged_comments_total_count" />)条,
