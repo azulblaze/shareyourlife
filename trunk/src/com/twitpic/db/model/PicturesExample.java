@@ -544,4 +544,18 @@ public class PicturesExample {
             return this;
         }
     }
+    
+    /*
+     * ============ 手动添加  ===========================
+     */
+    protected String m_limit;
+    
+    public void setLimit(String _limit){
+    	this.m_limit = _limit;
+    }
+    
+    public String getLimit(){
+    	return m_limit;
+    }
+    
 }
