@@ -2,17 +2,13 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <style>
-	.c_b {
-		width:300px;
-		font-size:12px;
-	}
 	.c_h {
 		background-color:#b694d1;
 		font-weight:bold;
 	}
 </style>
 
-<div class="c_b">
+<div class="div_panel">
 		<div class="c_h">
 			<img height="16" with="16" src="<s:property value='picture.picture'/>"/>
 			<a href="<s:property value='picture.account'/>" >

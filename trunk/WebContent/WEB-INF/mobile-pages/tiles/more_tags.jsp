@@ -3,18 +3,13 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <style>
-.c_b {
-	width: 300px;
-	font-size: 12px;
-}
-
 .c_h {
 	background-color: #b694d1;
 	font-weight: bold;
 }
 </style>
 
-<div class="c_b">
+<div class="div_panel">
 	<div class="c_h">你的标记共有
 		(<s:property value="paged_tags_total_count" />)条, 当前第
 		(<s:property value="page_index+1" />)页 -共
