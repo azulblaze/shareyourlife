@@ -130,7 +130,11 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 	public List<PictureInfo> loadPicturesPagedForHome(
 			Integer _page_index,
 			Integer _page_count) {
-
+		
+		if( _page_index < 0 ){
+			_page_index = 0;
+		}
+		
 		PicturesExample example = new PicturesExample();
 		example.setOrderByClause(" id desc ");
 		example.setLimit( _page_index*_page_count  +", "+ _page_count);
