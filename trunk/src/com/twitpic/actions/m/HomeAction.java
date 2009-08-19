@@ -91,10 +91,8 @@ public class HomeAction extends BaseAction {
 		/*
 		 * 先设置模拟数据
 		 */
-		this.setValue("h_sys_msgs_count", 10);
-		this.setValue("h_sys_msgs_unread_count", 5);
-		this.setValue("h_user_msgs_count", 15);
-		this.setValue("h_user_msgs_unread_count", 2);
+		this.setValue("h_msgs_count", 10);
+		this.setValue("h_msgs_unread_count", 5);
 	}
 	
 }
