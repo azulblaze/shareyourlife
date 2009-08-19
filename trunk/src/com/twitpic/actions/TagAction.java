@@ -4,14 +4,19 @@ import com.twitpic.db.model.Tags;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.FormTag;
 import com.twitpic.services.PictureService;
+import com.twitpic.services.TagService;
 import com.twitpic.util.ConsVar;
 
 @SuppressWarnings("serial")
 public class TagAction extends BaseAction {
 	private PictureService pictureService;
+	private TagService tagService;
 	private FormTag formTag;
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
+	}
+	public void setTagService(TagService tagService) {
+		this.tagService = tagService;
 	}
 	public FormTag getFormTag(){
 		return formTag;
@@ -20,7 +25,7 @@ public class TagAction extends BaseAction {
 		this.formTag = formTag;
 	}
 	public String tag() throws Exception {
-		if(formTag==null||formTag.getName()==null||formTag.getName().trim().length()<1||formTag.getId_pictures()==null||formTag.getId_pictures()<1){
+		if(formTag==null||formTag.getNames()==null||formTag.getNames().length<1||formTag.getId_pictures()==null||formTag.getId_pictures()<1){
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NONE+"',message:'错误的请求'}");
 			return "json";
 		}
@@ -45,5 +50,23 @@ public class TagAction extends BaseAction {
 	
 	public String load_user_tag() throws Exception{
 		return null;
+	}
+	
+	public String load_similar_tag() throws Exception{
+		String keyword = this.getRequestParameter("q");
+		if(keyword==null){
+			keyword = "";
+		}
+		java.util.List<com.twitpic.db.model.Tags> tags = tagService.load_similar_tag(keyword, 0, 10);
+		String list = null;
+		for(com.twitpic.db.model.Tags tag:tags){
+			if(list==null){
+				list = tag.getName();
+			}else{
+				list = list+ "|" + tag.getName();
+			}
+		}
+		this.setValue("json", list);
+		return "json";
 	}
 }

@@ -16,6 +16,9 @@
 	<definition name="page.reg" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/pages/tiles/reg.jsp"></put-attribute>
 	</definition>
+	<definition name="page.findpassword" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/pages/tiles/findpassword.jsp"></put-attribute>
+	</definition>
 	<definition name="page.main" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/pages/tiles/main.jsp"></put-attribute>
 	</definition>
