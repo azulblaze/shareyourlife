@@ -6,10 +6,6 @@
 		width:300px;
 		font-size:12px;
 	}
-	.img_user_logo{
-		width:16px;
-	}
-	
 </style>
 
 
@@ -42,7 +38,7 @@
 						<td valign="top" >
 						 	<div>
 						 		茄友:&nbsp;
-							 	<img class="img_user_logo" height="45" with="45" src="<s:property value='picture'/>"/>
+							 	<img height="16" with="16" src="<s:property value='picture'/>"/>
 							 	<a href="<s:property value='account'/>" >
 							 		<s:property value="name"/>
 							 	</a>
