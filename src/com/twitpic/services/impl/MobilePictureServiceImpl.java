@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.CommentsExample;
+import com.twitpic.db.model.PicturesExample;
 import com.twitpic.db.model.Tags;
 import com.twitpic.db.model.TagsExample;
 import com.twitpic.domain.Account;
@@ -123,6 +124,18 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 	public List<Tags> loadTagsWithPictureCountPagableFromAccount(String account,
 			Integer page_index, Integer page_count) {
 		return this.tagsDAO.selectTagsWithPictureCountPagableFromAccount(account, page_index, page_count);
+	}
+
+	@Override
+	public List<PictureInfo> loadPicturesPagedForHome(
+			Integer _page_index,
+			Integer _page_count) {
+
+		PicturesExample example = new PicturesExample();
+		example.setOrderByClause(" id desc ");
+		example.setLimit( _page_index*_page_count  +", "+ _page_count);
+		
+		return this.picturesDAO.findPicturesInformationByEexample(example);
 	}	
 
 	

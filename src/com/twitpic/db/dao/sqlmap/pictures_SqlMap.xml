@@ -81,6 +81,9 @@
       <isNotNull property="orderByClause" >
         order by $orderByClause$
       </isNotNull>
+      <isNotNull property="limit">
+      	limit $limit$
+      </isNotNull>
     </isParameterPresent>
   </select>
   <delete id="abatorgenerated_deleteByPrimaryKey" parameterClass="com.twitpic.db.model.Pictures" >
@@ -203,6 +206,8 @@
     </isParameterPresent>
   </update>
   
+  <!-- 自定义语句 -->
+  
   <select id="pictures_infomation" parameterClass="java.util.Map"  resultMap="pictures.abatorgenerated_PictureInfoResult">
   	select * from  pictures p,pictures_parameter pp where p.id = pp.id_pictures
   	<isNotNull prepend="and" property="id" >
@@ -241,4 +246,17 @@
 	        limit #start_index:BIGINT#,#end_index:BIGINT#
 	</isNotNull>
   </select>
+  
+  <select id="select_pictures_information_by_example" resultMap="pictures.abatorgenerated_PictureInfoResult" parameterClass="com.twitpic.db.model.PicturesExample" >
+	select u.name as user_name,u.account as user_account,up.picture as user_picture,p.*,pp.* from pictures p left join pictures_parameter pp on p.id = pp.id_pictures left join users u on pp.upload_account=u.account left join users_profile up on u.account=up.account
+    <isParameterPresent >
+      <include refid="pictures.abatorgenerated_Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+      <isNotNull property="limit">
+      	limit $limit$
+      </isNotNull>
+    </isParameterPresent>
+  </select>  
 </sqlMap>

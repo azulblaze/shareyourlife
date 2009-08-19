@@ -97,4 +97,21 @@ public class MobilePictureServiceImplTest extends TestCase {
 		System.out.println("Over");		
 		
 	}
+	
+	public void testLoadPicturesPagedForHome(){
+		try{
+			MobilePictureServiceImpl impl = (MobilePictureServiceImpl)m_context.getBean("mPictureService");
+			List<PictureInfo> list = impl.loadPicturesPagedForHome(2, 2);
+			
+			for (PictureInfo item:list) {
+				System.out.println(item.getPictures().getId()+"("+item.getAccount()+")");
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			this.assertFalse("测试失败, "+ex.getMessage(), true);
+		}
+		
+		System.out.println("Over");			
+	}
 }
