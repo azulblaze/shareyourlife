@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="application/xhtml+xml;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
-<style>
-	.div_panel {
-		width:300px;
-		font-size:12px;
-	}
-</style>
-
-
 <!-- start: 用户信息, 要求登录用户才能显示 -->
 <s:if test="#session.user != null && #session.user.status == 1" >
+<div> ----------------------- </div>
 <div class="div_panel">
 	欢迎您, solzhang <br />
 	系统信息(<a href="">共<s:property value="h_sys_msgs_count" />条</a> , <a href="">未读<s:property value="h_sys_msgs_unread_count" />条</a>)<br />
