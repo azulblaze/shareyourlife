@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Welcome</title>
-</head>
-<body>
+<script type="text/javascript" src="scripts/jquery.autocomplete.pack.js" charset="utf-8"></script>
+<link href="css/_jquery.autocomplete.css" rel="stylesheet" type="text/css" />
 用户<img height="45" with="45" src="<s:property value='picture.picture'/>"/><a href="<s:property value='picture.account'/>"/><s:property value="picture.name"/></a>
    <div><img src="<s:property value='picture.pictures.thumb'/>"/></div>
    <div>
@@ -23,13 +18,11 @@
    <input type="submit" value="提交"/>
    </form>
    
-  标记<form action="/tag.do" method="posts">
+  标记<form action="/tag.do" method="post">
   <input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>"/>
-  <input type="text" name="formTag.name">
+  <input type="text" name="formTag.name" id="tagname">
   <input type="submit" value="提交"/>
   </form>
-</body>
-</html>
 <script>
 function clicklink(){
 	$("#page_link a").each(function(){
@@ -54,6 +47,7 @@ function loadComments(url){
 	});
 }
 $(document).ready(function(){
+	$("#tagname").autocomplete("load_similar_tag.do",{delay:10,matchContains:true,autoFill:true,multiple:true,multipleSeparator:","});
 	if($("#count_num").html()>0){
 		loadComments("load_comment.do?id_picture=<s:property value='picture.pictures.id'/>");
 	}

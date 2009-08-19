@@ -224,4 +224,22 @@ public class AccountServiceImpl implements AccountService {
 		account.setUsersProfile(up);
 		return account;
 	}
+
+	@Override
+	public boolean find_password(String email, String account) throws Exception {
+		Users u = usersDAO.selectByPrimaryKey(account);
+		if(u==null){
+			throw new Exception("帐号不存在");
+		}
+		if(!(u.getEmail().equals(email))){
+			throw new Exception("帐号信息确认失败");
+		}
+		Mail mail = new Mail();
+		mail.setContent("尊敬的会员，您的密码是："+u.getPassword()+",请妥善保管您的密码。");
+		mail.setToAddr(email);
+		mail.setSubject("密码找回服务");
+		mail.setType(Mail.MAIL_TYPE_HTML);
+		mailServices.sendMail(mail);
+		return true;
+	}
 }

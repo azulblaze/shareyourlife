@@ -3,19 +3,19 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <div>
 <a href="reg.do">注册</a>
-<h5>登录</h5>
+<h5>找回密码</h5>
 <s:actionerror/>
-<form action="login.do" method="post">
+<s:actionmessage/>
+<form action="forget_pass.do" method="post">
 <input type="hidden" name="submit" value="true"/>
 <p>
-帐号:<input type="text" name="formLogin.name"/>
+帐号:<input type="text" name="account"/>
 </p>
 <p>
-密码:<input type="password" name="formLogin.password"/>
+邮箱:<input type="text" name="email"/>
 </p>
 <p>
-<input type="submit" value="登录"/>
+<input type="submit" value="确定"/>
 </p>
 </form>
 </div>
-<div><a href="forget_pass.do">忘记密码</a></div>

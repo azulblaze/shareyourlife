@@ -9,6 +9,8 @@ public class FormTag {
 	
 	private String name;
 	
+	private String []names;
+	
 	private Long selected_tag_id;
 	
 	private Integer page_index;
@@ -57,6 +59,24 @@ public class FormTag {
 	 */
 	public void setName(String name) {
 		this.name = name;
+		if(name!=null){
+			name = name.trim();
+			this.names = name.split(",");
+		}
+	}
+
+	/**
+	 * @return the names
+	 */
+	public String[] getNames() {
+		return names;
+	}
+
+	/**
+	 * @param names the names to set
+	 */
+	public void setNames(String[] names) {
+		this.names = names;
 	}
 	
 	

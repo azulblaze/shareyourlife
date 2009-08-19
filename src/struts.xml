@@ -52,7 +52,10 @@
 		<action name="profile" class="accountAction" method="profile" >
 			<result name="success" type="tiles">page.profile</result>
 		</action>
-		
+		<action name="forget_pass" class="accountAction" method="findPassword" >
+			<result name="input" type="tiles">page.findpassword</result>
+			<result name="success" type="tiles">page.findpassword</result>
+		</action>
 		<action name="upload_pic" class="pictureAction" method="upload" >
 			<result name="input" type="tiles">page.uploadpic</result>
 		</action>
@@ -69,6 +72,7 @@
 		</action>
 		
 		<action name="tag" class="tagAction" method="tag" />
+		<action name="load_similar_tag" class="tagAction" method="load_similar_tag" />
 	</package>
 	
 	<include file="conf/struts/mobile-struts.xml"></include>
