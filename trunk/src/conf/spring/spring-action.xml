@@ -13,4 +13,8 @@
 	<bean name="mPictureAction" class="com.twitpic.actions.m.PictureAction" singleton="false" >
 		<property name="mobilePictureService" ref="mPictureService"></property>
 	</bean>
+	<bean name="mHomeAction" class="com.twitpic.actions.m.HomeAction" singleton="false" >
+		<property name="pictureService" ref="mPictureService"></property>
+	</bean>
+	
 </beans>

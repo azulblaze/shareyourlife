@@ -183,4 +183,9 @@ public class PicturesDAOImpl extends SqlMapClientDaoSupport implements PicturesD
 		List<PictureInfo> list = (List<PictureInfo>) getSqlMapClientTemplate().queryForList("pictures.pictures_infomation_withuser", parameters);
 		return list;
 	}
+
+	@Override
+	public List<PictureInfo> findPicturesInformationByEexample(PicturesExample example) {
+		return (List<PictureInfo>)this.getSqlMapClientTemplate().queryForList("pictures.select_pictures_information_by_example", example);
+	}
 }

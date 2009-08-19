@@ -16,8 +16,8 @@
 <!-- start: 用户信息 -->
 <div class="div_panel">
 	欢迎您, solzhang <br />
-	系统信息(<a href="">共18条</a> , <a href="">未读5条</a>)<br />
-	茄友信息(<a href="">共18条</a> , <a href="">未读0条</a>)
+	系统信息(<a href="">共<s:property value="h_sys_msgs_count" />条</a> , <a href="">未读<s:property value="h_sys_msgs_unread_count" />条</a>)<br />
+	茄友信息(<a href="">共<s:property value="h_user_msgs_count" />条</a> , <a href="">未读<s:property value="h_user_msgs_unread_count" />条</a>)
 </div>
 <div> ----------------------- </div>
 <!-- end: 用户信息-->
@@ -25,10 +25,10 @@
 <!-- start: 当前最新相片 -->
 <div class="div_panel">
 	<div class="div_title">
-		# 当前最新相片 (共<strong>5</strong>页,当前是<strong>1</strong>页)
+		# 当前最新相片 (当前第<strong><s:property value="h_pictures_pageindex+1" /></strong>页)
 	</div>
 	<div>
-		<s:iterator value="pictures" id="picture" status="num">
+		<s:iterator value="h_pictures_list" id="picture" status="num">
 			<div>
 				<table>
 					<tr>
@@ -64,8 +64,7 @@
 	<div>
 		<a href="" >第一页</a>|
 		<a href="" >上一页</a>|
-		<a href="" >下一页</a>|
-		<a href="">最后一页</a>
+		<a href="" >下一页 ... </a>|
 	</div>
 </div>
 <div> ----------------------- </div>

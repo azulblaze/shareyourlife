@@ -1,0 +1,94 @@
+package com.twitpic.actions.m;
+
+import java.util.List;
+
+import com.twitpic.actions.BaseAction;
+import com.twitpic.domain.FormHome;
+import com.twitpic.domain.PictureInfo;
+import com.twitpic.services.MobilePictureService;
+import com.twitpic.services.PictureService;
+
+public class HomeAction extends BaseAction {
+	
+	private PictureService pictureService;
+	private Integer m_pictures_page_count = 5; 	// 默认为 5 条
+	private Integer m_tags_page_count = 9;		// 默认为9条
+	private FormHome m_formHome;
+	
+	public void setPictureService(PictureService pictureService) {
+		this.pictureService = pictureService;
+	}
+	
+	public void setPicturesPageCount(Integer _count){
+		this.m_pictures_page_count = _count;
+	}
+	
+	public void setTagsPageCount(Integer _count){
+		this.m_tags_page_count = _count;
+	}
+
+	public String index() throws Exception{
+		if(isLogin()){
+			// this.setValue("pictures", pictureService.loadHomePictures(15));
+			
+			/*
+			 *  初始化首页需要显示的数据
+			 *  1. 准备茄友的信息情况( 系统信息, 茄友信息 )
+			 *  2. 准备需要显示的分页的图片列表以及分页信息
+			 *  3. 准备分页的热门标签以及分页信息
+			 */
+			
+			// 准备茄友的信息情况( 系统信息, 茄友信息 )
+			prepare_mssage_for_account();
+			
+			// 准备需要显示的分页的图片列表以及分页信息
+			prepare_pictures_pagable_for_account();
+			
+			// 准备分页的热门标签以及分页信息
+			prepare_tags_pagable_for_account();
+						
+			return SUCCESS;
+		}
+		return INPUT;
+	}
+
+	/**
+	 * 准备分页的热门标签以及分页信息
+	 */
+	private void prepare_tags_pagable_for_account() {
+		
+
+	}
+
+	/**
+	 * 准备需要显示的分页的图片列表以及分页信息
+	 */
+	private void prepare_pictures_pagable_for_account() {
+		if( this.m_formHome == null ){
+			this.m_formHome = new FormHome();
+		}
+
+		List<PictureInfo> pictures = ((MobilePictureService)this.pictureService).loadPicturesPagedForHome(
+					this.m_formHome.getPicturesPageIndex(),
+					this.m_pictures_page_count
+				);
+		
+		this.setValue("h_pictures_list", pictures);
+		this.setValue("h_pictures_pageindex", this.m_formHome.getPicturesPageIndex());		
+	}
+
+	/**
+	 * 准备茄友的信息情况( 系统信息, 茄友信息 )
+	 */
+	private void prepare_mssage_for_account() {
+		
+		/*
+		 * 先设置模拟数据
+		 */
+		this.setValue("h_sys_msgs_count", 10);
+		this.setValue("h_sys_msgs_unread_count", 5);
+		this.setValue("h_user_msgs_count", 15);
+		this.setValue("h_user_msgs_unread_count", 2);
+	}
+	
+}

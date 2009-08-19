@@ -101,4 +101,6 @@ public interface PicturesDAO {
      * @return
      */
     public List<com.twitpic.domain.PictureInfo> findPicturesInfo(Integer status,Long id,String upload_account,Long from_id,Long to_id,Integer start_index,Integer size);
+    
+    public List<com.twitpic.domain.PictureInfo> findPicturesInformationByEexample(PicturesExample example);
 }

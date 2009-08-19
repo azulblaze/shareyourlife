@@ -9,9 +9,9 @@
 		<global-results>
 			<result name="msg_box" type="tiles">m.page.msg.box</result>
 		</global-results>
-	
-		<action name="index" class="homeAction" method="index">
-		 	<result name="welcome" type="tiles">m.page.index</result>
+		
+		<action name="index" class="mHomeAction" method="index">
+		 	<result name="input" type="tiles">m.page.index</result>
 		 	<result name="success" type="tiles">m.page.main</result>
 		 </action>
 		 

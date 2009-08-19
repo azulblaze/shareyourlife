@@ -27,4 +27,7 @@ public interface MobilePictureService {
 	public Integer getTagsCountFromAccount(String account);
 	
 	public List<Tags> loadTagsWithPictureCountPagableFromAccount(String account, Integer page_index, Integer page_count);
+	
+	public List<PictureInfo> loadPicturesPagedForHome(Integer pageIndex, Integer m_pictures_page_count);
+
 }
