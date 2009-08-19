@@ -167,7 +167,8 @@ public class PictureServiceImpl implements PictureService {
 		List<PictureInfo> list = picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, formTag.getId_pictures(), null, null, null, null, null);
 		if(list.size()>0){
 			TagsExample te = new TagsExample();
-			te.createCriteria().andNameEqualTo(formTag.getName());
+			//current we only support tag one name per time.
+			te.createCriteria().andNameEqualTo(formTag.getNames()[0]);
 			List<Tags> tags = tagsDAO.selectByExample(te);
 			if(tags.size()>0){
 				saveTagRel(account,formTag.getId_pictures(),tags.get(0).getId());
@@ -179,7 +180,7 @@ public class PictureServiceImpl implements PictureService {
 					tag.setAccount(account.getAccount());
 					tag.setCreateTime(new java.util.Date());
 					tag.setDescription("");
-					tag.setName(formTag.getName());
+					tag.setName(formTag.getNames()[0]);
 					tag.setStatus(Tags.STATUS_USER);
 					Long id = tagsDAO.insert_return_id(tag);
 					tag.setId(id);

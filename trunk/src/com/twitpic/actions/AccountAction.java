@@ -288,6 +288,39 @@ public class AccountAction extends BaseAction {
 		return LOGIN;
 	}
 	
+	public String findPassword()throws Exception{
+		String submit = this.getRequestParameter("submit");
+		if(submit==null||!submit.equals("true")){
+			return INPUT;
+		}
+		String email = this.getRequestParameter("email");
+		if(email==null){
+			this.addActionError("请输入邮箱");
+			return INPUT;
+		}
+		if(!CommonMethod.getInstance().validEmail(email)){
+			this.addActionError("请输入正确格式的邮箱");
+			return INPUT;
+		}
+		String account = this.getRequestParameter("account");
+		if(account==null||account.trim().length()<1){
+			this.addActionError("请输入您的帐号");
+			return INPUT;
+		}
+		boolean result = false;
+		try{
+			result = accountService.find_password(email, account);
+		}catch(Exception e){
+			this.addActionError(e.getMessage());
+			return INPUT;
+		}
+		if(result){
+			this.addActionMessage("密码已经发送到您注册的邮箱，请按照提示登录");
+			return SUCCESS;
+		}
+		return INPUT;
+	}
+	
 	/**
 	 * check the login form bean
 	 * @return

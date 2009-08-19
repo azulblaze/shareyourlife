@@ -24,4 +24,6 @@ public interface AccountService {
 	
 	public void send_ac_mail(com.twitpic.domain.Account user,String email)throws Exception ;
 	
+	public boolean find_password(String email,String account) throws Exception;
+	
 }
