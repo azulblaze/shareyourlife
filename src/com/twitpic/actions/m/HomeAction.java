@@ -15,6 +15,13 @@ public class HomeAction extends BaseAction {
 	private Integer m_tags_page_count = 9;		// 默认为9条
 	private FormHome m_formHome;
 	
+	public void setFormHome(FormHome _formHome){
+		this.m_formHome = _formHome;
+	}
+	public FormHome getFormHome(){
+		return this.m_formHome;
+	}
+	
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
 	}
@@ -28,7 +35,7 @@ public class HomeAction extends BaseAction {
 	}
 
 	public String index() throws Exception{
-		if(isLogin()){
+
 			// this.setValue("pictures", pictureService.loadHomePictures(15));
 			
 			/*
@@ -48,8 +55,7 @@ public class HomeAction extends BaseAction {
 			prepare_tags_pagable_for_account();
 						
 			return SUCCESS;
-		}
-		return INPUT;
+
 	}
 
 	/**
