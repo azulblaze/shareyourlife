@@ -49,6 +49,10 @@
 	<bean id="pictureService" name="pictureService" class="com.twitpic.services.impl.PictureServiceImpl" />
 	<bean id="adminService" name="adminService" class="com.twitpic.services.impl.AdminServiceImpl" />
 	<bean id="tagService" name="tagService" class="com.twitpic.services.impl.TagServiceImpl" />
+	<bean id="messageService" name="messageService" class="com.twitpic.services.impl.MessageServiceImpl" />
+	
 	<!-- mobile service  -->
 	<bean name="mPictureService" class="com.twitpic.services.impl.MobilePictureServiceImpl" />
+	
+	
 </beans>
