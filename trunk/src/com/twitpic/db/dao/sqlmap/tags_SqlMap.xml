@@ -212,7 +212,22 @@
   	<![CDATA[
 		select a.id, a.name, b.picture_count from tags a, (select id_tags, count(*) as picture_count from tags_rel group by id_tags) b
 		where a.id = b.id_tags and a.account = #ACCOUNT#
-		limit $LIMIT$  	
+		limit $LIMIT$
+  	]]>
+  </select>
+  
+  <select id="select_tags_with_time" resultMap="TagsResultWithPictureCount" parameterClass="java.util.Map">
+  	<![CDATA[
+  		select a.id, a.name, b.picture_count from tags a, (select id_tags, count(*) as picture_count from tags_rel 
+  		<isNotNull prepend="where" property="tag_time" >
+        	tag_time >= #tag_time:TIMESTAMP#
+      	</isNotNull>
+  		group by id_tags) b
+		where a.id = b.id_tags order by b.picture_count desc
+		order by b.picture_count desc
+		<isNotNull prepend=" " property="LIMIT" >
+        	limit $LIMIT$
+      	</isNotNull>  	
   	]]>
   </select>
   

@@ -1,5 +1,6 @@
 package com.twitpic.services.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import com.twitpic.db.dao.TagsDAO;
@@ -14,6 +15,13 @@ import com.twitpic.services.TagService;
 public class TagServiceImpl implements TagService {
 
 	protected TagsDAO tagsDAO;
+	
+	/**
+	 * @param tagsDAO the tagsDAO to set
+	 */
+	public void setTagsDAO(TagsDAO tagsDAO) {
+		this.tagsDAO = tagsDAO;
+	}
 	
 	@Override
 	public List<Tags> load_picture_tag(Integer id_picture, Integer start,
@@ -38,16 +46,49 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public List<Tags> load_user_tag(String keyword, String account,
-			Integer start, Integer size) throws Exception {
+	public List<Tags> load_user_tag(String keyword, String account,Integer start, Integer size) throws Exception {
 		return null;
 	}
 
-	/**
-	 * @param tagsDAO the tagsDAO to set
-	 */
-	public void setTagsDAO(TagsDAO tagsDAO) {
-		this.tagsDAO = tagsDAO;
+	@Override
+	public List<Tags> load_day_tag(Integer start, Integer size) {
+		
+		return tagsDAO.selectTagsWithTime(getDayDate(), 1, 10);
 	}
 
+	@Override
+	public List<Tags> load_month_tag(Integer start, Integer size) {
+		return tagsDAO.selectTagsWithTime(getWeekDate(), 1, 10);
+	}
+
+	@Override
+	public List<Tags> load_week_tag(Integer start, Integer size) {
+		return tagsDAO.selectTagsWithTime(getMonthDate(), 1, 10);
+	}
+
+	private java.util.Date getDayDate(){
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		return c.getTime();
+	}
+	
+	private java.util.Date getWeekDate(){
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		return c.getTime();
+	}
+	
+	private java.util.Date getMonthDate(){
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.DAY_OF_MONTH, 1);
+		return c.getTime();
+	}
 }

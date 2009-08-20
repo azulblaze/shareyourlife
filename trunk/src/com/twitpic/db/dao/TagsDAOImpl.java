@@ -1,5 +1,6 @@
 package com.twitpic.db.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,6 +162,7 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 		return (Long)getSqlMapClientTemplate().insert("tags.insert_return_id", record);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tags> selectTagsWithPictureCountPagableFromAccount(
 			String account, Integer page_index, Integer page_count) {
@@ -173,5 +175,17 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 	@Override
 	public Integer selectCountFromAcount(String account) {
 		return (Integer)getSqlMapClientTemplate().queryForObject("tags.select_count_from_account", account);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tags> selectTagsWithTime(Date from_date, Integer page_index,
+			Integer page_size) {
+		Map parames = new HashMap();
+		parames.put("tag_time", from_date);
+		if(page_index!=null&&page_size!=null){
+			parames.put("LIMIT", (page_index-1)*page_size+","+page_size);
+		}
+		return getSqlMapClientTemplate().queryForList("tags.select_tags_with_time", parames);
 	}
 }
