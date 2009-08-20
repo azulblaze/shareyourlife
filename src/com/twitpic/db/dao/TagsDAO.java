@@ -100,4 +100,6 @@ public interface TagsDAO {
     
     Integer selectCountFromAcount(String account);
     
+    List<Tags> selectTagsWithTime(java.util.Date from_date,Integer page_index,Integer page_size);
+    
 }
