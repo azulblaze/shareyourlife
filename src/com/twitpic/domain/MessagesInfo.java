@@ -40,6 +40,9 @@ public class MessagesInfo {
 	}
 	
 	
-	
+	public enum MessageStatus{
+		Unread,
+		Read
+	}
 
 }
