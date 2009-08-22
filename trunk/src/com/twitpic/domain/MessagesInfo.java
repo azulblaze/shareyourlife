@@ -1,48 +1,69 @@
 package com.twitpic.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.twitpic.db.model.Messages;
 
 public class MessagesInfo {
 	
-	private List<Messages>  	messages;
-	private List<Messages> 		unreadMessages;
-
-	public List<Messages> getMessages() {
-		if( this.messages == null )
-			this.messages = new ArrayList<Messages>();
-		return messages;
-	}
-
-	public void setMessages(List<Messages> messages) {
-		this.messages = messages;
-	}
+	private Integer 	messagesCount;
+	private Integer 	unreadMessageCount;
+	private String 		account;
 	
 	
-	public Integer getMessagesCount(){
-		return getMessages().size();
+	
+	public String getAccount() {
+		return account;
 	}
 
-	public List<Messages> getUnreadMessages() {
-		if( this.unreadMessages == null )
-			this.unreadMessages = new ArrayList<Messages>();
-		return unreadMessages;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
-	public void setUnreadMessages(List<Messages> unreadMessages) {
-		this.unreadMessages = unreadMessages;
+	public Integer getMessagesCount() {
+		return messagesCount;
 	}
-	
-	public Integer getUnreadMessagesCount(){
-		return getUnreadMessages().size();
+
+	public void setMessagesCount(Integer messagesCount) {
+		this.messagesCount = messagesCount;
 	}
-	
-	
+
+	public Integer getUnreadMessageCount() {
+		return unreadMessageCount;
+	}
+
+	public void setUnreadMessageCount(Integer unreadMessageCount) {
+		this.unreadMessageCount = unreadMessageCount;
+	}
+
+	/**
+	 * 信息状态
+	 * @author sol
+	 *
+	 */
 	public enum MessageStatus{
-		Unread,
-		Read
+		Unread,		// 没有读
+		Read		// 已读
+	}
+	
+	/**
+	 * 信息类型
+	 * @author sol
+	 *
+	 */
+	public enum MessageType{
+		Sms,		// 短信息
+		Mms,		// 彩信
+		Email,		// 电子邮件
+		Site		// 站内信息
+	}
+	
+	/**
+	 * 信息分类
+	 * @author sol
+	 *
+	 */
+	public enum MessageCategory{
+		System,		//	 系统信息
+		Admin,		//	管理员信息
+		User		//	用户信息
 	}
 
 }

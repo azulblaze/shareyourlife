@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN"
-  "http://ibatis.apache.org/dtd/abator-config_1_0.dtd">
-
-<abatorConfiguration>
-	<abatorContext generatorSet="Java5">
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/twitpic"
-			userId="root" password="123">
-			<classPathEntry
-				location="D:/Program Files/eclipse/workspace/twitpic/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration >
+	<classPathEntry location="F:/workspace/shareyourlife/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
+	<ibatorContext id="context1" targetRuntime="Ibatis2Java5">
+		<jdbcConnection 
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://121.12.125.10:3306/sq_cashguy1"
+			userId="sq_cashguy1" password="NJBCINFO2004">
 		</jdbcConnection>
 		<javaModelGenerator targetPackage="com.twitpic.db.model"
-			targetProject="twitpic/src" />
+			targetProject="shareyourlife/db" />
 		<sqlMapGenerator targetPackage="com.twitpic.db.dao.sqlmap"
-			targetProject="twitpic/src" />
+			targetProject="shareyourlife/db" />
 		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
-			targetProject="twitpic/src" />
+			targetProject="shareyourlife/db" />
 		
-		<table tableName="messages"/>
-	</abatorContext>
-	
-</abatorConfiguration>
+		<table tableName="Messages" domainObjectName="Message"/>
+	</ibatorContext>
+</ibatorConfiguration>
