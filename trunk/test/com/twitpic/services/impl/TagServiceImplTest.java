@@ -27,8 +27,8 @@ public class TagServiceImplTest extends TestCase{
 	
 	public void testTags() throws Exception {
 		TagService service = (TagService) this.m_context.getBean("tagService");
-		java.util.List<com.twitpic.db.model.Tags> tags = service.load_month_tag(1, 10);
+		java.util.List<com.twitpic.db.model.Tags> tags = service.load_user_tag("果", "andy", 1, 10);
 		System.out.println(tags.size());
-		//System.out.println(tags.get(0).getName());
+		System.out.println(tags.get(0).getName());
 	}
 }
