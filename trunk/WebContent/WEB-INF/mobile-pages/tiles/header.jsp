@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="application/xhtml+xml;charset=UTF-8" pageEncoding="UTF-8"%>
-
-<div class="div_panel" style="text-align:center;">
+<style>
+a img{border:none;}
+</style>
+<a href="index.do" >
+	<img src="/images/mobile/LOGO_mobile.gif"/>
+</a>
+<div class="div_panel" style="text-align:left;">
 	<a href="login.do">登录</a>
 	<a href="reg.do">注册</a>
 	<a href="logout.do">退出</a>
