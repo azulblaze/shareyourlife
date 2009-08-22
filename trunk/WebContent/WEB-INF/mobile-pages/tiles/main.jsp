@@ -39,7 +39,6 @@
 						 		 <s:date name="picturesParameter.uploadTime" format="yyyy-MM-dd HH:mm:ss" />
 						 	</div>
 						 	<div>
-						 		我想要:<br />
 						 		<a href="">加好友</a> <a href="">评论</a> <a href="">标签</a>
 						 	</div>
 						 						
@@ -51,9 +50,9 @@
 	</div>
 
 	<div>
-		<a href="index.do" >第一页</a>|
-		<a href="index.do?formHome.picturesPageIndex=<s:property value='h_pictures_pageindex-1' />" >上一页</a>|
-		<a href="index.do?formHome.picturesPageIndex=<s:property value='h_pictures_pageindex+1' />" >下一页 ... </a>|
+		<a href="index.do" >第一页</a>&nbsp;
+		<a href="index.do?formHome.picturesPageIndex=<s:property value='h_pictures_pageindex-1' />" >上一页</a>&nbsp;
+		<a href="index.do?formHome.picturesPageIndex=<s:property value='h_pictures_pageindex+1' />" >下一页 ... </a>
 	</div>
 </div>
 <div> ----------------------- </div>
@@ -61,17 +60,17 @@
 <!-- start: 当前热门标签 -->
 <div class="div_panel">
 	<div class="div_title">
-		# 当前热门标签 (共<strong>5</strong>页,当前是<strong>1</strong>页)
+		# 热门标签 (当前第<strong>1</strong>页)
+		&nbsp;<a href="">更多</a>
 	</div>
 	<div>
 		朋友 | 聚会 | 同事 | 周末 <br />
 		吃饭 | 电影 | 河蟹 | 新闻
 	</div>
 	<div>
-		<a href="" >第一页</a>|
-		<a href="" >上一页</a>|
-		<a href="" >下一页</a>|
-		<a href="">最后一页</a>
+		<a href="" >第一页</a>&nbsp;
+		<a href="" >上一页</a>&nbsp;
+		<a href="" >下一页</a>
 	</div>
 </div>
 <!-- end: 当前热门标签 -->

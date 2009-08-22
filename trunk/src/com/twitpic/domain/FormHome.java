@@ -6,8 +6,11 @@ public class FormHome {
 
 	private Integer tagsPageIndex = 0;
 
-	public void setPicturesPageIndex(Integer picturesPageIndex) {
-		this.picturesPageIndex = picturesPageIndex;
+	public void setPicturesPageIndex(Integer _picturesPageIndex) {
+		if( _picturesPageIndex < 0 ){
+			_picturesPageIndex = 0;
+		}
+		this.picturesPageIndex = _picturesPageIndex;
 	}
 
 	public Integer getPicturesPageIndex() {
