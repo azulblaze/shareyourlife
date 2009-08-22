@@ -47,23 +47,22 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public List<Tags> load_user_tag(String keyword, String account,Integer start, Integer size) throws Exception {
-		return null;
+		return tagsDAO.selectTagsFromAcount(account, keyword, start, size);
 	}
 
 	@Override
 	public List<Tags> load_day_tag(Integer start, Integer size) {
-		
 		return tagsDAO.selectTagsWithTime(getDayDate(), 1, 10);
 	}
 
 	@Override
 	public List<Tags> load_month_tag(Integer start, Integer size) {
-		return tagsDAO.selectTagsWithTime(getWeekDate(), 1, 10);
+		return tagsDAO.selectTagsWithTime(getMonthDate(), 1, 10);
 	}
 
 	@Override
 	public List<Tags> load_week_tag(Integer start, Integer size) {
-		return tagsDAO.selectTagsWithTime(getMonthDate(), 1, 10);
+		return tagsDAO.selectTagsWithTime(getWeekDate(), 1, 10);
 	}
 
 	private java.util.Date getDayDate(){

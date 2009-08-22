@@ -1,12 +1,15 @@
 package com.twitpic.actions;
 
 import com.twitpic.services.PictureService;
+import com.twitpic.services.TagService;
 import com.twitpic.util.ConsVar;
 
 @SuppressWarnings("serial")
 public class HomeAction extends BaseAction {
 	
 	private PictureService pictureService;
+	
+	private TagService tagService;
 	
 	private Long to_id;
 	
@@ -35,6 +38,9 @@ public class HomeAction extends BaseAction {
 	public String index() throws Exception{
 		if(isLogin()){
 			this.setValue("pictures", pictureService.loadHomePictures(15));
+			this.setValue("daykeys", tagService.load_day_tag(0, 10));
+			this.setValue("weekkeys", tagService.load_week_tag(0, 10));
+			this.setValue("monthkeys", tagService.load_month_tag(0, 10));
 			return SUCCESS;
 		}
 		return "welcome";

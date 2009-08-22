@@ -95,11 +95,31 @@ public interface TagsDAO {
      * @return
      */
     Long insert_return_id(Tags record);
-    
+    /**
+     * 
+     * @param account
+     * @param page_index from 0 to start
+     * @param page_count
+     * @return
+     */
     List<Tags> selectTagsWithPictureCountPagableFromAccount(String account, Integer page_index, Integer page_count);
     
     Integer selectCountFromAcount(String account);
     
+    /**
+     * 
+     * @param from_date
+     * @param page_index from 1 to start
+     * @param page_size
+     * @return
+     */
     List<Tags> selectTagsWithTime(java.util.Date from_date,Integer page_index,Integer page_size);
-    
+    /**
+     * 
+     * @param account
+     * @param page_index from 1 to start
+     * @param page_size
+     * @return
+     */
+    List<Tags> selectTagsFromAcount(String account,String keywords,Integer page_index,Integer page_size);
 }
