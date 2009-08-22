@@ -71,14 +71,7 @@ public class TagAction extends BaseAction {
 		java.util.List<com.twitpic.db.model.Tags> tags = tagService.load_similar_tag(keyword, 0, 10);
 		String list = "";
 		for(com.twitpic.db.model.Tags tag:tags){
-			list = list + tag.getName() + "\n";
-			/**
-			if(list==null){
-				list = tag.getName();
-			}else{
-				list = list+ "\n" + tag.getName();
-			}
-			*/
+			list = list + tag.getName()+"\n";
 		}
 		this.setValue("json", list);
 		return "json";
