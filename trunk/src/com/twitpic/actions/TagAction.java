@@ -53,9 +53,10 @@ public class TagAction extends BaseAction {
 	
 	public String load_picture_tag() throws Exception {
 		if(id_picture>0){
-			
+			java.util.List<com.twitpic.db.model.Tags> tags = tagService.load_picture_tag(id_picture, null, null);
+			this.setValue("json", tags);
 		}
-		return null;
+		return "json";
 	}
 	
 	public String load_user_tag() throws Exception{
@@ -68,13 +69,16 @@ public class TagAction extends BaseAction {
 			keyword = "";
 		}
 		java.util.List<com.twitpic.db.model.Tags> tags = tagService.load_similar_tag(keyword, 0, 10);
-		String list = null;
+		String list = "";
 		for(com.twitpic.db.model.Tags tag:tags){
+			list = list + tag.getName() + "\n";
+			/**
 			if(list==null){
 				list = tag.getName();
 			}else{
-				list = list+ "|" + tag.getName();
+				list = list+ "\n" + tag.getName();
 			}
+			*/
 		}
 		this.setValue("json", list);
 		return "json";

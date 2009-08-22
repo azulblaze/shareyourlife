@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script type="text/javascript" src="scripts/jquery.autocomplete.pack.js" charset="utf-8"></script>
-<link href="css/_jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
 用户<img height="45" with="45" src="<s:property value='picture.picture'/>"/><a href="<s:property value='picture.account'/>"/><s:property value="picture.name"/></a>
    <div><img src="<s:property value='picture.pictures.thumb'/>"/></div>
    <div>
@@ -17,7 +17,9 @@
    评论<textarea name="formComment.comment"></textarea>
    <input type="submit" value="提交"/>
    </form>
-   
+   <div>
+   	
+   </div>
   标记<form action="/tag.do" method="post">
   <input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>"/>
   <input type="text" name="formTag.name" id="tagname">
