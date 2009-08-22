@@ -216,19 +216,36 @@
   	]]>
   </select>
   
-  <select id="select_tags_with_time" resultMap="TagsResultWithPictureCount" parameterClass="java.util.Map">
-  	<![CDATA[
-  		select a.id, a.name, b.picture_count from tags a, (select id_tags, count(*) as picture_count from tags_rel 
-  		<isNotNull prepend="where" property="tag_time" >
-        	tag_time >= #tag_time:TIMESTAMP#
-      	</isNotNull>
-  		group by id_tags) b
-		where a.id = b.id_tags order by b.picture_count desc
+  <select id="select_tags_count_with_account" resultMap="TagsResultWithPictureCount" parameterClass="java.util.Map">
+		select a.id, a.name, b.picture_count from tags a, (select id_tags, count(*) as picture_count from tags_rel 
+		<dynamic prepend="where" >
+	  		<isNotNull prepend="and" property="account" >
+	        	account = #account:VARCHAR#
+	      	</isNotNull>
+      	</dynamic>
+		group by id_tags) b
+		where a.id = b.id_tags
+		<isNotNull prepend="and" property="keywords" >
+	        a.name like #keywords#
+	    </isNotNull>
 		order by b.picture_count desc
 		<isNotNull prepend=" " property="LIMIT" >
         	limit $LIMIT$
-      	</isNotNull>  	
-  	]]>
+      	</isNotNull>
+  </select>
+  
+  <select id="select_tags_with_time" resultMap="TagsResultWithPictureCount" parameterClass="java.util.Map">
+  		select a.id, a.name, b.picture_count from tags a, (select id_tags, count(*) as picture_count from tags_rel 
+  		<dynamic prepend="where" >
+	  		<isNotNull prepend="and" property="tag_time" >
+	        	tag_time &gt;= #tag_time:TIMESTAMP#
+	      	</isNotNull>
+      	</dynamic>
+  		group by id_tags) b
+		where a.id = b.id_tags order by b.picture_count desc
+		<isNotNull prepend=" " property="LIMIT" >
+        	limit $LIMIT$
+      	</isNotNull>
   </select>
   
   <select id="select_count_from_account" resultClass="int" parameterClass="string">

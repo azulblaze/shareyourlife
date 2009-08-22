@@ -152,7 +152,8 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
             this.record = record;
         }
 
-        public Object getRecord() {
+        @SuppressWarnings("unused")
+		public Object getRecord() {
             return record;
         }
     }
@@ -187,5 +188,20 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 			parames.put("LIMIT", (page_index-1)*page_size+","+page_size);
 		}
 		return getSqlMapClientTemplate().queryForList("tags.select_tags_with_time", parames);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tags> selectTagsFromAcount(String account,String keywords, Integer pageIndex,
+			Integer pageSize) {
+		Map parames = new HashMap();
+		parames.put("account", account);
+		if(keywords!=null){
+			parames.put("keywords", "%"+keywords+"%");
+		}
+		if(pageIndex!=null&&pageSize!=null){
+			parames.put("LIMIT", (pageIndex-1)*pageSize+","+pageSize);
+		}
+		return getSqlMapClientTemplate().queryForList("tags.select_tags_count_with_account", parames);
 	}
 }
