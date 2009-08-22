@@ -1,33 +1,46 @@
 package com.twitpic.services;
 
 
-import com.twitpic.db.model.Messages;
+import java.util.List;
+
+import com.twitpic.db.model.Message;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.MessagesInfo;
 
 public interface MessageService {
 	
 	/**
-	 * 通用消息发送
-	 * @param msg	 消息
-	 * @param from	发送者
-	 * @param to	接收者
+	 * 发送信息
+	 * @param title					信息标题
+	 * @param msg					信息内容
+	 * @param type					信息类型, 参考MessagesInfo.MessageType 
+	 * @param category				信息分类, 参考MessagesInfo.MessageCategory
+	 * @param from					信息发送者
+	 * @param to					信息接收者
+	 * @throws Exception
 	 */
-	public void sendToUser(Messages msg, Account from, Account to) throws Exception ;
+	public void sendMessage(
+			String title, 
+			String msg, 
+			MessagesInfo.MessageType type, 
+			MessagesInfo.MessageCategory category,
+			String from_account, 
+			String to_account) 
+	throws Exception ;
 	
+	public void sendSystemMesssage(String title, String msg, String to) throws Exception;
 	
-	/**
-	 * 获取用户自己的消息信息
-	 * @return
-	 */
-	public MessagesInfo loadUserMessagesInfo(Account account) throws Exception ;
+	public void sendAdminMesssage(String title, String msg, String to) throws Exception;
+	
+	public MessagesInfo loadMessagesInfoFromAccount(String account) throws Exception ;
+	
+	public List<Message> loadMessagesForListFromAccountPagable(String account, Integer page_index, Integer page_count)throws Exception;
+	
+	public List<Message> loadUnreadMessagesForListFromAccountPagable(String account, Integer page_index, Integer page_count)throws Exception;
 
+	public void updateMessageStatus(Long msg_id, MessagesInfo.MessageStatus status) throws Exception ;
 	
-	/**
-	 * 设置信息状态
-	 * @param messages
-	 * @param status
-	 */
-	public void updateMessageStatus(Messages messages, MessagesInfo.MessageStatus status) throws Exception ;
+	public Message readMessage(String account, Long message_id) throws Exception;
 	
+	public void removeMessage(String account, Long message_id) throws Exception;
 }
