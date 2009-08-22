@@ -11,5 +11,5 @@
 	<bean name="usersDAO" id="usersDAO" class="com.twitpic.db.dao.UsersDAOImpl" />
 	<bean name="usersProfileDAO" id="usersProfileDAO" class="com.twitpic.db.dao.UsersProfileDAOImpl" />
 	<bean name="adminsDAO" id="adminsDAO" class="com.twitpic.db.dao.AdminsDAOImpl" />
-	<bean name="messagesDAO" id="messagesDAO" class="com.twitpic.db.dao.MessagesDAOImpl" />
+	<bean name="messageDAO" id="messageDAO" class="com.twitpic.db.dao.MessageDAOImpl" />
 </beans>

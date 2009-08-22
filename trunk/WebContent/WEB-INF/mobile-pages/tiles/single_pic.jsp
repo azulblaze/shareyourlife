@@ -13,7 +13,7 @@
 			<img height="16" with="16" src="<s:property value='picture.picture'/>"/>
 			<a href="<s:property value='picture.account'/>" >
 				<s:property value="picture.name"/>
-			</a>&nbsp;上传于&nbsp;<s:date name="picture.picturesParameter.uploadTime" format="yyyy年MM月dd日 HH:mm:ss"/>
+			</a>&nbsp;<s:date name="picture.picturesParameter.uploadTime" format="yyyy-MM-dd HH:mm:ss"/>
 		</div>
 	   	<div>
 	   		<img src="<s:property value='picture.pictures.thumb'/>" />
@@ -33,7 +33,7 @@
 			  	<div>
 			  		<s:iterator value="comments" >
 			  			<div class="c_h">
-			  				<s:date name="commentTime" format="yyyy年MM月dd日 HH:mm:ss"/>&nbsp;<s:property value="account" />
+			  				<s:property value="account" /> <s:date name="commentTime" format="yyyy-MM-dd HH:mm:ss"/>
 			  			</div>
 			  			<div class="c_d">
 			  				<s:property value="comment" />
@@ -61,18 +61,15 @@
 				<div>
 					<table>
 					<s:iterator value="tags" status="status">
-						<s:if test="(#status.index%3 == 0 ) || #status.first">
+						<s:if test="(#status.index%4 == 0 ) || #status.first">
 							<tr>
 						</s:if>
 								<td>
 									<input type="radio" name="formTag.selectedTagId" value="<s:property value='id' />" /><s:property value="name" />
 								</td>
-						<s:if test="(#status.index%3 == 2) || #status.last" >
+						<s:if test="(#status.index%4 == 3) || #status.last" >
 							</tr>
 						</s:if>	
-						<s:else>
-							&nbsp;|&nbsp;
-						</s:else>
 					</s:iterator>
 					</table>
 				</div>
