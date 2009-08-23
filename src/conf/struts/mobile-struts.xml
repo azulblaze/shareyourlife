@@ -51,6 +51,18 @@
 			<result name="success" type="tiles">m.page.more.tags</result>
 		</action>
 		
+		<action name="msglist" class="msgAction" method="msg_list">
+			<result name="success" type="tiles">m.page.message.msglist</result>
+		</action>
+		
+		<action name="unreadmsglist" class="msgAction" method="unread_msg_list">
+			<result name="success" type="tiles">m.page.message.unreadmsglist</result>
+		</action>		
+		
+		<action name="msgdetail" class="msgAction" method="detail">
+			<result name="success" type="tiles">m.page.message.msg.detail</result>
+		</action>
+		
 	</package>
 
 </struts>
