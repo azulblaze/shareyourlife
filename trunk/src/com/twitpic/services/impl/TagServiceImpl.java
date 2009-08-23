@@ -24,10 +24,9 @@ public class TagServiceImpl implements TagService {
 	}
 	
 	@Override
-	public List<Tags> load_picture_tag(Integer id_picture, Integer start,
+	public List<Tags> load_picture_tag(Long id_picture, Integer start,
 			Integer size) {
-		
-		return null;
+		return tagsDAO.selectTagsFromPicture(id_picture, start, size);
 	}
 
 	@Override

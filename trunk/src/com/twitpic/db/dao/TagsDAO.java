@@ -122,4 +122,13 @@ public interface TagsDAO {
      * @return
      */
     List<Tags> selectTagsFromAcount(String account,String keywords,Integer page_index,Integer page_size);
+    
+    /**
+     * 
+     * @param id_picture
+     * @param page_index from 1 to start
+     * @param page_size
+     * @return
+     */
+    List<Tags> selectTagsFromPicture(Long id_picture,Integer page_index,Integer page_size);
 }
