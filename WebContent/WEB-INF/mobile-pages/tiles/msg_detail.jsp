@@ -20,7 +20,7 @@
 	</div>	
 	<div class="c_d">
 		内&nbsp;&nbsp;&nbsp;&nbsp;容:<br />
-		<s:property value="msg.content" />
+		<s:property value="msg.content" escape="false"/>
 	</div>
 	<div class="c_d">
 		---------------------------------------
