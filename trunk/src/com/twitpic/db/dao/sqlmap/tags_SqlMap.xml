@@ -248,6 +248,17 @@
       	</isNotNull>
   </select>
   
+  <select id="select_tags_with_pictureid" resultMap="TagsResultWithPictureCount" parameterClass="java.util.Map">
+  		select t.id,t.name,count(*) as picture_count from tags_rel tr,tags t where tr.id_tags=t.id 
+  		<isNotNull prepend="and" property="id_pictures" >
+	        	tr.id_pictures = #id_pictures:BIGINT#
+	   	</isNotNull>
+  		group by id_tags
+		<isNotNull prepend=" " property="LIMIT" >
+        	limit $LIMIT$
+      	</isNotNull>
+  </select>
+  
   <select id="select_count_from_account" resultClass="int" parameterClass="string">
   	<![CDATA[
 		select count(*) from tags where account = #value# 	
