@@ -113,7 +113,33 @@ public class MessageAction extends BaseAction {
 	}
 	
 	public String detail(){
-		return SUCCESS;
+		if(!isLogin()){
+			this.addActionMessage("请先登录");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}	
+		
+		if (this.formMessages == null ||
+			this.formMessages.getSelectedMsgId() == null ){
+			this.addActionMessage("消息参数错误");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;			
+		}
+		try {
+			Message msg = this.m_message_service.readMessage(
+					loadAccount().getAccount(), 
+					this.formMessages.getSelectedMsgId());
+			if( msg == null ){
+				LOGGER.error("读消息失败");
+				this.addActionMessage("读消息失败");
+				return ActionConstant.ACTION_RETURN_MSG_BOX;
+			}
+			
+			this.setValue("msg", msg);
+			
+			return SUCCESS;
+		} catch (Exception e) {
+			LOGGER.error("读消息出现异常", e);
+			this.addActionMessage("读消息出现异常");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}	
 	}
-
 }
