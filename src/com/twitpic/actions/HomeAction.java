@@ -46,6 +46,10 @@ public class HomeAction extends BaseAction {
 		return "welcome";
 	}
 	
+	public void setTagService(TagService tagService) {
+		this.tagService = tagService;
+	}
+
 	public String main_more()throws Exception{
 		if(!isLogin()){
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_REDIRECT+"', "+ConsVar.JSON_ACTION_REDIRECT_ADDR+":'/login.do'}");

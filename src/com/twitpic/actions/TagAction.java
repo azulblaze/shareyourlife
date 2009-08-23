@@ -12,7 +12,7 @@ public class TagAction extends BaseAction {
 	private PictureService pictureService;
 	private TagService tagService;
 	private FormTag formTag;
-	private Integer id_picture;
+	private Long id_picture;
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
 	}
@@ -25,10 +25,10 @@ public class TagAction extends BaseAction {
 	public void setFormTag(FormTag formTag){
 		this.formTag = formTag;
 	}
-	public Integer getId_picture() {
+	public Long getId_picture() {
 		return id_picture;
 	}
-	public void setId_picture(Integer idPicture) {
+	public void setId_picture(Long idPicture) {
 		id_picture = idPicture;
 	}
 	public String tag() throws Exception {

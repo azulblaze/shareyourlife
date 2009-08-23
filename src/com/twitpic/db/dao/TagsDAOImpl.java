@@ -204,4 +204,16 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 		}
 		return getSqlMapClientTemplate().queryForList("tags.select_tags_count_with_account", parames);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tags> selectTagsFromPicture(Long idPicture, Integer pageIndex,
+			Integer pageSize) {
+		Map parames = new HashMap();
+		parames.put("id_pictures", idPicture);
+		if(pageIndex!=null&&pageSize!=null){
+			parames.put("LIMIT", (pageIndex-1)*pageSize+","+pageSize);
+		}
+		return getSqlMapClientTemplate().queryForList("tags.select_tags_with_pictureid", parames);
+	}
 }

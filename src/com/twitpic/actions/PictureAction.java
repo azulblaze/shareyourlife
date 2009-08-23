@@ -9,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.PictureService;
+import com.twitpic.services.TagService;
 import com.twitpic.system.struts.ProgressMonitor;
 import com.twitpic.util.CommonMethod;
 import com.twitpic.util.ConsVar;
@@ -25,12 +26,17 @@ public class PictureAction extends BaseAction {
 	private String description;
 	private String title;
 	private PictureService pictureService;
+	private TagService tagService;
 	private Long id_picture;
 	
 	public void setPictureService(PictureService pictureService) {
 		this.pictureService = pictureService;
 	}
 	
+	public void setTagService(TagService tagService) {
+		this.tagService = tagService;
+	}
+
 	public void setPic(File pic) {
 		this.pic = pic;
 	}
@@ -111,6 +117,7 @@ public class PictureAction extends BaseAction {
 				PictureInfo pi = pictureService.loadPicture(id_picture);
 				this.setValue("picture", pi);
 				this.setValue("comments_count", pictureService.countComments(id_picture));
+				this.setValue("tags", tagService.load_picture_tag(id_picture, null, null));
 			}catch(Exception e){
 				this.addActionError(e.getMessage());
 				return ERROR;

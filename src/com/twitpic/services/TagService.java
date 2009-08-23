@@ -11,7 +11,7 @@ public interface TagService {
 	
 	public java.util.List<com.twitpic.db.model.Tags> load_user_tag(String keyword,String account,Integer start,Integer size)throws Exception;
 	
-	public java.util.List<com.twitpic.db.model.Tags> load_picture_tag(Integer id_picture,Integer start,Integer size);
+	public java.util.List<com.twitpic.db.model.Tags> load_picture_tag(Long id_picture,Integer start,Integer size);
 	
 	public java.util.List<com.twitpic.db.model.Tags> load_day_tag(Integer start,Integer size);
 	
