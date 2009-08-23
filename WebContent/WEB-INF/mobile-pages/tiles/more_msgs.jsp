@@ -35,7 +35,7 @@
 				<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/>&nbsp;来自 <s:property value="fromUser" />
 			</div>
 			<div class="c_d">
-				<a href="" ><s:property value="title" /></a>
+				<a href="msgdetail.do?formMessages.selectedMsgId=<s:property value='id' />" ><s:property value="title" /></a>
 			</div>
 		</s:iterator>
 	</div>
