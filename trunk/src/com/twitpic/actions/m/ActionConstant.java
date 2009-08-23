@@ -14,14 +14,20 @@ public class ActionConstant {
 	 * ============= action return parameter name ============
 	 * ARP -> ACTION_RETURN_PARAM
 	 */
+	public static final String ARP_PAGE_INDEX		= "page_index";
+	public static final String ARP_PAGE_COUNT		= "page_count";
+	public static final String ARP_ITEM_TOTAL_COUNT = "item_total_count";
+	
 	public static final String ARP_MORE_COMMENTS_LIST = "paged_comments";
 	public static final String ARP_MORE_COMMENTS_LIST_PAGE_INDEX = "page_index";
-	public static final String ARP_MORE_COMMENTS_LIST_PAGE_COUNT = "page_count"; // 一页记录数目
+	public static final String ARP_MORE_COMMENTS_LIST_PAGE_COUNT = "page_count";
 	public static final String ARP_MORE_COMMENTS_LIST_TOTAL_COUNT = "paged_comments_total_count";
 	public static final String ARP_MORE_COMMENTS_LIST_PICTURE_ID = "picture_id";
 	public static final String ARP_MORE_TAGS_LIST_PICTURE_ID = "picture_id";
 	public static final String ARP_MORE_TAGS_LIST = "paged_tags";
 	public static final String ARP_MORE_TAGS_LIST_PAGE_INDEX = "page_index";
-	public static final String ARP_MORE_TAGS_LIST_PAGE_COUNT = "page_count"; // 一页记录数目
+	public static final String ARP_MORE_TAGS_LIST_PAGE_COUNT = "page_count"; 
 	public static final String ARP_MORE_TAGS_LIST_TOTAL_COUNT = "paged_tags_total_count";
+	public static final String ARP_MESSAGE_LIST = "paged_messages";
+	public static final String ARP_MESSAGE_UNREAD_LIST = "paged_unread_messages";
 }

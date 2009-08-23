@@ -4,8 +4,11 @@
 <s:if test="#session.user != null && #session.user.status == 1" >
 <div> ----------------------- </div>
 <div class="div_panel">
-	欢迎您, solzhang <br />
-	你的信息(<a href="">共<s:property value="h_msgs_count" />条</a> , <a href="">未读<s:property value="h_msgs_unread_count" />条</a>)<br />
+	欢迎您, <s:property value="#session.user.name" /> <br />
+	你的信息(
+	<a href="msglist.do">共<s:property value="h_msgs_count" />条</a> , 
+	<a href="unreadmsglist.do">未读<s:property value="h_msgs_unread_count" />条</a>)
+	<br />
 </div>
 </s:if>
 <div> ----------------------- </div>
@@ -28,18 +31,19 @@
 						</td>
 						<td valign="top" >
 						 	<div>
-						 		茄友:&nbsp;
 							 	<img height="16" with="16" src="<s:property value='picture'/>"/>
 							 	<a href="<s:property value='account'/>" >
 							 		<s:property value="name"/>
 							 	</a>
+							 	&nbsp;上传于:
 						 	</div>
 						 	<div>
-						 		 上传时间:&nbsp;<br />
 						 		 <s:date name="picturesParameter.uploadTime" format="yyyy-MM-dd HH:mm:ss" />
 						 	</div>
 						 	<div>
-						 		<a href="">加好友</a> <a href="">评论</a> <a href="">标签</a>
+						 		<a href="">加好友</a>&nbsp;
+						 		<a href="m/more_comments.do?formMoreComments.pictureId=<s:property value='pictures.id'/>">评论</a>&nbsp;
+						 		<a href="m/more_tags.do?formTag.id_pictures=<s:property value='pictures.id'/>">标签</a>
 						 	</div>
 						 						
 						</td>

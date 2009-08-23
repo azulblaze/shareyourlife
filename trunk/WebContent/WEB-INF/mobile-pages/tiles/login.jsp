@@ -2,8 +2,6 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <div class="div_panel">
-	<a href="reg.do">注册</a>
-	<font color="red">登录</font>
 	<s:actionerror/>
 	<form action="login.do" method="post">
 		<input type="hidden" name="submit" value="true"/>

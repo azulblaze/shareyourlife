@@ -104,7 +104,7 @@ public class MessageServiceImplTest extends TestCase {
 		
 		try {
 			service.sendMessage(
-					"test", "test", 
+					"你好,我能不能认识你?", "Sol,你好,我看了你的相片,觉得你很可爱,我能不能认识你呢?", 
 					MessagesInfo.MessageType.Site, 
 					MessagesInfo.MessageCategory.User, "taro", "solzhang");
 		} catch (Exception e) {

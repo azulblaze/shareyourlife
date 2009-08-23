@@ -141,4 +141,30 @@ public class MessageServiceImpl implements MessageService {
 				
 	}
 
+	@Override
+	public void sendAddCommentMessage(Long id, String from, String to)throws Exception {
+		sendMessage(
+				"你有一个评论", "你好,你的图片有一新评论,来自茄友["+from+"], <a href=\"picture.do?id_picture="+
+				id
+				+"\">查看</a>", 
+				MessagesInfo.MessageType.Site, 
+				MessagesInfo.MessageCategory.User, 
+				from, to);
+	}
+
+	@Override
+	public Integer loadMessagesForCountFromAccount(String account) {
+		MessageExample example = new MessageExample();
+		example.createCriteria().andToUserEqualTo(account);
+		return this.m_msg_dao.countByExample(example);
+	}
+
+	@Override
+	public Integer loadUnreadMessagesForCountFromAccount(String account) {
+		MessageExample example = new MessageExample();
+		example.createCriteria().andToUserEqualTo(account)
+								.andStatusEqualTo(MessagesInfo.MessageStatus.Unread.toString());
+		return this.m_msg_dao.countByExample(example);
+	}
+
 }
