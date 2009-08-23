@@ -73,9 +73,16 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public Message readMessage(String account, Long message_id)
 			throws Exception {
-		Message msg = this.m_msg_dao.selectByPrimaryKey( message_id );
-		updateMessageStatus(message_id, MessagesInfo.MessageStatus.Read);
-		return msg;
+		MessageExample example = new MessageExample();
+		example.createCriteria().andToUserEqualTo(account)
+								.andIdEqualTo(message_id);
+		List<Message> list = this.m_msg_dao.selectByExampleWithBLOBs(example);
+		if( list.size() == 1 ){
+			updateMessageStatus(message_id, MessagesInfo.MessageStatus.Read);
+			return list.get(0);
+		}else {
+			return null;
+		}
 	}
 
 	@Override

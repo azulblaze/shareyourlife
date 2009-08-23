@@ -4,7 +4,14 @@ public class FormMessages {
 	
 	private Integer msgListPageIndex 			= 1;
 	private Integer unreadMsgListPageIndex		= 1;
+	private Long selectedMsgId					= null;
 	
+	public Long getSelectedMsgId() {
+		return selectedMsgId;
+	}
+	public void setSelectedMsgId(Long selectedMsgId) {
+		this.selectedMsgId = selectedMsgId;
+	}
 	public Integer getMsgListPageIndex() {
 		return msgListPageIndex;
 	}
