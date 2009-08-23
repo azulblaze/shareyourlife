@@ -16,5 +16,6 @@
 	<bean name="mHomeAction" class="com.twitpic.actions.m.HomeAction" singleton="false" >
 		<property name="pictureService" ref="mPictureService"></property>
 	</bean>
+	<bean name="msgAction" class="com.twitpic.actions.m.MessageAction" singleton="false" />
 	
 </beans>

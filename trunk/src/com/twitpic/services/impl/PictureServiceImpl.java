@@ -23,8 +23,10 @@ import com.twitpic.db.model.TagsRelExample;
 import com.twitpic.domain.CommentsInfo;
 import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormTag;
+import com.twitpic.domain.MessagesInfo;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.domain.Account;
+import com.twitpic.services.MessageService;
 import com.twitpic.services.PictureService;
 import com.twitpic.system.config.SystemConfig;
 import com.twitpic.util.CommonMethod;
@@ -49,6 +51,12 @@ public class PictureServiceImpl implements PictureService {
 	protected TagsDAO tagsDAO;
 	
 	protected TagsRelDAO tagsRelDAO;
+	
+	private MessageService messageService;
+	
+	public void setMessageService(MessageService service){
+		this.messageService = service;
+	}
 	
 	public void setTagsRelDAO(TagsRelDAO tagsRelDAO){
 		this.tagsRelDAO = tagsRelDAO;
@@ -147,6 +155,14 @@ public class PictureServiceImpl implements PictureService {
 			c.setCommentTime(new java.util.Date());
 			Long id = commentsDAO.insert_return_id(c);
 			c.setId(id);
+			
+			// 发送信息添加评论的信息
+			this.messageService.sendAddCommentMessage(
+						list.get(0).getPictures().getId(),
+						account.getAccount(), 
+						list.get(0).getAccount()
+					);
+		
 			return c;
 		}else{
 			throw new Exception("您要评论的图片不存在");

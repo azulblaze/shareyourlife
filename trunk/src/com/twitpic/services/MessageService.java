@@ -36,11 +36,17 @@ public interface MessageService {
 	
 	public List<Message> loadMessagesForListFromAccountPagable(String account, Integer page_index, Integer page_count)throws Exception;
 	
+	public Integer loadMessagesForCountFromAccount(String account);
+	
 	public List<Message> loadUnreadMessagesForListFromAccountPagable(String account, Integer page_index, Integer page_count)throws Exception;
 
+	public Integer loadUnreadMessagesForCountFromAccount(String account);
+	
 	public void updateMessageStatus(Long msg_id, MessagesInfo.MessageStatus status) throws Exception ;
 	
 	public Message readMessage(String account, Long message_id) throws Exception;
 	
 	public void removeMessage(String account, Long message_id) throws Exception;
+
+	public void sendAddCommentMessage(Long id, String from, String to) throws Exception;
 }

@@ -2,18 +2,30 @@ package com.twitpic.actions.m;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.twitpic.actions.BaseAction;
+import com.twitpic.domain.Account;
 import com.twitpic.domain.FormHome;
+import com.twitpic.domain.MessagesInfo;
 import com.twitpic.domain.PictureInfo;
+import com.twitpic.services.MessageService;
 import com.twitpic.services.MobilePictureService;
 import com.twitpic.services.PictureService;
 
 public class HomeAction extends BaseAction {
 	
+	private static Logger LOGGER = Logger.getLogger(HomeAction.class);
+	
 	private PictureService pictureService;
+	private MessageService messageService;
 	private Integer m_pictures_page_count = 5; 	// 默认为 5 条
 	private Integer m_tags_page_count = 9;		// 默认为9条
 	private FormHome m_formHome;
+	
+	public void setMessageService(MessageService _service){
+		this.messageService = _service;
+	}
 	
 	public void setFormHome(FormHome _formHome){
 		this.m_formHome = _formHome;
@@ -87,12 +99,16 @@ public class HomeAction extends BaseAction {
 	 * 准备茄友的信息情况( 系统信息, 茄友信息 )
 	 */
 	private void prepare_mssage_for_account() {
-		
-		/*
-		 * 先设置模拟数据
-		 */
-		this.setValue("h_msgs_count", 10);
-		this.setValue("h_msgs_unread_count", 5);
+		if( isLogin() ){
+			Account account = this.loadAccount();
+			try {
+				MessagesInfo info = this.messageService.loadMessagesInfoFromAccount(account.getAccount());
+				this.setValue("h_msgs_count", info.getMessagesCount());
+				this.setValue("h_msgs_unread_count", info.getUnreadMessageCount());
+			} catch (Exception e) {
+				LOGGER.error("获取用户信息情况失败", e);
+			}
+		}
 	}
 	
 }

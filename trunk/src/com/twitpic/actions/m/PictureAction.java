@@ -16,7 +16,9 @@ import com.twitpic.domain.Account;
 import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormMoreComments;
 import com.twitpic.domain.FormTag;
+import com.twitpic.domain.MessagesInfo;
 import com.twitpic.domain.PictureInfo;
+import com.twitpic.services.MessageService;
 import com.twitpic.services.MobilePictureService;
 import com.twitpic.services.PictureService;
 import com.twitpic.services.impl.MobilePictureServiceImpl;
@@ -177,11 +179,17 @@ public class PictureAction extends BaseAction {
 			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}
 		
+
 		this.addActionMessage("恭喜,发表评论成功");
 		return ActionConstant.ACTION_RETURN_MSG_BOX;
 	}
 	
 	public String more_comments() throws Exception{
+		
+		if(!isLogin()){
+			this.addActionMessage("请先登录后在才能评论");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}		
 		
 		// 检查该请求的输入参数是否合法, 如果pageIndex没有输入,那么
 		// 默认为使用第一个页面(索引为0的页面)
@@ -260,7 +268,7 @@ public class PictureAction extends BaseAction {
 	public String more_tags() throws Exception{
 		
 		if(!isLogin()){
-			this.addActionMessage("请先登录后在发表评论");
+			this.addActionMessage("请先登录后在才能设置标签");
 			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}		
 		
