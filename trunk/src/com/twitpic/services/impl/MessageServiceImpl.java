@@ -151,11 +151,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public void sendAddCommentMessage(Long id, String from, String to)throws Exception {
 		sendMessage(
-				"你有一个评论", "你好,你的图片有一新评论,来自茄友["+from+"], <a href=\"picture.do?id_picture="+
+				"收到评论", "你好,你的图片有一新评论,来自茄友["+from+"], <a href=\"picture.do?id_picture="+
 				id
 				+"\">查看</a>", 
 				MessagesInfo.MessageType.Site, 
-				MessagesInfo.MessageCategory.User, 
+				MessagesInfo.MessageCategory.System, 
 				from, to);
 	}
 
