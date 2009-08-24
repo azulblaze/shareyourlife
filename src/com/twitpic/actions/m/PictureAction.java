@@ -249,7 +249,12 @@ public class PictureAction extends BaseAction {
 		}
 		try{
 			Account account = loadAccount();
-			Tags tags = pictureService.Tag(account, formTag);
+			java.util.List<Tags> tags = pictureService.Tag(account, formTag);
+			if(tags.size()>0){
+				Tags tag = tags.get(0);
+			}else{
+				throw new Exception();
+			}
 		}catch(Exception e){
 			LOGGER.error( "标签提交失败, "+ e.getMessage(), e);
 			this.addActionMessage("提交标签失败,请联系网站管理员");
