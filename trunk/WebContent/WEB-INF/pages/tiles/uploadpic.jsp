@@ -47,7 +47,7 @@ $(function() {
 <a href="/reg.do">注册</a>
 <h5>登录</h5>
 <s:actionerror/>
-<form action="/upload_pic.do" method="post" enctype="multipart/form-data">
+<form action="upload_pic.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name="submit" value="true"/>
 <p>
 文件:<input id="up_file" type="file" name="pic"/>
