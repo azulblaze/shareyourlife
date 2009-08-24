@@ -42,8 +42,12 @@ public class TagAction extends BaseAction {
 		}
 		try{
 			Account account = loadAccount();
-			Tags tags = pictureService.Tag(account, formTag);
-			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记成功',data:'"+tags.to_json()+"'}");
+			java.util.List<Tags> tags = pictureService.Tag(account, formTag);
+			net.sf.json.JSONArray jsonarray = new net.sf.json.JSONArray();
+			for(Tags tag:tags){
+				jsonarray.add(tag.to_json());
+			}
+			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记成功',data:"+jsonarray.toString()+"}");
 		}catch(Exception e){
 			this.setValue(ConsVar.REQUEST_JSON, "{action:'"+ConsVar.JSON_ACTION_NOTICE+"', "+ConsVar.JSON_ACTION_NOTICE_MSG+":'标记失败,"+e.getMessage()+"'}");
 			return "json";

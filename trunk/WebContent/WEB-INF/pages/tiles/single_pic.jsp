@@ -21,7 +21,7 @@
 <div>总共评论条数:<span id="count_num"><s:property value="comments_count" /></span> <br />
 	<div id="comment"></div>
 </div>
-<form action="/comment.do" method="post">
+<form action="comment.do" method="post">
 	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture.pictures.id'/>" />
 	评论<textarea name="formComment.comment"></textarea>
 	<input type="submit" value="提交" />
@@ -32,7 +32,7 @@
 		<a href="#" rel="<s:property value='pictureCount'/>"><s:property value="name" /></a>
 	</s:iterator>
 </div>
-<form action="/tag.do" method="post">
+<form action="tag.do" method="post">
 	<input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>" />
 	<input type="text" name="formTag.name" id="tagname">
 	<input type="submit" value="提交" />
@@ -61,13 +61,6 @@
 		});
 	}
 	$(document).ready(function() {
-		$("#tagname").autocomplete("load_similar_tag.do", {
-			delay : 10,
-			matchContains : true,
-			autoFill : true,
-			multiple : true,
-			multipleSeparator : ","
-		});
 		if ($("#count_num").html() > 0) {
 			loadComments("load_comment.do?id_picture=<s:property value='picture.pictures.id'/>");
 		}
@@ -81,6 +74,13 @@
 				start : "#3D5EE0",
 				end : "#1616E9"
 			}
+		});
+		$("#tagname").autocomplete("load_similar_tag.do", {
+			delay : 10,
+			matchContains : true,
+			autoFill : true,
+			multiple : true,
+			multipleSeparator : ","
 		});
 	});
 </script>
