@@ -30,13 +30,34 @@
 		</form>
 	</div>
 	<div>
+		<hr />
+	</div>
+	<div>
+		<table width="100%">
 		<s:iterator value="paged_messages" >
-			<div class="c_h">
-				<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/>&nbsp;来自 <s:property value="fromUser" />
-			</div>
-			<div class="c_d">
-				<a href="msgdetail.do?formMessages.selectedMsgId=<s:property value='id' />" ><s:property value="title" /></a>
-			</div>
+			<tr>
+				<td>
+					<input type="checkbox" ></input>
+				</td>
+				<td>&nbsp;</td>
+				<td><s:property value="fromUser" /></td>
+				<td align="right"><s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></td>	
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td colspan="2">
+					<a href="msgdetail.do?formMessages.selectedMsgId=<s:property value='id' />" >
+						<s:property value="title" />
+					</a>
+				</td>
+			</tr>
 		</s:iterator>
+		</table>
+	</div>
+	<div>
+		<hr />
+	</div>	
+	<div>
+		<input type="submit" value="删&nbsp;除" />
 	</div>
 </div>
