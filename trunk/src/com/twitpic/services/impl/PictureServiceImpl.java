@@ -23,7 +23,6 @@ import com.twitpic.db.model.TagsRelExample;
 import com.twitpic.domain.CommentsInfo;
 import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormTag;
-import com.twitpic.domain.MessagesInfo;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.domain.Account;
 import com.twitpic.services.MessageService;
@@ -179,35 +178,41 @@ public class PictureServiceImpl implements PictureService {
 	}
 
 	@Override
-	public Tags Tag(Account account, FormTag formTag) throws Exception {
+	public java.util.List<Tags> Tag(Account account, FormTag formTag) throws Exception {
 		List<PictureInfo> list = picturesDAO.findPicturesInfo(PicturesParameter.STATUS_ALL, formTag.getId_pictures(), null, null, null, null, null);
+		List<Tags> success_tags = new java.util.ArrayList<Tags>();
 		if(list.size()>0){
-			TagsExample te = new TagsExample();
-			//current we only support tag one name per time.
-			te.createCriteria().andNameEqualTo(formTag.getNames()[0]);
-			List<Tags> tags = tagsDAO.selectByExample(te);
-			if(tags.size()>0){
-				saveTagRel(account,formTag.getId_pictures(),tags.get(0).getId());
-				return tags.get(0);
-			}else{
-				TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
-				try{
-					Tags tag = new Tags();
-					tag.setAccount(account.getAccount());
-					tag.setCreateTime(new java.util.Date());
-					tag.setDescription("");
-					tag.setName(formTag.getNames()[0]);
-					tag.setStatus(Tags.STATUS_USER);
-					Long id = tagsDAO.insert_return_id(tag);
-					tag.setId(id);
-					saveTagRel(account,formTag.getId_pictures(),tag.getId());
-					this.m_db_tx_manager.commit(status);
-					return tag;
-				}catch(Exception e){
-					this.m_db_tx_manager.rollback(status);
-					throw new Exception("标记失败");
+			for(String name:formTag.getNames()){
+				if(name!=null&&name.trim().length()>0){
+					TagsExample te = new TagsExample();
+					//current we only support tag one name per time.
+					te.createCriteria().andNameEqualTo(name);
+					List<Tags> tags = tagsDAO.selectByExample(te);
+					if(tags.size()>0){
+						saveTagRel(account,formTag.getId_pictures(),tags.get(0).getId());
+						success_tags.add(tags.get(0));
+					}else{
+						TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
+						try{
+							Tags tag = new Tags();
+							tag.setAccount(account.getAccount());
+							tag.setCreateTime(new java.util.Date());
+							tag.setDescription("");
+							tag.setName(name);
+							tag.setStatus(Tags.STATUS_USER);
+							Long id = tagsDAO.insert_return_id(tag);
+							tag.setId(id);
+							saveTagRel(account,formTag.getId_pictures(),tag.getId());
+							this.m_db_tx_manager.commit(status);
+							success_tags.add(tag);
+						}catch(Exception e){
+							this.m_db_tx_manager.rollback(status);
+							throw new Exception("标记失败");
+						}
+					}
 				}
 			}
+			return success_tags;
 		}else{
 			throw new Exception("您要标记的图片不存在");
 		}

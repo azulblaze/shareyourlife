@@ -36,7 +36,7 @@ public interface PictureService {
 	
 	public boolean delComment(com.twitpic.domain.Account account,Long id_comment)throws Exception;
 	
-	public com.twitpic.db.model.Tags Tag(com.twitpic.domain.Account account,com.twitpic.domain.FormTag formTag)throws Exception;
+	public java.util.List<com.twitpic.db.model.Tags> Tag(com.twitpic.domain.Account account,com.twitpic.domain.FormTag formTag)throws Exception;
 	
 	public com.twitpic.domain.PictureInfo loadPicture(long id_picture)throws Exception;
 	

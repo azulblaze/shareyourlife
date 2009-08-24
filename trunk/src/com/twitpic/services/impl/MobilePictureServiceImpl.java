@@ -35,7 +35,7 @@ public class MobilePictureServiceImpl extends PictureServiceImpl implements Mobi
 	}
 	
 	@Override
-	public Tags Tag(Account account, FormTag formTag) throws Exception {
+	public java.util.List<Tags> Tag(Account account, FormTag formTag) throws Exception {
 		
 		/*
 		 * 用户是否选择了radio按钮上的某个标签,如果是那么将查询出这个标签,
