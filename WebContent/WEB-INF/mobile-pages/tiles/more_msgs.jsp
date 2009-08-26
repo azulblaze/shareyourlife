@@ -36,12 +36,12 @@
 		<table width="100%">
 		<s:iterator value="paged_messages" >
 			<tr>
-				<td>
+				<td width="5%">
 					<input type="checkbox" ></input>
 				</td>
-				<td>&nbsp;</td>
-				<td><s:property value="fromUser" /></td>
-				<td align="right"><s:date name="createTime" format="yyyy/MM/dd HH:mm"/></td>	
+				<td width="5%">&nbsp;</td>
+				<td width="50%"><s:property value="fromUser" /></td>
+				<td width="40%" align="right"><s:date name="createTime" format="yyyy/MM/dd HH:mm"/></td>	
 			</tr>
 			<tr>
 				<td colspan="2">&nbsp;</td>
