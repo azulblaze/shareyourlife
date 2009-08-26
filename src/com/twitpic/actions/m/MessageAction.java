@@ -67,6 +67,8 @@ public class MessageAction extends BaseAction {
 			this.setValue(ActionConstant.ARP_PAGE_COUNT, page);
 			this.setValue(ActionConstant.ARP_PAGE_INDEX, this.formMessages.getMsgListPageIndex());
 			
+			this.loadUrlBack();
+			
 			return SUCCESS;
 		} catch (Exception e) {
 			LOGGER.error("获取用户消息列表出现异常", e);
@@ -104,6 +106,8 @@ public class MessageAction extends BaseAction {
 			this.setValue(ActionConstant.ARP_PAGE_COUNT, page);
 			this.setValue(ActionConstant.ARP_PAGE_INDEX, this.formMessages.getUnreadMsgListPageIndex());
 		
+			this.loadUrlBack();
+			
 			return SUCCESS;
 		} catch (Exception e) {
 			LOGGER.error("获取用户没读消息列表出现异常", e);
@@ -134,6 +138,7 @@ public class MessageAction extends BaseAction {
 			}
 			
 			this.setValue("msg", msg);
+			this.loadUrlBack();
 			
 			return SUCCESS;
 		} catch (Exception e) {

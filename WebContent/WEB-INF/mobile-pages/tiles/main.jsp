@@ -38,7 +38,7 @@
 							 	&nbsp;上传于:
 						 	</div>
 						 	<div>
-						 		 <s:date name="picturesParameter.uploadTime" format="yyyy-MM-dd HH:mm:ss" />
+						 		 <s:date name="picturesParameter.uploadTime" format="yyyy/MM/dd HH:mm" />
 						 	</div>
 						 	<div>
 						 		<a href="">加好友</a>&nbsp;

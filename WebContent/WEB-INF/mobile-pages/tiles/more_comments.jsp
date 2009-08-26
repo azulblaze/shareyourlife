@@ -36,7 +36,7 @@
 			  	<div>
 			  		<s:iterator value="paged_comments" >
 			  			<div class="c_h">
-			  				<s:date name="commentTime" format="yyyy年MM月dd日 HH:mm:ss"/>&nbsp;<s:property value="account" />
+			  				<s:date name="commentTime" format="yyyy/MM/dd HH:mm"/>&nbsp;<s:property value="account" />
 			  			</div>
 			  			<div class="c_d">
 			  				<s:property value="comment" />
@@ -51,6 +51,9 @@
 				</div>
 				<div>			  		
 			   		<input type="submit" value="提交"/>
+					<s:if test="urlBack != null ">
+						&nbsp;<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
+					</s:if>			   		
 			   	</div>
 		   </form>	
 	

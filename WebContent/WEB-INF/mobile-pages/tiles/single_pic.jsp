@@ -48,6 +48,9 @@
 				</div>
 				<div>			  		
 			   		<input type="submit" value="提交"/>
+					<s:if test="urlBack != null ">
+						&nbsp;<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
+					</s:if>				   		
 			   	</div>
 		   </form>
 	   </div>
@@ -82,6 +85,9 @@
 				</div>
 				<div>		  			
 		  			<input type="submit" value="标记此图片" />
+					<s:if test="urlBack != null ">
+						&nbsp;<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
+					</s:if>			  			
 		  		</div>
 		  	</form>
 	  </div>
