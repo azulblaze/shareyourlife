@@ -8,6 +8,7 @@
 <script type="text/javascript">
 $(function() {
 	$('.progressbar').progression({Current:0,Maximum:100,Animate:false});
+	$("#upload_status").hide();
 	$('form').uploadProgress({
 		progressUrl:"/upload_info.do",
 		start:function(){
@@ -35,9 +36,10 @@ $(function() {
 			if(upload.picture.status=='done'){
 				$("#up_img").attr({src:upload.picture.thumb});
 				$("#up_img_a").attr({href:"/picture.do?id_picture="+upload.picture.id_picture});
+				$("#up_img_a").show();
 			}
 			$("#file_progress").html(upload.received+"/"+upload.size);
-    		$(".progressbar").progression({Current:100,Animate:false});
+    		$(".progressbar").progression({Current:100,Animate:true});
 		},
 		interval:2000
 	    });
@@ -62,12 +64,14 @@ $(function() {
 </form>
 </div>
 <br/>
-<div id="upload_status" style="display:none;border:solid 1px">
-<div><div style="float:left">正在上传：</div><div id="filename"></div></div>
-<div><div style="float:left">当前进度：</div><div id="file_progress"></div></div>
-<div class="progressbar"></div>
+
+<div id="upload_status" style="border:solid 1px">
+	<div><div style="float:left">正在上传：</div><div id="filename"></div></div>
+	<br/>
+	<div><div style="float:left">当前进度：</div><div id="file_progress"></div></div>
+	<br/>
+	<div class="progressbar"></div>
 </div>
-<br/>
 <div>
-<a id="up_img_a" href=""><img src="" id="up_img"/></a>
+<a id="up_img_a" href="" style="display:none;"><img src="" id="up_img"/></a>
 </div>
