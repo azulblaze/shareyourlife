@@ -41,7 +41,7 @@
 				</td>
 				<td>&nbsp;</td>
 				<td><s:property value="fromUser" /></td>
-				<td align="right"><s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></td>	
+				<td align="right"><s:date name="createTime" format="yyyy/MM/dd HH:mm"/></td>	
 			</tr>
 			<tr>
 				<td colspan="2">&nbsp;</td>
@@ -58,6 +58,9 @@
 		<hr />
 	</div>	
 	<div>
+		<s:if test="urlBack != null ">
+			<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
+		</s:if>
 		<input type="submit" value="删&nbsp;除" />
 	</div>
 </div>

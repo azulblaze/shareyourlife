@@ -20,7 +20,12 @@ import com.twitpic.util.ConsVar;
 public abstract class BaseAction extends ActionSupport {
 	
 	protected final static String ROOT_PARENT_ID = "0";
+	protected String urlBack;
 	
+	public String getUrlBack() {
+		return urlBack;
+	}
+
 	public void setValue(String key, Object value){
 		ServletActionContext.getValueStack(getHttpServletRequest()).set(key, value);
 	}
@@ -64,5 +69,9 @@ public abstract class BaseAction extends ActionSupport {
 	
 	protected Account loadAccount(){
 		return (Account)ServletActionContext.getRequest().getSession().getAttribute(ConsVar.SESSION_USER);
+	}
+	
+	protected void loadUrlBack(){
+		this.urlBack = ServletActionContext.getRequest().getHeader("Referer");
 	}
 }

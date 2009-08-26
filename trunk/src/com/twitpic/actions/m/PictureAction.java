@@ -230,6 +230,8 @@ public class PictureAction extends BaseAction {
 			this.setValue(ActionConstant.ARP_MORE_COMMENTS_LIST_TOTAL_COUNT, comments_total_count);
 		}
 		
+		this.loadUrlBack();
+		
 		return SUCCESS;
 	}
 	
@@ -319,6 +321,8 @@ public class PictureAction extends BaseAction {
 			this.setValue(ActionConstant.ARP_MORE_TAGS_LIST_TOTAL_COUNT, tags_total_count);
 		}
 		
+		this.loadUrlBack();
+		
 		return SUCCESS;
 	}	
 
@@ -346,6 +350,8 @@ public class PictureAction extends BaseAction {
 					List<Tags> tags = ((MobilePictureServiceImpl) pictureService).loadTagsLimitWitTopFromPicture(pi , 6,account.getAccount());
 					this.setValue("tags", tags);
 				}
+				
+				this.loadUrlBack();
 				
 			}catch(Exception e){
 				this.addActionError(e.getMessage());
