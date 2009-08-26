@@ -9,23 +9,31 @@
 </style>
 
 <div class="div_panel">
-	<div class="c_d">
-		发&nbsp;送&nbsp;者:&nbsp;<s:property value="msg.fromUser" />
+	<div>
+		<hr />	
+	</div>
+	<div class="c_d" >
+		<span style="font-weight:bold; color: #036; text-decoration: none; border-bottom: 1px solid #666;"><s:property value="msg.fromUser" /></span>
 	</div>
 	<div class="c_d">
-		发送时间:&nbsp;<s:date name="msg.createTime" format="yyyy-MM-dd HH:mm:ss"/>
+		<s:date name="msg.createTime" format="yyyy/MM/dd HH:mm"/>
 	</div>
 	<div class="c_d">
-		标&nbsp;&nbsp;&nbsp;&nbsp;题:&nbsp;<s:property value="msg.title" />
-	</div>	
-	<div class="c_d">
-		内&nbsp;&nbsp;&nbsp;&nbsp;容:<br />
+		<s:property value="msg.title" />
+	</div>
+	<div>
+		<hr />	
+	</div>
+	<div class="c_d" style="height:200px;">
 		<s:property value="msg.content" escape="false"/>
 	</div>
 	<div class="c_d">
-		---------------------------------------
+		<hr />
 	</div>
 	<div class="c_d">
+		<s:if test="urlBack != null ">
+			<a href="<s:property value='urlBack' />">返回</a>&nbsp;
+		</s:if>
 		<a href="">回复</a>&nbsp;
 		<a href="">删除</a>
 	</div>
