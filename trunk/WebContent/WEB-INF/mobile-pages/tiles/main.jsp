@@ -35,7 +35,6 @@
 							 	<a href="<s:property value='account'/>" >
 							 		<s:property value="name"/>
 							 	</a>
-							 	&nbsp;上传于:
 						 	</div>
 						 	<div>
 						 		 <s:date name="picturesParameter.uploadTime" format="yyyy/MM/dd HH:mm" />

@@ -63,6 +63,10 @@
 			<result name="success" type="tiles">m.page.message.msg.detail</result>
 		</action>
 		
+		<action name="delete_msgs" class="msgAction" method="delete">
+			<result name="success" type="redirect">msglist.do</result>
+		</action>		
+		
 	</package>
 
 </struts>

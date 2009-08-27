@@ -38,7 +38,7 @@
 	<div>
 		<form action="tag.do" method="posts">
 			<input type="hidden" name="formTag.id_pictures" value="<s:property value='picture_id'/>" />
-			<table>
+			<table width="100%">
 			<s:iterator value="paged_tags" status="status">
 				<s:if test="(#status.index%3 == 0 ) || #status.first">
 					<tr>
@@ -52,9 +52,6 @@
 				<s:if test="(#status.index%3 == 2) || #status.last" >
 					</tr>
 				</s:if>	
-				<s:else>
-					&nbsp;|&nbsp;
-				</s:else>
 			</s:iterator>
 			</table>
 				<div class="c_h">
