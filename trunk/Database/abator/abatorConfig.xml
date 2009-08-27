@@ -19,9 +19,6 @@
 		<table tableName="comments" />
 		<table tableName="pictures" />
 		<table tableName="pictures_parameter" />
-		<table tableName="tags" />
-		<table tableName="tags_rel" />
-		<table tableName="users" />
-		<table tableName="users_profile" />
+		
 	</abatorContext>
 </abatorConfiguration>

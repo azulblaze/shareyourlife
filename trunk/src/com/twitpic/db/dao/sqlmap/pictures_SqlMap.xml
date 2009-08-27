@@ -26,6 +26,7 @@
     <result column="upload_account" property="picturesParameter.uploadAccount" jdbcType="VARCHAR"/>
     <result column="upload_time" property="picturesParameter.uploadTime" jdbcType="TIMESTAMP"/>
     <result column="status" property="picturesParameter.status" jdbcType="INTEGER"/>
+    <result column="device" property="picturesParameter.device" jdbcType="VARCHAR" />
     <result column="title" property="picturesParameter.title" jdbcType="VARCHAR"/>
     <result column="description" property="picturesParameter.description" jdbcType="VARCHAR"/>
   </resultMap>
