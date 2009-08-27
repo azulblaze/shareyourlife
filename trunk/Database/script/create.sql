@@ -44,8 +44,9 @@ go
 CREATE  TABLE IF NOT EXISTS pictures_parameter (
   id_pictures BIGINT NOT NULL ,
   upload_account VARCHAR(100) NOT NULL ,
-  upload_time TIMESTAMP NULL ,
+  upload_time TIMESTAMP NULL DEFAULT current_timestamp ,
   status INT NULL DEFAULT 1 ,
+  device VARCHAR(50) NULL ,
   title VARCHAR(100) NULL ,
   description VARCHAR(1000) NULL ,
   addtion_info TEXT NULL ,
