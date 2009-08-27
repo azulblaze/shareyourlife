@@ -1,5 +1,6 @@
 package com.twitpic.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -172,6 +173,24 @@ public class MessageServiceImpl implements MessageService {
 		example.createCriteria().andToUserEqualTo(account)
 								.andStatusEqualTo(MessagesInfo.MessageStatus.Unread.toString());
 		return this.m_msg_dao.countByExample(example);
+	}
+
+	@Override
+	public void removeMessagesByIDArray(
+			Account loadAccount,
+			String[] selectedMessageID) 
+	throws Exception {
+		
+		List<Long> ids = new ArrayList<Long>();
+		
+		for (String id : selectedMessageID) {
+			ids.add(Long.valueOf(id));
+		}
+		
+		MessageExample example = new MessageExample();
+		example.createCriteria().andIdIn(ids);
+		this.m_msg_dao.deleteByExample(example);
+		
 	}
 
 }
