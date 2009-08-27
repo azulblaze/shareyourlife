@@ -147,4 +147,29 @@ public class MessageAction extends BaseAction {
 			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}	
 	}
+	
+	public String delete() {
+		
+		if(!isLogin()){
+			this.addActionMessage("请先登录");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}	
+		
+		if (this.formMessages == null ||
+			this.formMessages.getSelectedMessageID() == null ){
+			this.addActionMessage("消息参数错误");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;			
+		}	
+		
+		try{
+			this.m_message_service.removeMessagesByIDArray( loadAccount(), this.formMessages.getSelectedMessageID());
+			this.addActionMessage("成功删除了["+this.formMessages.getSelectedMessageID().length+"]条消息");
+		}catch(Exception ex){
+			LOGGER.error("删除消息出现异常", ex);
+			this.addActionMessage("删除消息出现异常");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}
+		
+		return SUCCESS;
+	}
 }

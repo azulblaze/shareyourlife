@@ -32,9 +32,9 @@
 	</div>
 	<div class="c_d">
 		<s:if test="urlBack != null ">
-			<a href="<s:property value='urlBack' />">返回</a>&nbsp;
+			<a href="<s:property value='urlBack' />"><input type="button" value="返 回" /></a>&nbsp;
 		</s:if>
-		<a href="">回复</a>&nbsp;
-		<a href="">删除</a>
+		<a href=""><input type="button" value="回 复" /></a>&nbsp;
+		<a href="delete_msgs.do?formMessages.selectedMessageID=<s:property value='msg.id' />"><input type="button" value="删 除" /></a>
 	</div>
 </div>

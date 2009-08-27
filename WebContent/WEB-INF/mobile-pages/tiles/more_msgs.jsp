@@ -32,35 +32,37 @@
 	<div>
 		<hr />
 	</div>
-	<div>
-		<table width="100%">
-		<s:iterator value="paged_messages" >
-			<tr>
-				<td width="5%">
-					<input type="checkbox" ></input>
-				</td>
-				<td width="5%">&nbsp;</td>
-				<td width="50%"><s:property value="fromUser" /></td>
-				<td width="40%" align="right"><s:date name="createTime" format="yyyy/MM/dd HH:mm"/></td>	
-			</tr>
-			<tr>
-				<td colspan="2">&nbsp;</td>
-				<td colspan="2">
-					<a href="msgdetail.do?formMessages.selectedMsgId=<s:property value='id' />" >
-						<s:property value="title" />
-					</a>
-				</td>
-			</tr>
-		</s:iterator>
-		</table>
-	</div>
-	<div>
-		<hr />
-	</div>	
-	<div>
-		<s:if test="urlBack != null ">
-			<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
-		</s:if>
-		<input type="submit" value="删&nbsp;除" />
-	</div>
+	<form method="post" action="delete_msgs.do">
+		<div>
+			<table width="100%">
+			<s:iterator value="paged_messages" >
+				<tr>
+					<td width="5%">
+						<input name="formMessages.selectedMessageID" type="checkbox" value="<s:property value='id' />" />
+					</td>
+					<td width="5%">&nbsp;</td>
+					<td width="50%"><s:property value="fromUser" /></td>
+					<td width="40%" align="right"><s:date name="createTime" format="yyyy/MM/dd HH:mm"/></td>	
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+					<td colspan="2">
+						<a href="msgdetail.do?formMessages.selectedMsgId=<s:property value='id' />" >
+							<s:property value="title" />
+						</a>
+					</td>
+				</tr>
+			</s:iterator>
+			</table>
+		</div>
+		<div>
+			<hr />
+		</div>	
+		<div>
+			<s:if test="urlBack != null ">
+				<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
+			</s:if>
+			<input type="submit" value="删&nbsp;除" />
+		</div>
+	</form>
 </div>
