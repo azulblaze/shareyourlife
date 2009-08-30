@@ -31,17 +31,25 @@
 			<input type="submit" value="翻页" />
 		</form>
 	</div>
+	<div>
+		<hr />
+	</div>
 		   <form action="comment.do" method="post">
 			   	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture_id'/>"/>
 			  	<div>
+			  		<table width="100%">
 			  		<s:iterator value="paged_comments" >
-			  			<div class="c_h">
-			  				<s:date name="commentTime" format="yyyy/MM/dd HH:mm"/>&nbsp;<s:property value="account" />
-			  			</div>
-			  			<div class="c_d">
-			  				<s:property value="comment" />
-			  			</div>
+			  			<tr>
+			  				<td width="5%"><input type="checkbox" /></td>
+			  				<td width="40%"><s:property value="account" /></td>
+			  				<td width="55%" align="right"><s:date name="commentTime" format="yyyy/MM/dd HH:mm"/></td>
+			  			</tr>
+			  			<tr>
+			  				<td>&nbsp;</td>
+			  				<td colspan="2" ><s:property value="comment" /></td>
+			  			</tr>
 			  		</s:iterator>
+			  		</table>
 			  	</div>
 			  	<div class="c_h">
 			  		添加评论:

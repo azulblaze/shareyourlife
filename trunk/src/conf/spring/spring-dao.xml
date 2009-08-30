@@ -12,4 +12,7 @@
 	<bean name="usersProfileDAO" id="usersProfileDAO" class="com.twitpic.db.dao.UsersProfileDAOImpl" />
 	<bean name="adminsDAO" id="adminsDAO" class="com.twitpic.db.dao.AdminsDAOImpl" />
 	<bean name="messageDAO" id="messageDAO" class="com.twitpic.db.dao.MessageDAOImpl" />
+	<bean name="permissionDAO" id="permissionDAO" class="com.twitpic.db.dao.PermissionDAO" />
+	<bean name="permissionsSchemeDAO" id="permissionsSchemeDAO" class="com.twitpic.db.dao.PermissionsSchemeDAOImpl" />
+	<bean name="resourcesPermissionDAO" id="resourcesPermissionDAO" class="com.twitpic.db.dao.ResourcesPermissionDAOImpl" />
 </beans>

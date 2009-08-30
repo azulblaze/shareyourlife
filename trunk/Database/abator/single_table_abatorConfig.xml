@@ -3,11 +3,19 @@
 <ibatorConfiguration >
 	<classPathEntry location="F:/workspace/shareyourlife/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
 	<ibatorContext id="context1" targetRuntime="Ibatis2Java5">
+		<!-- 连接产品服务器 
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://121.12.125.10:3306/sq_cashguy1"
 			userId="sq_cashguy1" password="NJBCINFO2004">
 		</jdbcConnection>
+		-->
+		<!-- 连接本地服务器 -->
+		<jdbcConnection 
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/twitpic"
+			userId="root" password="">
+		</jdbcConnection>		
 		<javaModelGenerator targetPackage="com.twitpic.db.model"
 			targetProject="shareyourlife/db" />
 		<sqlMapGenerator targetPackage="com.twitpic.db.dao.sqlmap"
@@ -15,6 +23,9 @@
 		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
 			targetProject="shareyourlife/db" />
 		
-		<table tableName="Messages" domainObjectName="Message"/>
+		<table tableName="Permissions" domainObjectName="Permission"></table>
+		<table tableName="Resources_permission" domainObjectName="ResourcesPermission"></table>
+		<table tableName="Permissions_scheme" domainObjectName="PermissionsScheme"></table>
+		
 	</ibatorContext>
 </ibatorConfiguration>
