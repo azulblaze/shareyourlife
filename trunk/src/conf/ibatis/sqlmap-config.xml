@@ -19,4 +19,8 @@
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/admins_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/messages_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/permissions_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/permissions_scheme_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/resources_permission_SqlMap.xml" />
+	
 </sqlMapConfig>
