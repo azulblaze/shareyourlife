@@ -26,4 +26,5 @@ public interface AccountService {
 	
 	public boolean find_password(String email,String account) throws Exception;
 	
+	public com.twitpic.domain.Account loadUserByAccount(String account) throws Exception; 
 }

@@ -57,4 +57,9 @@
 		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/msg_detail.jsp"></put-attribute>
 	</definition>	
 	
+	<definition name="m.page.message.msg.send.input" extends="m.layout">	
+		<put-attribute name="body" value="/WEB-INF/mobile-pages/tiles/msg_send.jsp"></put-attribute>
+	</definition>	
+	
+	
 </tiles-definitions>

@@ -65,7 +65,11 @@
 		
 		<action name="delete_msgs" class="msgAction" method="delete">
 			<result name="success" type="redirect">msglist.do</result>
-		</action>		
+		</action>	
+		
+		<action name="msgsend" class="msgAction" method="send_msg">
+			<result name="input" type="tiles">m.page.message.msg.send.input</result>
+		</action>	
 		
 	</package>
 

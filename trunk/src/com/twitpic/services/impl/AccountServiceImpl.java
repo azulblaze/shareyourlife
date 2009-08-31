@@ -10,11 +10,11 @@ import com.twitpic.db.dao.UsersProfileDAO;
 import com.twitpic.db.model.Users;
 import com.twitpic.db.model.UsersExample;
 import com.twitpic.db.model.UsersProfile;
+import com.twitpic.domain.Account;
 import com.twitpic.domain.FormLogin;
 import com.twitpic.domain.FormRegister;
 import com.twitpic.domain.FormUserProfile;
 import com.twitpic.domain.Mail;
-import com.twitpic.domain.Account;
 import com.twitpic.services.AccountService;
 import com.twitpic.system.config.SystemConfig;
 import com.twitpic.system.email.MailServices;
@@ -241,5 +241,14 @@ public class AccountServiceImpl implements AccountService {
 		mail.setType(Mail.MAIL_TYPE_HTML);
 		mailServices.sendMail(mail);
 		return true;
+	}
+
+	@Override
+	public Account loadUserByAccount(String _account) throws Exception {
+		Users user =  this.usersDAO.selectByPrimaryKey(_account);
+		Account account = new Account();
+		account.setUsers(user);
+		return account;
+
 	}
 }
