@@ -48,7 +48,13 @@
 					<td colspan="2">&nbsp;</td>
 					<td colspan="2">
 						<a href="msgdetail.do?formMessages.selectedMsgId=<s:property value='id' />" >
-							<s:property value="title" />
+							<span 
+								<s:if test="status=='Unread'" >
+								style="font-weight:bold"
+								</s:if>
+							>
+								<s:property value="title" />
+							</span>
 						</a>
 					</td>
 				</tr>
