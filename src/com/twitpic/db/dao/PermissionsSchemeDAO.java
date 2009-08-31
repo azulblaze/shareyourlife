@@ -92,4 +92,6 @@ public interface PermissionsSchemeDAO {
      * @ibatorgenerated Sun Aug 30 15:33:51 CST 2009
      */
     int updateByPrimaryKey(PermissionsScheme record);
+    
+    long insert_return_id(PermissionsScheme record);
 }
