@@ -51,4 +51,6 @@ public interface MessageService {
 	public void sendAddCommentMessage(Long id, String from, String to) throws Exception;
 
 	public void removeMessagesByIDArray(Account loadAccount,String[] selectedMessageID) throws Exception;
+
+	public Message loadMessageById(Long msg_id) throws Exception;
 }

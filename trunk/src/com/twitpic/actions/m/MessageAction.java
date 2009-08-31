@@ -2,11 +2,15 @@ package com.twitpic.actions.m;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.twitpic.actions.BaseAction;
 import com.twitpic.db.model.Message;
+import com.twitpic.domain.Account;
 import com.twitpic.domain.FormMessages;
+import com.twitpic.domain.MessagesInfo;
+import com.twitpic.services.AccountService;
 import com.twitpic.services.MessageService;
 
 
@@ -16,9 +20,14 @@ public class MessageAction extends BaseAction {
 	private static Logger LOGGER = Logger.getLogger(MessageAction.class);
 	
 	private MessageService m_message_service;
+	private AccountService m_account_service;
 	private FormMessages formMessages;
 	private Integer msgListPageCount 			= 10;	// 默认为每一页10条
 	private Integer unreadMsgListPageCount 		= 10;	// 默认为每一页10条
+	
+	public void setAccountService(AccountService _service){
+		this.m_account_service = _service;
+	}
 	
 	public void setMsgListPageCount(Integer msgListPageCount) {
 		this.msgListPageCount = msgListPageCount;
@@ -171,5 +180,52 @@ public class MessageAction extends BaseAction {
 		}
 		
 		return SUCCESS;
+	}
+	
+	public String send_msg(){
+		
+		if(!isLogin()){
+			this.addActionMessage("请先登录");
+			return ActionConstant.ACTION_RETURN_MSG_BOX;
+		}	
+		
+		if(!StringUtils.equalsIgnoreCase(
+				this.getRequestParameter("submit"),
+				"submit" ) ){
+			String action = this.getRequestParameter("a");
+			
+			// 如果是回复,那么需要准备好 消息接收者和 标题
+			if( StringUtils.equals(action, "reply")){
+				try{
+					Long msg_id = Long.valueOf(this.getRequestParameter("msgid"));
+					Message msg = this.m_message_service.loadMessageById(msg_id);
+					Account from_account = m_account_service.loadUserByAccount(msg.getFromUser());
+					
+					this.setValue("msg_receiver_account", from_account.getAccount());
+					this.setValue("msg_receiver", from_account.getName());
+					this.setValue("msg_title", "回复:"+msg.getTitle());
+					
+				}catch(Exception ex){
+					LOGGER.error("回复信息出现异常",ex);
+					this.addActionMessage("回复信息出现异常");
+					return ActionConstant.ACTION_RETURN_MSG_BOX;
+				}
+			}
+			return INPUT;
+		}else{
+			// 发送信息
+			try {
+				this.m_message_service.sendMessage( 
+						this.formMessages.getTitle(), this.formMessages.getMsgContent(), 
+						MessagesInfo.MessageType.Site, MessagesInfo.MessageCategory.User, 
+						this.loadAccount().getAccount(), this.formMessages.getReceiver());
+				this.addActionMessage("信息发送成功");
+				return ActionConstant.ACTION_RETURN_MSG_BOX;
+			} catch (Exception ex) {
+				LOGGER.error("回复信息出现异常",ex);
+				this.addActionMessage("回复信息出现异常");
+				return ActionConstant.ACTION_RETURN_MSG_BOX;
+			}
+		}
 	}
 }

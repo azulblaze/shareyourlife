@@ -193,4 +193,9 @@ public class MessageServiceImpl implements MessageService {
 		
 	}
 
+	@Override
+	public Message loadMessageById(Long msg_id) throws Exception{
+		return this.m_msg_dao.selectByPrimaryKey(msg_id);
+	}
+
 }
