@@ -161,4 +161,9 @@ public class PermissionDAOImpl extends SqlMapClientDaoSupport implements Permiss
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(Permission record) {
+		return (Long)getSqlMapClientTemplate().insert("permissions.insert_return_id", record);
+	}
 }
