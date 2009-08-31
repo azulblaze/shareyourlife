@@ -157,8 +157,14 @@ public class PermissionsSchemeDAOImpl extends SqlMapClientDaoSupport implements 
             this.record = record;
         }
 
-        public Object getRecord() {
+        @SuppressWarnings("unused")
+		public Object getRecord() {
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(PermissionsScheme record) {
+		return (Long)getSqlMapClientTemplate().insert("permissions_scheme.insert_return_id", record);
+	}
 }

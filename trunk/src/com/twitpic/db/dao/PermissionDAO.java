@@ -92,4 +92,6 @@ public interface PermissionDAO {
      * @ibatorgenerated Sun Aug 30 15:33:51 CST 2009
      */
     int updateByPrimaryKey(Permission record);
+    
+    long insert_return_id(Permission record);
 }

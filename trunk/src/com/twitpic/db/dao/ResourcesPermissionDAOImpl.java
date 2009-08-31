@@ -161,4 +161,9 @@ public class ResourcesPermissionDAOImpl extends SqlMapClientDaoSupport implement
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(ResourcesPermission record) {
+		return (Long)getSqlMapClientTemplate().insert("resources_permission.insert_return_id", record);
+	}
 }
