@@ -177,7 +177,7 @@ go
 DROP TABLE IF EXISTS resources_permission;
 go
 CREATE  TABLE IF NOT EXISTS resources_permission (
-  id INT NOT NULL AUTO_INCREMENT ,
+  id BIGINT NOT NULL AUTO_INCREMENT ,
   dest_type VARCHAR(50) NULL ,
   dest_value VARCHAR(100) NULL ,
   id_permissions BIGINT NULL ,
