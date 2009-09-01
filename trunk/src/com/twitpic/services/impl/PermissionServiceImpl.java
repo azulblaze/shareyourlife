@@ -48,13 +48,17 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	public PermissionsScheme add_permissions_scheme(Long idPermissions,
+	public PermissionsScheme add_permissions_scheme(Long idPermissions,String account,
 			String action, String destType, String destValue) throws Exception {
 		PermissionsSchemeExample pse = new PermissionsSchemeExample();
 		pse.createCriteria().andIdPermissionsEqualTo(idPermissions).andActionEqualTo(action).andDestTypeEqualTo(destType);
 		java.util.List<PermissionsScheme> permissionsschemes = permissionsSchemeDAO.selectByExample(pse);
 		if(permissionsschemes.size()>0){
 			throw new Exception("你已经创建了这种类型得权限了");
+		}
+		Permission permission = permissionDAO.selectByPrimaryKey(idPermissions);
+		if(permission==null||!permission.getAccount().equals(account)){
+			throw new Exception("无法完成您得请求");
 		}
 		PermissionsScheme permissionsscheme = new PermissionsScheme();
 		permissionsscheme.setAction(action);
@@ -66,13 +70,17 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	public ResourcesPermission bind_permission(String destType,
+	public ResourcesPermission bind_permission(String account,String destType,
 			String destValue, Long idPermissions) throws Exception {
 		ResourcesPermissionExample rpe = new ResourcesPermissionExample();
 		rpe.createCriteria().andDestTypeEqualTo(destType).andDestValueEqualTo(destValue);
 		java.util.List<ResourcesPermission> resourcespermissions = resourcesPermissionDAO.selectByExample(rpe);
 		if(resourcespermissions.size()>0){
 			throw new Exception("一个资源只能绑定一个权限");
+		}
+		Permission permission = permissionDAO.selectByPrimaryKey(idPermissions);
+		if(permission==null||!permission.getAccount().equals(account)){
+			throw new Exception("无法完成您得请求");
 		}
 		ResourcesPermission resourcespermission = new ResourcesPermission();
 		resourcespermission.setDestType(destType);
@@ -83,40 +91,90 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	public boolean del_permissions_scheme(Long id) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean del_permissions_scheme(Long id,String account) throws Exception {
+		PermissionsScheme permissionsscheme = permissionsSchemeDAO.selectByPrimaryKey(id);
+		if(permissionsscheme!=null){
+			Permission permission = permissionDAO.selectByPrimaryKey(permissionsscheme.getIdPermissions());
+			if(permission!=null&&permission.getAccount().equals(account)){
+				permissionsSchemeDAO.deleteByPrimaryKey(id);
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean delete_permission(Long id) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean delete_permission(Long id,String account) throws Exception {
+		Permission permission = permissionDAO.selectByPrimaryKey(id);
+		if(permission!=null&&permission.getAccount().equals(account)){
+			//delete scheme
+			PermissionsSchemeExample pse = new PermissionsSchemeExample();
+			pse.createCriteria().andIdPermissionsEqualTo(id);
+			permissionsSchemeDAO.deleteByExample(pse);
+			//delete bind resources
+			ResourcesPermissionExample rpe = new ResourcesPermissionExample();
+			rpe.createCriteria().andIdPermissionsEqualTo(id);
+			resourcesPermissionDAO.deleteByExample(rpe);
+			//delete permission
+			permissionDAO.deleteByPrimaryKey(id);
+			
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean unbind_permission(Long id) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean unbind_permission(Long id,String account) throws Exception {
+		ResourcesPermission resourcespermission = resourcesPermissionDAO.selectByPrimaryKey(id);
+		if(resourcespermission!=null){
+			Permission permission = permissionDAO.selectByPrimaryKey(resourcespermission.getIdPermissions());
+			if(permission!=null&&permission.getAccount().equals(account)){
+				resourcesPermissionDAO.deleteByPrimaryKey(id);
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public ResourcesPermission update_bind_permission(Long id, String destType,
+	public ResourcesPermission update_bind_permission(Long id,String account, String destType,
 			String destValue) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		ResourcesPermission resourcespermission = resourcesPermissionDAO.selectByPrimaryKey(id);
+		if(resourcespermission!=null){
+			Permission permission = permissionDAO.selectByPrimaryKey(resourcespermission.getIdPermissions());
+			if(permission!=null&&permission.getAccount().equals(account)){
+				resourcespermission.setDestType(destType);
+				resourcespermission.setDestValue(destValue);
+				resourcesPermissionDAO.updateByPrimaryKeySelective(resourcespermission);
+				return resourcespermission;
+			}
+		}
+		throw new Exception("无法更新该资源的权限");
 	}
 
 	@Override
-	public Permission update_permission(Long id, String name) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Permission update_permission(Long id,String account, String name) throws Exception {
+		Permission permission = permissionDAO.selectByPrimaryKey(id);
+		if(permission!=null&&permission.getAccount().equals(account)){
+			permission.setName(name);
+			permissionDAO.updateByPrimaryKeySelective(permission);
+			return permission;
+		}
+		throw new Exception("无法更新权限名字");
 	}
 
 	@Override
-	public PermissionsScheme update_permissions_scheme(Long id,String destValue) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public PermissionsScheme update_permissions_scheme(Long id,String account,String destType,String destValue) throws Exception {
+		PermissionsScheme permissionsscheme = permissionsSchemeDAO.selectByPrimaryKey(id);
+		if(permissionsscheme!=null){
+			Permission permission = permissionDAO.selectByPrimaryKey(permissionsscheme.getIdPermissions());
+			if(permission!=null&&permission.getAccount().equals(account)&&permissionsscheme.getDestType().equals(destType)){
+				permissionsscheme.setDestValue(destValue);
+				permissionsSchemeDAO.updateByPrimaryKeySelective(permissionsscheme);
+				return permissionsscheme;
+			}
+		}
+		throw new Exception("无法更新权限配置");
 	}
 
 }
