@@ -17,15 +17,13 @@
 			userId="root" password="">
 		</jdbcConnection>		
 		<javaModelGenerator targetPackage="com.twitpic.db.model"
-			targetProject="shareyourlife/db" />
+			targetProject="shareyourlife/src" />
 		<sqlMapGenerator targetPackage="com.twitpic.db.dao.sqlmap"
-			targetProject="shareyourlife/db" />
+			targetProject="shareyourlife/src" />
 		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
-			targetProject="shareyourlife/db" />
+			targetProject="shareyourlife/src" />
 		
-		<table tableName="Permissions" domainObjectName="Permission"></table>
 		<table tableName="Resources_permission" domainObjectName="ResourcesPermission"></table>
-		<table tableName="Permissions_scheme" domainObjectName="PermissionsScheme"></table>
 		
 	</ibatorContext>
 </ibatorConfiguration>
