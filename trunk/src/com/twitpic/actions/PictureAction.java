@@ -205,4 +205,11 @@ public class PictureAction extends BaseAction {
 		}
 		return "json";
 	}
+	
+	public String view_times()throws Exception{
+		if(id_picture!=null&&id_picture>0){
+			pictureService.add_view_times(id_picture);
+		}
+		return null;
+	}
 }
