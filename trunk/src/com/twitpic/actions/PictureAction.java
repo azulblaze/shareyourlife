@@ -207,9 +207,13 @@ public class PictureAction extends BaseAction {
 	}
 	
 	public String view_times()throws Exception{
-		if(id_picture!=null&&id_picture>0){
-			pictureService.add_view_times(id_picture);
+		String back_url = (String)getHttpServletRequest().getHeader("Referer");
+		if(back_url!=null&&back_url.trim().length()>0){
+			if(id_picture!=null&&id_picture>0){
+				this.setValue("json", "{info:"+pictureService.add_view_times(id_picture)+"}");
+				return "json";
+			}
 		}
-		return null;
+		return "error";
 	}
 }
