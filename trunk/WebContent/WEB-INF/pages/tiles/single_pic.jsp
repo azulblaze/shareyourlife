@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript" src="scripts/jquery.autocomplete.pack.js" charset="utf-8"></script>
 <script type="text/javascript" src="scripts/jquery.tagcloud.js" charset="utf-8"></script>
+<script type="text/javascript" src="scripts/display.pack.js"></script>
 <style>
 #tagcloud a {
 	text-decoration: none;
@@ -61,6 +62,7 @@
 		});
 	}
 	$(document).ready(function() {
+		$(this).displayqiezi({extStr:"<s:property value='#session.user.name'/>",qiezi:<s:property value='picture.pictures.id'/>,delay:3000});
 		if ($("#count_num").html() > 0) {
 			loadComments("load_comment.do?id_picture=<s:property value='picture.pictures.id'/>");
 		}

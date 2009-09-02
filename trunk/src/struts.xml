@@ -64,6 +64,7 @@
 			<result name="success" type="tiles">page.single_pic</result>
 		</action>
 		<action name="delete_pic" class="pictureAction" method="delete_pic" />
+		<action name="view_times" class="pictureAction" method="view_times" />
 		
 		<action name="comment" class="commentAction" method="comment" />
 		<action name="delete_comment" class="commentAction" method="delete_comment" />
