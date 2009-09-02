@@ -45,4 +45,6 @@ public interface PictureService {
 	public int countComments(Long id_picture);
 	
 	public java.util.List<com.twitpic.domain.CommentsInfo> loadComments(Long id_pictre,int c_page,int size)throws Exception;
+	
+	public Long add_view_times(Long id_picture);
 }
