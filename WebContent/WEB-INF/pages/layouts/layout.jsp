@@ -10,6 +10,7 @@
 <title><tiles:insertAttribute name="title"/></title>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="scripts/jquery-1.3.2.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.js" charset="utf-8"></script>
 </head>
 <body>
 <tiles:insertAttribute name="header"></tiles:insertAttribute>
