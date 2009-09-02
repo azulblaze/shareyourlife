@@ -299,4 +299,15 @@ public class PictureServiceImpl implements PictureService {
 		long start_index = (cPage-1)*size;
 		return commentsDAO.selectCommentsInfoBLOBs(null, null, idPictre, start_index, size);
 	}
+
+	@Override
+	public Long add_view_times(Long idPicture) {
+		PicturesParameter picturesparameter = picturesParameterDAO.selectByPrimaryKey(idPicture);
+		if(picturesparameter==null){
+			return 0l;
+		}
+		picturesparameter.setViewedTimes(picturesparameter.getViewedTimes()+1);
+		picturesParameterDAO.updateByPrimaryKeySelective(picturesparameter);
+		return picturesparameter.getViewedTimes();
+	}
 }
