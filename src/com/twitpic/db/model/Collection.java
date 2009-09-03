@@ -194,4 +194,15 @@ public class Collection {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    
+    private Integer collectCount;
+
+	public Integer getCollectCount() {
+		return collectCount;
+	}
+
+	public void setCollectCount(Integer collectCount) {
+		this.collectCount = collectCount;
+	}
+    
 }

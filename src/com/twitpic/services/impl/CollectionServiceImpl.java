@@ -1,5 +1,7 @@
 package com.twitpic.services.impl;
 
+import java.util.List;
+
 import com.twitpic.db.model.Collection;
 import com.twitpic.db.model.CollectionExample;
 import com.twitpic.db.model.PicturesParameter;
@@ -161,6 +163,22 @@ public class CollectionServiceImpl implements CollectionService {
 			collectionDAO.updateByPrimaryKey(collection);
 		}
 		return collection;
+	}
+
+	@Override
+	public List<Collection> select_all_collections(String account) {
+		CollectionExample ce = new CollectionExample();
+		ce.createCriteria().andAccountEqualTo(account);
+		return collectionDAO.select_with_count_ByExample(ce);
+	}
+
+	@Override
+	public Collection select_collection(String account, Long id) {
+		Collection collection = collectionDAO.select_with_count_ByPrimaryKey(id);
+		if(collection!=null&&collection.getAccount().equals(account)){
+			return collection;
+		}
+		return null;
 	}
 
 }
