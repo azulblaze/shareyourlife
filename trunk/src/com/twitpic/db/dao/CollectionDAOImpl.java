@@ -166,4 +166,20 @@ public class CollectionDAOImpl extends SqlMapClientDaoSupport implements Collect
 	public long insert_return_id(Collection record) {
 		return (Long)getSqlMapClientTemplate().insert("collections.ibatorgenerated_insert", record);
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Collection> select_with_count_ByExample(
+			CollectionExample example) {
+		 List<Collection> list = getSqlMapClientTemplate().queryForList("collections.select_with_count_ByExample", example);
+		 return list;
+	}
+
+	@Override
+	public Collection select_with_count_ByPrimaryKey(Long id) {
+		Collection key = new Collection();
+        key.setId(id);
+        Collection record = (Collection) getSqlMapClientTemplate().queryForObject("collections.select_with_count_ByPrimaryKey", key);
+        return record;
+	}
 }

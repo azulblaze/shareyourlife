@@ -12,6 +12,7 @@
     <result column="cover" property="cover" jdbcType="BIGINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="collect_count" property="collectCount" jdbcType="INTEGER" />
   </resultMap>
   <sql id="ibatorgenerated_Example_Where_Clause" >
     <!--
@@ -245,4 +246,18 @@
       create_time = #createTime:TIMESTAMP#
     where id = #id:BIGINT#
   </update>
+  <select id="select_with_count_ByExample" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.twitpic.db.model.CollectionExample" >
+  	select c.*,b.collect_count from collections c left join (select id_collections,count(*) as collect_count from pictures_collection) b on c.id=b.id_collections
+    from collections
+    <isParameterPresent >
+      <include refid="collections.ibatorgenerated_Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="select_with_count_ByPrimaryKey" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.twitpic.db.model.Collection" >
+  	select c.*,b.collect_count from collections c left join (select id_collections,count(*) as collect_count from pictures_collection) b on c.id=b.id_collections
+    where id = #id:BIGINT#
+  </select>
 </sqlMap>
