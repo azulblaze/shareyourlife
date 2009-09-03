@@ -51,4 +51,8 @@ public interface CollectionService {
 	 * @throws Exception
 	 */
 	public boolean bind_collection(String account,Long id_picture,com.twitpic.db.model.Collection collection) throws Exception;
+	
+	public java.util.List<com.twitpic.db.model.Collection> select_all_collections(String account);
+	
+	public com.twitpic.db.model.Collection select_collection(String account,Long id);
 }

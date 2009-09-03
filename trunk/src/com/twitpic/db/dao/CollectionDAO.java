@@ -94,4 +94,8 @@ public interface CollectionDAO {
     int updateByPrimaryKey(Collection record);
     
     long insert_return_id(Collection record);
+    
+    List<Collection> select_with_count_ByExample(CollectionExample example);
+    
+    Collection select_with_count_ByPrimaryKey(Long id);
 }
