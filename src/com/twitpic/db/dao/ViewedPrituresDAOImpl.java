@@ -161,4 +161,9 @@ public class ViewedPrituresDAOImpl extends SqlMapClientDaoSupport implements Vie
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(ViewedPritures record) {
+		return (Long)getSqlMapClientTemplate().insert("viewed_pritures.ibatorgenerated_insert", record);
+	}
 }

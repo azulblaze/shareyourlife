@@ -92,4 +92,8 @@ public interface PicturesCollectionDAO {
      * @ibatorgenerated Wed Sep 02 16:12:27 CST 2009
      */
     int updateByPrimaryKey(PicturesCollection record);
+    
+    long insert_return_id(PicturesCollection record);
+    
+    int count_collection_picture(String account,Long id_picture,Long id_collections);
 }
