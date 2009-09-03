@@ -92,4 +92,6 @@ public interface ViewedPrituresDAO {
      * @ibatorgenerated Wed Sep 02 16:12:27 CST 2009
      */
     int updateByPrimaryKey(ViewedPritures record);
+    
+    long insert_return_id(ViewedPritures record);
 }

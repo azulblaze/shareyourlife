@@ -161,4 +161,20 @@ public class PicturesCollectionDAOImpl extends SqlMapClientDaoSupport implements
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(PicturesCollection record) {
+		return (Long)getSqlMapClientTemplate().insert("pictures_collection.ibatorgenerated_insert", record);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int count_collection_picture(String account, Long idPicture,
+			Long idCollections) {
+		java.util.Map maps = new java.util.HashMap();
+		maps.put("account", maps);
+		maps.put("id_pictures", idPicture);
+		maps.put("id_collections", idCollections);
+		return (Integer)  getSqlMapClientTemplate().queryForObject("pictures_collection.count_collected_picture", maps);
+	}
 }

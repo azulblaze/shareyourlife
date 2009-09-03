@@ -92,4 +92,6 @@ public interface CollectionDAO {
      * @ibatorgenerated Wed Sep 02 16:12:27 CST 2009
      */
     int updateByPrimaryKey(Collection record);
+    
+    long insert_return_id(Collection record);
 }
