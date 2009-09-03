@@ -229,7 +229,7 @@ CREATE  TABLE IF NOT EXISTS collections (
   description VARCHAR(200) NULL ,
   create_time TIMESTAMP NULL ,
   PRIMARY KEY (id) ,
-  UNIQUE INDEX C_UNIQUE (name ASC) )
+  UNIQUE INDEX C_UNIQUE (account ASC,name ASC) )
 ENGINE = InnoDB
 go
 

@@ -164,7 +164,7 @@ public class CollectionDAOImpl extends SqlMapClientDaoSupport implements Collect
 
 	@Override
 	public long insert_return_id(Collection record) {
-		return (Long)getSqlMapClientTemplate().insert("collections.ibatorgenerated_insert", record);
+		return (Long)getSqlMapClientTemplate().insert("collections.insert_return_id", record);
 	}
 
 	@Override
