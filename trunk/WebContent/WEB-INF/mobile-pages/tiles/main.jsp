@@ -20,7 +20,7 @@
 		# 当前最新相片 (当前第<strong><s:property value="h_pictures_pageindex+1" /></strong>页)
 	</div>
 	<div>
-		<s:iterator value="h_pictures_list" id="picture" status="num">
+		<s:iterator value="h_pictures_list" id="item_picture" status="num">
 			<div>
 				<table>
 					<tr>
