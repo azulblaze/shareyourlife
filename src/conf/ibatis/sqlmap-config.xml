@@ -22,5 +22,7 @@
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/permissions_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/permissions_scheme_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/resources_permission_SqlMap.xml" />
-	
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/collections_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/pictures_collection_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/viewed_pritures_SqlMap.xml" />
 </sqlMapConfig>
