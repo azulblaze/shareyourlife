@@ -2,7 +2,6 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!-- start: 用户信息, 要求登录用户才能显示 -->
 <s:if test="#session.user != null && #session.user.status == 1" >
-
 <div class="div_panel">
 	欢迎您, <s:property value="#session.user.name" /> <br />
 	你的信息(

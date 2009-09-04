@@ -12,6 +12,12 @@
 			body textarea{
 				font-size:12px;
 			}
+			body input{
+				font-size:12px;
+			}			
+			body div{
+				padding:4px 2px
+			}
 			.div_panel{
 				border-bottom: 1px solid #DDDDDD;
 				padding:4px 2px
