@@ -218,7 +218,7 @@ public class MessageAction extends BaseAction {
 				this.m_message_service.sendMessage( 
 						this.formMessages.getTitle(), this.formMessages.getMsgContent(), 
 						MessagesInfo.MessageType.Site, MessagesInfo.MessageCategory.User, 
-						this.loadAccount().getAccount(), this.formMessages.getReceiver());
+						this.loadAccount().getAccount(), this.getRequestParameter("msg_receiver"));
 				this.addActionMessage("信息发送成功");
 				return ActionConstant.ACTION_RETURN_MSG_BOX;
 			} catch (Exception ex) {
