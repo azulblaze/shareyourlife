@@ -1,21 +1,14 @@
 <%@ page language="java" contentType="application/xhtml+xml;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<style>
-	.c_h {
-		background-color:#b694d1;
-		font-weight:bold;
-	}
-</style>
-
 <div class="div_panel">
 	
-	<div class="c_h" >
+	<div class="div_panel" >
 		此图片评论(<s:property value="paged_comments_total_count" />)条,
 		当前第(<s:property value="page_index+1" />)页
 		-共(<s:property value="page_count" />)页
 	</div>
-	<div class="c_h">
+	<div class="div_panel_header">
 		<form method="post" action="more_comments.do">
 			<input type="hidden" name="formMoreComments.pictureId" value="<s:property value='picture_id' />" />
 			评论列表:&nbsp;
@@ -31,12 +24,10 @@
 			<input type="submit" value="翻页" />
 		</form>
 	</div>
-	<div>
-		<hr />
-	</div>
+
 		   <form action="comment.do" method="post">
 			   	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture_id'/>"/>
-			  	<div>
+			  	<div class="div_panel" >
 			  		<table width="100%">
 			  		<s:iterator value="paged_comments" >
 			  			<tr>
@@ -51,7 +42,7 @@
 			  		</s:iterator>
 			  		</table>
 			  	</div>
-			  	<div class="c_h">
+			  	<div class="div_panel_header">
 			  		添加评论:
 			  	</div>
 			  	<div>
@@ -64,5 +55,5 @@
 					</s:if>			   		
 			   	</div>
 		   </form>	
-	
+
 </div>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!-- start: 用户信息, 要求登录用户才能显示 -->
 <s:if test="#session.user != null && #session.user.status == 1" >
-<div> ----------------------- </div>
+
 <div class="div_panel">
 	欢迎您, <s:property value="#session.user.name" /> <br />
 	你的信息(
@@ -11,25 +11,24 @@
 	<br />
 </div>
 </s:if>
-<div> ----------------------- </div>
 <!-- end: 用户信息-->
 
 <!-- start: 当前最新相片 -->
-<div class="div_panel">
-	<div class="div_title">
-		# 当前最新相片 (当前第<strong><s:property value="h_pictures_pageindex+1" /></strong>页)
+<div>
+	<div class="div_panel_header">
+		&nbsp;当前最新相片 (当前第<strong><s:property value="h_pictures_pageindex+1" /></strong>页)
 	</div>
 	<div>
 		<s:iterator value="h_pictures_list" id="item_picture" status="num">
-			<div>
-				<table>
-					<tr>
-						<td valign="top" >
+			<div class="div_panel">
+				<table width="100%">
+					<tr >
+						<td valign="top" width="50%">
 							<a href="picture.do?id_picture=<s:property value='pictures.id'/>" >
 								<img src="<s:property value='pictures.min'/>"/>
 							</a>					
 						</td>
-						<td valign="top" >
+						<td valign="top" width="50%">
 						 	<div>
 							 	<img height="16" with="16" src="<s:property value='picture'/>"/>
 							 	<a href="<s:property value='account'/>" >
@@ -41,10 +40,9 @@
 						 	</div>
 						 	<div>
 						 		<a href="">加好友</a>&nbsp;
-						 		<a href="m/more_comments.do?formMoreComments.pictureId=<s:property value='pictures.id'/>">评论</a>&nbsp;
-						 		<a href="m/more_tags.do?formTag.id_pictures=<s:property value='pictures.id'/>">标签</a>
+						 		<a href="more_comments.do?formMoreComments.pictureId=<s:property value='pictures.id'/>">评论</a>&nbsp;
+						 		<a href="more_tags.do?formTag.id_pictures=<s:property value='pictures.id'/>">标签</a>
 						 	</div>
-						 						
 						</td>
 					</tr>
 				</table>
@@ -52,25 +50,24 @@
 		</s:iterator>
 	</div>
 
-	<div>
+	<div class="div_panel_header" >
 		<a href="index.do" >第一页</a>&nbsp;
 		<a href="index.do?formHome.picturesPageIndex=<s:property value='h_pictures_pageindex-1' />" >上一页</a>&nbsp;
 		<a href="index.do?formHome.picturesPageIndex=<s:property value='h_pictures_pageindex+1' />" >下一页 ... </a>
 	</div>
 </div>
-<div> ----------------------- </div>
 
 <!-- start: 当前热门标签 -->
-<div class="div_panel">
-	<div class="div_title">
-		# 热门标签 (当前第<strong>1</strong>页)
+<div>
+	<div class="div_panel_header">
+		&nbsp;热门标签 (当前第<strong>1</strong>页)
 		&nbsp;<a href="">更多</a>
 	</div>
-	<div>
+	<div class="div_panel" >
 		朋友 | 聚会 | 同事 | 周末 <br />
 		吃饭 | 电影 | 河蟹 | 新闻
 	</div>
-	<div>
+	<div class="div_panel" >
 		<a href="" >第一页</a>&nbsp;
 		<a href="" >上一页</a>&nbsp;
 		<a href="" >下一页</a>
