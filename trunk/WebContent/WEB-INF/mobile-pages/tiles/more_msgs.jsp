@@ -20,11 +20,12 @@
 				</s:iterator>
 			</select>
 			<input type="submit" value="翻页" />
+			<a href="msgsend.do?a=new" ><input type="button" value="写消息" /></a>
 		</form>
 	</div>
 	<form method="post" action="delete_msgs.do">
 		<div class="div_panel">
-			<table width="100%">
+			<table>
 			<s:iterator value="paged_messages" >
 				<tr>
 					<td width="5%">
