@@ -1,21 +1,14 @@
 <%@ page language="java" contentType="application/xhtml+xml;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<style>
-	.c_h {
-		background-color:#b694d1;
-		font-weight:bold;
-	}
-</style>
-
 <div class="div_panel">
 	
-	<div class="c_h" >
+	<div class="div_panel_header" >
 		你共有(<s:property value="item_total_count" />)条信息,
 		当前第(<s:property value="page_index" />)页
 		-共(<s:property value="page_count" />)页
 	</div>
-	<div class="c_d">
+	<div class="div_panel">
 		<form method="post" action="msglist.do">
 			<select name="formMessages.msgListPageIndex" >
 				<s:iterator status="stat" value="(page_count).{ #this }">
@@ -29,11 +22,8 @@
 			<input type="submit" value="翻页" />
 		</form>
 	</div>
-	<div>
-		<hr />
-	</div>
 	<form method="post" action="delete_msgs.do">
-		<div>
+		<div class="div_panel">
 			<table width="100%">
 			<s:iterator value="paged_messages" >
 				<tr>
@@ -61,10 +51,7 @@
 			</s:iterator>
 			</table>
 		</div>
-		<div>
-			<hr />
-		</div>	
-		<div>
+		<div style="padding:4px 2px;">
 			<s:if test="urlBack != null ">
 				<a href="<s:property value='urlBack' />"><input type="button" value="返&nbsp;回" /></a>&nbsp;
 			</s:if>

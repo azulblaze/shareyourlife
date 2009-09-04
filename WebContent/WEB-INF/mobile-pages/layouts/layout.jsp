@@ -6,9 +6,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<style>
-			.div_panel {
-				width:300px;
+			body {
 				font-size:12px;
+			}
+			body textarea{
+				font-size:12px;
+			}
+			.div_panel{
+				border-bottom: 1px solid #DDDDDD;
+				padding:4px 2px
+			}
+			.div_panel_header{
+				border-bottom: 1px solid #DDDDDD;
+				padding:4px 2px;
+				color: #a012b4;
 			}
 		</style>	
 	</head>
