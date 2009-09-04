@@ -20,14 +20,14 @@
 	<div>
 		<s:iterator value="h_pictures_list" id="item_picture" status="num">
 			<div class="div_panel">
-				<table width="100%">
+				<table>
 					<tr >
-						<td valign="top" width="50%">
+						<td valign="top">
 							<a href="picture.do?id_picture=<s:property value='pictures.id'/>" >
 								<img src="<s:property value='pictures.min'/>"/>
 							</a>					
 						</td>
-						<td valign="top" width="50%">
+						<td align="right" valign="top">
 						 	<div>
 							 	<img height="16" with="16" src="<s:property value='picture'/>"/>
 							 	<a href="<s:property value='account'/>" >
