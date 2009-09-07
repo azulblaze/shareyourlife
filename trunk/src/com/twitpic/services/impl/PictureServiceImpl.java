@@ -90,7 +90,7 @@ public class PictureServiceImpl implements PictureService {
 	}
 
 	@Override
-	public PictureInfo savePicture(Account user, String root_path, File file,String filetype,String description,String title)
+	public PictureInfo savePicture(Account user, String root_path, File file,String filetype,String description,String title,String from)
 			throws Exception {
 		if(file.length()>systemConfig.getUpload_pic_maxlength()){
 			throw new Exception("上次文件大小超过"+systemConfig.getUpload_pic_maxlength()/(1024*1024)+"MB限制");
@@ -115,6 +115,8 @@ public class PictureServiceImpl implements PictureService {
 			pp.setUploadAccount(user.getAccount());
 			pp.setUploadTime(new java.util.Date());
 			pp.setStatus(PicturesParameter.STATUS_ALL);
+			pp.setViewedTimes(0l);
+			pp.setDevice(from);
 			picturesParameterDAO.insert(pp);
 			this.m_db_tx_manager.commit(status);
 			//return the picture info
