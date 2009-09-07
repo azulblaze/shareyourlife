@@ -4,7 +4,7 @@ body {
 	font:12px Tahoma, arial, sans-serif;
 	color:#464646;
 	line-height:20px;
-	background:url(../images/index_back.png) #791781 top center no-repeat;
+	background:#791781;
 }
 
 ul,li {
@@ -45,6 +45,7 @@ a:hover {
 #wrap {
 	width:960px;
 	margin:0px auto;
+	background:url(../images/index_back.png) #791781 top no-repeat;
 }
 
 #welcomePage{
