@@ -110,7 +110,7 @@ public class AccountAction extends BaseAction {
 	 */
 	public String logout()throws Exception{
 		clearSession(ConsVar.SESSION_USER);
-		return "index";
+		return "welcome";
 	}
 	
 	/**

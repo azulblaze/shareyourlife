@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.twitpic.actions.BaseAction;
 import com.twitpic.db.model.Comments;
+import com.twitpic.db.model.PicturesParameter;
 import com.twitpic.db.model.Tags;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.FormComment;
@@ -151,7 +152,7 @@ public class PictureAction extends BaseAction {
 				return ActionConstant.ACTION_RETURN_MSG_BOX;
 			}
 			Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
-			PictureInfo pi = pictureService.savePicture(user, root_path, pic, ext_type, description,title);
+			PictureInfo pi = pictureService.savePicture(user, root_path, pic, ext_type, description,title,PicturesParameter.DEVICE_M);
 			this.addActionMessage("恭喜,上传成功");
 			return ActionConstant.ACTION_RETURN_MSG_BOX;
 		}catch(Exception e){

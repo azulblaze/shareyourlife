@@ -6,6 +6,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.twitpic.db.model.PicturesParameter;
 import com.twitpic.domain.Account;
 import com.twitpic.domain.PictureInfo;
 import com.twitpic.services.PictureService;
@@ -100,7 +101,7 @@ public class PictureAction extends BaseAction {
 				return null;
 			}
 			Account user = (Account)this.getHttpSession().getAttribute(ConsVar.SESSION_USER);
-			PictureInfo pi = pictureService.savePicture(user, root_path, pic, ext_type, description,title);
+			PictureInfo pi = pictureService.savePicture(user, root_path, pic, ext_type, description,title,PicturesParameter.DEVICE_NET);
 			pm.setStatus("done");
 			pm.setPictureInfo(pi);
 			return null;
