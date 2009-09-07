@@ -7,7 +7,7 @@
 <s:actionerror/>
 <s:actionmessage/>
 <form action="forget_pass.do" method="post">
-<input type="hidden" name="submit" value="true"/>
+<input type="hidden" name="sub" value="true"/>
 <p>
 帐号:<input type="text" name="account"/>
 </p>

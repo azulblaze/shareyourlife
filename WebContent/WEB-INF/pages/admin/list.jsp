@@ -9,7 +9,7 @@ border:none;
 <form method="post" action="dashboard.do">
 From:<input type="text" name="from"/>
 To:<input type="text" name="to"/>
-<input type="hidden" name="submit" value="true"/>
+<input type="hidden" name="sub" value="true"/>
 <input type="submit" value="Search"/>
 </form>
 <s:if test="pil!=null&&pil.pis!=null">

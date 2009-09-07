@@ -75,7 +75,7 @@ public class PictureAction extends BaseAction {
 		}else{
 			file_tag = file_tag.trim();
 		}
-		String submit = this.getRequestParameter("submit");
+		String submit = this.getRequestParameter("sub");
 		//if this is load the upload input page
 		if(submit==null||!submit.equals("true")){
 			clearSession(ProgressMonitor.SESSION_PROGRESS_MONITOR+file_tag);

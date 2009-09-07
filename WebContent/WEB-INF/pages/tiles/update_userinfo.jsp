@@ -5,7 +5,7 @@
 <div>
 <h5>修改密码</h5>
 <form action="/edit_password.do" method="post">
-<input type="hidden" name="submit" value="true"/>
+<input type="hidden" name="sub" value="true"/>
 <p>
 当前密码:<input type="password" name="formUserProfile.oldpassword"/>
 </p>
@@ -24,7 +24,7 @@
 <div>
 <h5>更改头像</h5>
 <form action="/edit_header.do" method="post" enctype="multipart/form-data">
-<input type="hidden" name="submit" value="true"/>
+<input type="hidden" name="sub" value="true"/>
 <p>
 <img alt="<s:property value='#session.user.name'/>" src="<s:property value='#session.user.picture'/>">
 </p>
@@ -40,7 +40,7 @@
 <div>
 <h5>修改资料</h5>
 <form action="/edit_profile.do" method="post">
-<input type="hidden" name="submit" value="true"/>
+<input type="hidden" name="sub" value="true"/>
 <p>
 签名:<input type="text" name="formUserProfile.signature"/>
 </p>

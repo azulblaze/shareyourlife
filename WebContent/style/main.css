@@ -134,7 +134,7 @@ li.recent li a {
 	height:20px;
 	margin-top:8px;
 }
-
+#bottomNav ul.login input.error{ border: 1px dotted red; }
 #bottomNav ul.search {
 	float:right;
 }
