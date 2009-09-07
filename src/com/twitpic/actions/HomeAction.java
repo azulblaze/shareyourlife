@@ -36,14 +36,15 @@ public class HomeAction extends BaseAction {
 	}
 
 	public String index() throws Exception{
-		if(isLogin()){
-			this.setValue("pictures", pictureService.loadHomePictures(15));
-			this.setValue("daykeys", tagService.load_day_tag(0, 10));
-			this.setValue("weekkeys", tagService.load_week_tag(0, 10));
-			this.setValue("monthkeys", tagService.load_month_tag(0, 10));
-			return SUCCESS;
-		}
-		return "welcome";
+		this.setValue("pictures", pictureService.loadHomePictures(15));
+		this.setValue("daykeys", tagService.load_day_tag(0, 10));
+		this.setValue("weekkeys", tagService.load_week_tag(0, 10));
+		this.setValue("monthkeys", tagService.load_month_tag(0, 10));
+		return SUCCESS;
+	}
+	
+	public String welcome() throws Exception{
+		return SUCCESS;
 	}
 	
 	public void setTagService(TagService tagService) {

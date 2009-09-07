@@ -19,12 +19,15 @@
 			<result name="error">/WEB-INF/pages/tiles/error.jsp</result>
 			<result name="json">/WEB-INF/pages/tiles/json_response_tile.jsp</result>	
 			<result name="index" type="redirect-action">index</result>
+			<result name="welcome" type="redirect-action">welcome</result>
 			<result name="login" type="redirect-action">login</result>			
 		</global-results>
 		
 		 <action name="index" class="homeAction" method="index">
-		 	<result name="welcome">/WEB-INF/pages/tiles/index.jsp</result>
 		 	<result name="success" type="tiles">page.main</result>
+		 </action>
+		 <action name="welcome" class="homeAction" method="welcome">
+		 	<result name="success">/WEB-INF/pages/tiles/index.jsp</result>
 		 </action>
 		 
 		<action name="login" class="accountAction" method="login" >

@@ -8,7 +8,7 @@ public interface PictureService {
 	
 	public java.util.List<com.twitpic.domain.PictureInfo> load_picturesinfo_by_account(String account)throws java.lang.Exception;
 	
-	public com.twitpic.domain.PictureInfo savePicture(com.twitpic.domain.Account user,String root_path,java.io.File file,String filetype,String description,String title)throws java.lang.Exception;
+	public com.twitpic.domain.PictureInfo savePicture(com.twitpic.domain.Account user,String root_path,java.io.File file,String filetype,String description,String title,String from)throws java.lang.Exception;
 	
 	/**
 	 * Home's pictures list
