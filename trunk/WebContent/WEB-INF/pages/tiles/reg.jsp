@@ -6,7 +6,7 @@
 <h5>注册</h5>
 <s:actionerror/>
 <form action="reg.do" method="post">
-<input type="hidden" name="submit" value="true"/>
+<input type="hidden" name="sub" value="true"/>
 <p>
 帐号:<input type="text" name="formRegister.account" value="<s:property value='formRegister.account'/>"/>
 </p>

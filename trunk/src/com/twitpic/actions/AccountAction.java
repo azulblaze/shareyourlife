@@ -81,7 +81,7 @@ public class AccountAction extends BaseAction {
 		if(formLogin==null){
 			formLogin = new FormLogin();
 		}
-		String submit = this.getRequestParameter("submit");
+		String submit = this.getRequestParameter("sub");
 		if(submit==null||!submit.equals("true")){
 			return INPUT;
 		}
@@ -124,7 +124,7 @@ public class AccountAction extends BaseAction {
 			formRegister = new FormRegister();
 		}
 		this.setValue("formRegister", formRegister);
-		String submit = this.getRequestParameter("submit");
+		String submit = this.getRequestParameter("sub");
 		if(submit==null||!submit.equals("true")){
 			return INPUT;
 		}
@@ -289,7 +289,7 @@ public class AccountAction extends BaseAction {
 	}
 	
 	public String findPassword()throws Exception{
-		String submit = this.getRequestParameter("submit");
+		String submit = this.getRequestParameter("sub");
 		if(submit==null||!submit.equals("true")){
 			return INPUT;
 		}
