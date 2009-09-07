@@ -1,0 +1,171 @@
+body {
+	margin:0;
+	padding:0;
+	font:12px Tahoma, arial, sans-serif;
+	color:#464646;
+	line-height:20px;
+	background:url(../images/index_back.png) #791781 top center repeat-x;
+}
+
+ul,li {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+h1,h2,h3 {
+	margin:0;
+	line-height:none;
+	padding:0;
+}
+
+img {
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+form,input {
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+a {
+	margin:0;
+	padding:0;
+	color:#264478;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;	
+}
+
+#wrap {
+	width:960px;
+	margin:0px auto;
+}
+
+#welcomePage{
+	width:930px;
+	margin:0px auto;
+	overflow:hidden;
+}
+
+#welcomePage .binInfo{
+	float:left;
+}
+
+#welcomePage .marrowPic{
+	float:left;
+	margin:26px 0 0 39px;
+}
+
+.logo {
+	margin:26px 0 0 73px;
+}
+
+.info {
+	margin:7px 0 0 26px;
+	width:348px;
+	height:196px;
+	padding:19px 0 0 0;
+	text-align:center;
+	background:url(../images/index_reg_bg.gif) top center repeat-x;
+}
+
+img.regBtn {
+	margin-top:15px;
+}
+
+.clear {
+	clear:both;
+}
+
+#welcomePage ul.content {
+	float:left;
+	margin:39px 0 0 0;
+}
+
+#welcomePage ul.content li {
+	float:left;
+	margin-right:13px;
+}
+
+
+#welcomePage ul.content li.recent {
+	width:170px;
+	height:85px;
+	padding:40px 0 0 110px;
+	margin-right:0px;
+	background:url(../images/tj03.gif) top left no-repeat;
+}
+
+li.recent li a {
+	line-height:20px;
+	color:#fff;
+}
+
+#bottomNav{
+	clear:both;
+	margin-top:30px;
+	width:940px;
+	height:38px;
+	padding:0 10px;
+	background:url(../images/bottomNav.gif) top left no-repeat;
+}
+
+#bottomNav ul.login {
+	float:left;
+}
+
+#bottomNav ul.login li {
+	float:left;	
+	margin-right:15px;
+}
+
+#bottomNav ul.login input {
+	background:#9b9b9b;
+	color:#fff;
+	border:none;
+	width:105px;
+	height:20px;
+	margin-top:8px;
+}
+
+#bottomNav ul.search {
+	float:right;
+}
+
+#bottomNav ul.search li {
+	float:left;	
+	margin-right:10px;
+}
+
+#bottomNav ul.search input.default {
+	background:#9b9b9b;
+	color:#d0d0d0;
+	border:none;
+	width:187px;
+	height:20px;
+	margin-top:8px;
+}
+
+#bottomNav ul.search input.choice {
+	background:#9b9b9b;
+	color:#fff;
+	border:none;
+	width:187px;
+	height:20px;
+	margin-top:8px;
+}
+
+.copyright {
+	clear:both;
+	color:#c092c4;
+}
+
+.copyright a {
+	color:#c092c4;
+}
