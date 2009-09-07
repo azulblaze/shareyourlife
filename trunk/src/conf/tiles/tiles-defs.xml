@@ -7,9 +7,6 @@
 		<put-attribute name="header" value="/WEB-INF/pages/tiles/header.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/pages/tiles/footer.jsp"></put-attribute>
 	</definition>
-	<definition name="page.index" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/pages/tiles/index.jsp"></put-attribute>
-	</definition>
 	<definition name="page.login" template="/WEB-INF/pages/layouts/layout.jsp" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/pages/tiles/login.jsp"></put-attribute>
 	</definition>

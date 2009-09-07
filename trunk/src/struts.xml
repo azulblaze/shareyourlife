@@ -23,7 +23,7 @@
 		</global-results>
 		
 		 <action name="index" class="homeAction" method="index">
-		 	<result name="welcome" type="tiles">page.index</result>
+		 	<result name="welcome">/WEB-INF/pages/tiles/index.jsp</result>
 		 	<result name="success" type="tiles">page.main</result>
 		 </action>
 		 
