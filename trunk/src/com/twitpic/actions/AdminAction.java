@@ -25,7 +25,7 @@ public class AdminAction extends BaseAction {
 		if(formLogin==null){
 			formLogin = new FormLogin();
 		}
-		String submit = this.getRequestParameter("submit");
+		String submit = this.getRequestParameter("sub");
 		if(submit==null||!submit.equals("true")){
 			return INPUT;
 		}
@@ -45,7 +45,7 @@ public class AdminAction extends BaseAction {
 	
 	public String dashboard() throws Exception{
 		if(isAdmin()){
-			String submit = this.getRequestParameter("submit");
+			String submit = this.getRequestParameter("sub");
 			if(submit==null||!submit.equals("true")){
 				return SUCCESS;
 			}
