@@ -4,7 +4,7 @@ body {
 	font:12px Tahoma, arial, sans-serif;
 	color:#464646;
 	line-height:20px;
-	background:url(../images/index_back.png) #791781 top center repeat-x;
+	background:url(../images/index_back.png) #791781 top center no-repeat;
 }
 
 ul,li {
