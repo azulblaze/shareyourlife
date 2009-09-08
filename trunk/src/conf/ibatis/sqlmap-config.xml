@@ -25,4 +25,6 @@
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/collections_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/pictures_collection_SqlMap.xml" />
 	<sqlMap resource="com/twitpic/db/dao/sqlmap/viewed_pritures_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/groups_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_group_SqlMap.xml" />
 </sqlMapConfig>
