@@ -23,7 +23,6 @@
 		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
 			targetProject="twitpic/src" />
 		
-		<table tableName="groups" domainObjectName="Group"></table>
-		<table tableName="users_group" domainObjectName="UsersGroup"></table>
+		<table tableName="follows" domainObjectName="Follow"></table>
 	</ibatorContext>
 </ibatorConfiguration>
