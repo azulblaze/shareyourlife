@@ -18,4 +18,6 @@
 	<bean name="picturesCollectionDAO" id="picturesCollectionDAO" class="com.twitpic.db.dao.PicturesCollectionDAOImpl" />
 	<bean name="collectionDAO" id="collectionDAO" class="com.twitpic.db.dao.CollectionDAOImpl" />
 	<bean name="viewedPrituresDAO" id="viewedPrituresDAO" class="com.twitpic.db.dao.ViewedPrituresDAOImpl" />
+	<bean name="groupDAO" id="groupDAO" class="com.twitpic.db.dao.GroupDAOImpl" />
+	<bean name="usersGroupDAO" id="usersGroupDAO" class="com.twitpic.db.dao.UsersGroupDAOImpl" />
 </beans>

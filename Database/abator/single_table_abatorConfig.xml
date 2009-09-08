@@ -23,9 +23,7 @@
 		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
 			targetProject="twitpic/src" />
 		
-		<table tableName="viewed_pritures" domainObjectName="ViewedPritures"></table>
-		<table tableName="collections" domainObjectName="Collection"></table>
-		<table tableName="pictures_collection" domainObjectName="PicturesCollection"></table>
-		<table tableName="pictures_parameter" domainObjectName="PicturesParameter"></table>
+		<table tableName="groups" domainObjectName="Group"></table>
+		<table tableName="users_group" domainObjectName="UsersGroup"></table>
 	</ibatorContext>
 </ibatorConfiguration>
