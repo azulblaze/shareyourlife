@@ -20,4 +20,5 @@
 	<bean name="viewedPrituresDAO" id="viewedPrituresDAO" class="com.twitpic.db.dao.ViewedPrituresDAOImpl" />
 	<bean name="groupDAO" id="groupDAO" class="com.twitpic.db.dao.GroupDAOImpl" />
 	<bean name="usersGroupDAO" id="usersGroupDAO" class="com.twitpic.db.dao.UsersGroupDAOImpl" />
+	<bean name="followDAO" id="followDAO" class="com.twitpic.db.dao.FollowDAOImpl" />
 </beans>
