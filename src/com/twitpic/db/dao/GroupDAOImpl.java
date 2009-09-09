@@ -161,4 +161,9 @@ public class GroupDAOImpl extends SqlMapClientDaoSupport implements GroupDAO {
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(Group record) {
+		return (Long)getSqlMapClientTemplate().insert("groups.insert_return_id", record);
+	}
 }

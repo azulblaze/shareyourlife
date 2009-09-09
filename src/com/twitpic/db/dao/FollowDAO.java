@@ -92,4 +92,6 @@ public interface FollowDAO {
      * @ibatorgenerated Tue Sep 08 17:33:31 CST 2009
      */
     int updateByPrimaryKey(Follow record);
+    
+    long insert_return_id(Follow record);
 }

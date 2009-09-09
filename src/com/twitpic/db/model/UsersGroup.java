@@ -162,4 +162,10 @@ public class UsersGroup {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+    
+    public static final int STATUS_APPLY = 0;
+    
+    public static final int STATUS_REJECT =-1;
+    
+    public static final int STATUS_CONFIRM =1;
 }
