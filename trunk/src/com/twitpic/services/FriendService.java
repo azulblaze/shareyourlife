@@ -27,6 +27,15 @@ public interface FriendService {
 	 */
 	public boolean delete_group(String account, Long id) throws Exception;
 	/**
+	 * user add friend without group
+	 * @param account who want to add the friend
+	 * @param friend the friend that will be added
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer apply_friend(String account,String friend) throws Exception;
+
+	/**
 	 * 
 	 * @param account who want to add the friend
 	 * @param friend the friend that will be added
