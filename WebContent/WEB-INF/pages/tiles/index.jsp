@@ -9,6 +9,7 @@
 	<meta name="Description" content="茄子网" />
 	<link rel="bookmark" href="favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<link type="images/gif" href="/act_favicon.gif" rel="icon"/>
 	<title>茄子网 myqizi.com</title>
 	<link rel="stylesheet" href="style/main.css" type="text/css"/>
 	<link rel="stylesheet" href="css/jquery.validate.css" type="text/css"/>
