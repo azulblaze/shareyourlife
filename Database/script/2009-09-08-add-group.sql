@@ -20,6 +20,7 @@ go
 CREATE  TABLE IF NOT EXISTS users_group (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   id_groups BIGINT NULL ,
+  src_account VARCHAR(100) NULL ,
   account VARCHAR(100) NULL ,
   status INT NULL ,
   update_time TIMESTAMP NULL DEFAULT current_timestamp ,

@@ -25,7 +25,33 @@ public class FriendServiceImpl implements FriendService {
 	public void setUsersGroupDAO(com.twitpic.db.dao.UsersGroupDAO usersGroupDAO) {
 		this.usersGroupDAO = usersGroupDAO;
 	}
-
+	
+	@Override
+	public Integer apply_friend(String account, String friend) throws Exception {
+		UsersGroupExample example = new UsersGroupExample();
+		example.createCriteria().andAccountEqualTo(friend).andSrcAccountEqualTo(account);
+		java.util.List<UsersGroup> lists = usersGroupDAO.selectByExample(example);
+		if(lists.size()>0){
+			UsersGroup ug = lists.get(0);
+			//if we found that the user relation is not confirmed and applied, we change to applied
+			if(ug.getStatus()!=UsersGroup.STATUS_APPLY&&ug.getStatus()!=UsersGroup.STATUS_CONFIRM){
+				ug.setStatus(UsersGroup.STATUS_APPLY);
+				ug.setUpdateTime(new java.util.Date());
+				usersGroupDAO.updateByPrimaryKey(ug);
+			}
+			return ug.getStatus();
+		}
+		UsersGroup ug = new UsersGroup();
+		ug.setSrcAccount(account);
+		ug.setAccount(friend);
+		ug.setIdGroups(null);
+		ug.setStatus(UsersGroup.STATUS_APPLY);
+		ug.setUpdateTime(new java.util.Date());
+		ug.setId(usersGroupDAO.insert_return_id(ug));
+		return UsersGroup.STATUS_APPLY;
+	
+	}
+	
 	@Override
 	public Integer apply_friend(String account, String friend, Long idGroup)
 			throws Exception {
@@ -48,6 +74,7 @@ public class FriendServiceImpl implements FriendService {
 		}
 		UsersGroup ug = new UsersGroup();
 		ug.setAccount(friend);
+		ug.setSrcAccount(account);
 		ug.setIdGroups(idGroup);
 		ug.setStatus(UsersGroup.STATUS_APPLY);
 		ug.setUpdateTime(new java.util.Date());
@@ -88,6 +115,7 @@ public class FriendServiceImpl implements FriendService {
 			group.setId(groupDAO.insert_return_id(group));
 		}
 		UsersGroup ug = new UsersGroup();
+		ug.setSrcAccount(account);
 		ug.setAccount(friend);
 		ug.setIdGroups(group.getId());
 		ug.setStatus(UsersGroup.STATUS_APPLY);
@@ -105,19 +133,37 @@ public class FriendServiceImpl implements FriendService {
 				ug.setUpdateTime(new java.util.Date());
 				usersGroupDAO.updateByPrimaryKey(ug);
 			}
+			//if confirmed, we add the friend by each other
+			UsersGroupExample uge = new UsersGroupExample();
+			uge.createCriteria().andSrcAccountEqualTo(account).andAccountEqualTo(ug.getSrcAccount());
+			java.util.List<UsersGroup> ugs = usersGroupDAO.selectByExample(uge);
+			UsersGroup my_ug = null;
+			if(ugs.size()>0){
+				my_ug = ugs.get(0);
+				my_ug.setStatus(UsersGroup.STATUS_CONFIRM);
+				my_ug.setUpdateTime(new java.util.Date());
+				usersGroupDAO.updateByPrimaryKey(my_ug);
+			}else{
+				my_ug = new UsersGroup();
+				my_ug.setSrcAccount(account);
+				my_ug.setAccount(ug.getSrcAccount());
+				my_ug.setIdGroups(null);
+				my_ug.setStatus(UsersGroup.STATUS_CONFIRM);
+				my_ug.setUpdateTime(new java.util.Date());
+				usersGroupDAO.insert(my_ug);
+			}
 			return ug.getStatus();
 		}
-		throw new Exception("错误得请求");
+		throw new Exception("错误的请求");
 	}
 
 	@Override
 	public Integer reject_friend(String account, Long id) throws Exception {
 		UsersGroup ug = usersGroupDAO.selectByPrimaryKey(id);
 		if(ug==null){
-			throw new Exception("错误得请求");
+			throw new Exception("错误的请求");
 		}
-		Group group = groupDAO.selectByPrimaryKey(ug.getIdGroups());
-		if(ug!=null&&group!=null&&group.getAccount().equals(account)){
+		if(ug!=null&&ug.getAccount().equals(account)){
 			//if the status is apply, set to reject
 			if(ug.getStatus()==UsersGroup.STATUS_APPLY){
 				ug.setStatus(UsersGroup.STATUS_REJECT);
@@ -126,7 +172,7 @@ public class FriendServiceImpl implements FriendService {
 			}
 			return ug.getStatus();
 		}
-		throw new Exception("错误得请求");
+		throw new Exception("错误的请求");
 	}
 	
 	@Override
@@ -135,7 +181,7 @@ public class FriendServiceImpl implements FriendService {
 		example.createCriteria().andAccountEqualTo(account).andNameEqualTo(name);
 		java.util.List<Group> groups = groupDAO.selectByExample(example);
 		if(groups.size()>0){
-			throw new Exception("不能创建重复得名字");
+			throw new Exception("不能创建重复的名字");
 		}
 		Group group = new Group();
 		group.setAccount(account);
@@ -151,8 +197,7 @@ public class FriendServiceImpl implements FriendService {
 		if(ug==null){
 			return false;
 		}
-		Group group = groupDAO.selectByPrimaryKey(ug.getIdGroups());
-		if(group!=null&&group.getAccount().equals(account)&&ug!=null){
+		if(ug!=null&&ug.getSrcAccount().equals(account)){
 			usersGroupDAO.deleteByPrimaryKey(id);
 			return true;
 		}
@@ -177,7 +222,7 @@ public class FriendServiceImpl implements FriendService {
 			throws Exception {
 		Group group = groupDAO.selectByPrimaryKey(id);
 		if(group==null){
-			throw new Exception("错误得请求");
+			throw new Exception("错误的请求");
 		}
 		if(group.getName().equals(name)){
 			return group;
@@ -186,12 +231,13 @@ public class FriendServiceImpl implements FriendService {
 		example.createCriteria().andAccountEqualTo(account).andNameEqualTo(name);
 		java.util.List<Group> groups = groupDAO.selectByExample(example);
 		if(groups.size()>0){
-			throw new Exception("不能创建重复得名字");
+			throw new Exception("不能创建重复的名字");
 		}
 		group.setName(name);
 		group.setCreateTime(new java.util.Date());
 		groupDAO.updateByPrimaryKeySelective(group);
 		return group;
 	}
+
 
 }
