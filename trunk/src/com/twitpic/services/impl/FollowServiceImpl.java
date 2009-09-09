@@ -33,13 +33,13 @@ public class FollowServiceImpl implements FollowService {
 	}
 
 	@Override
-	public Follow apply_follow(String srcAccount, String destAccount, String function) throws Exception {
+	public Follow apply_follow(String srcAccount, String destAccount, Follow.FollowFunction function) throws Exception {
 		com.twitpic.db.model.Users user = usersDAO.selectByPrimaryKey(destAccount);
 		if(user==null){
 			throw new Exception("错误的请求");
 		}
 		FollowExample example = new FollowExample();
-		example.createCriteria().andFollowEqualTo(srcAccount).andFollowedEqualTo(destAccount).andFunctionEqualTo(function);
+		example.createCriteria().andFollowEqualTo(srcAccount).andFollowedEqualTo(destAccount).andFunctionEqualTo(function.toString());
 		java.util.List<Follow> follows = followDAO.selectByExample(example);
 		if(follows.size()>0){
 			throw new Exception("错误得请求");
@@ -47,7 +47,7 @@ public class FollowServiceImpl implements FollowService {
 		Follow follow = new Follow();
 		follow.setFollow(srcAccount);
 		follow.setFollowed(destAccount);
-		follow.setFunction(function);
+		follow.setFunction(function.toString());
 		follow.setStatus(Follow.STATUS_CONFIRM);
 		follow.setUpdateTime(new java.util.Date());
 		follow.setId(followDAO.insert_return_id(follow));
