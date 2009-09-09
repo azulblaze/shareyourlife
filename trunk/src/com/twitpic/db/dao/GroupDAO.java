@@ -92,4 +92,6 @@ public interface GroupDAO {
      * @ibatorgenerated Tue Sep 08 17:06:31 CST 2009
      */
     int updateByPrimaryKey(Group record);
+    
+    long insert_return_id(Group record);
 }
