@@ -194,4 +194,20 @@ public class Follow {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+    /**
+     * 
+     * the functions list
+     *
+     */
+    public enum FollowFunction{
+		upload_picture,		//users upload a picture
+		comment_picture,	//users comment a picture
+		view_picture        //users viewed a picture
+	}
+    
+    public final static int STATUS_APPLY = 0;
+    
+    public final static int STATUS_REJECT = -1;
+    
+    public final static int STATUS_CONFIRM = 1;
 }
