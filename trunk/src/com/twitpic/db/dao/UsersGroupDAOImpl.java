@@ -161,4 +161,9 @@ public class UsersGroupDAOImpl extends SqlMapClientDaoSupport implements UsersGr
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(UsersGroup record) {
+		return (Long)getSqlMapClientTemplate().insert("users_group.insert_return_id", record);
+	}
 }

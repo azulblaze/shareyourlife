@@ -161,4 +161,9 @@ public class FollowDAOImpl extends SqlMapClientDaoSupport implements FollowDAO {
             return record;
         }
     }
+
+	@Override
+	public long insert_return_id(Follow record) {
+		return (Long)getSqlMapClientTemplate().insert("follows.insert_return_id", record);
+	}
 }
