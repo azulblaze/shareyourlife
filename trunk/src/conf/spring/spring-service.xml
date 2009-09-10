@@ -34,7 +34,7 @@
 	
 	<bean name="mailServices" class="com.twitpic.system.email.MailServices" >
 		<property name="senderName" value="茄子网" />
-		<property name="senderAddr" value="andy.noreply.mail@gmail.com" />
+		<property name="senderAddr" value="webmaster@myqiezi.com" />
 	</bean>
 	
 	<bean name="systemConfig" class="com.twitpic.system.config.SystemConfig" >
