@@ -39,7 +39,7 @@
 	   <div class="binInfo">
 			<div class="logo"><a href="/"><img src="images/logo.png" title="茄子网" /></a></div>
 			<div class="info">
-			  <a href="/"><img src="images/info.gif" title="我们的茄子 我们的微笑" /></a>
+			  <a href="/index.do"><img src="images/info.gif" title="我们的茄子 我们的微笑" /></a>
 			  <a href="reg.do"><img src="images/regBtn.gif" title="加入我们" class="regBtn" /></a>
 			</div>
 	   </div>
