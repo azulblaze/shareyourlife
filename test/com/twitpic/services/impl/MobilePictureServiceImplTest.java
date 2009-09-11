@@ -19,7 +19,7 @@ public class MobilePictureServiceImplTest extends TestCase {
 		super.setUp();
 		this.m_context = new ClassPathXmlApplicationContext(new String[]{
 				"conf/spring/spring-db.xml", "conf/spring/spring-dao.xml", "conf/spring/spring-service.xml"
-		});;
+		});
 	}
 
 	protected void tearDown() throws Exception {

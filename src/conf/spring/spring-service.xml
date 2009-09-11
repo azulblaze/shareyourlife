@@ -52,6 +52,7 @@
 	<bean id="messageService" name="messageService" class="com.twitpic.services.impl.MessageServiceImpl" />
 	<bean id="permissionService" name="permissionService" class="com.twitpic.services.impl.PermissionServiceImpl" />
 	<bean id="collectionService" name="collectionService" class="com.twitpic.services.impl.CollectionServiceImpl" />
+	<bean id="friendService" name="friendService" class="com.twitpic.services.impl.FriendServiceImpl" />
 	
 	<!-- mobile service  -->
 	<bean name="mPictureService" class="com.twitpic.services.impl.MobilePictureServiceImpl" />
