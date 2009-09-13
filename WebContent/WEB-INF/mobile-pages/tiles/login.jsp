@@ -4,7 +4,7 @@
 <div class="div_panel">
 	<s:actionerror/>
 	<form action="login.do" method="post">
-		<input type="hidden" name="submit" value="true"/>
+		<input type="hidden" name="sub" value="true"/>
 		<p>
 		帐号:<input type="text" name="formLogin.name"/>
 		</p>
