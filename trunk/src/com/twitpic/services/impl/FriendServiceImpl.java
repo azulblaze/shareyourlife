@@ -239,5 +239,29 @@ public class FriendServiceImpl implements FriendService {
 		return group;
 	}
 
+	@Override
+	public boolean delete_friend(
+			String _account, 
+			String _friend_account)
+			throws Exception {
+		
+		/*
+		 * 步骤1: 检查account和friend account是否是好友关系,如果不是，直接返回 true,
+		 * 		    所谓好友关系则是users_group里面存在2条相关记录，并且状态时好友状态,
+		 * 		    即 UsersGroup.STATUS_CONFIRM
+		 */
+		
+
+		
+		/*
+		 * 步骤2: 如果存在好友关系，那么在users_group表中删除相关的2条记录,
+		 * 		  并且通过站内信息，发送一站内通知给friend account
+		 */
+		
+		
+		
+		return false;
+	}
+
 
 }

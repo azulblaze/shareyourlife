@@ -78,4 +78,13 @@ public interface FriendService {
 	 */
 	public boolean delete_friend(String account,Long id) throws Exception;
 	
+	/**
+	 * 删除某一好友
+	 * @param account
+	 * @param friend_account
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean delete_friend(String account, String friend_account) throws Exception;
+	
 }
