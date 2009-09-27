@@ -31,6 +31,21 @@ public class FriendServiceImplTest extends TestCase {
 
 	public void testApply_friendStringString() {
 		
+		try{
+			FormLogin formLogin = new FormLogin();
+			formLogin.setName("solzhang");
+			formLogin.setPassword("111111");
+			
+			Account account = this.m_account_service.user_login(formLogin);
+			
+			this.m_service.apply_friend(account.getAccount(), "andy");
+			
+			System.out.println("success");
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		System.out.println("over");
 		
 	}
 
@@ -60,7 +75,7 @@ public class FriendServiceImplTest extends TestCase {
 			Account account = this.m_account_service.user_login(formLogin);
 			this.m_service.create_group(account.getAccount(), "亲人");
 			this.m_service.create_group(account.getAccount(), "同事");
-			
+			this.m_service.create_group(account.getAccount(), "同学");
 			System.out.println("Over");
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -68,6 +83,27 @@ public class FriendServiceImplTest extends TestCase {
 	}
 
 	public void testDelete_friend() {
+		
+		try{
+			FormLogin formLogin = new FormLogin();
+			formLogin.setName("solzhang");
+			formLogin.setPassword("111111");
+			
+			Account account = this.m_account_service.user_login(formLogin);
+			
+			this.m_service.delete_friend(account.getAccount(),3L);
+			
+			System.out.println("success");
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		System.out.println("over");
+		
+
+	}
+
+	public void testDelete_group() {
 		try{
 			FormLogin formLogin = new FormLogin();
 			formLogin.setName("solzhang");
@@ -81,10 +117,6 @@ public class FriendServiceImplTest extends TestCase {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
-	}
-
-	public void testDelete_group() {
-		
 	}
 
 	public void testUpdate_group() {
