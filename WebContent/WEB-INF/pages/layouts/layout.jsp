@@ -10,7 +10,7 @@
 	<link rel="bookmark" href="favicon.ico" />
 	<link rel="shortcut icon" href="favicon.ico" />
 	<title><tiles:insertAttribute name="title"/></title>
-	<link href="css/common.css" rel="stylesheet" type="text/css" />
+	<link href="style/main.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="scripts/jquery-1.3.2.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="scripts/jquery.cookie.js" charset="utf-8"></script>
 </head>
