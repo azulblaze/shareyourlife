@@ -4,7 +4,11 @@ body {
 	font:12px Tahoma, arial, sans-serif;
 	color:#464646;
 	line-height:20px;
-	background:#791781;
+	background:url(../images/index_back.png) #791781 top center repeat-x;
+}
+
+body#login {
+	background:#82198b;
 }
 
 ul,li {
@@ -45,7 +49,6 @@ a:hover {
 #wrap {
 	width:960px;
 	margin:0px auto;
-	background:url(../images/index_back.png) #791781 top no-repeat;
 }
 
 #welcomePage{
@@ -101,7 +104,6 @@ img.regBtn {
 	padding:40px 0 0 110px;
 	margin-right:0px;
 	background:url(../images/tj03.gif) top left no-repeat;
-	color:#fff;
 }
 
 li.recent li a {
@@ -135,7 +137,7 @@ li.recent li a {
 	height:20px;
 	margin-top:8px;
 }
-#bottomNav ul.login input.error{ border: 1px dotted red; }
+
 #bottomNav ul.search {
 	float:right;
 }
@@ -161,6 +163,90 @@ li.recent li a {
 	width:187px;
 	height:20px;
 	margin-top:8px;
+}
+
+#topNav{
+	clear:both;
+	margin:0px;
+	width:940px;
+	height:38px;
+	padding:0 10px;
+	background:url(../images/bottomNav.gif) top left no-repeat;
+}
+
+#topNav ul.login {
+	float:left;
+}
+
+#topNav ul.login li {
+	float:left;	
+	margin-right:15px;
+}
+
+#topNav ul.login input {
+	background:#9b9b9b;
+	color:#fff;
+	border:none;
+	width:105px;
+	height:20px;
+	margin-top:8px;
+}
+
+#topNav ul.search {
+	float:right;
+}
+
+#topNav ul.search li {
+	float:left;	
+	margin-right:10px;
+}
+
+#topNav ul.search input.default {
+	background:#9b9b9b;
+	color:#d0d0d0;
+	border:none;
+	width:187px;
+	height:20px;
+	margin-top:8px;
+}
+
+#topNav ul.search input.choice {
+	background:#9b9b9b;
+	color:#fff;
+	border:none;
+	width:187px;
+	height:20px;
+	margin-top:8px;
+}
+
+#sePageTop {
+	width:960px;
+	margin:0px auto;
+}
+
+#sePageTop .logo {
+	float:left;
+	width:30%;
+	text-align:left;
+	padding:0;
+	margin:5px 0;
+}
+
+#mainContent {
+	clear:both;
+	margin:0px auto;
+	background:url(../images/mainContentBgTop.gif) #dbbcdd top center no-repeat;
+	width:960px;
+}
+
+#mainContent .content {
+	padding:20px 20px 8px 20px;
+}
+
+#mainContent .bottom {
+	width:960px;
+	height:12px;
+	background:url(../images/mainContentBgBottom.gif) bottom center no-repeat;
 }
 
 .copyright {
