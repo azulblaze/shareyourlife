@@ -15,29 +15,32 @@
 }
 </style>
 <link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
-用户
-<img height="45" with="45" src="<s:property value='picture.picture'/>" />
-<a href="<s:property value='picture.account'/>" /><s:property value="picture.name" /></a>
-<div><img src="<s:property value='picture.pictures.thumb'/>" /></div>
-<div>总共评论条数:<span id="count_num"><s:property value="comments_count" /></span> <br />
-	<div id="comment"></div>
-</div>
-<form action="comment.do" method="post">
-	<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture.pictures.id'/>" />
-	评论<textarea name="formComment.comment"></textarea>
-	<input type="submit" value="提交" />
-</form>
-标记
-<div id="tagcloud">
-	<s:iterator value="tags" id="tag" status="num">
-		<a href="#" rel="<s:property value='pictureCount'/>"><s:property value="name" /></a>
-	</s:iterator>
-</div>
-<form action="tag.do" method="post">
-	<input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>" />
-	<input type="text" name="formTag.name" id="tagname">
-	<input type="submit" value="提交" />
-</form>
+	<div id="mainContent">
+		用户
+		<img height="45" with="45" src="<s:property value='picture.picture'/>" />
+		<a href="<s:property value='picture.account'/>" /><s:property value="picture.name" /></a>
+		<div><img src="<s:property value='picture.pictures.thumb'/>" /></div>
+		<div>总共评论条数:<span id="count_num"><s:property value="comments_count" /></span> <br />
+			<div id="comment"></div>
+		</div>
+		<form action="comment.do" method="post">
+			<input type="hidden" name="formComment.id_pictures" value="<s:property value='picture.pictures.id'/>" />
+			评论<textarea name="formComment.comment"></textarea>
+			<input type="submit" value="提交" />
+		</form>
+		标记
+		<div id="tagcloud">
+			<s:iterator value="tags" id="tag" status="num">
+				<a href="#" rel="<s:property value='pictureCount'/>"><s:property value="name" /></a>
+			</s:iterator>
+		</div>
+		<form action="tag.do" method="post">
+			<input type="hidden" name="formTag.id_pictures" value="<s:property value='picture.pictures.id'/>" />
+			<input type="text" name="formTag.name" id="tagname">
+			<input type="submit" value="提交" />
+		</form>
+		<div class="bottom"></div>
+	</div>
 <script>
 	function clicklink() {
 		$("#page_link a").each(function() {

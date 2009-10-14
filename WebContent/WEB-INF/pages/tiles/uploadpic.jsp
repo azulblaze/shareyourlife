@@ -45,33 +45,36 @@ $(function() {
 	    });
 	});
 </script>
-<div>
-<a href="/reg.do">注册</a>
-<h5>登录</h5>
-<s:actionerror/>
-<form action="upload_pic.do" method="post" enctype="multipart/form-data">
-<input type="hidden" name="sub" value="true"/>
-<p>
-文件:<input id="up_file" type="file" name="pic"/>
-</p>
-<p>
-标题:<input type="text" name="title"/>
-</p>
-<p>
-描述:<input type="text" name="description"/>
-<input type="submit" value="上传"/>
-</p>
-</form>
-</div>
-<br/>
-
-<div id="upload_status" style="border:solid 1px">
-	<div><div style="float:left">正在上传：</div><div id="filename"></div></div>
-	<br/>
-	<div><div style="float:left">当前进度：</div><div id="file_progress"></div></div>
-	<br/>
-	<div class="progressbar"></div>
-</div>
-<div>
-<a id="up_img_a" href="" style="display:none;"><img src="" id="up_img"/></a>
-</div>
+	<div id="mainContent">
+		<div>
+		<a href="/reg.do">注册</a>
+		<h5>登录</h5>
+		<s:actionerror/>
+		<form action="upload_pic.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="sub" value="true"/>
+		<p>
+		文件:<input id="up_file" type="file" name="pic"/>
+		</p>
+		<p>
+		标题:<input type="text" name="title"/>
+		</p>
+		<p>
+		描述:<input type="text" name="description"/>
+		<input type="submit" value="上传"/>
+		</p>
+		</form>
+		</div>
+		<br/>
+		
+		<div id="upload_status" style="border:solid 1px">
+			<div><div style="float:left">正在上传：</div><div id="filename"></div></div>
+			<br/>
+			<div><div style="float:left">当前进度：</div><div id="file_progress"></div></div>
+			<br/>
+			<div class="progressbar"></div>
+		</div>
+		<div>
+		<a id="up_img_a" href="" style="display:none;"><img src="" id="up_img"/></a>
+		</div>
+		<div class="bottom"></div>
+	</div>
