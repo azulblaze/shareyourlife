@@ -84,4 +84,6 @@ public interface UsersProfileDAO {
      * @abatorgenerated Sun Aug 02 17:41:31 CST 2009
      */
     int updateByExample(UsersProfile record, UsersProfileExample example);
+
+	List<UsersProfile> select_current_active_user_profile(Integer maxAmount);
 }

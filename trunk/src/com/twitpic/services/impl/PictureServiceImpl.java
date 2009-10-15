@@ -1,6 +1,7 @@
 package com.twitpic.services.impl;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.transaction.PlatformTransactionManager;
@@ -12,6 +13,8 @@ import com.twitpic.db.dao.PicturesDAO;
 import com.twitpic.db.dao.PicturesParameterDAO;
 import com.twitpic.db.dao.TagsDAO;
 import com.twitpic.db.dao.TagsRelDAO;
+import com.twitpic.db.dao.UsersDAO;
+import com.twitpic.db.dao.UsersProfileDAO;
 import com.twitpic.db.model.Comments;
 import com.twitpic.db.model.CommentsExample;
 import com.twitpic.db.model.Pictures;
@@ -20,11 +23,12 @@ import com.twitpic.db.model.Tags;
 import com.twitpic.db.model.TagsExample;
 import com.twitpic.db.model.TagsRel;
 import com.twitpic.db.model.TagsRelExample;
+import com.twitpic.db.model.UsersProfile;
+import com.twitpic.domain.Account;
 import com.twitpic.domain.CommentsInfo;
 import com.twitpic.domain.FormComment;
 import com.twitpic.domain.FormTag;
 import com.twitpic.domain.PictureInfo;
-import com.twitpic.domain.Account;
 import com.twitpic.services.MessageService;
 import com.twitpic.services.PictureService;
 import com.twitpic.system.config.SystemConfig;
@@ -51,6 +55,8 @@ public class PictureServiceImpl implements PictureService {
 	
 	protected TagsRelDAO tagsRelDAO;
 	
+	private UsersProfileDAO usersProfileDAO;
+	
 	private MessageService messageService;
 	
 	public void setMessageService(MessageService service){
@@ -63,6 +69,11 @@ public class PictureServiceImpl implements PictureService {
 	public void setTagsDAO(TagsDAO tagsDAO){
 		this.tagsDAO = tagsDAO;
 	}
+	
+	public void setUsersProfileDAO(UsersProfileDAO dao) {
+		this.usersProfileDAO = dao;
+	}
+	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
 	}
@@ -311,5 +322,20 @@ public class PictureServiceImpl implements PictureService {
 		picturesparameter.setViewedTimes(picturesparameter.getViewedTimes()+1);
 		picturesParameterDAO.updateByPrimaryKeySelective(picturesparameter);
 		return picturesparameter.getViewedTimes();
+	}
+
+	@Override
+	public List<Account> load_current_active_accounts(Integer maxAmount) {
+		
+		List<UsersProfile> 	users 	= usersProfileDAO.select_current_active_user_profile( maxAmount );
+		List<Account> 	accounts	= new ArrayList<Account>();
+		
+		for (UsersProfile up : users) {
+			Account a = new Account();
+			a.setUsersProfile(up);
+			accounts.add(a);
+		}
+		
+		return accounts;
 	}
 }

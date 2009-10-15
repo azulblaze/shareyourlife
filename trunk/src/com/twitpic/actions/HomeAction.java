@@ -36,10 +36,24 @@ public class HomeAction extends BaseAction {
 	}
 
 	public String index() throws Exception{
-		this.setValue("pictures", pictureService.loadHomePictures(15));
+		/*
+		 * 查询最新提交的图片
+		 */
+		this.setValue("pictures", pictureService.loadHomePictures(12));
+		
+		/*
+		 * 查询热门标签
+		 */
 		this.setValue("daykeys", tagService.load_day_tag(0, 10));
 		this.setValue("weekkeys", tagService.load_week_tag(0, 10));
 		this.setValue("monthkeys", tagService.load_month_tag(0, 10));
+		this.setValue("pop_tags", tagService.load_pop_tags(20));
+		
+		/*
+		 *  查询最活跃的茄友,也就是最近上传相片的茄友
+		 */
+		this.setValue("active_accounts", pictureService.load_current_active_accounts(10));
+				
 		return SUCCESS;
 	}
 	
