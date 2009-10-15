@@ -2,6 +2,8 @@ package com.twitpic.db.dao;
 
 import com.twitpic.db.model.Users;
 import com.twitpic.db.model.UsersExample;
+import com.twitpic.db.model.UsersProfile;
+
 import java.util.List;
 
 public interface UsersDAO {

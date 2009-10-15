@@ -151,4 +151,10 @@ public class UsersProfileDAOImpl extends SqlMapClientDaoSupport implements Users
             return record;
         }
     }
+
+	@Override
+	public List<UsersProfile> select_current_active_user_profile(
+			Integer maxAmount) {
+		return this.getSqlMapClientTemplate().queryForList("users_profile.select_current_active", maxAmount);
+	}
 }

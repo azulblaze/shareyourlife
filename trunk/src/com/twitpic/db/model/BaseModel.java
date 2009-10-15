@@ -14,12 +14,7 @@ public abstract class BaseModel {
 		return format;
 	}
 
-
-	public void setFormat(SimpleDateFormat format) {
-		this.format = format;
-	}
-
-	protected SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+	protected static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 	
 	/**
 	 * @param field  make sure the field'Accessible is true!
