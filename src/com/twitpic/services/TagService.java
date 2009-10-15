@@ -18,4 +18,6 @@ public interface TagService {
 	public java.util.List<com.twitpic.db.model.Tags> load_week_tag(Integer start,Integer size);
 	
 	public java.util.List<com.twitpic.db.model.Tags> load_month_tag(Integer start,Integer size);
+	
+	public java.util.List<com.twitpic.db.model.Tags> load_pop_tags(Integer size);
 }

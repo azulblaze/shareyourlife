@@ -193,4 +193,14 @@
       <include refid="users_profile.abatorgenerated_Example_Where_Clause" />
     </isParameterPresent>
   </update>
+  
+  <!-- 自定义SQL查询 -->
+  <select id="select_current_active" parameterClass="int" resultMap="abatorgenerated_UsersProfileResult">
+	select ta.*
+	from 
+	    users_profile ta, 
+	    (select DISTINCT upload_account from pictures_parameter order by upload_time desc limit 0, #value#) tb
+	where ta.account = tb.upload_account 
+  </select>
+    
 </sqlMap>

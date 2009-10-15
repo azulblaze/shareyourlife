@@ -1,11 +1,14 @@
 package com.twitpic.services.impl;
 
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.twitpic.domain.Account;
 import com.twitpic.services.PictureService;
 
 public class PictureServiceImplTest extends TestCase {
@@ -47,4 +50,12 @@ public class PictureServiceImplTest extends TestCase {
 		}
 	}
 	**/
+	
+	public void testLoadCurrentActiveAccount(){
+		PictureService service = (PictureService) this.m_context.getBean("pictureService");
+		List<Account> accounts = service.load_current_active_accounts(10);
+		for (Account account : accounts) {
+			System.out.println(account.getPicture());
+		}
+	}
 }

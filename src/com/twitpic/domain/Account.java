@@ -1,5 +1,7 @@
 package com.twitpic.domain;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.twitpic.db.model.Users;
 import com.twitpic.db.model.UsersProfile;
 
@@ -103,6 +105,8 @@ public class Account extends com.twitpic.db.model.BaseModel{
 	}
 	
 	public void setUsersProfile(UsersProfile up){
+		if( StringUtils.isEmpty(this.account) )
+			this.account = up.getAccount();
 		this.setPicture(up.getPicture());
 		this.setSelf_introduction(up.getSelfIntroduction());
 		this.setLoginTime(up.getLoginTime());

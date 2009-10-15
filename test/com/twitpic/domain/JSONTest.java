@@ -16,7 +16,7 @@ public class JSONTest {
 		
 		PicturesParameter p = new PicturesParameter();
 		p.setUploadTime(new java.util.Date());
-		p.setFormat(new SimpleDateFormat("yyyy年MM-dd kk:mm:ss"));		
+	
 		String json_str = p.to_json().toString();
 		JSONObject jsonObject = JSONObject.fromObject(json_str);      
 		System.out.println(jsonObject.get("uploadTime"));

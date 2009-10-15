@@ -1,5 +1,9 @@
 package com.twitpic.services;
 
+import java.util.List;
+
+import com.twitpic.domain.Account;
+
 /**
  * <code>PictureService.java</code>
  * @version 1.0, 2009-8-3
@@ -47,4 +51,11 @@ public interface PictureService {
 	public java.util.List<com.twitpic.domain.CommentsInfo> loadComments(Long id_pictre,int c_page,int size)throws Exception;
 	
 	public Long add_view_times(Long id_picture);
+	
+	/**
+	 * 加载最近比较活跃的用户，也就是最近发帖的用户
+	 * @param amount 需要列表出来的最大数量
+	 * @return
+	 */
+	public List<Account> load_current_active_accounts(Integer max_amount);
 }

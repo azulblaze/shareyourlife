@@ -51,17 +51,17 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public List<Tags> load_day_tag(Integer start, Integer size) {
-		return tagsDAO.selectTagsWithTime(getDayDate(), 1, 10);
+		return tagsDAO.selectTagsWithTime(getDayDate(), 1, size);
 	}
 
 	@Override
 	public List<Tags> load_month_tag(Integer start, Integer size) {
-		return tagsDAO.selectTagsWithTime(getMonthDate(), 1, 10);
+		return tagsDAO.selectTagsWithTime(getMonthDate(), 1, size);
 	}
 
 	@Override
 	public List<Tags> load_week_tag(Integer start, Integer size) {
-		return tagsDAO.selectTagsWithTime(getWeekDate(), 1, 10);
+		return tagsDAO.selectTagsWithTime(getWeekDate(), 1, size);
 	}
 
 	private java.util.Date getDayDate(){
@@ -88,5 +88,13 @@ public class TagServiceImpl implements TagService {
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.DAY_OF_MONTH, 1);
 		return c.getTime();
+	}
+
+	@Override
+	public List<Tags> load_pop_tags(Integer size) {
+		if( size == null ){
+			size = 10;
+		}
+		return this.tagsDAO.selectTagsWithTime(null, 1, size);
 	}
 }

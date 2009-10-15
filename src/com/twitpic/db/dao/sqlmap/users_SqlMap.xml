@@ -192,4 +192,5 @@
       <include refid="users.abatorgenerated_Example_Where_Clause" />
     </isParameterPresent>
   </update>
+  
 </sqlMap>
