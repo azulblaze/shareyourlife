@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<link href="style/index.css" rel="stylesheet" type="text/css" />
 <div id="mainContent">
 	<!-- 最近提交的图片 -->
 	<div class="panel" >
@@ -19,12 +19,12 @@
 					</s:else>
 							  <div class="picbox" >
 							  	<div class="pic">
-								  	<a href="/picture.do?id_picture=<s:property value='pictures.id'/>"/>
-								  		<img width="180" height="130" src="<s:property value='pictures.large'/>"/>
+							  		<span></span><em><s:property value="picturesParameter.title" /></em>
+								  	<a href="/picture.do?id_picture=<s:property value='pictures.id'/>" title="<s:property value='picturesParameter.title' />"/>
+								  		<img src="<s:property value='pictures.large'/>"/>
 								  	</a>
 							  	</div>
-							  	<div clss="picinfo">
-							  		<s:property value="picturesParameter.title" /><br />
+							  	<div class="picinfo">
 							  		<s:date name="picturesParameter.uploadTime" format="yyyy年MM月dd日" />
 							  	</div>
 							  </div>
