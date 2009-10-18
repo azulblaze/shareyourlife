@@ -79,7 +79,7 @@
 		</form>
 	</div>
 	<div class="copyright">
-		<a href="http://www.miibeian.gov.cn/">蜀ICP备09028449号</a>  | <a href="#">关于我们</a> | <a href="#">常见问题</a> | <a href="#">服务条款</a> | <a href="#">隐私权政策</a> |  &copy;2009 <a href="/">myqizi.com</a>
+		<a href="http://www.miibeian.gov.cn/">蜀ICP备09028449号</a>  | <a href="#">关于我们</a> | <a href="#">常见问题</a> | <a href="#">服务条款</a> | <a href="#">隐私权政策</a> |  &copy;2009 <a href="/">myqiezi.com</a>
 	</div>
 </div>
 <script>
