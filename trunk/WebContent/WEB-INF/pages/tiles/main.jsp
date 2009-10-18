@@ -21,7 +21,7 @@
 							  	<div class="pic">
 							  		<span></span><em><s:property value="picturesParameter.title" /></em>
 								  	<a href="/picture.do?id_picture=<s:property value='pictures.id'/>" title="<s:property value='picturesParameter.title' />"/>
-								  		<img src="<s:property value='pictures.large'/>"/>
+								  		<img src="<s:property value='pictures.thumb'/>"/>
 								  	</a>
 							  	</div>
 							  	<div class="picinfo">
