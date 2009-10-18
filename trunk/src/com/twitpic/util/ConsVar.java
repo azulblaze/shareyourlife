@@ -29,7 +29,7 @@ public final class ConsVar {
 	 */
 	public static String JSON_ACTION_NOTICE_MSG= "notice_msg";
 	
-	public static int []IMG_WIDTH = {90,300,600};
+	public static int []IMG_WIDTH = {170,500,800};
 	
-	public static int []IMG_HIGHT = {70,0,0};
+	public static int []IMG_HIGHT = {120,0,0};
 }
