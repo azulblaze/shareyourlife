@@ -7,8 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="Keywords" content="茄子网" />
 	<meta name="Description" content="茄子网" />
-	<link rel="bookmark" href="favicon.ico" />
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="bookmark" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<link type="images/gif" href="/act_favicon.gif" rel="icon"/>
 	<title><tiles:insertAttribute name="title"/></title>
 	<link href="style/main.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="scripts/jquery-1.3.2.min.js" charset="utf-8"></script>

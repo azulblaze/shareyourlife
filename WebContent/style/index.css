@@ -1,0 +1,45 @@
+.panel_content table tr td,.picbox{
+	text-align:center;
+}
+.picbox .pic{
+	padding: 10px;
+	margin:0px auto;
+	position: relative;
+	width: 180px;
+	height: 130px;
+}
+.picbox .pic:hover img {
+	border-color: #000;
+}
+.picbox .pic img {
+	height:120px;
+	width:170px;
+	background: #fff;
+	border: solid 1px #ccc;
+	padding: 5px;
+}
+.picbox .pic em {
+	background: #fff;
+	color: #000;
+	font-style: normal;
+	padding: 2px 8px 0 22px;
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 5px;
+	border: 1px solid #999;
+}
+.picbox .pic span {
+	width: 30px;
+	height: 60px;
+	display: block;
+	position: absolute;
+	top: 7px;
+	left: 9px;
+	background: url(/images/paper-clip-mini.png) no-repeat;
+	z-index: 3;
+}
+.picbox .picinfo{
+	clear:both;
+	text-align:center;
+}
