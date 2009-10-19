@@ -1,0 +1,12 @@
+#mainContent .content .left{
+	float:left;
+	height:500px;
+	width:600px;
+	margin:10px 0px auto 10px;
+}
+#mainContent .content .right{
+	height:300px;
+	float:left;
+	width:300px;
+	margin:10px auto 0px auto;
+}
