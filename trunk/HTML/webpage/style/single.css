@@ -58,8 +58,18 @@ position:relative;
 z-index:5;
 }
 
+.description p {
+	line-height:20px;
+}
+
+.description p.data {
+color:#777;
+font-size:12px;
+font-style:italic;
+}
+
 .PostDateTime, .DateTime {
-color:#666666;
+color:#666;
 }
 
 div.PostContent {
@@ -101,4 +111,5 @@ width:80%;
 	float:left;
 	width:300px;
 	margin:10px auto 0px auto;
+	line-height:20px;
 }
