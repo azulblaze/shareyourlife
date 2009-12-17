@@ -1,0 +1,76 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+
+	<package name="mobile" extends="tiles-default" namespace="/m">
+	
+		<global-results>
+			<result name="msg_box" type="tiles">m.page.msg.box</result>
+		</global-results>
+		
+		<action name="index" class="mHomeAction" method="index">
+		 	<result name="input" type="tiles">m.page.index</result>
+		 	<result name="success" type="tiles">m.page.main</result>
+		 </action>
+		 
+		<action name="login" class="accountAction" method="login" >
+			<result name="email_valid" type="tiles">m.page.error_email_not_valid</result>
+			<result name="been_closed" type="tiles">m.page.error_been_closed</result>
+			<result name="input" type="tiles">m.page.login</result>
+			<result name="success" type="redirect-action">index</result>
+		</action>	
+		
+		<action name="reg" class="accountAction" method="register" >
+			<result name="email_valid" type="tiles">m.page.error_email_not_valid</result>
+			<result name="input" type="tiles">m.page.reg</result>
+		</action>	 
+		
+		<action name="upload_pic" class="mPictureAction" method="upload" >
+			<result name="input" type="tiles">m.page.uploadpic</result>
+		</action>	
+		
+		<action name="picture" class="pictureAction" method="single_pic" >
+			<result name="success" type="tiles">m.page.single_pic</result>
+		</action>	
+		
+		<action name="picture" class="mPictureAction" method="single_pic" >
+			<result name="success" type="tiles">m.page.single_pic</result>
+		</action>		
+		
+		<action name="comment" class="mPictureAction" method="comment" />
+		
+		<action name="tag" class="mPictureAction" method="tag" />
+		
+		<action name="more_comments" class="mPictureAction" method="more_comments" >
+			<result name="success" type="tiles">m.page.more.comments</result>
+		</action>
+		
+		<action name="more_tags" class="mPictureAction" method="more_tags">
+			<result name="success" type="tiles">m.page.more.tags</result>
+		</action>
+		
+		<action name="msglist" class="msgAction" method="msg_list">
+			<result name="success" type="tiles">m.page.message.msglist</result>
+		</action>
+		
+		<action name="unreadmsglist" class="msgAction" method="unread_msg_list">
+			<result name="success" type="tiles">m.page.message.unreadmsglist</result>
+		</action>		
+		
+		<action name="msgdetail" class="msgAction" method="detail">
+			<result name="success" type="tiles">m.page.message.msg.detail</result>
+		</action>
+		
+		<action name="delete_msgs" class="msgAction" method="delete">
+			<result name="success" type="redirect">msglist.do</result>
+		</action>	
+		
+		<action name="msgsend" class="msgAction" method="send_msg">
+			<result name="input" type="tiles">m.page.message.msg.send.input</result>
+		</action>	
+		
+	</package>
+
+</struts>

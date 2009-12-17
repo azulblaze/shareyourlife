@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+		  "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-lazy-init="false" default-dependency-check="none" default-autowire="byName">
+
+	<!-- mail service -->
+	<bean name="smtpAuthenticator"
+		class="com.twitpic.system.email.SmtpAuthenticator">
+		<constructor-arg value="andy.noreply.mail@gmail.com" />
+		<constructor-arg value="~@$fs#@s*o)p" />
+	</bean>
+	<bean name="mailSession" class="javax.mail.Session"
+		factory-method="getInstance">
+		<constructor-arg>
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.socketFactory.port">465</prop>
+				<prop key="mail.smtp.socketFactory.class">
+					javax.net.ssl.SSLSocketFactory
+				</prop>
+				<prop key="mail.smtp.socketFactory.fallback">
+					false
+				</prop>
+			</props>
+		</constructor-arg>
+		<constructor-arg ref="smtpAuthenticator" />
+	</bean>
+	
+	<bean name="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="session" ref="mailSession" />
+	</bean>
+	
+	<bean name="mailServices" class="com.twitpic.system.email.MailServices" >
+		<property name="senderName" value="茄子网" />
+		<property name="senderAddr" value="webmaster@myqiezi.com" />
+	</bean>
+	
+	<bean name="systemConfig" class="com.twitpic.system.config.SystemConfig" >
+		<property name="domain" value="http://myqiezi.com" />
+		<property name="upload_pic" value="/upload/images/pic" />
+		<property name="upload_pic_maxlength" value="4194304" />
+		<property name="upload_header" value="/upload/images/header" />
+		<property name="upload_header_maxlength" value="16384" />
+	</bean>
+	
+	<bean id="accountService" name="accountService" class="com.twitpic.services.impl.AccountServiceImpl" />
+	<bean id="pictureService" name="pictureService" class="com.twitpic.services.impl.PictureServiceImpl" />
+	<bean id="adminService" name="adminService" class="com.twitpic.services.impl.AdminServiceImpl" />
+	<bean id="tagService" name="tagService" class="com.twitpic.services.impl.TagServiceImpl" />
+	<bean id="messageService" name="messageService" class="com.twitpic.services.impl.MessageServiceImpl" />
+	<bean id="permissionService" name="permissionService" class="com.twitpic.services.impl.PermissionServiceImpl" />
+	<bean id="collectionService" name="collectionService" class="com.twitpic.services.impl.CollectionServiceImpl" />
+	<bean id="friendService" name="friendService" class="com.twitpic.services.impl.FriendServiceImpl" />
+	
+	<!-- mobile service  -->
+	<bean name="mPictureService" class="com.twitpic.services.impl.MobilePictureServiceImpl" />
+	
+	
+</beans>
