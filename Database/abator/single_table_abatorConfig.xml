@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
 <ibatorConfiguration >
-	<classPathEntry location="/home/andy/software/eclipse/worksapce/twitpic/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
+	<classPathEntry location="/home/andy/software/eclipse/worksapce/zhela_web/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
 	<ibatorContext id="context1" targetRuntime="Ibatis2Java5">
 		<!-- 连接产品服务器 
 		<jdbcConnection 
@@ -13,15 +13,15 @@
 		<!-- 连接本地服务器 -->
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1:3306/twitpic"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/zhelazhela"
 			userId="root" password="123">
 		</jdbcConnection>		
-		<javaModelGenerator targetPackage="com.twitpic.db.model"
-			targetProject="twitpic/src" />
-		<sqlMapGenerator targetPackage="com.twitpic.db.dao.sqlmap"
-			targetProject="twitpic/src" />
-		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
-			targetProject="twitpic/src" />
+		<javaModelGenerator targetPackage="com.zhelazhela.db.model"
+			targetProject="zhela_web/src" />
+		<sqlMapGenerator targetPackage="com.zhelazhela.db.dao.sqlmap"
+			targetProject="zhela_web/src" />
+		<daoGenerator type="SPRING" targetPackage="com.zhelazhela.db.dao"
+			targetProject="zhela_web/src" />
 		
 		<table tableName="follows" domainObjectName="Follow"></table>
 	</ibatorContext>
