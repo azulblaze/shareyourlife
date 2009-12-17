@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+
+<sqlMapConfig>
+
+	<settings
+		maxRequests="512"
+		maxSessions="64"
+		maxTransactions="32"
+		useStatementNamespaces="true"
+		lazyLoadingEnabled="true" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/comments_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/pictures_parameter_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/pictures_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/tags_rel_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/tags_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_profile_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/admins_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/messages_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/permissions_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/permissions_scheme_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/resources_permission_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/collections_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/pictures_collection_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/viewed_pritures_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/groups_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/users_group_SqlMap.xml" />
+	<sqlMap resource="com/twitpic/db/dao/sqlmap/follows_SqlMap.xml" />
+</sqlMapConfig>

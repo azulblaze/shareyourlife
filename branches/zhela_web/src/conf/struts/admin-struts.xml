@@ -1,0 +1,28 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+
+	<package name="admin" extends="tiles-default" namespace="/admin">
+
+		<global-results>
+			<result name="json">/WEB-INF/pages/tiles/json_response_tile.jsp</result>	
+		</global-results>
+		
+		<action name="login" class="adminAction" method="login" >
+			<result name="input">/WEB-INF/pages/admin/login.jsp</result>
+			<result name="success" type="redirect-action">dashboard</result>
+		</action>
+		 
+		<action name="dashboard" class="adminAction" method="dashboard">
+			<result name="success">/WEB-INF/pages/admin/list.jsp</result>
+			<result name="login" type="redirect-action">login</result>
+		</action>
+		
+		<action name="delete_picture" class="adminAction" method="delete_picture"/>
+		<action name="disable_picture" class="adminAction" method="disable_picture"/>
+		<action name="disable_user" class="adminAction" method="disable_user"/>
+	</package>
+
+</struts>
