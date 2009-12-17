@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<abatorConfiguration>
+	<classPathEntry
+				location="D:/Program Files/eclipse/workspace/zhela_web/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
+	<abatorContext generatorSet="Java5">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/zhelazhela"
+			userId="root" password="123" >
+		</jdbcConnection>
+		<javaModelGenerator targetPackage="com.zhelazhela.db.model"
+			targetProject="zhela_web/src" />
+		<sqlMapGenerator targetPackage="com.zhelazhela.db.dao.sqlmap"
+			targetProject="zhela_web/src" />
+		<daoGenerator type="SPRING" targetPackage="com.twitpic.db.dao"
+			targetProject="zhela_web/src" />
+		<table tableName="comments" />
+		<table tableName="pictures" />
+		<table tableName="pictures_parameter" />
+		
+	</abatorContext>
+</abatorConfiguration>
