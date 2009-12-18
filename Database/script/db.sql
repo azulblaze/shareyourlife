@@ -23,9 +23,9 @@ go
 -- -----------------------------------------------------
 -- Table discount_info
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS discount_info ;
+DROP TABLE IF EXISTS discount_news ;
 go
-CREATE  TABLE IF NOT EXISTS discount_info (
+CREATE  TABLE IF NOT EXISTS discount_news (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   approve_user VARCHAR(100) NOT NULL ,
   approve_result BOOLEAN NULL ,
@@ -45,10 +45,10 @@ CREATE  TABLE IF NOT EXISTS discount_info (
   discount_area VARCHAR(400) NULL ,
   discount_start TIMESTAMP NULL ,
   discount_end TIMESTAMP NULL ,
-  info_source VARCHAR(400) NULL ,
-  info_title VARCHAR(200) NULL ,
-  info_review VARCHAR(1000) NULL ,
-  nfo_content TEXT NULL ,
+  news_source VARCHAR(400) NULL ,
+  news_title VARCHAR(200) NULL ,
+  news_review VARCHAR(1000) NULL ,
+  news_content TEXT NULL ,
   PRIMARY KEY (id) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
