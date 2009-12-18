@@ -113,9 +113,9 @@ go
 -- -----------------------------------------------------
 -- Table City
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS City ;
+DROP TABLE IF EXISTS city ;
 go
-CREATE  TABLE IF NOT EXISTS City (
+CREATE  TABLE IF NOT EXISTS city (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   province_id BIGINT NULL ,
   name VARCHAR(200) NULL ,
@@ -124,15 +124,15 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 go
-CREATE INDEX I_NAME ON City (name ASC) ;
+CREATE INDEX I_NAME ON city (name ASC) ;
 go
 
 -- -----------------------------------------------------
 -- Table County
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS County ;
+DROP TABLE IF EXISTS county ;
 go
-CREATE  TABLE IF NOT EXISTS County (
+CREATE  TABLE IF NOT EXISTS county (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   city_id BIGINT NULL ,
   postcode VARCHAR(20) NULL ,
@@ -142,16 +142,16 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 go
-CREATE INDEX I_NAME ON County (name ASC) ;
+CREATE INDEX I_NAME ON county (name ASC) ;
 
 go
 
 -- -----------------------------------------------------
 -- Table comments
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Comments ;
+DROP TABLE IF EXISTS comments ;
 go
-CREATE  TABLE IF NOT EXISTS Comments (
+CREATE  TABLE IF NOT EXISTS comments (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   discount_info_id BIGINT NOT NULL ,
   user_name VARCHAR(100) NULL ,
@@ -166,5 +166,5 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
 go
-CREATE INDEX I_DISCOUNT ON Comments (discount_info_id ASC) ;
+CREATE INDEX I_DISCOUNT ON comments (discount_info_id ASC) ;
 go
