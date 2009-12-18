@@ -17,7 +17,7 @@
 		<table tableName="city" />
 		<table tableName="comments" />
 		<table tableName="county" />
-		<table tableName="discount_info" />
+		<table tableName="discount_news" />
 		<table tableName="manage_user" />
 		<table tableName="merchandise_category" />
 		<table tableName="program_info" />
