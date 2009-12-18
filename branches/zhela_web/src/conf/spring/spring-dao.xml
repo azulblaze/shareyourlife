@@ -3,22 +3,12 @@
 		  "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans default-lazy-init="false" default-dependency-check="none" default-autowire="byName">
-	<bean name="commentsDAO" id="commentsDAO" class="com.twitpic.db.dao.CommentsDAOImpl" />
-	<bean name="picturesDAO" id="picturesDAO" class="com.twitpic.db.dao.PicturesDAOImpl" />
-	<bean name="picturesParameterDAO" id="picturesParameterDAO" class="com.twitpic.db.dao.PicturesParameterDAOImpl" />
-	<bean name="tagsDAO" id="tagsDAO" class="com.twitpic.db.dao.TagsDAOImpl" />
-	<bean name="tagsRelDAO" id="tagsRelDAO" class="com.twitpic.db.dao.TagsRelDAOImpl" />
-	<bean name="usersDAO" id="usersDAO" class="com.twitpic.db.dao.UsersDAOImpl" />
-	<bean name="usersProfileDAO" id="usersProfileDAO" class="com.twitpic.db.dao.UsersProfileDAOImpl" />
-	<bean name="adminsDAO" id="adminsDAO" class="com.twitpic.db.dao.AdminsDAOImpl" />
-	<bean name="messageDAO" id="messageDAO" class="com.twitpic.db.dao.MessageDAOImpl" />
-	<bean name="permissionDAO" id="permissionDAO" class="com.twitpic.db.dao.PermissionDAOImpl" />
-	<bean name="permissionsSchemeDAO" id="permissionsSchemeDAO" class="com.twitpic.db.dao.PermissionsSchemeDAOImpl" />
-	<bean name="resourcesPermissionDAO" id="resourcesPermissionDAO" class="com.twitpic.db.dao.ResourcesPermissionDAOImpl" />
-	<bean name="picturesCollectionDAO" id="picturesCollectionDAO" class="com.twitpic.db.dao.PicturesCollectionDAOImpl" />
-	<bean name="collectionDAO" id="collectionDAO" class="com.twitpic.db.dao.CollectionDAOImpl" />
-	<bean name="viewedPrituresDAO" id="viewedPrituresDAO" class="com.twitpic.db.dao.ViewedPrituresDAOImpl" />
-	<bean name="groupDAO" id="groupDAO" class="com.twitpic.db.dao.GroupDAOImpl" />
-	<bean name="usersGroupDAO" id="usersGroupDAO" class="com.twitpic.db.dao.UsersGroupDAOImpl" />
-	<bean name="followDAO" id="followDAO" class="com.twitpic.db.dao.FollowDAOImpl" />
+	<bean name="cityDAO" id="cityDAO" class="com.zhelazhela.db.dao.CityDAOImpl" />
+	<bean name="commentsDAO" id="commentsDAO" class="com.zhelazhela.db.dao.CommentsDAOImpl" />
+	<bean name="countyDAO" id="countyDAO" class="com.zhelazhela.db.dao.CountyDAOImpl" />
+	<bean name="discountNewsDAO" id="discountNewsDAO" class="com.zhelazhela.db.dao.DiscountNewsDAOImpl" />
+	<bean name="manageUserDAO" id="manageUserDAO" class="com.zhelazhela.db.dao.ManageUserDAOImpl" />
+	<bean name="merchandiseCategoryDAO" id="merchandiseCategoryDAO" class="com.zhelazhela.db.dao.MerchandiseCategoryDAOImpl" />
+	<bean name="programInfoDAO" id="programInfoDAO" class="com.zhelazhela.db.dao.ProgramInfoDAOImpl" />
+	<bean name="provinceDAO" id="provinceDAO" class="com.zhelazhela.db.dao.ProvinceDAOImpl" />
 </beans>
