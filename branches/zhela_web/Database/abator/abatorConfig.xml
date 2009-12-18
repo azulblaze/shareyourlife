@@ -2,7 +2,7 @@
 <!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
 <ibatorConfiguration>
 	<classPathEntry
-				location="D:/Program Files/eclipse/worksapce/zhela_web/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
+				location="D:\Program Files\eclipse\workspace\zhela_web\WebContent\WEB-INF\lib\mysql-connector-java-5.1.5-bin.jar" />
 	<ibatorContext targetRuntime="Ibatis2Java5" id="zhela">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/zhelazhela"

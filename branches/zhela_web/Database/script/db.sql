@@ -6,7 +6,7 @@ go
 CREATE  TABLE IF NOT EXISTS program_info (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   name VARCHAR(100) NULL ,
-  short VARCHAR(10) NULL ,
+  short_name VARCHAR(10) NULL ,
   website VARCHAR(200) NULL ,
   email VARCHAR(200) NULL ,
   log VARCHAR(400) NULL ,
