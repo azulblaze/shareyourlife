@@ -146,3 +146,25 @@ CREATE INDEX I_NAME ON County (name ASC) ;
 
 go
 
+-- -----------------------------------------------------
+-- Table comments
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS Comments ;
+go
+CREATE  TABLE IF NOT EXISTS Comments (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  discount_info_id BIGINT NOT NULL ,
+  user_name VARCHAR(100) NULL ,
+  user_index VARCHAR(200) NULL ,
+  user_email VARCHAR(200) NULL ,
+  content VARCHAR(1000) NULL ,
+  support_times BIGINT NULL DEFAULT 0 ,
+  against_times BIGINT NULL DEFAULT 0 ,
+  comment_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+go
+CREATE INDEX I_DISCOUNT ON Comments (discount_info_id ASC) ;
+go
