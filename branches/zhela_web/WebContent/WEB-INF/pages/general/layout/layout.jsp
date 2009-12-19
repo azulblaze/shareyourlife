@@ -5,15 +5,17 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="Keywords" content="这啦折啦" />
+	<meta name="Description" content="这啦折啦" />
 	<link rel="bookmark" href="favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link type="images/gif" href="/act_favicon.gif" rel="icon"/>
-	<title><tiles:insertAttribute name="title"/> - 这啦折啦后台管理</title>
-	<link rel="stylesheet" href="style/base.css" type="text/css"/>
-	<link rel="stylesheet" href="style/admin.css" type="text/css"/>
+	<title><tiles:insertAttribute name="title"/> - 这啦折啦折扣信息分享平台</title>
+	<link href="style/base.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="scripts/jquery-1.3.2.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="scripts/jquery.cookie.js" charset="utf-8"></script>
 </head>
-<body>
+<body id="login">
 <div id="wrap">
 <tiles:insertAttribute name="header"></tiles:insertAttribute>
 <tiles:insertAttribute name="body"></tiles:insertAttribute>
