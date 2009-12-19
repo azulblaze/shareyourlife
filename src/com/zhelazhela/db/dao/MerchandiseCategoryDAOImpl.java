@@ -161,4 +161,10 @@ public class MerchandiseCategoryDAOImpl extends SqlMapClientDaoSupport implement
 			return record;
 		}
 	}
+
+	@Override
+	public long insertSelectiveReturnId(MerchandiseCategory record) {
+		return (Long)getSqlMapClientTemplate().insert(
+				"merchandise_category.insertSelective_returnId", record);
+	}
 }
