@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS discount_news ;
 go
 CREATE  TABLE IF NOT EXISTS discount_news (
   id BIGINT NOT NULL AUTO_INCREMENT ,
-  approve_user VARCHAR(100) NOT NULL ,
+  approve_user VARCHAR(100) NULL ,
   approve_result BOOLEAN NULL ,
   approve_time TIMESTAMP NULL ,
   sender_name VARCHAR(100) NOT NULL ,
@@ -81,14 +81,13 @@ go
 DROP TABLE IF EXISTS manage_user ;
 go
 CREATE  TABLE IF NOT EXISTS manage_user (
-  id BIGINT NOT NULL AUTO_INCREMENT ,
   account VARCHAR(100) NOT NULL ,
   password VARCHAR(200) NULL ,
   name VARCHAR(100) NULL ,
   email VARCHAR(200) NULL ,
   isvalid BOOLEAN NOT NULL DEFAULT true ,
   update_time TIMESTAMP NULL DEFAULT current_timestamp ,
-  PRIMARY KEY (id) )
+  PRIMARY KEY (account) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -167,4 +166,22 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
 go
 CREATE INDEX I_DISCOUNT ON comments (discount_info_id ASC) ;
+go
+
+-- -----------------------------------------------------
+-- Table attachments
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS attachments ;
+go
+CREATE  TABLE IF NOT EXISTS attachments (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  rel_table VARCHAR(45) NOT NULL ,
+  rel_table_id BIGINT NULL ,
+  file_name VARCHAR(200) NULL ,
+  update_time TIMESTAMP  NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) ,
+  INDEX I_TABLE (rel_table ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
 go
