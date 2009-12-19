@@ -116,4 +116,6 @@ public interface DiscountNewsDAO {
      * @ibatorgenerated Fri Dec 18 16:20:44 CST 2009
      */
     int updateByPrimaryKeyWithoutBLOBs(DiscountNews record);
+    
+    long insertSelectiveReturnId(DiscountNews record);
 }

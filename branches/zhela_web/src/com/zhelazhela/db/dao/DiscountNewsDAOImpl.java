@@ -196,4 +196,9 @@ public class DiscountNewsDAOImpl extends SqlMapClientDaoSupport implements Disco
             return record;
         }
     }
+
+	@Override
+	public long insertSelectiveReturnId(DiscountNews record) {
+		return (Long)getSqlMapClientTemplate().insert("discount_news.insertSelective_returnId", record);
+	}
 }

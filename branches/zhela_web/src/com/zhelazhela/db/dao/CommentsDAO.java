@@ -92,4 +92,14 @@ public interface CommentsDAO {
      * @ibatorgenerated Fri Dec 18 11:08:41 CST 2009
      */
     int updateByPrimaryKey(Comments record);
+    
+    long insertSelectiveReturnId(Comments record);
+    /**
+     * 
+     * @param dn_id
+     * @param start_index if this is zero, no page div
+     * @param end_index
+     * @return
+     */
+    List<Comments> selectByDiscountNews(long dn_id,long start_index,long end_index);
 }

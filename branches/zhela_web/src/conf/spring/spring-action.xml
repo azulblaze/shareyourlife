@@ -2,20 +2,21 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans default-lazy-init="false" default-dependency-check="none" default-autowire="byName">
-	<bean id="homeAction" name="homeAction" class="com.twitpic.actions.HomeAction" singleton="false" />
-	<bean id="accountAction" name="accountAction" class="com.twitpic.actions.AccountAction" singleton="false"  />
-	<bean id="pictureAction" name="pictureAction" class="com.twitpic.actions.PictureAction" singleton="false"  />
-	<bean id="adminAction" name="adminAction" class="com.twitpic.actions.AdminAction" singleton="false"  />
-	<bean id="commentAction" name="commentAction" class="com.twitpic.actions.CommentAction" singleton="false"  />
-	<bean id="tagAction" name="tagAction" class="com.twitpic.actions.TagAction" singleton="false"  />
 	
-	<!-- mobile actions -->
-	<bean name="mPictureAction" class="com.twitpic.actions.m.PictureAction" singleton="false" >
-		<property name="mobilePictureService" ref="mPictureService"></property>
+	<!-- general actions -->
+	<bean name="newsAction" class="com.zhelazhela.actions.DiscountNewsAction" singleton="false" >
+		<property name="pagesize" value="15" />
 	</bean>
-	<bean name="mHomeAction" class="com.twitpic.actions.m.HomeAction" singleton="false" >
-		<property name="pictureService" ref="mPictureService"></property>
-	</bean>
-	<bean name="msgAction" class="com.twitpic.actions.m.MessageAction" singleton="false" />
 	
+	<bean name="commentsAction" class="com.zhelazhela.actions.CommentAction" singleton="false" >
+		<property name="pagesize" value="10" />
+	</bean>
+	
+	<bean name="validateCodeAction" class="com.zhelazhela.actions.ValidateCodeAction" singleton="false" >
+	</bean>
+		
+	<!-- administrator actions -->
+	<bean name="adminAction" class="com.zhelazhela.actions.ManageDiscountNewsAction" singleton="false" >
+		<property name="pagesize" value="20" />
+	</bean>
 </beans>

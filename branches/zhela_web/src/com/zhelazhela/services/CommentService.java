@@ -7,12 +7,12 @@ public interface CommentService {
 	
 	public Comments saveComment(Comments comments) throws Exception;
 	
-	public boolean delComment(Comments comments) throws Exception;
+	public boolean delComment(long id) throws Exception;
 	
 	public long supportComment(long id) throws Exception;
 	
 	public long againstComment(long id) throws Exception;
 	
-	public CommentList loadComment(int page_size,int page) throws Exception;
+	public CommentList loadComment(long n_id, int page_size,int page) throws Exception;
 	
 }
