@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin:0;
+	padding:0;
+	font:12px 微软雅黑, 宋体, 新宋体, Tahoma, arial, sans-serif;
+	line-height:20px;
+}
+
+ul,li {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+h1,h2,h3 {
+	margin:0;
+	line-height:none;
+	padding:0;
+}
+
+img {
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+form,input {
+	margin:0;
+	padding:0;
+}
+
+a {
+	margin:0;
+	padding:0;
+	color:#264478;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;	
+}

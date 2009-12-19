@@ -1,0 +1,234 @@
+@charset "utf-8";
+/* CSS Document */
+#wrap{
+	width:800px;
+	margin:0px auto;
+}
+#header{
+	min-height: 55px;
+	padding: 0 10px;
+	background:#1b5790;
+	width:100%;
+	margin:0px;
+}
+.right-side {
+	float: right;
+	padding-top: 15px;
+}
+.right-side img {
+	border: 1px solid white;
+	vertical-align: middle;
+}
+.right-side a {
+	color: white;
+	border-left: 1px solid white;
+	height: 10px;
+	padding-left: 10px;
+}
+.right-side a.first {
+	border: none;
+	padding: 0;
+}
+form.main-search {
+	display: inline;
+	position: relative;
+	padding-right: 10px;
+}
+form.main-search label {
+
+}
+form.main-search .search-field{
+	width:300px;
+	
+}
+.search-button {
+	position: absolute;
+	right: 0px;
+	top: -6px;
+}
+#top-nav {
+	width:100%;
+	background: #b2d281;
+	min-height: 30px;
+	padding: 5px 10px 0 10px;
+}
+#top-nav ul {
+	display: block;
+	z-index:999;
+}
+#top-nav ul li {
+	height: 18px;
+	padding: 5px 5px 0 5px;
+	position: relative;
+	float: left;
+	margin-right: 10px;
+}
+#top-nav ul li:hover {
+	background: url(images/zonebar-navleft.png) center left no-repeat;
+}
+#top-nav ul li a {
+	display: block;
+	float: left;
+	height: 23px;
+	position: relative;
+	top: -5px;
+	right: -5px;
+	padding-right: 3px;
+	color: #383838;
+	font-weight: bold;
+	font-size:14px;
+	text-decoration: none;
+}
+#top-nav ul li a:hover {
+	background: url(images/zonebar-navright.png) center right no-repeat;
+}
+#top-nav ul li a span {
+	position: relative;
+	top: 2px;
+}
+#top-nav ul li ul {
+	display: none;
+	position: absolute;
+	top: 29px;
+	left: 0px;
+	width: 150px;
+	border: 1px solid #ccc;
+	background: white;
+	padding: 10px 0 0 0;
+}
+#top-nav ul li ul li {
+	float: none;
+	padding: 0; margin: 0;
+	height: 100%;
+}
+#top-nav ul li ul li:hover {
+	background: none;
+}
+#top-nav ul li ul li a {
+	display: block;
+	float: none;
+	margin-left: -5px;
+	padding: 5px 0 0 10px;
+	width: 140px;
+	font-size:12px;
+}
+#top-nav ul li ul li a:hover {
+	background: #d9f0b7;
+}
+#content{
+	width:100%;
+}
+#footer{
+	margin-top:20px;
+	background: #1b5790;
+	width:100%;
+	padding: 5px 10px;
+	color: white;
+	font-size: 12px;
+	}
+#footer a {
+	color: white;
+}
+.login{
+	width:350px;
+	height:180px;
+	border:1px solid #CCC;
+	margin:30px auto;
+}
+.login h3{
+	color:#039;
+	padding:3px 10px;
+	border-bottom:1px dashed #CCC;
+	margin-bottom:15px;
+}
+.login div {
+	clear:left;
+	float:left;
+	width:40px;
+	padding:0px 10px;
+	margin-top:12px;
+	height:24px;
+	font-size:12px;
+	text-align:right;
+}
+.text-input{
+	margin:10px 0px;
+	height:22px;
+	width:200px;
+	float:left;
+}
+.form-submit{
+	height:24px;
+	font-weight:bold;
+	font-size:14px;
+	width:65px;
+	margin:0px auto auto 60px;
+}
+.search{
+	margin:10px 0px;
+	clear:both;
+	height:30px;
+	line-height:30px;
+	font-weight:bold;
+	font-size:12px;
+}
+.result{
+	width:820px;
+	padding:0px;
+}
+
+ table css 
+table.list {
+	width:100%;
+	border-collapse: collapse;
+	background:#D3E4E5;
+    border:1px solid #F00;
+	font-size:12px;
+	color:#fff;
+	margin:0px 0px 10px 0px;
+  }
+table.list th{
+	border: 1px solid gray;
+	color:#363636;
+}
+table.list td{
+  border: 1px dashed gray;
+  color:#363636;
+ }
+table.list thead th,table.list tfoot th {
+	text-align: left;
+	color:#FFF;
+	padding-top:6px;
+	background-color: #b2d281;
+  }
+table.list tbody td a {
+  background: transparent;
+  text-decoration: none;
+  color:#363636;
+ }
+table.list tbody td a:hover {
+	text-decoration:underline;
+}
+ table.list tbody td a:visited {
+   color:gray;
+   text-decoration:line-through;
+ } 
+table.list tbody th, tbody td {
+  vertical-align: top;
+  text-align: left;
+}
+table.list tfoot td {
+  background: #99BCBF;
+  padding-top:6px;
+  }
+table.list .odd {
+  background: #d3e4e5;
+  }
+table.list tbody tr:hover {
+  background: #99BCBF;
+  }
+table.list tbody tr:hover th,
+table.list tbody tr.odd:hover th {
+ background:#99BCBF;
+ color:#000000;
+ }
