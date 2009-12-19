@@ -73,4 +73,6 @@ public interface MerchandiseCategoryDAO {
 	 * @ibatorgenerated  Fri Dec 18 11:08:41 CST 2009
 	 */
 	int updateByPrimaryKey(MerchandiseCategory record);
+	
+	long insertSelectiveReturnId(MerchandiseCategory record);
 }

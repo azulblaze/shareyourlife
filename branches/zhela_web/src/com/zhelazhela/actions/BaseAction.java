@@ -1,6 +1,7 @@
 package com.zhelazhela.actions;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -38,6 +39,10 @@ public abstract class BaseAction extends ActionSupport {
 	public HttpServletRequest getHttpServletRequest(){
 		return ServletActionContext.getRequest();	
 	}
+	
+	public HttpServletResponse getHttpServletResponse(){
+		return ServletActionContext.getResponse();	
+	}
 
 	public String getRequestParameter(String key) {
 		return ServletActionContext.getRequest().getParameter(key);
@@ -51,6 +56,13 @@ public abstract class BaseAction extends ActionSupport {
 		ServletActionContext.getRequest().getSession().removeAttribute(key);
 	}
 	
+	public void saveSession(String key,Object value){
+		ServletActionContext.getRequest().getSession().setAttribute(key, value);
+	}
+	
+	public Object getSession(String key){
+		return ServletActionContext.getRequest().getSession().getAttribute(key);
+	}
 	
 	protected void loadUrlBack(){
 		this.urlBack = ServletActionContext.getRequest().getHeader("Referer");
