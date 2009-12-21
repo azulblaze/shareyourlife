@@ -356,7 +356,7 @@
   <select id="comments_list_byNews" parameterClass="java.util.Map"  resultMap="ibatorgenerated_BaseResultMap">
   	select * from comments
   	where discount_info_id = #discount_info_id:BIGINT#
-    order by id desc
+    order by id asc
     <isNotNull prepend=" " property="start_index" >
 	        limit #start_index:BIGINT#,#end_index:BIGINT#
 	</isNotNull>

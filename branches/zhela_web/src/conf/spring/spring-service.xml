@@ -5,7 +5,7 @@
 
 	<!-- mail service -->
 	<bean name="smtpAuthenticator"
-		class="com.twitpic.system.email.SmtpAuthenticator">
+		class="com.zhelazhela.system.email.SmtpAuthenticator">
 		<constructor-arg value="andy.noreply.mail@gmail.com" />
 		<constructor-arg value="~@$fs#@s*o)p" />
 	</bean>
@@ -32,12 +32,12 @@
 		<property name="session" ref="mailSession" />
 	</bean>
 	
-	<bean name="mailServices" class="com.twitpic.system.email.MailServices" >
+	<bean name="mailServices" class="com.zhelazhela.system.email.MailServices" >
 		<property name="senderName" value="这啦折啦" />
 		<property name="senderAddr" value="webmaster@zhelazhela.com" />
 	</bean>
 	
-	<bean name="systemConfig" class="com.twitpic.system.config.SystemConfig" >
+	<bean name="systemConfig" class="com.zhelazhela.system.config.SystemConfig" >
 		<property name="domain" value="http://www.zhelazhela.com" />
 		<property name="upload_pic" value="/upload/images/pic" />
 		<property name="upload_pic_maxlength" value="4194304" />

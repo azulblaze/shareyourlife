@@ -379,4 +379,14 @@
       reg_date = #regDate:TIMESTAMP#
     where id = #id:BIGINT#
   </update>
+  <select id="program_list" parameterClass="java.util.Map"  resultMap="ibatorgenerated_BaseResultMap">
+  	select * from program_info
+  	<isNotNull prepend=" where " property="keyword" >
+	        name like %#keyword:VARCHAR#%
+	</isNotNull>
+    order by id desc
+    <isNotNull prepend=" " property="start_index" >
+	        limit #start_index:BIGINT#,#end_index:BIGINT#
+	</isNotNull>
+  </select>
 </sqlMap>

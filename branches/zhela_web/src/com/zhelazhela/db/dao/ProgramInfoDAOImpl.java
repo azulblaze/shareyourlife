@@ -3,6 +3,8 @@ package com.zhelazhela.db.dao;
 import com.zhelazhela.db.model.ProgramInfo;
 import com.zhelazhela.db.model.ProgramInfoExample;
 import java.util.List;
+import java.util.ListIterator;
+
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public class ProgramInfoDAOImpl extends SqlMapClientDaoSupport implements ProgramInfoDAO {
@@ -191,5 +193,21 @@ public class ProgramInfoDAOImpl extends SqlMapClientDaoSupport implements Progra
 	public long insertSelectiveReturnId(ProgramInfo record) {
 		return (Long)getSqlMapClientTemplate().insert(
 				"program_info.insertSelective_returnId", record);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProgramInfo> loadList(long startIndex, long endIndex,
+			String keyword) {
+		java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
+		if(keyword!=null){
+			map.put("keyword", keyword);
+		}
+		if(startIndex>=0){
+			map.put("start_index", startIndex);
+			map.put("end_index", endIndex);
+		}
+		List<ProgramInfo> list = (List<ProgramInfo>)getSqlMapClientTemplate().queryForList("comments.comments_list_byNews", map);
+		return list;
 	}
 }
