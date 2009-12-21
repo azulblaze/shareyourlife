@@ -7,10 +7,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+
+import com.zhelazhela.util.ConsVar;
 
 /**
  * @author Yan Chen
@@ -89,5 +92,34 @@ public class ValidateCodeAction extends BaseAction {
 		if(!s_names.contains(sessionName)){
 			return;
 		}
+	}
+	
+	public String ValidateCode()throws Exception{
+		int width=158, height=65;
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics g = image.getGraphics();
+		Random random = new Random();
+		g.setColor(new Color(255, 255, 255));
+		g.fillRect(0, 0, width, height);
+		g.setFont(new Font("Chiller",Font.BOLD,50));
+		g.setColor(new Color(255, 0, 0));
+		String sRand="";
+		for (int i=0;i<8;i++){
+		    String rand= ""+ConsVar.CONSTANT_ABC[random.nextInt(26)];
+		    sRand+=rand;
+		    g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));
+		    g.drawString(rand,18*i+8,42);
+		}
+		this.getHttpSession().setAttribute(sessionName,sRand);
+		g.dispose();
+		this.getHttpServletResponse().setHeader("Pragma","No-cache");
+		this.getHttpServletResponse().setHeader("Cache-Control","no-cache");
+		this.getHttpServletResponse().setDateHeader("Expires", 0);
+		try {
+			ImageIO.write(image, "JPEG", this.getHttpServletResponse().getOutputStream());
+		} catch (IOException e) {
+			
+		}
+		return null;
 	}
 }

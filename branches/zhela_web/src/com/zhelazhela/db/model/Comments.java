@@ -303,8 +303,13 @@ public class Comments {
 	}
 
 	public boolean validate() {
+		/**
 		if (discountInfoId < 1 || StringUtils.isBlank(userName)|| StringUtils.isBlank(userIndex)
 				|| StringUtils.isBlank(userEmail) || StringUtils.isBlank(userEmail) || StringUtils.isBlank(content)) {
+			return false;
+		}**/
+		if (discountInfoId < 1 || StringUtils.isBlank(userName)
+				|| StringUtils.isBlank(userEmail) || StringUtils.isBlank(content)) {
 			return false;
 		}
 		return true;

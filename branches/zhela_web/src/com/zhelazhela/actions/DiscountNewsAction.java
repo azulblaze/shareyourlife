@@ -1,5 +1,9 @@
 package com.zhelazhela.actions;
 
+import java.text.DecimalFormat;
+
+import net.sf.json.JSONObject;
+
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.DiscountNewsService;
@@ -8,6 +12,8 @@ import com.zhelazhela.services.DiscountNewsService;
 public class DiscountNewsAction extends BaseAction {
 	
 	private DiscountNewsService discountNewsService;
+	
+	private static DecimalFormat df = new DecimalFormat("######0.00");
 
 	/** 折扣新闻对象 */
 	private DiscountNews dnews;
@@ -38,6 +44,8 @@ public class DiscountNewsAction extends BaseAction {
 			return INPUT;
 		}
 		this.setValue("dnews", dnews);
+		//确保是未审批的内容
+		dnews.setApproveResult(null);
 		if(validate_code==null||!validate_code.equals((String)getSession("validate_code"))){
 			this.clearSession("validate_code");
 			setValue("error","您必须输入正确的验证码才能提交！");
@@ -98,20 +106,36 @@ public class DiscountNewsAction extends BaseAction {
 	
 	public String support() throws Exception{
 		long result = discountNewsService.supportDiscountNews(dn_id);
-		setValue("result",result);
-		return SUCCESS;
+		JSONObject jb = new JSONObject();
+		jb.put("points", result);
+		setValue("json",jb.toString());
+		return "json";
 	}
 	
 	public String point_content() throws Exception{
 		DiscountNews dn = discountNewsService.pointContent(dn_id, points);
-		setValue("result",dn);
-		return SUCCESS;
+		JSONObject jb = new JSONObject();
+		jb.put("times", dn.getContentPointsTimes());
+		float avg_points = 0;
+		if(dn.getContentPointsTimes()>0){
+			avg_points = dn.getContentPoints()/dn.getContentPointsTimes();
+		}
+		jb.put("avg_points", df.format(avg_points));
+		setValue("json",jb.toString());
+		return "json";
 	}
 	
 	public String point_publish() throws Exception{
 		DiscountNews dn = discountNewsService.pointPublish(dn_id, points);
-		setValue("result",dn);
-		return SUCCESS;
+		JSONObject jb = new JSONObject();
+		jb.put("times", dn.getPublishPointsTimes());
+		float avg_points = 0;
+		if(dn.getPublishPointsTimes()>0){
+			avg_points = dn.getPublishPoints()/dn.getPublishPointsTimes();
+		}
+		jb.put("avg_points", df.format(avg_points));
+		setValue("json",jb.toString());
+		return "json";
 	}
 	
 	
