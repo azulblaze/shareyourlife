@@ -4,14 +4,23 @@
 <tiles-definitions>
 	<definition name="zhela.layout" template="/WEB-INF/pages/general/layout/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/pages/general/tiles/header.jsp"></put-attribute>
+		<put-attribute name="right" value="/WEB-INF/pages/general/tiles/index_right.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/pages/general/tiles/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="zhela.news_submit" template="/WEB-INF/pages/general/layout/layout.jsp" extends="zhela.layout">
 		<put-attribute name="title" type="string" value="提交折扣新闻"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/pages/general/tiles/news_submit.jsp"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/general/tiles/news_submit.jsp"></put-attribute>
+	</definition>
+	<definition name="zhela.news_list" template="/WEB-INF/pages/general/layout/layout.jsp" extends="zhela.layout">
+		<put-attribute name="title" type="string" value="最新折扣信息"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/general/tiles/index.jsp"></put-attribute>
+	</definition>
+	<definition name="zhela.news_detail" template="/WEB-INF/pages/general/layout/layout.jsp" extends="zhela.layout">
+		<put-attribute name="title" type="string" value=""></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/general/tiles/detail.jsp"></put-attribute>
 	</definition>
 	<definition name="zhela.thankyou_support_news" template="/WEB-INF/pages/general/layout/layout.jsp" extends="zhela.layout">
 		<put-attribute name="title" type="string" value="感谢您的支持"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/pages/general/tiles/thankyou_support_news.jsp"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/general/tiles/thankyou_support_news.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

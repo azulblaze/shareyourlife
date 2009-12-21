@@ -84,7 +84,8 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	@Override
 	public DiscountNewsList loadDiscountNewsList(int page, int pagesize,
 			Map<String, String> parameters)  throws Exception{
-		throw new Exception("un implements");
+		//throw new Exception("un implements");
+		return null;
 	}
 
 	@Override
@@ -159,12 +160,14 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 
 	@Override
 	public DiscountNews viewDiscountNews(long id) throws Exception{
-		throw new Exception("un implements");
+		//throw new Exception("un implements");
+		return null;
 	}
 
 	@Override
 	public DiscountNewsList loadUnReleaseDiscountNewsList(int page, int pagesize) throws Exception{
-		throw new Exception("un implements");
+		//throw new Exception("un implements");
+		return null;
 	}
 
 	public void setDiscountNewsDAO(DiscountNewsDAO discountNewsDAO) {

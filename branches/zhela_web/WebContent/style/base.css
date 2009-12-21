@@ -34,10 +34,56 @@ form,input {
 a {
 	margin:0;
 	padding:0;
-	color:#264478;
+	color:#3ad1fa;
 	text-decoration:none;
 }
 
 a:hover {
+	color:#003399;
 	text-decoration:underline;	
+}
+.clear{
+	clear:both;
+}
+.error{
+	color:red;
+	padding:0px 5px;
+	display:none;
+}
+a.zhelazhela{
+	font-weight:bold;
+	color:#e44408;
+}
+a.zhelazhela:hover{
+	text-decoration:none;
+}
+input.w350{
+	width:350px;
+}
+input.w300{
+	width:300px;
+}
+input.w250{
+	width:250px;
+}
+input.w200{
+	width:200px;
+}
+input.w100{
+	width:100px;
+}
+input.w60{
+	width:60px;
+}
+a.b_link{
+	border:1px solid #CCC;
+	background:url(images/b_link.gif) center right no-repeat ;
+	padding-right:20px;
+	color:#003399;
+	padding:2px 20px 2px 4px;
+	height:16px;
+	line-height:16px;
+}
+a.b_link:hover{
+	text-decoration:none;
 }
