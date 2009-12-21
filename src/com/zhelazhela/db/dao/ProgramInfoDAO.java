@@ -92,4 +92,6 @@ public interface ProgramInfoDAO {
 	int updateByPrimaryKeyWithoutBLOBs(ProgramInfo record);
 	
 	long insertSelectiveReturnId(ProgramInfo record);
+	
+	java.util.List<ProgramInfo> loadList(long start_index,long end_index,String keyword );
 }
