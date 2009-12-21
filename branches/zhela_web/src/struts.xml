@@ -25,6 +25,14 @@
 			<result name="success" type="redirect-action">thankyou_support_news</result>
 		</action>
 		
+		<action name="index" class="newsAction" method="list">
+			<result name="success" type="tiles">zhela.news_list</result>
+		</action>
+		
+		<action name="detail" class="newsAction" method="view">
+			<result name="success" type="tiles">zhela.news_detail</result>
+		</action>
+		
 		<action name="thankyou_support_news" class="newsAction" method="thankyou">
 			<result name="success" type="tiles">zhela.thankyou_support_news</result>
 		</action>
