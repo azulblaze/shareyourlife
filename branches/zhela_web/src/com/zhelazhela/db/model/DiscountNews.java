@@ -741,7 +741,17 @@ public class DiscountNews {
         this.newsContent = newsContent;
     }
     
-    public boolean validate(){
+    private ProgramInfo programInfo;
+    
+    public ProgramInfo getProgramInfo() {
+		return programInfo;
+	}
+
+	public void setProgramInfo(ProgramInfo programInfo) {
+		this.programInfo = programInfo;
+	}
+
+	public boolean validate(){
     	if(StringUtils.isBlank(senderName)||StringUtils.isBlank(senderMail)||StringUtils.isBlank(senderLink)||
     			pId==null||StringUtils.isBlank(discountCategory)||StringUtils.isBlank(discountArea)||
     			discountStart==null||discountEnd==null||StringUtils.isBlank(newsSource)||

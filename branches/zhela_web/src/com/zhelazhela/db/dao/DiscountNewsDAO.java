@@ -118,4 +118,8 @@ public interface DiscountNewsDAO {
     int updateByPrimaryKeyWithoutBLOBs(DiscountNews record);
     
     long insertSelectiveReturnId(DiscountNews record);
+    
+    List<DiscountNews> selectWithProgramInfoByExampleWithoutBLOBs(DiscountNewsExample example);
+    
+    DiscountNews selectWithProgramInfoByPrimaryKey(Long id);
 }

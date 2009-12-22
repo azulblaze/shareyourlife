@@ -1,16 +1,22 @@
 package com.zhelazhela.services.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.zhelazhela.db.dao.DiscountNewsDAO;
 import com.zhelazhela.db.model.DiscountNews;
+import com.zhelazhela.db.model.DiscountNewsExample;
+import com.zhelazhela.db.model.DiscountNewsExample.Criteria;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.DiscountNewsService;
+import com.zhelazhela.services.UtilService;
 
 public class DiscountNewsServiceImpl implements DiscountNewsService {
 
 	private DiscountNewsDAO discountNewsDAO;
+	
+	private UtilService utilService;
 	
 	@Override
 	public boolean approveDiscountNews(long id, String approveUser,boolean result)
@@ -82,10 +88,31 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	}
 
 	@Override
-	public DiscountNewsList loadDiscountNewsList(int page, int pagesize,
-			Map<String, String> parameters)  throws Exception{
-		//throw new Exception("un implements");
-		return null;
+	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title)  throws Exception{
+		DiscountNewsExample example = new DiscountNewsExample();
+		if(pagesize>0){
+			example.setLimit(""+(page-1)*pagesize+" "+pagesize);
+		}
+		Criteria criteria = example.createCriteria().andApproveResultEqualTo(true);
+		if(title!=null){
+			criteria.andNewsTitleLike(title);
+		}
+		java.util.List<String> _categorys = new java.util.ArrayList<String>(utilService.loadCategorys(categorys));
+		for(String category:_categorys){
+			example.or(example.createCriteria().andApproveResultEqualTo(true).andDiscountCategoryLike(category));
+		}
+		java.util.List<String> _areas = new java.util.ArrayList<String>(utilService.loadAreas(areas));
+		for(String _area:_areas){
+			example.or(example.createCriteria().andApproveResultEqualTo(true).andDiscountAreaLike(_area));
+		}
+		List<DiscountNews> list = discountNewsDAO.selectWithProgramInfoByExampleWithoutBLOBs(example);
+		int size = discountNewsDAO.countByExample(example);
+		DiscountNewsList dnl = new DiscountNewsList();
+		dnl.setList(list);
+		dnl.setSize(size);
+		dnl.setPage(page);
+		dnl.setPagesize(pagesize);
+		return dnl;
 	}
 
 	@Override
@@ -160,20 +187,48 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 
 	@Override
 	public DiscountNews viewDiscountNews(long id) throws Exception{
-		//throw new Exception("un implements");
-		return null;
+		return discountNewsDAO.selectWithProgramInfoByPrimaryKey(id);
 	}
 
 	@Override
-	public DiscountNewsList loadUnReleaseDiscountNewsList(int page, int pagesize) throws Exception{
-		//throw new Exception("un implements");
-		return null;
-	}
+	public DiscountNewsList loadUnReleaseDiscountNewsList(int page,
+			int pagesize, Map<String, Object> parameters, String categorys,
+			String areas, String title) throws Exception {
 
+		DiscountNewsExample example = new DiscountNewsExample();
+		if(pagesize>0){
+			example.setLimit(""+(page-1)*pagesize+" "+pagesize);
+		}
+		Criteria criteria = example.createCriteria();
+		if(title!=null){
+			criteria.andNewsTitleLike(title);
+		}
+		java.util.List<String> _categorys = new java.util.ArrayList<String>(utilService.loadCategorys(categorys));
+		for(String category:_categorys){
+			example.or(example.createCriteria().andDiscountCategoryLike(category));
+		}
+		java.util.List<String> _areas = new java.util.ArrayList<String>(utilService.loadAreas(areas));
+		for(String _area:_areas){
+			example.or(example.createCriteria().andDiscountAreaLike(_area));
+		}
+		List<DiscountNews> list = discountNewsDAO.selectWithProgramInfoByExampleWithoutBLOBs(example);
+		int size = discountNewsDAO.countByExample(example);
+		DiscountNewsList dnl = new DiscountNewsList();
+		dnl.setList(list);
+		dnl.setSize(size);
+		dnl.setPage(page);
+		dnl.setPagesize(pagesize);
+		return dnl;
+	}
+	
 	public void setDiscountNewsDAO(DiscountNewsDAO discountNewsDAO) {
 		this.discountNewsDAO = discountNewsDAO;
 	}
-	
+
+	public void setUtilService(UtilService utilService) {
+		this.utilService = utilService;
+	}
+
 	
 	
 }

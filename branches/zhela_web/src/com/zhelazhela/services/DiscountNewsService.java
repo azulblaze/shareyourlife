@@ -35,14 +35,19 @@ public interface DiscountNewsService {
 	public boolean delDiscountNews(long id) throws Exception;
 	
 	public boolean approveDiscountNews(long id,String approve_user,boolean result) throws Exception;
-		
+	/**
+	 * 用于异步的更新阅读次数
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public long readDiscountNews(long id) throws Exception;
 	
 	public long supportDiscountNews(long id) throws Exception;
 	
-	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,String> parameters) throws Exception;
+	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title) throws Exception;
 	
-	public DiscountNewsList loadUnReleaseDiscountNewsList(int page,int pagesize) throws Exception;
+	public DiscountNewsList loadUnReleaseDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title) throws Exception;
 	
 	public DiscountNews viewDiscountNews(long id) throws Exception;
 }
