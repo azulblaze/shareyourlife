@@ -2,10 +2,28 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script type="text/javascript" src="/scripts/xheditor-zh-cn.js"></script>
+<script type="text/javascript" src="/scripts/set.js"></script>
 <script>
+var categorys = new Set();
 $(document).ready(function(){
 	$('#news_review').xheditor(true);
 	$('#news_content').xheditor(true);
+	$('#category_add').bind("click", function(event) {
+		var _category = $('#category_select option:selected').val();
+		if(categorys.put(_category)){
+			$('#categorys').append('<div class="b_link"><a href="#">'+_category+'</a></div>');
+			$('#categorys .b_link').each(function(index,e){
+				$(this).unbind('click');
+				$(this).bind('click',function(event){
+					event.preventDefault();
+					categorys.remove($(this).find('a').html());
+					$(this).remove();
+					$('#dnews_discountCategory').attr("value",categorys.toString());
+				})
+			});
+			$('#dnews_discountCategory').attr("value",categorys.toString());
+		}
+	});
 })
 </script>
         	<div class="rule">
@@ -19,10 +37,11 @@ $(document).ready(function(){
                     <li>5. 编辑也许会对投递进行适当修改, 以适合在本站发表.</li>
                 </ul>
             </div>
+            <form action="/news_submit.zl" method="post">
             <div class="line">
             	<div class="input">
                 	<div class="label">标题:</div>
-                    <input type="text" class="w200" name="title" />
+                    <input type="text" class="w200" name="dnews.newsTitle" />
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>最多20个字，简明扼要。</div>
@@ -30,9 +49,9 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">折扣开始时间:</div>
-                    <input type="text" class="w100" name="title" />
+                    <input type="text" class="w100" name="dnews.discountStart" />
                     <div class="label">结束时间</div>
-                    <input type="text" class="w100" name="title" />
+                    <input type="text" class="w100" name="dnews.discountEnd" />
                      <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>请注明折扣开始时间和结束时间。</div>
@@ -40,7 +59,7 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">新闻来源:</div>
-                    <input type="text" class="w300" name="title" />
+                    <input type="text" class="w300" name="dnews.newsSource" />
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>请提供新闻来源的网址或者其他信息。</div>
@@ -48,7 +67,7 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">您的网名:</div>
-                    <input type="text" class="w200" name="title" />
+                    <input type="text" class="w200" name="dnews.senderName" />
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>如果信息发布，会显示您的大名。</div>
@@ -56,7 +75,7 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">您的主页:</div>
-                    <input type="text" class="w300" name="title" />
+                    <input type="text" class="w300" name="dnews.senderLink" />
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice">请提供您的博客网址或者个人站点地址，可能能给您带来流量。</div>
@@ -64,7 +83,7 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">您的邮箱:</div>
-                    <input type="text" class="w200" name="title" />
+                    <input type="text" class="w200" name="dnews.senderMail" />
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>请留下您的邮箱作为联系方式。</div>
@@ -72,10 +91,9 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">打折商家:</div>
-                    <select>
-                    	<option value="1">请选择打折的商家</option>
-                        <option value="2">淘宝商城</option>
-                        <option value="3">其他(我们会为您补充)</option>
+                    <select name="dnews.pId">
+                    	<option value="-1">其他(我们会为您补充)</option>
+                        <option value="1">淘宝商城</option>
                     </select>
                     <div class="error">错误信息</div>
                 </div>
@@ -84,18 +102,19 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">打折地区:</div>
-                    <select>
-                    	<option value="1">中国地区</option>
+                    <select id="province">
+                    	<option value="-1" selected="selected">所有地区</option>
                         <option value="2">四川省</option>
                         <option value="3">云南省</option>
                         <option value="3">山东省</option>
                     </select>
-                    <select>
-                    	<option value="1">全部地区</option>
+                    <select id="city">
+                    	<option value="-1" selected="selected">全部地区</option>
                     	<option value="1">成都市</option>
                         <option value="2">绵阳市</option>
                         <option value="3">自贡市</option>
                     </select>
+                    <input type="hidden" name="dnews.discountArea" value=""/>
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>打折设计的范围，请根据需要选择</div>
@@ -103,16 +122,17 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">商品类别:</div>
-                    <select>
-                    	<option value="1">各种类别</option>
-                        <option value="2">电子产品</option>
-                        <option value="3">服装</option>
-                        <option value="3">食品</option>
+                    <select id="category_select">
+                    	<option value="多种商品">多种商品</option>
+                        <option value="电子产品">电子产品</option>
+                        <option value="服装">服装</option>
+                        <option value="食品">食品</option>
                     </select>
-                    <input type="button" class="w60" value="增加" />
+                    <input type="button" id="category_add" class="w60" value="增加" />
+                    <input type="hidden" id="dnews_discountCategory" name="dnews.discountCategory" value=""/>
                     <div class="error">错误信息</div>
                 </div>
-                <div class="option_link"><a class="b_link" href="#">电子产品</a> <a class="b_link" href="#">服装</a></div>
+                <div class="option_link" id="categorys"></div>
                 <div class="notice"><em>(必填*)</em>打折产品的类别，可以包含多种，请增加，如果类别实在太多，请选择【各种类别】</div>
             </div>
             <div class="line">
@@ -121,7 +141,7 @@ $(document).ready(function(){
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>新闻概要部分(尽量简明概要)。</div>
-                <div class="news_review"><textarea id="news_review"></textarea></div>
+                <div class="news_review"><textarea name="dnews.newsReview" id="news_review"></textarea></div>
             </div>
             <div class="line">
             	<div class="input">
@@ -129,13 +149,13 @@ $(document).ready(function(){
                     <div class="error">错误信息</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>请客观具体的说明打折的情</div>
-                <div class="news_content"><textarea id="news_content"></textarea></div>
+                <div class="news_content"><textarea name="dnews.newsContent" id="news_content"></textarea></div>
             </div>
             <div class="line">
             	<div class="input">
                 	<div class="label">验证码:</div>
-                    <input type="text" class="w60" name="title" />
-                    <img src="images/v_code.png" />
+                    <input type="text" class="w60" name="title" name="validate_code" />
+                    <img src="images/v_code.png" value="news_submit"/>
                     <div class="error">终于到最后一步啦</div>
                 </div>
                 <div class="notice"><em>(必填*)</em>终于到最后一步啦，填写好验证码提交，如果看不清楚点击图片刷新，再次感谢您的无私贡献。</div>
@@ -143,3 +163,4 @@ $(document).ready(function(){
             <div class="big_sbumit">
             	<input type="submit" value="确认提交折扣信息" />
             </div>
+            </form>

@@ -48,5 +48,5 @@
 	<bean id="accountService" name="accountService" class="com.zhelazhela.services.impl.AccountServiceImpl" />	
 	<bean id="commentService" name="commentService" class="com.zhelazhela.services.impl.CommentServiceImpl" />
 	<bean id="discountNewsService" name="discountNewsService" class="com.zhelazhela.services.impl.DiscountNewsServiceImpl" />
-	
+	<bean id="utilService" name="utilService" class="com.zhelazhela.services.impl.UtilServiceImpl" />
 </beans>
