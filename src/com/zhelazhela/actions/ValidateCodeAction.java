@@ -25,6 +25,7 @@ public class ValidateCodeAction extends BaseAction {
 	public static java.util.List<String> s_names = new java.util.ArrayList<String>();
 	static{
 		s_names.add("validate_code");
+		s_names.add("news_submit");
 	}
 	
 	/**
