@@ -75,15 +75,20 @@ input.w100{
 input.w60{
 	width:60px;
 }
-a.b_link{
+div.b_link{
+	float:left;
 	border:1px solid #CCC;
-	background:url(images/b_link.gif) center right no-repeat ;
-	padding-right:20px;
-	color:#003399;
-	padding:2px 20px 2px 4px;
-	height:16px;
-	line-height:16px;
+	padding-right:5px;
+	height:18px;
+	line-height:18px;
+	margin:0px 10px 10px 0px;
 }
-a.b_link:hover{
+div.b_link a{
+	display:block;
+	color:#003399;
+	background:url(images/b_link.gif) center right no-repeat ;
+	padding:1px 20px 2px 4px;
+}
+div.b_link a:hover{
 	text-decoration:none;
 }

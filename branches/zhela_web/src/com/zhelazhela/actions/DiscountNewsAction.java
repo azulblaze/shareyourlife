@@ -29,6 +29,8 @@ public class DiscountNewsAction extends BaseAction {
 	private String seller;
 	/** 折扣地区 */
 	private String area;
+	/** 排列顺序 **/
+	private String order;
 	/** 折扣新闻唯一ID */
 	private int dn_id;
 	/** 打分 */
@@ -80,11 +82,10 @@ public class DiscountNewsAction extends BaseAction {
 		if(page<=0){
 			page = 1;
 		}
-		java.util.Map<String,String> parameters = new java.util.HashMap<String,String>();
-		parameters.put("seller", seller);
-		parameters.put("category", category);
-		parameters.put("area", area);
-		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, parameters);
+		if(order==null){
+			order = "approve_time desc";
+		}
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, null, category, area, null,order);
 		setValue("dnl",dnl);
 		return SUCCESS;
 	}
@@ -97,7 +98,7 @@ public class DiscountNewsAction extends BaseAction {
 		DiscountNews dn = discountNewsService.viewDiscountNews(dn_id);
 		if(dn!=null){
 			//只能阅读审批过的内容
-			if(dn.getApproveResult()){
+			if(dn.getApproveResult()!=null&&dn.getApproveResult()){
 				setValue("dn",dn);
 			}
 		}
@@ -211,6 +212,14 @@ public class DiscountNewsAction extends BaseAction {
 	}
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
 	}
 
 }

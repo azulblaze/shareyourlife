@@ -32,6 +32,8 @@ public class ManageDiscountNewsAction extends BaseAction {
 	private String seller;
 	/** 折扣地区 */
 	private String area;
+	/** 排列顺序 **/
+	private String order;
 	/** 折扣新闻唯一ID */
 	private int dn_id;
 	/** 审批操作ID */
@@ -107,7 +109,10 @@ public class ManageDiscountNewsAction extends BaseAction {
 		if(page<=0){
 			page = 1;
 		}
-		DiscountNewsList dnl = discountNewsService.loadUnReleaseDiscountNewsList(page, pagesize);
+		if(order==null){
+			order = "approve_time desc";
+		}
+		DiscountNewsList dnl = discountNewsService.loadUnReleaseDiscountNewsList(page, pagesize, null, category, area, null, order);
 		setValue("dnl",dnl);
 		return SUCCESS;
 	}
@@ -178,6 +183,12 @@ public class ManageDiscountNewsAction extends BaseAction {
 	}
 	public void setApprove_action(int approveAction) {
 		approve_action = approveAction;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
 	}
 	
 }

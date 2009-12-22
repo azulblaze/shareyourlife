@@ -23,7 +23,7 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 			throws Exception {
 		DiscountNews discountnews = discountNewsDAO.selectByPrimaryKey(id);
 		if(discountnews!=null){
-			if(discountnews.getApproveResult()==result){
+			if(discountnews.getApproveResult()!=null&&discountnews.getApproveResult()==result){
 				return true;
 			}else{
 				DiscountNews tmp = new DiscountNews();
@@ -88,10 +88,10 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	}
 
 	@Override
-	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title)  throws Exception{
+	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title,String orderby)  throws Exception{
 		DiscountNewsExample example = new DiscountNewsExample();
 		if(pagesize>0){
-			example.setLimit(""+(page-1)*pagesize+" "+pagesize);
+			example.setLimit(""+(page-1)*pagesize+","+pagesize);
 		}
 		Criteria criteria = example.createCriteria().andApproveResultEqualTo(true);
 		if(title!=null){
@@ -105,6 +105,7 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		for(String _area:_areas){
 			example.or(example.createCriteria().andApproveResultEqualTo(true).andDiscountAreaLike(_area));
 		}
+		example.setOrderByClause(orderby);
 		List<DiscountNews> list = discountNewsDAO.selectWithProgramInfoByExampleWithoutBLOBs(example);
 		int size = discountNewsDAO.countByExample(example);
 		DiscountNewsList dnl = new DiscountNewsList();
@@ -193,24 +194,25 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	@Override
 	public DiscountNewsList loadUnReleaseDiscountNewsList(int page,
 			int pagesize, Map<String, Object> parameters, String categorys,
-			String areas, String title) throws Exception {
+			String areas, String title,String orderby) throws Exception {
 
 		DiscountNewsExample example = new DiscountNewsExample();
 		if(pagesize>0){
-			example.setLimit(""+(page-1)*pagesize+" "+pagesize);
+			example.setLimit(""+(page-1)*pagesize+","+pagesize);
 		}
-		Criteria criteria = example.createCriteria();
+		Criteria criteria = example.createCriteria().andApproveResultNotEqualTo(true);
 		if(title!=null){
 			criteria.andNewsTitleLike(title);
 		}
 		java.util.List<String> _categorys = new java.util.ArrayList<String>(utilService.loadCategorys(categorys));
 		for(String category:_categorys){
-			example.or(example.createCriteria().andDiscountCategoryLike(category));
+			example.or(example.createCriteria().andApproveResultNotEqualTo(true).andDiscountCategoryLike(category));
 		}
 		java.util.List<String> _areas = new java.util.ArrayList<String>(utilService.loadAreas(areas));
 		for(String _area:_areas){
-			example.or(example.createCriteria().andDiscountAreaLike(_area));
+			example.or(example.createCriteria().andApproveResultNotEqualTo(true).andDiscountAreaLike(_area));
 		}
+		example.setOrderByClause(orderby);
 		List<DiscountNews> list = discountNewsDAO.selectWithProgramInfoByExampleWithoutBLOBs(example);
 		int size = discountNewsDAO.countByExample(example);
 		DiscountNewsList dnl = new DiscountNewsList();
