@@ -201,4 +201,19 @@ public class DiscountNewsDAOImpl extends SqlMapClientDaoSupport implements Disco
 	public long insertSelectiveReturnId(DiscountNews record) {
 		return (Long)getSqlMapClientTemplate().insert("discount_news.insertSelective_returnId", record);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DiscountNews> selectWithProgramInfoByExampleWithoutBLOBs(
+			DiscountNewsExample example) {
+		 List<DiscountNews> list = getSqlMapClientTemplate().queryForList("discount_news.dicount_news_programInfo", example);
+		 return list;
+	}
+	
+	public DiscountNews selectWithProgramInfoByPrimaryKey(Long id) {
+        DiscountNews key = new DiscountNews();
+        key.setId(id);
+        DiscountNews record = (DiscountNews) getSqlMapClientTemplate().queryForObject("discount_news.selectWithProgramInfoByPrimaryKey", key);
+        return record;
+    }
 }
