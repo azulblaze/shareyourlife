@@ -48,7 +48,9 @@ a:hover {
 .error{
 	color:red;
 	padding:0px 5px;
-	display:none;
+}
+input.error{
+	border:1px dashed #F00;
 }
 a.zhelazhela{
 	font-weight:bold;

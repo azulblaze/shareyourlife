@@ -6,7 +6,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 
 import com.zhelazhela.db.dao.CityDAO;
-import com.zhelazhela.db.dao.CountyDAO;
 import com.zhelazhela.db.dao.MerchandiseCategoryDAO;
 import com.zhelazhela.db.dao.ProvinceDAO;
 import com.zhelazhela.db.model.City;
@@ -21,19 +20,12 @@ public class UtilServiceImpl implements UtilService {
 	
 	private CityDAO cityDAO;
 	
-	/** 目前我们不支持到小地区 **/
-	private CountyDAO countyDAO;
-	
 	private ProvinceDAO provinceDAO;
 	
 	private MerchandiseCategoryDAO merchandiseCategoryDAO;
 
 	public void setCityDAO(CityDAO cityDAO) {
 		this.cityDAO = cityDAO;
-	}
-
-	public void setCountyDAO(CountyDAO countyDAO) {
-		this.countyDAO = countyDAO;
 	}
 
 	public void setProvinceDAO(ProvinceDAO provinceDAO) {
@@ -119,5 +111,51 @@ public class UtilServiceImpl implements UtilService {
 		}
 		return my_categorys;
 	}
+
+	@Override
+	public List<MerchandiseCategory> loadCategorys(long father) throws Exception{
+		MerchandiseCategoryExample example = new MerchandiseCategoryExample();
+		example.createCriteria().andFatherEqualTo(father).andIsSystemEqualTo(true);
+		return merchandiseCategoryDAO.selectByExample(example);
+	}
+
+	@Override
+	public List<City> loadCitys(long provinceId) throws Exception{
+		CityExample example = new CityExample();
+		example.createCriteria().andProvinceIdEqualTo(provinceId);
+		return cityDAO.selectByExample(example);
+	}
+
+	@Override
+	public List<Province> loadProvinces()throws Exception {
+		ProvinceExample example = new ProvinceExample();
+		return provinceDAO.selectByExample(example);
+	}
+
+	@Override
+	public MerchandiseCategory addCategory(long father, boolean isSystem,
+			String name, String description)throws Exception {
+		MerchandiseCategoryExample example = new MerchandiseCategoryExample();
+		example.createCriteria().andIdEqualTo(father).andIsSystemEqualTo(true);
+		List<MerchandiseCategory> tmp = merchandiseCategoryDAO.selectByExample(example);
+		if(tmp.size()>0){
+			example.clear();
+			example.createCriteria().andFatherEqualTo(father).andNameEqualTo(name);
+			tmp = merchandiseCategoryDAO.selectByExample(example);
+			if(tmp.size()==0){
+				MerchandiseCategory mc = new MerchandiseCategory();
+				mc.setFather(father);
+				mc.setDescription(description);
+				mc.setIsSystem(isSystem);
+				mc.setName(name);
+				long result = merchandiseCategoryDAO.insertSelectiveReturnId(mc);
+				if(result>0){
+					return merchandiseCategoryDAO.selectByPrimaryKey(result);
+				}
+			}
+		}
+		return null;
+	}
+
 
 }
