@@ -49,4 +49,5 @@
 	<bean id="commentService" name="commentService" class="com.zhelazhela.services.impl.CommentServiceImpl" />
 	<bean id="discountNewsService" name="discountNewsService" class="com.zhelazhela.services.impl.DiscountNewsServiceImpl" />
 	<bean id="utilService" name="utilService" class="com.zhelazhela.services.impl.UtilServiceImpl" />
+	<bean id="cacheService" name="cacheService" class="com.zhelazhela.services.impl.CacheServiceImpl" />
 </beans>

@@ -19,4 +19,8 @@
 	<bean name="adminAction" class="com.zhelazhela.actions.ManageDiscountNewsAction" singleton="false" >
 		<property name="pagesize" value="20" />
 	</bean>
+	
+	<bean name="programAction" class="com.zhelazhela.actions.ManageProgramInfoAction" singleton="false" >
+		<property name="pagesize" value="20" />
+	</bean>
 </beans>

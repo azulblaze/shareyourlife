@@ -45,7 +45,7 @@ public interface DiscountNewsService {
 	
 	public long supportDiscountNews(long id) throws Exception;
 	
-	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title,String orderby) throws Exception;
+	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,String categorys,String areas,String title,java.util.Date after_approve_time,String orderby) throws Exception;
 	
 	public DiscountNewsList loadUnReleaseDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title,String orderby) throws Exception;
 	

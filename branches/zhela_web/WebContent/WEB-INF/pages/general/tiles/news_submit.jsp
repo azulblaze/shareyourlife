@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script type="text/javascript" src="/scripts/xheditor-zh-cn.js"></script>
 <script type="text/javascript" src="/scripts/set.js"></script>
+<script type="text/javascript" src="/scripts/jquery.validate.pack.js"></script>
 <script>
 var categorys = new Set();
 $(document).ready(function(){
@@ -24,6 +25,45 @@ $(document).ready(function(){
 			$('#dnews_discountCategory').attr("value",categorys.toString());
 		}
 	});
+	$("#_submit").validate({
+		rules: {
+			"dnews.newsTitle": {
+				required: true
+			},
+			"dnews.discountStart": {
+				required: true,
+			}
+			"dnews.discountEnd": {
+				required: true
+			},
+			"dnews.discountStart": {
+				required: true,
+			}
+			"dnews.newsSource": {
+				required: true
+			},
+			"dnews.senderName": {
+				required: true,
+			}
+			"dnews.senderMail": {
+				required: true,
+			}
+			"dnews.pId": {
+				required: true
+			},
+			"dnews.newsReview": {
+				required: true,
+			}
+			"dnews.newsContent": {
+				required: true,
+			}
+			"validate_code": {
+				required: true,
+			}
+		},
+		messages: {
+		}
+	});
 })
 </script>
         	<div class="rule">
@@ -37,12 +77,12 @@ $(document).ready(function(){
                     <li>5. 编辑也许会对投递进行适当修改, 以适合在本站发表.</li>
                 </ul>
             </div>
-            <form action="/news_submit.zl" method="post">
+            <form action="/news_submit.zl" method="post" id="_submit">
             <div class="line">
             	<div class="input">
                 	<div class="label">标题:</div>
                     <input type="text" class="w200" name="dnews.newsTitle" />
-                    <div class="error">错误信息</div>
+                    <div class="error"></div>
                 </div>
                 <div class="notice"><em>(必填*)</em>最多20个字，简明扼要。</div>
             </div>
