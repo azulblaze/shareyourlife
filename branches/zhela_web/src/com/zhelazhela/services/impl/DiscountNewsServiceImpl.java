@@ -88,7 +88,7 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	}
 
 	@Override
-	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title,String orderby)  throws Exception{
+	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,String categorys,String areas,String title,java.util.Date after_approve_time,String orderby)  throws Exception{
 		DiscountNewsExample example = new DiscountNewsExample();
 		if(pagesize>0){
 			example.setLimit(""+(page-1)*pagesize+","+pagesize);
@@ -96,6 +96,9 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		Criteria criteria = example.createCriteria().andApproveResultEqualTo(true);
 		if(title!=null){
 			criteria.andNewsTitleLike(title);
+		}
+		if(after_approve_time!=null){
+			criteria.andApproveTimeGreaterThan(after_approve_time);
 		}
 		java.util.List<String> _categorys = new java.util.ArrayList<String>(utilService.loadCategorys(categorys));
 		for(String category:_categorys){
