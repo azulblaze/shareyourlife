@@ -6,12 +6,15 @@ import net.sf.json.JSONObject;
 
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.domain.DiscountNewsList;
+import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
 
 @SuppressWarnings("serial")
 public class DiscountNewsAction extends BaseAction {
 	
 	private DiscountNewsService discountNewsService;
+	
+	private CacheService cacheService;
 	
 	private static DecimalFormat df = new DecimalFormat("######0.00");
 
@@ -42,6 +45,11 @@ public class DiscountNewsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String submit() throws Exception {
+		//for right side
+		setValue("weeklyhot",cacheService.loadWeeklyHot());
+		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		
+		
 		if(dnews==null){
 			return INPUT;
 		}
@@ -70,6 +78,9 @@ public class DiscountNewsAction extends BaseAction {
 	}
 	
 	public String thankyou() throws Exception{
+		//for right side
+		setValue("weeklyhot",cacheService.loadWeeklyHot());
+		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		return SUCCESS;
 	}
 	
@@ -79,13 +90,17 @@ public class DiscountNewsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String list() throws Exception{
+		//for right side
+		setValue("weeklyhot",cacheService.loadWeeklyHot());
+		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		
 		if(page<=0){
 			page = 1;
 		}
 		if(order==null){
 			order = "approve_time desc";
 		}
-		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, null, category, area, null,order);
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, null, null,order);
 		setValue("dnl",dnl);
 		return SUCCESS;
 	}
@@ -95,6 +110,10 @@ public class DiscountNewsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String view() throws Exception{
+		//for right side
+		setValue("weeklyhot",cacheService.loadWeeklyHot());
+		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		
 		DiscountNews dn = discountNewsService.viewDiscountNews(dn_id);
 		if(dn!=null){
 			//只能阅读审批过的内容
@@ -220,6 +239,10 @@ public class DiscountNewsAction extends BaseAction {
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public void setCacheService(CacheService cacheService) {
+		this.cacheService = cacheService;
 	}
 
 }
