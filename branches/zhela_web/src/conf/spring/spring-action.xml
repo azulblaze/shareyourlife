@@ -23,4 +23,7 @@
 	<bean name="programAction" class="com.zhelazhela.actions.ManageProgramInfoAction" singleton="false" >
 		<property name="pagesize" value="20" />
 	</bean>
+	
+	<bean name="commonAction" class="com.zhelazhela.actions.CommonAction" singleton="false" >
+	</bean>
 </beans>

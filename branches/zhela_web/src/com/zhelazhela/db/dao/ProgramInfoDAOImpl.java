@@ -207,7 +207,7 @@ public class ProgramInfoDAOImpl extends SqlMapClientDaoSupport implements Progra
 			map.put("start_index", startIndex);
 			map.put("end_index", endIndex);
 		}
-		List<ProgramInfo> list = (List<ProgramInfo>)getSqlMapClientTemplate().queryForList("comments.comments_list_byNews", map);
+		List<ProgramInfo> list = (List<ProgramInfo>)getSqlMapClientTemplate().queryForList("program_info.program_list", map);
 		return list;
 	}
 }

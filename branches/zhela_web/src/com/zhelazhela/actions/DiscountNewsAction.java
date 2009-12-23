@@ -15,7 +15,7 @@ public class DiscountNewsAction extends BaseAction {
 	private DiscountNewsService discountNewsService;
 	
 	private CacheService cacheService;
-	
+		
 	private static DecimalFormat df = new DecimalFormat("######0.00");
 
 	/** 折扣新闻对象 */
@@ -48,15 +48,24 @@ public class DiscountNewsAction extends BaseAction {
 		//for right side
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
-		
+		//for some select
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
+		setValue("programinfos",cacheService.loadProgram());
 		
 		if(dnews==null){
 			return INPUT;
 		}
+		//for select
+		setValue("province_id",getRequestParameter("province_id"));
+		setValue("city_id",getRequestParameter("city_id"));
+		
 		this.setValue("dnews", dnews);
 		//确保是未审批的内容
 		dnews.setApproveResult(null);
-		if(validate_code==null||!validate_code.equals((String)getSession("validate_code"))){
+		//dnews.setDiscountEndStr(dnews.getDiscountEndStr());
+		//dnews.setDiscountStartStr(dnews.getDiscountStartStr());
+		if(validate_code==null||!validate_code.equals((String)getSession("news_submit"))){
 			this.clearSession("validate_code");
 			setValue("error","您必须输入正确的验证码才能提交！");
 			return INPUT;
