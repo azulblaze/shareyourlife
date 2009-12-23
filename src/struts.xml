@@ -40,8 +40,9 @@
 		<action name="comment" class="commentsAction" method="submit">
 		</action>
 		
-		<action name="code" class="validateCodeAction">
-		</action>
+		<action name="code" class="validateCodeAction"/>
+		
+		<action name="loadcity" class="commonAction" method="loadCity"/>
 		
 	</package>
 	

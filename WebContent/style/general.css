@@ -320,21 +320,24 @@ li.intro{
 .line .error{
 	float:left;
 }
-.line .notice em{
+.line .input .spec{
+	float:left;
+}
+.line .notice em,.line .input .spec em{
 	color:#F00;
 	font-size:12px;
 	font-weight:bold;
 }
 .news_review,.news_content{
-	margin-left:90px;
+	width:620px;
 	padding:0px;
 }
 .news_review textarea{
-	width:530px;
+	width:620px;
 	height:200px;
 }
 .news_content textarea{
-	width:530px;
+	width:620px;
 	height:500px;
 }
 .big_sbumit{
@@ -348,4 +351,14 @@ li.intro{
 	color:#063;
 	font-weight:bold;
 	font-size:14px;
+}
+.line .error_info{
+	border:1px solid #F00;
+	background:#FB4322;
+	height:26px;
+	line-height:26px;
+	padding:0px;
+	padding-left:5px;
+	color:#FFF;
+	margin-left:90px;
 }
