@@ -14,6 +14,10 @@ public class SystemConfig {
 	private String upload_pic;
 	
 	private long upload_pic_maxlength;
+	
+	private String upload_logo;
+	
+	private String upload_log_maxlength;
 
 	/**
 	 * @return the domain
@@ -83,6 +87,22 @@ public class SystemConfig {
 	 */
 	public void setUpload_pic_maxlength(long upload_pic_maxlength) {
 		this.upload_pic_maxlength = upload_pic_maxlength;
+	}
+
+	public String getUpload_logo() {
+		return upload_logo;
+	}
+
+	public void setUpload_logo(String uploadLogo) {
+		upload_logo = uploadLogo;
+	}
+
+	public String getUpload_log_maxlength() {
+		return upload_log_maxlength;
+	}
+
+	public void setUpload_log_maxlength(String uploadLogMaxlength) {
+		upload_log_maxlength = uploadLogMaxlength;
 	}
 	
 	

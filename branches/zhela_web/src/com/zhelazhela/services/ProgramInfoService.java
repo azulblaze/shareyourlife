@@ -5,7 +5,7 @@ import com.zhelazhela.domain.ProgramInfoList;
 
 public interface ProgramInfoService {
 	
-	public ProgramInfo addProgramInfo(ProgramInfo programInfo) throws Exception;
+	public ProgramInfo addProgramInfo(ProgramInfo programInfo,String root_path,String filetype,java.io.File logo) throws Exception;
 	
 	public ProgramInfo editProgramInfo(long id,String name,String shortname,String website,String email,String log,String description) throws Exception;
 	

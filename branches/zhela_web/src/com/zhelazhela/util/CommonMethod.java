@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * <code>CommonMethod.java</code>
  * 
@@ -29,6 +28,42 @@ public class CommonMethod {
 
 	private CommonMethod() {
 		
+	}
+	
+	public synchronized String saveImg(File file,String root_path,String dir,String filetype)throws Exception{
+		//First we save full image to disk
+		
+		String base_name = getFileName();
+		String path = dir+base_name+"."+filetype;
+		File _file = new File(root_path+path);
+		File folder = _file.getParentFile();
+		if(!folder.exists()){
+			folder.mkdirs();
+		}
+		try{
+			file.renameTo(_file);
+		}catch(Exception e){
+			throw new Exception("保存文件失败");
+		}
+		return path;
+	}
+	
+	public synchronized String saveLogo(File file,String root_path,String dir,String filetype)throws Exception{
+		//First we save full image to disk
+		
+		String base_name = getLogoName();
+		String path = dir+base_name+"."+filetype;
+		File _file = new File(root_path+path);
+		File folder = _file.getParentFile();
+		if(!folder.exists()){
+			folder.mkdirs();
+		}
+		try{
+			file.renameTo(_file);
+		}catch(Exception e){
+			throw new Exception("保存文件失败");
+		}
+		return path;
 	}
 
 	private static CommonMethod instance = new CommonMethod();
@@ -81,6 +116,15 @@ public class CommonMethod {
 		return tmp;
 	}
 	
+	public synchronized String getLogoName() {
+		String tmp = "/";
+		Calendar calender = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		tmp = tmp + format.format(calender.getTime());
+		tmp = tmp + GenActivtyCode(16);
+		return tmp;
+	}
+	
 	public synchronized void deleteFile(String file){
 		try{
 			File _file = new File(file);
@@ -97,6 +141,10 @@ public class CommonMethod {
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(email);
 		return m.find();
+	}
+	
+	public synchronized String isAllowedPicture(String type) {
+		return picture_type.get(type);
 	}
 	
 	public static void main(String args[])throws Exception{
