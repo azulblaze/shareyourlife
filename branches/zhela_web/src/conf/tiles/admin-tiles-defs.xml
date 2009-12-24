@@ -20,9 +20,19 @@
 		<put-attribute name="nav_title" type="string" value="增加类别"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/category_add.jsp"></put-attribute>
 	</definition>
+	<definition name="admin.categorylist" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="类别列表"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="类别列表"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/category_list.jsp"></put-attribute>
+	</definition>
 	<definition name="admin.programadd" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
-		<put-attribute name="title" type="string" value="增加商户"></put-attribute>
-		<put-attribute name="nav_title" type="string" value="增加商户"></put-attribute>
+		<put-attribute name="title" type="string" value="增加商家"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="增加商家"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/program_add.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.programlist" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="商家列表"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="商家列表"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/program_list.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

@@ -111,6 +111,11 @@ public class UtilServiceImpl implements UtilService {
 		}
 		return my_categorys;
 	}
+	
+	@Override
+	public MerchandiseCategory loadCategory(long id) throws Exception {
+		return merchandiseCategoryDAO.selectByPrimaryKey(id);
+	}
 
 	@Override
 	public List<MerchandiseCategory> loadCategorys(long father) throws Exception{
@@ -119,6 +124,15 @@ public class UtilServiceImpl implements UtilService {
 		return merchandiseCategoryDAO.selectByExample(example);
 	}
 
+	@Override
+	public List<MerchandiseCategory> loadAllCategorys(int page,int pagesize) throws Exception {
+		MerchandiseCategoryExample example = new MerchandiseCategoryExample();
+		if(pagesize>0){
+			example.setLimit(""+(page-1)*pagesize+","+pagesize);
+		}
+		return merchandiseCategoryDAO.selectByExample(example);
+	}
+	
 	@Override
 	public List<City> loadCitys(long provinceId) throws Exception{
 		CityExample example = new CityExample();
