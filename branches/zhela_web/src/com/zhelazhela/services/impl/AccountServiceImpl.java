@@ -12,6 +12,8 @@ public class AccountServiceImpl implements AccountService {
 	public boolean validateManager(ManageUser mu) throws Exception {
 		ManageUser tmp = manageUserDAO.selectByPrimaryKey(mu.getAccount());
 		if(tmp!=null&&tmp.getIsvalid()&&tmp.getPassword().equals(mu.getPassword())){
+			mu.setEmail(tmp.getEmail());
+			mu.setName(tmp.getName());
 			mu.setPassword(null);
 			return true;
 		}
