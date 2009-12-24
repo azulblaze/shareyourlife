@@ -24,6 +24,10 @@
 		<property name="pagesize" value="20" />
 	</bean>
 	
+	<bean name="categoryAction" class="com.zhelazhela.actions.ManageCategoryAction" singleton="false" >
+		<property name="pagesize" value="20" />
+	</bean>
+	
 	<bean name="commonAction" class="com.zhelazhela.actions.CommonAction" singleton="false" >
 	</bean>
 </beans>

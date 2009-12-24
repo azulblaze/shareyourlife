@@ -16,6 +16,10 @@ public interface UtilService {
 	
 	public java.util.List<MerchandiseCategory> loadCategorys(long father)throws Exception;
 	
+	public java.util.List<MerchandiseCategory> loadAllCategorys(int page,int pagesize) throws Exception;
+	
+	public MerchandiseCategory loadCategory(long id) throws Exception;
+		
 	public MerchandiseCategory addCategory(long father,boolean is_system,String name,String description)throws Exception;
 	
 }
