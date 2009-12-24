@@ -34,9 +34,6 @@ form.main-search {
 	position: relative;
 	padding-right: 10px;
 }
-form.main-search label {
-
-}
 form.main-search .search-field{
 	width:300px;
 	
@@ -117,6 +114,7 @@ form.main-search .search-field{
 }
 #content{
 	width:100%;
+	padding:0px 10px;
 }
 #footer{
 	margin-top:20px;
@@ -164,9 +162,22 @@ form.main-search .search-field{
 	width:65px;
 	margin:0px auto auto 60px;
 }
+.nav_title{
+	border-bottom:1px solid #ccc;
+	width:820px;
+	margin:0px;
+}
+.nav_title h3{
+	float:left;
+	width:200px;
+	margin:10px;
+	font-size:14px;
+	font-weight:bold;
+	color:#1b5790;
+}
 .search{
+	float:right;
 	margin:10px 0px;
-	clear:both;
 	height:30px;
 	line-height:30px;
 	font-weight:bold;
@@ -175,9 +186,7 @@ form.main-search .search-field{
 .result{
 	width:820px;
 	padding:0px;
-}
-
- table css 
+} 
 table.list {
 	width:100%;
 	border-collapse: collapse;
@@ -220,15 +229,95 @@ table.list tbody th, tbody td {
 table.list tfoot td {
   background: #99BCBF;
   padding-top:6px;
-  }
+}
 table.list .odd {
   background: #d3e4e5;
-  }
+}
 table.list tbody tr:hover {
   background: #99BCBF;
-  }
+}
 table.list tbody tr:hover th,
 table.list tbody tr.odd:hover th {
  background:#99BCBF;
  color:#000000;
- }
+}
+.line{
+	margin:10px 0px;
+}
+.firstline {
+	margin-top:20px;
+}
+.line .input *{
+	float:left;
+}
+.line .input .label{
+	font-weight:800;
+	color:#060;
+	font-size:12px;
+	text-align:right;
+	padding-right:10px;
+	height:20px;
+	line-height:20px;
+	width:80px;
+}
+.line .input img{
+	margin:0px 10px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+.line .notice,.line .option_link{
+	clear:left;
+	margin-left:90px;
+	color:#999;
+	font-size:11px;
+}
+.line .option_link{
+	font-size:12px;
+	padding:5px 10px 0px 0px;
+}
+.line input{
+	height:20px;
+	left:20px;
+	vertical-align:middle;
+}
+.line .error{
+	float:left;
+}
+.line .input .spec{
+	float:left;
+}
+.line .notice em,.line .input .spec em{
+	color:#F00;
+	font-size:12px;
+	font-weight:bold;
+}
+.news_content{
+	width:710px;
+	padding-left:90px;
+}
+.news_content textarea{
+	width:710px;
+	height:200px;
+}
+.big_sbumit{
+	border-top:1px solid #CCC;
+	margin-top:10px;
+	padding:5px 0px;
+	padding-left:90px;
+}
+.big_sbumit input{
+	padding:5px 10px;
+	color:#063;
+	font-weight:bold;
+	font-size:14px;
+}
+.line .error_info{
+	border:1px solid #F00;
+	background:#FB4322;
+	height:26px;
+	line-height:26px;
+	padding:0px;
+	padding-left:5px;
+	color:#FFF;
+	margin-left:90px;
+}

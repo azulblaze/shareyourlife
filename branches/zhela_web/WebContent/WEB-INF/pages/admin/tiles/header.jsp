@@ -36,14 +36,44 @@
 	<div id="top-nav">
 		<ul>
 			<li>
-				<a href="#"><span>审批新闻<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
+				<a href="#"><span>折扣新闻<em><img src="images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
 					<li><a href="go">未审批内容</a></li>
-                    <li><a href="go">已拒绝内容</a></li>
-                    <li><a href="go">已通过内容</a></li>
-                    <li><a href="go">所有内容</a></li>
-                </ul>
-            </li>
+               <li><a href="go">已拒绝内容</a></li>
+               <li><a href="go">已通过内容</a></li>
+               <li><a href="go">所有内容</a></li>
+            </ul>
+         </li>
+         <li>
+				<a href="#"><span>商家信息<em><img src="images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
+				<ul class="sublist">
+					<li><a href="go">增加商家</a></li>
+               <li><a href="go">商家列表</a></li>
+            </ul>
+         </li>
+         <li>
+				<a href="#"><span>商品类别<em><img src="images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
+				<ul class="sublist">
+					<li><a href="go">增加类别</a></li>
+               <li><a href="go">类别列表</a></li>
+            </ul>
+         </li>
+         <li>
+				<a href="#"><span>系统设置<em><img src="images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
+				<ul class="sublist">
+					<li><a href="go">附件管理</a></li>
+            </ul>
+         </li>
 		</ul>
 	</div>
+	<div class="nav_title">
+		<h3>增加类别</h3>
+		<div class="search">
+		<form class="main-search">
+			<input type="text" tabindex="1" maxlength="255" class="search-field" value="根据标题查找新闻"/>
+			<input type="image" alt="Search" value="Search" src="images/search.png" class="search-button"/>  
+      </form>
+    </div>
+    <div class="clear"></div>    	
+    </div>
 	</s:if>
