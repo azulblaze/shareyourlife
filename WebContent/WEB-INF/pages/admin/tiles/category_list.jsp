@@ -1,47 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-    <div id="content">
     	<div class="result">
         	<table class="list" width="100%">
 			<thead>
 				<tr>
-					<th scope="col">Design Name</th>
-					<th scope="col">Author</th>
-					<th scope="col">Country</th>
-					<th scope="col">Comment</th>
-					<th scope="col">Download</th>
+					<th scope="col">编号</th>
+					<th scope="col">父类</th>
+					<th scope="col">是否系统</th>
+					<th scope="col">名称</th>
+					<th scope="col">描述</th>
+					<th scope="col">添加时间</th>
+					<th scope="col">操作</th>
 				</tr>
 			</thead>	
 			<tfoot>
 				<tr>
-					<th scope="row">Total</th>
-					<td colspan="4">85 designs</td>
+					<th scope="row">统计</th>
+					<td colspan="6">85条 <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a></td>
 				</tr>
 			</tfoot>
 			<tbody>
-								<tr >
-					<td><a href="index.php?css=101#r101">Classic yet somehow fancy</a></td>
-					<td><a href="twitter.com/radubilei">Radu</a></td>
-					<td>Rom&Atilde;&cent;nia</td>
-					<td>Monochrome classy-ness with a touch of CSS3</td>
-					<td><a href="https://dl.getdropbox.com/u/300539/tabeluMeu.css" title="Download the Classic yet somehow fancy CSS file">Download</a></td>
+				<tr>
+					<td><a href="#">1</a></td>
+					<td><a href="#">0</a></td>
+					<td>是</td>
+					<td>服饰鞋包</td>
+					<td>服饰鞋包</td>
+					<td>2009-10-12 12:12:12</td>
+					<td><a href="#"/>删除</a></td>
 				</tr>
-								<tr class="odd">
-					<td><a href="index.php?css=100#r100">rows table template</a></td>
-					<td><a href="www.adobati.it">Omar '0m4r' Adobati</a></td>
-					<td>Italy</td>
-					<td>Simple, clean and a quite classic table template :)</td>
-					<td><a href="http://www.adobati.it/labs/CSSTable/0m4r.table.css" title="Download the rows table template CSS file">Download</a></td>
-				</tr>
-					<tr >
-					<td><a href="index.php?css=99#r99">Blue Dream</a></td>
-					<td><a href="http://www.admixweb.com">Teylor Feliz</a></td>
-					<td>USA</td>
-					<td>Beautiful combination of Blue and Brown.</td>
-					<td><a href="http://www.admixweb.com/downloads/csstablegallery/bluedream.css" title="Download the Blue Dream CSS file">Download</a></td>
+				<tr>
+					<td><a href="#">1</a></td>
+					<td><a href="#">0</a></td>
+					<td>是</td>
+					<td>服饰鞋包</td>
+					<td>服饰鞋包</td>
+					<td>2009-10-12 12:12:12</td>
+					<td><a href="#"/>删除</a></td>
 				</tr>
              </tbody>
         </table>
         </div>
-    </div>

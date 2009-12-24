@@ -352,7 +352,7 @@ li.intro{
 	font-weight:bold;
 	font-size:14px;
 }
-.line .error_info{
+.line .error_info,.line .success_info{
 	border:1px solid #F00;
 	background:#FB4322;
 	height:26px;
@@ -361,4 +361,8 @@ li.intro{
 	padding-left:5px;
 	color:#FFF;
 	margin-left:90px;
+}
+.line .success_info{
+	background:#060;
+	border:1px solid #093;
 }

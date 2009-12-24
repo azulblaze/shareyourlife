@@ -39,30 +39,27 @@
 			<li>
 				<a href="#"><span>折扣新闻<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
-					<li><a href="go">未审批内容</a></li>
-               		<li><a href="go">已拒绝内容</a></li>
-               		<li><a href="go">已通过内容</a></li>
-               		<li><a href="go">所有内容</a></li>
+					<li><a href="/admin/news_list.zl">未审批内容</a></li>
             	</ul>
          	</li>
          	<li>
 				<a href="#"><span>商家信息<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
 					<li><a href="/admin/static_page.zl?nav=add_program">增加商家</a></li>
-                    <li><a href="go">商家列表</a></li>
+                    <li><a href="/admin/program_list.zl">商家列表</a></li>
             	</ul>
          	</li>
          	<li>
 				<a href="#"><span>商品类别<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
 					<li><a href="/admin/static_page.zl?nav=add_category">增加类别</a></li>
-               		<li><a href="go">类别列表</a></li>
+               		<li><a href="/admin/category_list.zl">类别列表</a></li>
             	</ul>
          	</li>
          	<li>
 				<a href="#"><span>系统设置<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
-					<li><a href="go">附件管理</a></li>
+					<li><a href="#">附件管理</a></li>
             	</ul>
          	</li>
 		</ul>

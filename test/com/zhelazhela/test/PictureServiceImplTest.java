@@ -12,6 +12,7 @@ import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
 import com.zhelazhela.services.ProgramInfoService;
+import com.zhelazhela.services.UtilService;
 
 public class PictureServiceImplTest extends TestCase {
 	
@@ -29,9 +30,9 @@ public class PictureServiceImplTest extends TestCase {
 	}
 
 	public void testLoadNewsList() throws Exception {
-		ProgramInfoService programInfoService = (ProgramInfoService) this.m_context.getBean("programInfoService");
+		UtilService utilService = (UtilService) this.m_context.getBean("utilService");
 		
-		System.out.println(programInfoService.loadProgramInfo(1, 2, null).getList().size());
+		System.out.println(utilService.loadAllCategorys(2, 3).size());
 	}
 
 }

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/style/base.css" type="text/css"/>
 	<link rel="stylesheet" href="/style/admin.css" type="text/css"/>
 	<script type="text/javascript" src="/scripts/jquery-1.3.2.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/scripts/common.js" charset="utf-8"></script>
 </head>
 <body>
 <div id="wrap">
