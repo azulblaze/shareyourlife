@@ -3,7 +3,7 @@
          "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 	<definition name="admin.layout" template="/WEB-INF/pages/admin/layout/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/pages/admin/tiles/header.jsp"></put-attribute>
+		
 		<put-attribute name="footer" value="/WEB-INF/pages/admin/tiles/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="admin.login" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
@@ -12,6 +12,17 @@
 	</definition>
 	<definition name="admin.newslist" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
 		<put-attribute name="title" type="string" value="新闻列表"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="新闻列表"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/news_list.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.categoryadd" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="增加类别"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="增加类别"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/category_add.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.programadd" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="增加商户"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="增加商户"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/program_add.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

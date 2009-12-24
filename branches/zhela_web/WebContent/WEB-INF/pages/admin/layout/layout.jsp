@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="wrap">
-<tiles:insertAttribute name="header"></tiles:insertAttribute>
+<jsp:include page="/WEB-INF/pages/admin/tiles/header.jsp"></jsp:include>
 <tiles:insertAttribute name="body"></tiles:insertAttribute>
 <tiles:insertAttribute name="footer"></tiles:insertAttribute>
 </div>
