@@ -21,6 +21,7 @@ public class ManageProgramInfoAction extends BaseAction{
 	
 	private String keyword;
 	
+	
 	public String addProgram() throws Exception{
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		JSONObject jb = new JSONObject();
@@ -63,7 +64,7 @@ public class ManageProgramInfoAction extends BaseAction{
 	public String viewProgram() throws Exception{
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		if(mu==null){
-			return INPUT;
+			return LOGIN;
 		}
 		setValue("result",programInfoService.viewProgramInfo(pi_id));
 		return SUCCESS;
@@ -94,7 +95,7 @@ public class ManageProgramInfoAction extends BaseAction{
 	public String listProgram() throws Exception{
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		if(mu==null){
-			return INPUT;
+			return LOGIN;
 		}
 		if(page<=0){
 			page = 1;
@@ -146,6 +147,5 @@ public class ManageProgramInfoAction extends BaseAction{
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
 	
 }

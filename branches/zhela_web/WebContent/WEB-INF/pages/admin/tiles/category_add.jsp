@@ -20,7 +20,7 @@
       </div>
       <div class="line">
       	<div class="input">
-      		<div class="label">类别的基本描述</div>
+      		<div class="label">基本描述</div>
       			<div class="spec"><em>(必填*)</em>类别的基本描述，比如包含大概什么商品等等...</div>
             </div>
             <div class="news_content"><textarea name="dnews.newsContent" id="news_content"></textarea></div>

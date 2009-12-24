@@ -20,6 +20,13 @@
 			<result name="login" type="redirect-action">login</result>
 		</action>
 		
+		<action name="static_page" class="adminAction" method="static_page">
+			<result name="success" type="redirect-action">news_list</result>
+			<result name="login" type="redirect-action">login</result>
+			<result name="add_program" type="tiles">admin.programadd</result>
+			<result name="add_category" type="tiles">admin.categoryadd</result>
+		</action>
+		
 	</package>
 
 </struts>

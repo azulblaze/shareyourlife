@@ -61,7 +61,7 @@ form.main-search .search-field{
 	margin-right: 10px;
 }
 #top-nav ul li:hover {
-	background: url(images/zonebar-navleft.png) center left no-repeat;
+	background: url(/style/images/zonebar-navleft.png) center left no-repeat;
 }
 #top-nav ul li a {
 	display: block;
@@ -77,7 +77,7 @@ form.main-search .search-field{
 	text-decoration: none;
 }
 #top-nav ul li a:hover {
-	background: url(images/zonebar-navright.png) center right no-repeat;
+	background: url(/style/images/zonebar-navright.png) center right no-repeat;
 }
 #top-nav ul li a span {
 	position: relative;
