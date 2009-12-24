@@ -43,6 +43,8 @@
 		<property name="upload_pic_maxlength" value="4194304" />
 		<property name="upload_header" value="/upload/images/header" />
 		<property name="upload_header_maxlength" value="16384" />
+		<property name="upload_logo" value="/upload/images/logo" />
+		<property name="upload_log_maxlength" value="102400" />
 	</bean>
 	
 	<bean id="accountService" name="accountService" class="com.zhelazhela.services.impl.AccountServiceImpl" />	

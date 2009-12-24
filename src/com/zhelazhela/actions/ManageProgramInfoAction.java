@@ -1,10 +1,13 @@
 package com.zhelazhela.actions;
 
+import java.io.File;
+
 import net.sf.json.JSONObject;
 
 import com.zhelazhela.db.model.ManageUser;
 import com.zhelazhela.db.model.ProgramInfo;
 import com.zhelazhela.services.ProgramInfoService;
+import com.zhelazhela.util.CommonMethod;
 
 @SuppressWarnings("serial")
 public class ManageProgramInfoAction extends BaseAction{
@@ -21,6 +24,10 @@ public class ManageProgramInfoAction extends BaseAction{
 	
 	private String keyword;
 	
+	private File pic;
+	
+	private String picContentType;
+	
 	
 	public String addProgram() throws Exception{
 		ManageUser mu = (ManageUser)this.getSession("manager");
@@ -30,14 +37,29 @@ public class ManageProgramInfoAction extends BaseAction{
 			this.setValue("json", jb.toString());
 			return "json";
 		}
-		if(pi!=null&&pi.validate()){
-			ProgramInfo tmp = programInfoService.addProgramInfo(pi);
-			if(tmp!=null){
-				jb.put("result", "success");
-				jb.put("pi", tmp.to_json());
-				setValue("json",jb.toString());
-				return "json";
+		try{
+			String ext_type = CommonMethod.getInstance().isAllowedPicture(picContentType);
+			if(picContentType!=null){
+				if(ext_type==null){
+					jb.put("result", "fail");
+					jb.put("msg", "LOGO不支持您上传的格式");
+					setValue("json",jb.toString());
+					return "json";
+				}
 			}
+			if(pi!=null&&pi.validate()){
+				ProgramInfo tmp = programInfoService.addProgramInfo(pi,getRootPath(),ext_type,pic);
+				if(tmp!=null){
+					jb.put("result", "success");
+					jb.put("pi", tmp);
+					jb.put("msg", "增加商家成功");
+					setValue("json",jb.toString());
+					return "json";
+				}
+			}
+		}catch(Exception e){
+			jb.put("msg", "提交失败:"+e.getMessage());
+			return null;
 		}
 		jb.put("result", "fail");
 		setValue("json",jb.toString());
@@ -82,7 +104,7 @@ public class ManageProgramInfoAction extends BaseAction{
 			ProgramInfo tmp = programInfoService.editProgramInfo(pi.getId(), pi.getName(), pi.getShortName(), pi.getWebsite(), pi.getEmail(), pi.getLog(), pi.getDescription());
 			if(tmp!=null){
 				jb.put("result", "success");
-				jb.put("pi", tmp.to_json());
+				jb.put("pi", tmp);
 				setValue("json",jb.toString());
 				return "json";
 			}
@@ -146,6 +168,22 @@ public class ManageProgramInfoAction extends BaseAction{
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public File getPic() {
+		return pic;
+	}
+
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
+
+	public String getPicContentType() {
+		return picContentType;
+	}
+
+	public void setPicContentType(String picContentType) {
+		this.picContentType = picContentType;
 	}
 	
 }

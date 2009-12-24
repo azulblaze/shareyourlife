@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<script type="text/javascript" src="/scripts/jquery.upload.js" charset="utf-8"></script>
+<script>
+$(document).ready(function(){
+	$("#addform").uploadAjax();
+})
+</script>
 	<div id="content">
+		<form action="/admin/add_program.zl" method="post">
 		<div class="line firstline">
 			<div class="input"><div class="label">全称:</div><input type="text" value="" class="w200"/></div>
     		<div class="notice"><em>(必填*)</em>商家的完整名称。</div>
@@ -35,4 +42,5 @@
 		<div class="big_sbumit">
 			<input type="submit" value="确认增加" />
 		</div>
+		</form>
     </div>

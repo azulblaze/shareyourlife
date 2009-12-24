@@ -1,23 +1,51 @@
 package com.zhelazhela.services.impl;
 
-import java.util.List;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.zhelazhela.db.dao.ProgramInfoDAO;
 import com.zhelazhela.db.model.ProgramInfo;
 import com.zhelazhela.domain.ProgramInfoList;
 import com.zhelazhela.services.ProgramInfoService;
+import com.zhelazhela.system.config.SystemConfig;
+import com.zhelazhela.util.CommonMethod;
 
 public class ProgramInfoServiceImpl implements ProgramInfoService {
 
 	private ProgramInfoDAO programInfoDAO;
 	
+	private PlatformTransactionManager m_db_tx_manager;
+	
+	protected SystemConfig systemConfig;
+	
+	public void setTxManager(PlatformTransactionManager tx){
+		this.m_db_tx_manager = tx;
+	}
+	
 	@Override
-	public ProgramInfo addProgramInfo(ProgramInfo programInfo) throws Exception {
-		long result = programInfoDAO.insertSelectiveReturnId(programInfo);
-		if(result>0){
-			return programInfoDAO.selectByPrimaryKey(result);
+	public ProgramInfo addProgramInfo(ProgramInfo programInfo,String root_path,String filetype,java.io.File logo) throws Exception {
+		if(logo!=null&&logo.length()>systemConfig.getUpload_pic_maxlength()){
+			throw new Exception("上次文件大小超过"+systemConfig.getUpload_pic_maxlength()/(1024*1024)+"MB限制");
 		}
-		return null;
+		TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
+		try{
+			if(logo!=null){
+				CommonMethod cm = CommonMethod.newInstance();
+				programInfo.setLog(cm.saveLogo(logo, root_path, systemConfig.getUpload_logo(), filetype));
+			}
+			long result = programInfoDAO.insertSelectiveReturnId(programInfo);
+			if(result>0){
+				this.m_db_tx_manager.commit(status);
+				return programInfoDAO.selectByPrimaryKey(result);
+			}else{
+				this.m_db_tx_manager.rollback(status);
+				throw new java.lang.Exception("保存商家信息失败");
+			}
+		}catch(Exception e){
+			this.m_db_tx_manager.rollback(status);
+			throw new java.lang.Exception(e.getMessage());
+		}
 	}
 
 	@Override
@@ -100,6 +128,10 @@ public class ProgramInfoServiceImpl implements ProgramInfoService {
 
 	public void setProgramInfoDAO(ProgramInfoDAO programInfoDAO) {
 		this.programInfoDAO = programInfoDAO;
+	}
+
+	public void setSystemConfig(SystemConfig systemConfig) {
+		this.systemConfig = systemConfig;
 	}
 
 	
