@@ -27,6 +27,8 @@
 			<result name="add_category" type="tiles">admin.categoryadd</result>
 		</action>
 		
+		<action name="add_program" class="programAction" method="addProgram"/>
+		
 	</package>
 
 </struts>

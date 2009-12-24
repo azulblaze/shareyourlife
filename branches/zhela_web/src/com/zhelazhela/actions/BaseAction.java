@@ -18,12 +18,15 @@ import com.opensymphony.xwork2.ActionSupport;
 public abstract class BaseAction extends ActionSupport {
 	
 	protected final static String ROOT_PARENT_ID = "0";
-	protected String urlBack;
-	
+	protected String urlBack;	
 	public String getUrlBack() {
 		return urlBack;
 	}
 
+	public String getRootPath(){
+		return ServletActionContext.getServletContext().getRealPath("/");
+	}
+	
 	public void setValue(String key, Object value){
 		ServletActionContext.getValueStack(getHttpServletRequest()).set(key, value);
 	}
