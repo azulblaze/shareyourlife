@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
     <div id="content">
-    	<div class="search">
-            <form class="main-search">
-                <label for="search-field" class="search-field-label">搜索</label>
-                <input type="text" tabindex="1" maxlength="255" class="search-field" value="根据标题查找新闻"/>
-                <input type="image" alt="Search" value="Search" src="/images/search.png" class="search-button"/>  
-            </form>
-        </div>
     	<div class="result">
         	<table class="list" width="100%">
 			<thead>

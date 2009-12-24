@@ -41,6 +41,26 @@ public class ManageDiscountNewsAction extends BaseAction {
 	/** 管理员对象 */
 	private ManageUser muser;
 	
+	private String nav;
+	
+	private static java.util.List<String> navs = new java.util.ArrayList<String>();
+	
+	static{
+		navs.add("add_program");
+		navs.add("add_category");
+	}
+	
+	public String static_page() throws Exception{
+		ManageUser mu = (ManageUser)this.getSession("manager");
+		if(mu==null){
+			return LOGIN;
+		}
+		if(navs.contains(nav)){
+			return nav;
+		}
+		return SUCCESS;
+	}
+	
 	/** 审批新闻 **/
 	public String approve() throws Exception{
 		ManageUser mu = (ManageUser)this.getSession("manager");
@@ -189,6 +209,14 @@ public class ManageDiscountNewsAction extends BaseAction {
 	}
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public String getNav() {
+		return nav;
+	}
+
+	public void setNav(String nav) {
+		this.nav = nav;
 	}
 	
 }
