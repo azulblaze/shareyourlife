@@ -325,3 +325,8 @@ table.list tbody tr.odd:hover th {
 	background:#060;
 	border:1px solid #093;
 }
+#page_bar a{
+	font-size:12px;
+	font-weight:bold;
+	color:#fff;
+}

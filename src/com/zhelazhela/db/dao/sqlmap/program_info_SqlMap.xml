@@ -64,6 +64,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+        limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByExample" parameterClass="com.zhelazhela.db.model.ProgramInfoExample" resultMap="ibatorgenerated_BaseResultMap">
     <!--
@@ -78,6 +81,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+        limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByPrimaryKey" parameterClass="com.zhelazhela.db.model.ProgramInfo" resultMap="ibatorgenerated_ResultMapWithBLOBs">
     <!--

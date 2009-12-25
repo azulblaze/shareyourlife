@@ -41,6 +41,10 @@
 		
 		<action name="add_category" class="categoryAction" method="addCategory"/>
 		
+		<action name="child_category" class="categoryAction" method="childCategory"/>
+		
+		<action name="del_category" class="categoryAction" method="delCategory"/>
+		
 	</package>
 
 </struts>

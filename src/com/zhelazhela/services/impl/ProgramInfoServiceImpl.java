@@ -6,6 +6,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.zhelazhela.db.dao.ProgramInfoDAO;
 import com.zhelazhela.db.model.ProgramInfo;
+import com.zhelazhela.db.model.ProgramInfoExample;
 import com.zhelazhela.domain.ProgramInfoList;
 import com.zhelazhela.services.ProgramInfoService;
 import com.zhelazhela.system.config.SystemConfig;
@@ -106,17 +107,20 @@ public class ProgramInfoServiceImpl implements ProgramInfoService {
 	@Override
 	public ProgramInfoList loadProgramInfo(int page, int pagesize , String keywords)
 			throws Exception {
-		java.util.List<ProgramInfo> list = null;
-		if(pagesize>0){
-			list = programInfoDAO.loadList((page-1)*pagesize, page*pagesize, keywords);
-		}else{
-			list = programInfoDAO.loadList(-1, -1, keywords);
+		ProgramInfoExample example = new ProgramInfoExample();
+		if(keywords!=null){
+			example.createCriteria().andNameLike(keywords);
 		}
+		if(pagesize>0){
+			example.setLimit(""+ (page-1)*pagesize+","+pagesize);
+		}
+		java.util.List<ProgramInfo> list = programInfoDAO.selectByExampleWithoutBLOBs(example);
+		int count = programInfoDAO.countByExample(example);
 		ProgramInfoList pil = new ProgramInfoList();
 		pil.setList(list);
 		pil.setPagesize(pagesize);
 		pil.setPage(page);
-		pil.setSize(list.size());
+		pil.setSize(count);
 		return pil;
 	}
 	
