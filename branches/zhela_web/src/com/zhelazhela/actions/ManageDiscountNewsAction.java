@@ -4,6 +4,7 @@ import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.ManageUser;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.AccountService;
+import com.zhelazhela.services.UtilService;
 import com.zhelazhela.services.DiscountNewsService;
 @SuppressWarnings("serial")
 public class ManageDiscountNewsAction extends BaseAction {
@@ -17,6 +18,8 @@ public class ManageDiscountNewsAction extends BaseAction {
 	private DiscountNewsService discountNewsService;
 	
 	private AccountService accountService;
+	
+	private UtilService utilService;
 
 	/** 折扣新闻对象 */
 	private DiscountNews dnews;
@@ -56,6 +59,9 @@ public class ManageDiscountNewsAction extends BaseAction {
 			return LOGIN;
 		}
 		if(navs.contains(nav)){
+			if(nav.equals("add_category")){
+				setValue("categorys",utilService.loadCategorys(0));
+			}
 			return nav;
 		}
 		return SUCCESS;
@@ -217,6 +223,10 @@ public class ManageDiscountNewsAction extends BaseAction {
 
 	public void setNav(String nav) {
 		this.nav = nav;
+	}
+
+	public void setUtilService(UtilService utilService) {
+		this.utilService = utilService;
 	}
 	
 }

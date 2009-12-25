@@ -14,6 +14,7 @@ import com.zhelazhela.db.model.MerchandiseCategory;
 import com.zhelazhela.db.model.MerchandiseCategoryExample;
 import com.zhelazhela.db.model.Province;
 import com.zhelazhela.db.model.ProvinceExample;
+import com.zhelazhela.domain.CategoryList;
 import com.zhelazhela.services.UtilService;
 
 public class UtilServiceImpl implements UtilService {
@@ -125,12 +126,48 @@ public class UtilServiceImpl implements UtilService {
 	}
 
 	@Override
-	public List<MerchandiseCategory> loadAllCategorys(int page,int pagesize) throws Exception {
+	public CategoryList loadAllCategorys(int page,int pagesize) throws Exception {
 		MerchandiseCategoryExample example = new MerchandiseCategoryExample();
 		if(pagesize>0){
 			example.setLimit(""+(page-1)*pagesize+","+pagesize);
 		}
-		return merchandiseCategoryDAO.selectByExample(example);
+		java.util.List<MerchandiseCategory> list = merchandiseCategoryDAO.selectByExample(example);
+		int count = merchandiseCategoryDAO.countByExample(example);
+		CategoryList cl = new CategoryList();
+		cl.setList(list);
+		cl.setPage(page);
+		cl.setPagesize(pagesize);
+		cl.setSize(count);
+		return cl;
+	}
+	
+
+	@Override
+	public boolean delCategory(long id) throws Exception {
+		MerchandiseCategory record = merchandiseCategoryDAO.selectByPrimaryKey(id);
+		if(record!=null){
+			if(record.getChild()==0){
+				int result = merchandiseCategoryDAO.deleteByPrimaryKey(id);
+				if(result>0){
+					if(record.getFather()>0){
+						MerchandiseCategory mc = merchandiseCategoryDAO.selectByPrimaryKey(record.getFather());
+						if(mc!=null){
+							mc.setAddTime(null);
+							mc.setChild(mc.getChild()-1);
+							mc.setDescription(null);
+							mc.setFather(null);
+							mc.setIsSystem(null);
+							mc.setName(null);
+							merchandiseCategoryDAO.updateByPrimaryKeySelective(mc);
+						}
+					}
+					return true;
+				}
+				throw new Exception("删除失败，未知错误");
+			}
+			throw new Exception("该类别含有子类，您必须先删除子类才能删除它");
+		}
+		throw new Exception("不存在该记录");
 	}
 	
 	@Override
@@ -149,13 +186,17 @@ public class UtilServiceImpl implements UtilService {
 	@Override
 	public MerchandiseCategory addCategory(long father, boolean isSystem,
 			String name, String description)throws Exception {
-		MerchandiseCategoryExample example = new MerchandiseCategoryExample();
-		example.createCriteria().andIdEqualTo(father).andIsSystemEqualTo(true);
-		List<MerchandiseCategory> tmp = merchandiseCategoryDAO.selectByExample(example);
-		if(tmp.size()>0){
-			example.clear();
+		MerchandiseCategory fathermc = null;
+		if(father>0){
+			fathermc = merchandiseCategoryDAO.selectByPrimaryKey(father);
+			if(fathermc!=null&&!fathermc.getIsSystem()){
+				fathermc = null;
+			}
+		}
+		if(father==0||fathermc!=null){
+			MerchandiseCategoryExample example = new MerchandiseCategoryExample();
 			example.createCriteria().andFatherEqualTo(father).andNameEqualTo(name);
-			tmp = merchandiseCategoryDAO.selectByExample(example);
+			List<MerchandiseCategory> tmp = merchandiseCategoryDAO.selectByExample(example);
 			if(tmp.size()==0){
 				MerchandiseCategory mc = new MerchandiseCategory();
 				mc.setFather(father);
@@ -164,12 +205,19 @@ public class UtilServiceImpl implements UtilService {
 				mc.setName(name);
 				long result = merchandiseCategoryDAO.insertSelectiveReturnId(mc);
 				if(result>0){
+					if(fathermc!=null){
+						MerchandiseCategory record = new MerchandiseCategory();
+						record.setId(father);
+						record.setChild(fathermc.getChild()+1);
+						merchandiseCategoryDAO.updateByPrimaryKeySelective(record);
+					}
 					return merchandiseCategoryDAO.selectByPrimaryKey(result);
 				}
 			}
 		}
 		return null;
 	}
+
 
 
 }

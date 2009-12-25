@@ -32,7 +32,7 @@ public class PictureServiceImplTest extends TestCase {
 	public void testLoadNewsList() throws Exception {
 		UtilService utilService = (UtilService) this.m_context.getBean("utilService");
 		
-		System.out.println(utilService.loadAllCategorys(2, 3).size());
+		System.out.println(utilService.loadAllCategorys(2, 3).getList().size());
 	}
 
 }

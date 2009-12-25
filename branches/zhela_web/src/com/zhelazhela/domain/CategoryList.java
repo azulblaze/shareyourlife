@@ -1,20 +1,19 @@
 package com.zhelazhela.domain;
 
-import java.util.List;
+import com.zhelazhela.db.model.MerchandiseCategory;
 
-import com.zhelazhela.db.model.ProgramInfo;
-
-public class ProgramInfoList {
+public class CategoryList {
+	
 	/** 当前页数 */
 	private int page;
 	/** 每页数量 */
 	private int pagesize;
 	/** 总数量 */
 	private int size;
-	
+	/** 当前页数量 */
 	private int c_size;
 	
-	private List<ProgramInfo> list;
+	java.util.List<MerchandiseCategory> list;
 
 	public int getPage() {
 		return page;
@@ -40,21 +39,21 @@ public class ProgramInfoList {
 		this.size = size;
 	}
 
-	public List<ProgramInfo> getList() {
-		return list;
-	}
-
-	public void setList(List<ProgramInfo> list) {
-		this.list = list;
-		this.c_size = list.size();
-	}
-
 	public int getC_size() {
 		return c_size;
 	}
 
 	public void setC_size(int cSize) {
 		c_size = cSize;
+	}
+
+	public java.util.List<MerchandiseCategory> getList() {
+		return list;
+	}
+
+	public void setList(java.util.List<MerchandiseCategory> list) {
+		this.list = list;
+		this.c_size = list.size();
 	}
 	
 	
