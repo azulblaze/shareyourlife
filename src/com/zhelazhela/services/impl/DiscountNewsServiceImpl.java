@@ -203,19 +203,21 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		if(pagesize>0){
 			example.setLimit(""+(page-1)*pagesize+","+pagesize);
 		}
-		Criteria criteria = example.createCriteria().andApproveResultNotEqualTo(true);
+		Criteria criteria = example.createCriteria().andApproveResultNotEqualTo(true).andApproveUserIsNull();
 		if(title!=null){
 			criteria.andNewsTitleLike(title);
 		}
 		java.util.List<String> _categorys = new java.util.ArrayList<String>(utilService.loadCategorys(categorys));
 		for(String category:_categorys){
-			example.or(example.createCriteria().andApproveResultNotEqualTo(true).andDiscountCategoryLike(category));
+			example.or(example.createCriteria().andApproveResultNotEqualTo(true).andApproveUserIsNull().andDiscountCategoryLike(category));
 		}
 		java.util.List<String> _areas = new java.util.ArrayList<String>(utilService.loadAreas(areas));
 		for(String _area:_areas){
-			example.or(example.createCriteria().andApproveResultNotEqualTo(true).andDiscountAreaLike(_area));
+			example.or(example.createCriteria().andApproveResultNotEqualTo(true).andApproveUserIsNull().andDiscountAreaLike(_area));
 		}
-		example.setOrderByClause(orderby);
+		if(orderby!=null){
+			example.setOrderByClause(orderby);
+		}
 		List<DiscountNews> list = discountNewsDAO.selectWithProgramInfoByExampleWithoutBLOBs(example);
 		int size = discountNewsDAO.countByExample(example);
 		DiscountNewsList dnl = new DiscountNewsList();

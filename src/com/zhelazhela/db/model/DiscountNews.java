@@ -1,11 +1,14 @@
 package com.zhelazhela.db.model;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
 public class DiscountNews{
+	
+	private static DecimalFormat df = new DecimalFormat("######0.0");
 	
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     /**
@@ -793,6 +796,19 @@ public class DiscountNews{
 			
 		}
 	}
-	 
-	 
+	public String getAvePPoints(){
+		if(getPublishPointsTimes()==null||getPublishPointsTimes()==0){
+			return "0";
+		}
+		double avg_points = (double)getPublishPoints()/(double)getPublishPointsTimes();
+		return df.format(avg_points);
+	}
+	
+	public String getAveCPoints(){
+		if(getContentPointsTimes()==null||getContentPointsTimes()==0){
+			return "0";
+		}
+		double avg_points = (double)getContentPoints()/(double)getContentPointsTimes();
+		return df.format(avg_points);
+	}
 }

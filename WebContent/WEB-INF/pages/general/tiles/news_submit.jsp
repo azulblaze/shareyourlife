@@ -72,7 +72,7 @@ $(document).ready(function(){
 	});
 	$("#v_code_img").bind("click",function(event){
 		var timer=new Date();
-		$("#v_code_img").attr("src","/code.zl?sessionName=news_submit&mytime="+timer.getHours()+timer.getMinutes()+timer.getSeconds());
+		$("#v_code_img").attr("src","/code.zl?sessionName=comment_submit&mytime="+timer.getHours()+timer.getMinutes()+timer.getSeconds());
 	});
 	$("#validate_code").bind("focus",function(event){
 		if($("#v_code_img").css("display")=="none"){

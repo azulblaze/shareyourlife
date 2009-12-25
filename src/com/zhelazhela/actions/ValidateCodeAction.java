@@ -26,6 +26,7 @@ public class ValidateCodeAction extends BaseAction {
 	static{
 		s_names.add("validate_code");
 		s_names.add("news_submit");
+		s_names.add("comment_submit");
 	}
 	
 	/**
