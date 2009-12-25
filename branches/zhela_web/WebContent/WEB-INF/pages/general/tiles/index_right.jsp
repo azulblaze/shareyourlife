@@ -9,30 +9,22 @@
             	<div class="configure_bottom"></div>
             </div>
             <div class="right_box">
-            	<div class="title">相关折扣新闻</div>
+            	<div class="title">本周最受欢迎折扣信息</div>
                 <ul>
-                	<li><a href="#">扭腰客的迷你公寓</a></li>
-                    <li><a href="#">煎蛋圣诞送礼啦：最棒的圣诞节礼物百科</a></li>
-                    <li><a href="#">一日一冷新闻：举重运动员在训练时生孩子</a></li>
-                    <li><a href="#">喜感地球人：打喷嚏的瞬间[6P]</a></li>
-                    <li><a href="#">发霉啦：所谓理性的男人门啊</a></li>
-                    <li><a href="#">来投票吧：2009煎蛋年度汉字</a></li>
-                    <li><a href="#">女生不敢在男友面前做的几件事</a></li>
+                	<s:iterator  value="weeklywelcome.list">
+                	<li><a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></li>
+                	</s:iterator>
                 </ul>
             </div>
             <div class="right_box">
-            	<div class="title">本周最受欢迎折扣</div>
+            	<div class="title">本周最热门折扣信息</div>
                 <ul>
-                	<li><a href="#">扭腰客的迷你公寓</a></li>
-                    <li><a href="#">煎蛋圣诞送礼啦：最棒的圣诞节礼物百科</a></li>
-                    <li><a href="#">一日一冷新闻：举重运动员在训练时生孩子</a></li>
-                    <li><a href="#">喜感地球人：打喷嚏的瞬间[6P]</a></li>
-                    <li><a href="#">发霉啦：所谓理性的男人门啊</a></li>
-                    <li><a href="#">来投票吧：2009煎蛋年度汉字</a></li>
-                    <li><a href="#">女生不敢在男友面前做的几件事</a></li>
+                	<s:iterator  value="weeklyhot.list">
+                	<li><a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></li>
+                	</s:iterator>
                 </ul>
             </div>
-            <div class="right_box">
+            <div class="right_box" style="display:none;">
             	<div class="title">关键字</div>
                 <ul>
                 	<a href="http://jandan.net/search/youtube">youtube</a>&nbsp;
@@ -83,7 +75,7 @@
 <a href="http://jandan.net/search/无厘头科学">无厘头科学</a>&nbsp;
                 </ul>
             </div>
-            <div class="right_box">
+            <div class="right_box" style="display:none;">
             	<div class="title">链接</div>
                 <ul class="link">
                 	<li><a href="#">小众软件</a></li>

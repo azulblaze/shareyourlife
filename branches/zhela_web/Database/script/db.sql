@@ -28,7 +28,7 @@ go
 CREATE  TABLE IF NOT EXISTS discount_news (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   approve_user VARCHAR(100) NULL ,
-  approve_result BOOLEAN NULL ,
+  approve_result BOOLEAN DEFAULT false ,
   approve_time TIMESTAMP NULL ,
   sender_name VARCHAR(100) NOT NULL ,
   sender_mail VARCHAR(100) NOT NULL ,

@@ -764,10 +764,10 @@
       <isNotNull property="orderByClause" >
         order by $orderByClause$
       </isNotNull>
-      <isNotNull property="limit">
-      	limit $limit$
-      </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+    	limit $limit$
+    </isNotNull>
   </select>
   <select id="selectWithProgramInfoByPrimaryKey" resultMap="discountNews_withProgramInfoWithBLOBs" parameterClass="com.zhelazhela.db.model.DiscountNews" >
     <!--
