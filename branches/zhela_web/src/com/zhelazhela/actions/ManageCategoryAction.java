@@ -1,10 +1,12 @@
 package com.zhelazhela.actions;
 
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.zhelazhela.db.model.ManageUser;
 import com.zhelazhela.db.model.MerchandiseCategory;
+import com.zhelazhela.domain.CategoryList;
 import com.zhelazhela.services.UtilService;
 
 @SuppressWarnings("serial")
@@ -30,8 +32,16 @@ public class ManageCategoryAction extends BaseAction{
 			this.setValue("json", jb.toString());
 			return "json";
 		}
-
+		MerchandiseCategory category = utilService.addCategory(mc.getFather(), true, mc.getName(), mc.getDescription());
+		if(category!=null){
+			jb.put("result", "success");
+			jb.put("data", category);
+			jb.put("msg", "添加成功");
+			setValue("json",jb.toString());
+			return "json";
+		}
 		jb.put("result", "fail");
+		jb.put("msg", "添加失败，注意名字不能重复");
 		setValue("json",jb.toString());
 		return "json";
 	}
@@ -44,7 +54,17 @@ public class ManageCategoryAction extends BaseAction{
 			setValue("json", jb.toString());
 			return "json";
 		}
-		
+		try{
+			utilService.delCategory(c_id);
+			jb.put("result", "success");
+			jb.put("msg", "删除成功");
+			setValue("json", jb.toString());
+			return "json";
+		}catch(Exception e){
+			jb.put("msg", e.getMessage());
+		}
+		jb.put("result", "fail");
+		setValue("json", jb.toString());
 		return "json";
 	}
 	
@@ -78,8 +98,43 @@ public class ManageCategoryAction extends BaseAction{
 		if(page<=0){
 			page = 1;
 		}
-		this.setValue("result", utilService.loadAllCategorys(page,pagesize));
+		if(f_id>0){
+			java.util.List<MerchandiseCategory> list = utilService.loadCategorys(f_id);
+			CategoryList cl = new CategoryList();
+			cl.setPage(1);
+			cl.setList(list);
+			cl.setPagesize(list.size());
+			cl.setSize(list.size());
+			this.setValue("result", cl);
+		}else{
+			this.setValue("result", utilService.loadAllCategorys(page,pagesize));
+		}
 		return SUCCESS;
+	}
+	
+	public String childCategory() throws Exception{
+		ManageUser mu = (ManageUser)this.getSession("manager");
+		JSONObject jb = new JSONObject();
+		if(mu==null){
+			jb.put("result", "login");
+			setValue("json", jb.toString());
+			return "json";
+		}
+		try{
+			java.util.List<MerchandiseCategory> list = utilService.loadCategorys(f_id);
+			JSONArray ja = new JSONArray();
+			ja.addAll(list);
+			jb.put("result", "success");
+			jb.put("msg", "取得子类别");
+			jb.put("data", ja);
+			setValue("json", jb.toString());
+			return "json";
+		}catch(Exception e){
+			jb.put("msg", e.getMessage());
+		}
+		jb.put("result", "fail");
+		setValue("json", jb.toString());
+		return "json";
 	}
 
 	public int getPage() {

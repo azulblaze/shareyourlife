@@ -63,6 +63,7 @@ go
 CREATE  TABLE IF NOT EXISTS merchandise_category (
   id BIGINT NOT NULL AUTO_INCREMENT ,
   father BIGINT NOT NULL DEFAULT 0 ,
+  child BIGINT NOT NULL DEFAULT 0 ,
   is_system BOOLEAN NOT NULL DEFAULT false ,
   name VARCHAR(100) NULL ,
   description VARCHAR(500) NULL ,

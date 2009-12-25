@@ -13,6 +13,8 @@ public class CommentList {
 	private int pagesize;
 	/** 总数量 */
 	private int size;
+	
+	private int c_size;
 
 	public List<Comments> getList() {
 		return list;
@@ -20,6 +22,7 @@ public class CommentList {
 
 	public void setList(List<Comments> list) {
 		this.list = list;
+		this.c_size = list.size();
 	}
 
 	public int getPage() {
@@ -44,6 +47,14 @@ public class CommentList {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	public int getC_size() {
+		return c_size;
+	}
+
+	public void setC_size(int cSize) {
+		c_size = cSize;
 	}
 
 }
