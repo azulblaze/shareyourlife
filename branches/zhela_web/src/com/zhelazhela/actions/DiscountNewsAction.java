@@ -15,9 +15,7 @@ public class DiscountNewsAction extends BaseAction {
 	private DiscountNewsService discountNewsService;
 	
 	private CacheService cacheService;
-		
-	private static DecimalFormat df = new DecimalFormat("######0.00");
-
+	
 	/** 折扣新闻对象 */
 	private DiscountNews dnews;
 	/** 提交的验证码  */
@@ -37,7 +35,7 @@ public class DiscountNewsAction extends BaseAction {
 	/** 折扣新闻唯一ID */
 	private int dn_id;
 	/** 打分 */
-	private int points;
+	private int number;
 	
 	/**
 	 * 提交新闻
@@ -142,27 +140,19 @@ public class DiscountNewsAction extends BaseAction {
 	}
 	
 	public String point_content() throws Exception{
-		DiscountNews dn = discountNewsService.pointContent(dn_id, points);
+		DiscountNews dn = discountNewsService.pointContent(dn_id, number);
 		JSONObject jb = new JSONObject();
 		jb.put("times", dn.getContentPointsTimes());
-		float avg_points = 0;
-		if(dn.getContentPointsTimes()>0){
-			avg_points = dn.getContentPoints()/dn.getContentPointsTimes();
-		}
-		jb.put("avg_points", df.format(avg_points));
+		jb.put("avg_points", dn.getAveCPoints());
 		setValue("json",jb.toString());
 		return "json";
 	}
 	
 	public String point_publish() throws Exception{
-		DiscountNews dn = discountNewsService.pointPublish(dn_id, points);
+		DiscountNews dn = discountNewsService.pointPublish(dn_id, number);
 		JSONObject jb = new JSONObject();
 		jb.put("times", dn.getPublishPointsTimes());
-		float avg_points = 0;
-		if(dn.getPublishPointsTimes()>0){
-			avg_points = dn.getPublishPoints()/dn.getPublishPointsTimes();
-		}
-		jb.put("avg_points", df.format(avg_points));
+		jb.put("avg_points", dn.getAvePPoints());
 		setValue("json",jb.toString());
 		return "json";
 	}
@@ -235,11 +225,11 @@ public class DiscountNewsAction extends BaseAction {
 	public void setDn_id(int dn_id) {
 		this.dn_id = dn_id;
 	}
-	public int getPoints() {
-		return points;
+	public int getNumber() {
+		return number;
 	}
-	public void setPoints(int points) {
-		this.points = points;
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	public String getOrder() {

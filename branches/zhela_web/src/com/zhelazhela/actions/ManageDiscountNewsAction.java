@@ -1,5 +1,7 @@
 package com.zhelazhela.actions;
 
+import net.sf.json.JSONObject;
+
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.ManageUser;
 import com.zhelazhela.domain.DiscountNewsList;
@@ -65,6 +67,23 @@ public class ManageDiscountNewsAction extends BaseAction {
 			return nav;
 		}
 		return SUCCESS;
+	}
+	
+	public String delDiscountNews() throws Exception{
+		ManageUser mu = (ManageUser)this.getSession("manager");
+		JSONObject jb = new JSONObject();
+		if(mu==null){
+			jb.put("result", "login");
+			setValue("json", jb.toString());
+			return "json";
+		}
+		if(discountNewsService.delDiscountNews(dn_id)){
+			jb.put("result", "success");
+		}else{
+			jb.put("result", "fail");
+		}
+		setValue("json", jb.toString());
+		return "json";
 	}
 	
 	/** 审批新闻 **/
@@ -136,10 +155,10 @@ public class ManageDiscountNewsAction extends BaseAction {
 			page = 1;
 		}
 		if(order==null){
-			order = "approve_time desc";
+			order = "sender_time desc";
 		}
 		DiscountNewsList dnl = discountNewsService.loadUnReleaseDiscountNewsList(page, pagesize, null, category, area, null, order);
-		setValue("dnl",dnl);
+		setValue("result",dnl);
 		return SUCCESS;
 	}
 	

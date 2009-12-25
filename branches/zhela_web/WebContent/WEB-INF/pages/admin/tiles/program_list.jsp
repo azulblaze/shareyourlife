@@ -1,6 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<script>
+function bindDelete(select){
+	$(select).each(function(){
+		$(this).bind("click",function(event){
+			event.preventDefault();
+			var tr_obj = $(this).parent().parent("tr");
+			$.ajax({
+				type : "GET",
+				url : $(this).attr("href"),
+				dataType:"json",
+				cache : false,
+				success : function(data, textStatus) {
+					if(data.result=="login"){
+						redirectAdminLogin();
+					}
+					if(data.result=="success"){
+						$(tr_obj).remove();
+					}
+				}
+			});
+		})
+	})
+}
+$(document).ready(function(){
+	var size = <s:property value="result.size"/>;
+	var pagesize = <s:property value="result.pagesize"/>;
+	var c_page = Math.ceil(size/pagesize);
+	writePage(c_page,<s:property value="result.page"/>,"#page_bar","/admin/program_list.zl?page=");
+	bindDelete(".del");
+})
+</script>
     	<div class="result">
         	<table class="list" width="100%">
 			<thead>
@@ -19,32 +50,23 @@
 			<tfoot>
 				<tr>
 					<th scope="row">统计</th>
-					<td colspan="8">85条 <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a></td>
+					<td colspan="8" id="page_bar"><s:property value="result.size"/>条 </td>
 				</tr>
 			</tfoot>
 			<tbody>
+				<s:iterator value="result.list">
 				<tr>
-					<td><a href="#">1</a></td>
-					<td>淘宝网</td>
-					<td>淘宝网</td>
-					<td><a href="http://www.taobao.com">http://www.taobao.com</a></td>
-					<td><a href="mailto:test@test.com">test@test.com</a></td>
-					<td><img src="#" /></td>
-					<td>淘宝网是一个包含B2C,C2C的购物网站。</td>
-					<td>2009-10-12 12:12:12</td>
-					<td><a href="#"/>删除</a></td>
+					<td><a href="#"><s:property value="id"/></a></td>
+					<td><s:property value='name'/></td>
+					<td><s:property value='shortName'/></td>
+					<td><a href="<s:property value='website'/>"><s:property value='website'/></a></td>
+					<td><a href="mailto:<s:property value='email'/>"><s:property value='email'/></a></td>
+					<td><img alt="LOGO" height="30" width="100" src="<s:property value='log'/>" /></td>
+					<td><s:property value='regDate'/></td>
+					<td><s:property value='description'/></td>
+					<td><a href="/admin/del_program.zl?pi_id=<s:property value='id'/>"  class="del"/>删除</a></td>
 				</tr>
-				<tr>
-					<td><a href="#">1</a></td>
-					<td>淘宝网</td>
-					<td>淘宝网</td>
-					<td><a href="http://www.taobao.com">http://www.taobao.com</a></td>
-					<td><a href="mailto:test@test.com">test@test.com</a></td>
-					<td><img src="#" /></td>
-					<td>淘宝网是一个包含B2C,C2C的购物网站。</td>
-					<td>2009-10-12 12:12:12</td>
-					<td><a href="#"/>删除</a></td>
-				</tr>
+				</s:iterator>
              </tbody>
         </table>
         </div>

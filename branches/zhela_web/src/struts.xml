@@ -35,6 +35,12 @@
 			<result name="success" type="tiles">zhela.news_detail</result>
 		</action>
 		
+		<action name="point_c" class="newsAction" method="point_content"/>
+		
+		<action name="point_p" class="newsAction" method="point_publish"/>
+		
+		<action name="support" class="newsAction" method="support"/>
+		
 		<action name="thankyou_support_news" class="newsAction" method="thankyou">
 			<result name="success" type="tiles">zhela.thankyou_support_news</result>
 		</action>

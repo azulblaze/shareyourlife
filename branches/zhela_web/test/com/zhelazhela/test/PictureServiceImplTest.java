@@ -1,6 +1,7 @@
 package com.zhelazhela.test;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -30,9 +31,19 @@ public class PictureServiceImplTest extends TestCase {
 	}
 
 	public void testLoadNewsList() throws Exception {
-		UtilService utilService = (UtilService) this.m_context.getBean("utilService");
-		
-		System.out.println(utilService.loadAllCategorys(2, 3).getList().size());
+		DiscountNewsService discountNewsService = (DiscountNewsService) this.m_context.getBean("discountNewsService");
+		java.util.Calendar calendar = java.util.Calendar.getInstance();
+		calendar.set(java.util.Calendar.DAY_OF_WEEK, 1);
+		calendar.set(java.util.Calendar.HOUR, 0);
+		calendar.set(java.util.Calendar.MINUTE, 0);
+		calendar.set(java.util.Calendar.SECOND, 0);
+		System.out.println(calendar.getTime());
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "read_times desc");
+		System.out.println(dnl.getList().size());
 	}
 
+	public static void main(String args[]){
+		DecimalFormat df = new DecimalFormat("######0.0");
+		System.out.println(df.format(3.14));
+	}
 }

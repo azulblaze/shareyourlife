@@ -169,6 +169,10 @@ background:url(images/bgOFF.gif) repeat-x;border-bottom:0px solid #859e2d;/*bott
 	width:45px;
 	height:67px;
 }
+.left .post_body .support img{
+	width:45px;
+	height:67px;
+}
 .left .post_body .support span{
 	color:#03C;
 }
@@ -365,4 +369,22 @@ li.intro{
 .line .success_info{
 	background:#060;
 	border:1px solid #093;
+}
+.index_page_link{
+	margin-top:20px;
+	text-align:right;
+	height:30px;
+	line-height:30px;
+}
+.index_page_link a{
+	border:1px solid #3ad1fa;
+	padding:7px 15px;
+	margin-left:20px;
+	font-size:14px;
+	font-weight:bold;
+}
+.index_page_link a:hover{
+	color:#FFF;
+	background:#3ad1fa;
+	text-decoration:none;
 }
