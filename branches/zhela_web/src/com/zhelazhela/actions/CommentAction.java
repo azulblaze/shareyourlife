@@ -1,5 +1,8 @@
 package com.zhelazhela.actions;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.zhelazhela.domain.CommentList;
 import com.zhelazhela.services.CommentService;
 import com.zhelazhela.db.model.Comments;
@@ -17,24 +20,48 @@ public class CommentAction extends BaseAction {
 	/** 评论信息 */
 	private Comments comments;
 	
+	private String validate_code;
+	
 	public String list() throws Exception{
 		if(page<=0){
 			page = 1;
 		}
-		CommentList result = commentService.loadComment(comments.getDiscountInfoId(),pagesize, page);
-		setValue("result", result);
+		//CommentList result = commentService.loadComment(comments.getDiscountInfoId(),pagesize, page);
+		CommentList result = commentService.loadComment(comments.getDiscountInfoId(),-1, page);
+		JSONObject jb = new JSONObject();
+		jb.put("size", result.getSize());
+		JSONArray ja = new JSONArray();
+		ja.addAll(result.getList());
+		jb.put("data", ja);
+		setValue("json", jb.toString());
 		return "json";
 	}
 	
 	public String against() throws Exception{
-		long result  = commentService.againstComment(c_id);
-		setValue("result", result);
+		Comments result  = commentService.againstComment(c_id);
+		JSONObject jb = new JSONObject();
+		if(result!=null){
+			jb.put("result", "success");
+			jb.put("against", result.getAgainstTimes());
+			jb.put("support", result.getSupportTimes());
+		}else{
+			jb.put("result", "fail");
+		}
+		setValue("json", jb.toString());
 		return "json";
 	}
 	
 	public String support() throws Exception{
-		long result  = commentService.supportComment(c_id);
-		setValue("result", result);
+		Comments result  = commentService.supportComment(c_id);
+		JSONObject jb = new JSONObject();
+		if(result!=null){
+			jb.put("result", "success");
+			jb.put("against", result.getAgainstTimes());
+			jb.put("support", result.getSupportTimes());
+		}else{
+			jb.put("result", "fail");
+		}
+		setValue("json", jb.toString());
 		return "json";
 	}
 	
@@ -42,10 +69,26 @@ public class CommentAction extends BaseAction {
 		if(comments==null){
 			return null;
 		}
+		JSONObject jb = new JSONObject();
+		if(validate_code==null||!validate_code.equals((String)getSession("comment_submit"))){
+			this.clearSession("comment_submit");
+			jb.put("msg", "您必须输入正确的验证码才能提交！");
+			jb.put("result", "fail");
+			setValue("json", jb.toString());
+			return "json";
+		}
 		if(comments!=null&&comments.validate()){
 			comments = commentService.saveComment(comments);
+			jb.put("data", comments);
 		}
-		setValue("result",comments);
+		if(comments!=null){
+			jb.put("result", "success");
+			jb.put("msg", "评论成功");
+		}else{
+			jb.put("result", "fail");
+			jb.put("msg", "评论失败");
+		}
+		setValue("json", jb.toString());
 		return "json";
 	}
 
@@ -83,6 +126,14 @@ public class CommentAction extends BaseAction {
 
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
+	}
+
+	public String getValidate_code() {
+		return validate_code;
+	}
+
+	public void setValidate_code(String validateCode) {
+		validate_code = validateCode;
 	}
 	
 	

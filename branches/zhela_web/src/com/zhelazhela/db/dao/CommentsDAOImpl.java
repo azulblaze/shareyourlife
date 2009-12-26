@@ -169,16 +169,4 @@ public class CommentsDAOImpl extends SqlMapClientDaoSupport implements CommentsD
 		return  (Long)getSqlMapClientTemplate().insert("comments.insertSelective_returnId", record);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Comments> selectByDiscountNews(long dn_id,long start_index,long end_index) {
-		java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
-		map.put("discount_info_id", dn_id);
-		if(start_index>=0){
-			map.put("start_index", start_index);
-			map.put("end_index", end_index);
-		}
-		List<Comments> list = getSqlMapClientTemplate().queryForList("comments.comments_list_byNews", map);
-		return list;
-	}
 }

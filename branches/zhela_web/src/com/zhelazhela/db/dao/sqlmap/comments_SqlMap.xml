@@ -60,6 +60,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit" >
+        limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByPrimaryKey" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.zhelazhela.db.model.Comments" >
     <!--
@@ -353,12 +356,4 @@
       comment_time = #commentTime:TIMESTAMP#
     where id = #id:BIGINT#
   </update>
-  <select id="comments_list_byNews" parameterClass="java.util.Map"  resultMap="ibatorgenerated_BaseResultMap">
-  	select * from comments
-  	where discount_info_id = #discount_info_id:BIGINT#
-    order by id asc
-    <isNotNull prepend=" " property="start_index" >
-	        limit #start_index:BIGINT#,#end_index:BIGINT#
-	</isNotNull>
-  </select>
 </sqlMap>

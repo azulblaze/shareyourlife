@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <link rel="stylesheet" href="/style/rater-star.css" type="text/css"/>
+<script type="text/javascript" src="/scripts/jquery.validate.pack.js"></script>
 <script type="text/javascript" src="/scripts/rater-star.js"></script>
 <script>
 function writeCategory(categorys){
@@ -46,7 +47,42 @@ function getOption(obj,addr,all_p,times){
 		};
 	return option;
 }
+function submit_box_focus(){
+	$("textarea[name='comments.content']").bind("focus",function(){
+		if($(this).val()=="沙发，还不快抢！"){
+			$(this).val("");
+		}
+	});
+}
+function createComment(data){
+	var obj = '<div class="commet_bar"><span><a href="'+data.userIndex+'">'+data.userName+'</a></span><span class="qty">发表于</span>  ( '+(data.commentTime.year+1900)+'-'+(data.commentTime.month+1)+'-'+(data.commentTime.date)+' '+data.commentTime.hours+':'+data.commentTime.minutes+':'+data.commentTime.seconds+' )<div><a href="/comment_s?c_id='+data.id+'" class="s_link"><span>支持('+data.supportTimes+')</span><img src="images/support.png" /></a><a href="/comment_a?c_id='+data.id+'" class="a_link"><span>反对('+data.againstTimes+')</span><img src="images/against.png" class="end" /></a></div></div><div class="comment_news">'+data.content+'</div>';
+	return obj;
+}
+function loadComment(){
+	$.ajax({
+		type : "GET",
+		url : "/comment_list.zl?comments.discountInfoId=<s:property value='dn.id'/>",
+		dataType:"json",
+		cache : false,
+		success : function(data, textStatus) {
+			if(data.size==0){
+				$("#submit_box").css("display","");
+				$("textarea[name='comments.content']").val("沙发，还不快抢！");
+			}else{
+				$("#submit_box").css("display","none");
+				var len = data.data.length;
+				$("#qty_num").append("( "+len+"条 )");
+				for(var i=0;i<len;i++){
+					$(".comment").append(createComment(data.data[i]));
+				}
+			}
+		}
+	});
+}
 $(document).ready(function(){
+	$("input[name='validate_code']").val("");
+	loadComment();
+	submit_box_focus();
 	$('#content_level').rater(getOption('#content_level',"point_c.zl?dn_id=<s:property value='dn.id'/>",<s:property value='dn.contentPoints'/>,<s:property value='dn.contentPointsTimes'/>));
 	$('#info_level').rater(getOption('#info_level',"point_p.zl?dn_id=<s:property value='dn.id'/>",<s:property value='dn.publishPoints'/>,<s:property value='dn.publishPointsTimes'/>));
 	$("#want_comment").bind("click",function(event){
@@ -59,7 +95,7 @@ $(document).ready(function(){
 	});
 	$("#v_code_img").bind("click",function(event){
 		var timer=new Date();
-		$("#v_code_img").attr("src","/code.zl?sessionName=news_submit&mytime="+timer.getHours()+timer.getMinutes()+timer.getSeconds());
+		$("#v_code_img").attr("src","/code.zl?sessionName=comment_submit&mytime="+timer.getHours()+timer.getMinutes()+timer.getSeconds());
 	});
 	$("#validate_code").bind("focus",function(event){
 		if($("#v_code_img").css("display")=="none"){
@@ -79,6 +115,74 @@ $(document).ready(function(){
 				$("#support_div").append('<img src="images/05.gif" alt="已支持"/><br /><span>支持:'+data.points+'</span>');
 			}
 		});
+	});
+	$("#_submit").validate({
+		submitHandler: function(form) {
+			$("#s_button").attr("disabled","disabled");
+			$("#error_span").empty();
+			$("#error_span").css("display","none");
+			$.ajax( {
+				type : "POST",
+				url : "/comment.zl",
+				dataType:"json",
+				data:{"comments.discountInfoId":"<s:property value='dn.id'/>","comments.userName":$("input[name='comments.userName']").val(),"comments.userIndex":$("input[name='comments.userIndex']").val(),"comments.userEmail":$("input[name='comments.userEmail']").val(),"comments.content":$("textarea[name='comments.content']").val(),"validate_code":$("input[name='validate_code']").val()},
+				cache : true,
+				success : function(data, textStatus) {
+					$("#s_button").removeAttr("disabled");
+					if(data.result=="success"){
+						if(data.msg!=null){
+							$("#error_span").empty();
+							$("#error_span").css("display","");
+							$("#error_span").append(data.msg);
+						}
+						$("textarea[name='comments.content']").val("");
+					}
+					if(data.result=="fail"){
+						$("#error_span").empty();
+						$("#error_span").css("display","");
+						$("#error_span").append(data.msg);
+					}
+					$("#s_button").attr("disabled","");
+					$("input[name='validate_code']").val("");
+				}
+			});
+			return false;
+		},
+		errorElement: "em",
+		rules: {
+			"comments.userName": {
+				required: true,
+				maxlength:5
+			},
+			"comments.userEmail": {
+				required: true,
+				maxlength:100
+			},
+			"comments.content": {
+				required: true,
+				maxlength:500
+			},
+			"validate_code":{
+				required: true
+			}
+		},
+		messages: {
+			"comments.userName": {
+				required: "",
+				maxlength:""
+			},
+			"comments.userEmail": {
+				required: "",
+				maxlength:""
+			},
+			"comments.content": {
+				required: "",
+				maxlength:""
+			},
+			"validate_code":{
+				required: ""
+			}
+		}
 	});
 })
 </script>
@@ -129,21 +233,16 @@ $(document).ready(function(){
             </div>
             <div class="comment">
             	<div class="commet_bar">
-                	<span>评论</span><span class="qty">( 109条 )</span>
+                	<span>评论</span><span class="qty" id="qty_num"></span>
                     <div>
                     	<a href="#" id="want_comment">我要评论</a>
                     </div>
                 </div>
-                <div class="submit">
-                	<form action="#" method="post">
-                    <textarea disabled="disabled"></textarea>
-                    <div class="row"><label>验证码:</label><input class="v_code" type="text" name="validate_code" id="validate_code" /><img src="images/v_code.png" id="v_code_img" style="display:none;" title="看不起请点击图片刷新"/><input type="submit" value="提交" class="i_button" /><input type="button" value="取消" class="i_button" id="del_comment" /><span class="error">请输入验证码</span></div>
+                <div class="submit" id="submit_box">
+                	<form action="/comment.zl" method="post" id="_submit">
+                	<div class="row userinput"><label class="first">网名:</label><input type="text" name="comments.userName" /><label>邮箱:</label><input type="text" name="comments.userEmail" /><label>网址:</label><input name="comments.userIndex" type="text" /></div>
+                    <textarea name="comments.content"></textarea>
+                    <div class="row"><label>验证码:</label><input class="v_code" type="text" name="validate_code" id="validate_code" /><img src="images/v_code.png" id="v_code_img" style="display:none;" title="看不起请点击图片刷新"/><input type="submit" value="提交" id="s_button" class="i_button" /><input type="button" value="取消" class="i_button" id="del_comment" /><span id="error_span" class="error">请输入验证码</span></div>
                     </form>
-                </div>
-                <div class="commet_bar">
-                	<span><a href="#">我是小坏</a></span><span class="qty">发表于</span>  ( 2009-10-12 12:12:12 )
-                    <div>
-                    	<a href="#"><span>支持(103)</span><img src="images/support.png" /></a><a href="#"><span>反对(103)</span><img src="images/against.png" class="end" /></a>
-                    </div>
                 </div>
             </div>
