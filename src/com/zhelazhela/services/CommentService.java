@@ -9,9 +9,9 @@ public interface CommentService {
 	
 	public boolean delComment(long id) throws Exception;
 	
-	public long supportComment(long id) throws Exception;
+	public Comments supportComment(long id) throws Exception;
 	
-	public long againstComment(long id) throws Exception;
+	public Comments againstComment(long id) throws Exception;
 	
 	public CommentList loadComment(long n_id, int page_size,int page) throws Exception;
 	

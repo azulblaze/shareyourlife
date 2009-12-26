@@ -64,7 +64,7 @@ public class DiscountNewsAction extends BaseAction {
 		//dnews.setDiscountEndStr(dnews.getDiscountEndStr());
 		//dnews.setDiscountStartStr(dnews.getDiscountStartStr());
 		if(validate_code==null||!validate_code.equals((String)getSession("news_submit"))){
-			this.clearSession("validate_code");
+			this.clearSession("news_submit");
 			setValue("error","您必须输入正确的验证码才能提交！");
 			return INPUT;
 		}

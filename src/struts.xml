@@ -45,8 +45,13 @@
 			<result name="success" type="tiles">zhela.thankyou_support_news</result>
 		</action>
 		
-		<action name="comment" class="commentsAction" method="submit">
-		</action>
+		<action name="comment" class="commentsAction" method="submit"/>
+		
+		<action name="comment_s" class="commentsAction" method="support"/>
+		
+		<action name="comment_list" class="commentsAction" method="list"/>
+		
+		<action name="comment_a" class="commentsAction" method="against"/>
 		
 		<action name="code" class="validateCodeAction"/>
 		
