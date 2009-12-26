@@ -232,6 +232,19 @@ background:url(images/bgOFF.gif) repeat-x;border-bottom:0px solid #859e2d;/*bott
 .left .comment .submit .row{
 	margin-top:10px;
 }
+.left .comment .submit .userinput{
+	margin-bottom:10px;
+}
+.left .comment .submit .userinput label{
+	padding:0px 10px;
+}
+.left .comment .submit .userinput label.first{
+	padding-left:0px;
+}
+.left .comment .submit .userinput input{
+	height:20px;
+	width:140px;
+}
 .left .comment .submit .row .i_button{
 	padding:2px 10px;
 	margin-left:5px;
