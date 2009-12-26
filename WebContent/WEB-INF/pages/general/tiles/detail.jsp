@@ -54,8 +54,52 @@ function submit_box_focus(){
 		}
 	});
 }
+function bindAS(aobj,sobj,as){
+	var c_obj;
+	if(as){
+		c_obj = sobj;
+	}else{
+		c_obj = aobj;
+	}
+	$(c_obj).bind("click",function(event){
+		event.preventDefault();
+		$.ajax({
+			type : "GET",
+			url : $(this).attr("href"),
+			dataType:"json",
+			cache : false,
+			success : function(data, textStatus) {
+				if(data.result=="success"){
+					if(as){
+						$(aobj).empty();
+						$(aobj).append('<span>反对('+data.against+')</span><img src="images/against.png" class="end" />');
+						$(sobj).empty();
+						$(sobj).append('<span style="color:grey;">已支持('+data.support+')</span><img src="images/support.png" class="end" />');
+					}else{
+						$(aobj).empty();
+						$(aobj).append('<span style="color:grey;">已反对('+data.against+')</span><img src="images/against.png" class="end" />');
+						$(sobj).empty();
+						$(sobj).append('<span>支持('+data.support+')</span><img src="images/support.png" class="end" />');
+					}
+					$(aobj).unbind("click");
+					$(aobj).bind("click",function(event1){
+						event1.preventDefault();
+					});
+					$(sobj).unbind("click");
+					$(sobj).bind("click",function(event1){
+						event1.preventDefault();
+					});
+				}
+			}
+		});
+	});
+}
 function createComment(data){
-	var obj = '<div class="commet_bar"><span><a href="'+data.userIndex+'">'+data.userName+'</a></span><span class="qty">发表于</span>  ( '+(data.commentTime.year+1900)+'-'+(data.commentTime.month+1)+'-'+(data.commentTime.date)+' '+data.commentTime.hours+':'+data.commentTime.minutes+':'+data.commentTime.seconds+' )<div><a href="/comment_s?c_id='+data.id+'" class="s_link"><span>支持('+data.supportTimes+')</span><img src="images/support.png" /></a><a href="/comment_a?c_id='+data.id+'" class="a_link"><span>反对('+data.againstTimes+')</span><img src="images/against.png" class="end" /></a></div></div><div class="comment_news">'+data.content+'</div>';
+	var obj = $('<div class="commet_bar"><span><a href="'+data.userIndex+'">'+data.userName+'</a></span><span class="qty">发表于</span>  ( '+(data.commentTime.year+1900)+'-'+(data.commentTime.month+1)+'-'+(data.commentTime.date)+' '+data.commentTime.hours+':'+data.commentTime.minutes+':'+data.commentTime.seconds+' )<div><a href="/comment_s.zl?c_id='+data.id+'" class="s_link"><span>支持('+data.supportTimes+')</span><img src="images/support.png" /></a><a href="/comment_a.zl?c_id='+data.id+'" class="a_link"><span>反对('+data.againstTimes+')</span><img src="images/against.png" class="end" /></a></div></div><div class="comment_news">'+data.content+'</div>');
+	var alink = $(obj).find(".a_link");
+	var slink = $(obj).find(".s_link");
+	bindAS(alink,slink,true);
+	bindAS(alink,slink,false);
 	return obj;
 }
 function loadComment(){
@@ -128,14 +172,16 @@ $(document).ready(function(){
 				data:{"comments.discountInfoId":"<s:property value='dn.id'/>","comments.userName":$("input[name='comments.userName']").val(),"comments.userIndex":$("input[name='comments.userIndex']").val(),"comments.userEmail":$("input[name='comments.userEmail']").val(),"comments.content":$("textarea[name='comments.content']").val(),"validate_code":$("input[name='validate_code']").val()},
 				cache : true,
 				success : function(data, textStatus) {
+					$("#v_code_img").css("display","none");
 					$("#s_button").removeAttr("disabled");
 					if(data.result=="success"){
 						if(data.msg!=null){
 							$("#error_span").empty();
 							$("#error_span").css("display","");
-							$("#error_span").append(data.msg);
+							$("#error_span").append("<span style='color:green;'>"+data.msg+"</span>");
 						}
 						$("textarea[name='comments.content']").val("");
+						$(".submit").after(createComment(data.data));
 					}
 					if(data.result=="fail"){
 						$("#error_span").empty();
@@ -156,7 +202,8 @@ $(document).ready(function(){
 			},
 			"comments.userEmail": {
 				required: true,
-				maxlength:100
+				maxlength:100,
+				email:true
 			},
 			"comments.content": {
 				required: true,
@@ -173,7 +220,8 @@ $(document).ready(function(){
 			},
 			"comments.userEmail": {
 				required: "",
-				maxlength:""
+				maxlength:"",
+				email:""
 			},
 			"comments.content": {
 				required: "",
