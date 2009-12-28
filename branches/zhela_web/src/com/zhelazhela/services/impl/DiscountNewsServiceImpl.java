@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.zhelazhela.db.dao.DiscountNewsDAO;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.DiscountNewsExample;
@@ -51,38 +53,36 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 			String infoReview, String infoContent) throws Exception {
 		DiscountNews discountnews = new DiscountNews();
 		discountnews.setId(id);
-		if(discountnews!=null){
-			if(programId!=null&&programId>0){
-				discountnews.setpId(programId);
-			}
-			if(discountCategory!=null){
-				discountnews.setDiscountCategory(discountCategory);
-			}
-			if(discountArea!=null){
-				discountnews.setDiscountArea(discountArea);
-			}
-			if(discountStart!=null){
-				discountnews.setDiscountStart(discountStart);
-			}
-			if(discountEnd!=null){
-				discountnews.setDiscountEnd(discountEnd);
-			}
-			if(infoSource!=null){
-				discountnews.setNewsSource(infoSource);
-			}
-			if(infoTitle!=null){
-				discountnews.setNewsTitle(infoTitle);
-			}
-			if(infoReview!=null){
-				discountnews.setNewsReview(infoReview);
-			}
-			if(infoContent!=null){
-				discountnews.setNewsContent(infoContent);
-			}
-			int result  = discountNewsDAO.updateByPrimaryKeySelective(discountnews);
-			if(result>0){
-				return discountNewsDAO.selectByPrimaryKey(id);
-			}
+		if(programId!=null&&programId>0){
+			discountnews.setpId(programId);
+		}
+		if(!StringUtils.isBlank(discountCategory)){
+			discountnews.setDiscountCategory(discountCategory);
+		}
+		if(!StringUtils.isBlank(discountArea)){
+			discountnews.setDiscountArea(discountArea);
+		}
+		if(discountStart!=null){
+			discountnews.setDiscountStart(discountStart);
+		}
+		if(discountEnd!=null){
+			discountnews.setDiscountEnd(discountEnd);
+		}
+		if(!StringUtils.isBlank(infoSource)){
+			discountnews.setNewsSource(infoSource);
+		}
+		if(!StringUtils.isBlank(infoTitle)){
+			discountnews.setNewsTitle(infoTitle);
+		}
+		if(!StringUtils.isBlank(infoReview)){
+			discountnews.setNewsReview(infoReview);
+		}
+		if(!StringUtils.isBlank(infoContent)){
+			discountnews.setNewsContent(infoContent);
+		}
+		int result  = discountNewsDAO.updateByPrimaryKeySelective(discountnews);
+		if(result>0){
+			return discountNewsDAO.selectByPrimaryKey(id);
 		}
 		return null;
 	}

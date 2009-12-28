@@ -59,15 +59,15 @@ $(document).ready(function(){
 			<tbody>
 				<s:iterator value="result.list">
 				<tr>
-					<td><a href="#"><s:property value='id'/></a></td>
-					<td><a href="#"><s:property value='newsTitle'/></a></td>
-					<td><a href="<s:property value='programInfo.website'/>"><s:property value='programInfo.name'/></a></td>
+					<td><a target="_blank" href="/admin/review_news.zl?dn_id=<s:property value='id'/>"><s:property value='id'/></a></td>
+					<td><a target="_blank" href="/admin/review_news.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></td>
+					<td><a target="_blank" href="<s:property value='programInfo.website'/>"><s:property value='programInfo.name'/></a></td>
 					<td><s:property value='discountArea'/></td>
 					<td><s:property value='discountCategory'/></td>
 					<td><s:property value='discountStart'/></td>
 					<td><s:property value='discountEnd'/></td>
 					<td><s:property value='senderTime'/></td>
-					<td><a href="/admin/del_news.zl?dn_id=<s:property value='id'/>" class="del"/>删除</a></td>
+					<td><a href="/admin/approve_news.zl?approve_action=-1&dn_id=<s:property value='id'/>" class="del"/>删除</a>&nbsp;&nbsp;<a href="/admin/edit_news.zl?edit=true&dnews.id=<s:property value='id'/>"/>编辑</a></td>
 				</tr>
 				</s:iterator>
              </tbody>

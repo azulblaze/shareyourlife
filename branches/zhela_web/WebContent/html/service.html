@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>关于我们 - 这啦折啦折扣信息分享</title>
+<link rel="stylesheet" href="/style/base.css" type="text/css"/>
+<link rel="stylesheet" href="/style/static.css" type="text/css"/>
+<script type="text/javascript" src="/scripts/jquery-1.3.2.min.js" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+	$("#addfav").click(function(event) {
+		event.preventDefault();
+		var ctrl = (navigator.userAgent.toLowerCase()).indexOf('mac') != -1 ? 'Command/Cmd' : 'CTRL'; 
+        if (document.all){
+            window.external.addFavorite('http://www.zhelazhela.com','这啦折啦折扣信息分享平台');
+		}else if (window.sidebar){
+			window.sidebar.addPanel('这啦折啦折扣信息分享平台', 'http://www.zhelazhela.com', "");
+		}else {
+			alert('您可以尝试通过快捷键' + ctrl + ' + D 收藏本站到到收藏夹');
+		}
+    });   
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+    	<div class="logo">
+        	<a href="/"><img src="/images/zhelazhela.png" /></a>
+            <div class="right-side">
+            	<img src="/images/favicon.gif"/><a href="/" id="addfav">加入收藏夹</a>
+                <img src="/images/exclamation.gif"/><a href="/html/help.html">帮助</a>
+            </div>
+        </div>
+    	<div class="menu">
+            <ul>
+                <li><a href="/">折扣信息</a></li>
+                <li><a href="/news_submit.zl">我来投递</a></li>
+                <li class="select"><a href="/html/about.html">关于我们</a></li>
+            </ul>
+		</div>
+        <div class="clear"></div>
+    </div>
+    <div id="content">
+    	<div class="left">
+        	<ul>
+            	<li>
+                	<h3>这啦折啦</h3>
+                </li>
+                <li><a href="/html/about.html">关于我们</a></li>
+                <li class="select"><a href="/html/service.html">服务条款</a></li>
+                <li><a href="/html/corperation.html">浅谈合作</a></li>
+                <li><a href="/html/private.html">隐私版权策略</a></li>
+                <li><a href="/html/contact.html">联系我们</a></li>
+                <li><a href="/html/help.html" class="last">帮助</a></li>
+            </ul>
+        </div>
+        <div class="right">
+        	<h2>服务条款</h2>
+            <h3>广告接入</h3>
+            <p><strong>这啦折啦</strong> 提供广告的接入，广告可以是图片、文字、超级链接。如果您有需要请与我们联系。详细的联系方式请查看【联系我们】</p>
+            <h3>打折信息发布</h3>
+            <p>如果您是商家，您推出了打折的商品，那么可以通过邮件的方式把打折的详细信息发送到我们的邮箱:<a href="mailto:zhelazhela@gmail.com">zhelazhela@gmail.com</a>。如果信息内容符合我们的要求，我们将<strong>免费</strong>为您发布信息。</p>
+            <p>如果您希望购买到打折的便宜又实惠的商品，出发前也别忘了浏览下 <a href="/" class="zhelazhela">这啦折啦</a> 了解最新的打折信息，这些信息将为您节省一笔费用，何乐而不为呢？！</p>
+            <h3>关于邮件回复</h3>
+            <p>由于我们精力有限，对于邮件并不能一一回复，请见谅！再次感谢您对 <strong>这啦折啦</strong> 的支持</p>
+        </div>
+    </div>
+    <div id="footer">
+    	<div class="footerline"><a href="/cert/bazs.cert" target="_blank">蜀ICP备09028449</a><a href="/html/about.html" target="_blank">关于我们</a><a href="/html/service.html" target="_blank">服务条款</a><a href="/html/corperation.html" target="_blank">洽谈合作</a><a href="/html/private.html" target="_blank">隐私版权策略</a><a href="/html/contact.html" target="_blank">联系我们</a><a href="/html/help.html" target="_blank">帮助</a><a href="/" class="last">2009 zhelazhela.com</a>
+        <div class="footertop"><a href="#"><img src="/images/top.gif" width="32" height="19" /></a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

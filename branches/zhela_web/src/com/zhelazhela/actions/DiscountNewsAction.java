@@ -1,6 +1,5 @@
 package com.zhelazhela.actions;
 
-import java.text.DecimalFormat;
 
 import net.sf.json.JSONObject;
 
@@ -44,6 +43,7 @@ public class DiscountNewsAction extends BaseAction {
 	 */
 	public String submit() throws Exception {
 		//for right side
+		setValue("nav","news_submit");
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		//for some select
@@ -86,6 +86,7 @@ public class DiscountNewsAction extends BaseAction {
 	
 	public String thankyou() throws Exception{
 		//for right side
+		setValue("nav","news_submit");
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		return SUCCESS;
@@ -98,6 +99,7 @@ public class DiscountNewsAction extends BaseAction {
 	 */
 	public String list() throws Exception{
 		//for right side
+		setValue("nav","index");
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		
@@ -155,6 +157,11 @@ public class DiscountNewsAction extends BaseAction {
 		jb.put("avg_points", dn.getAvePPoints());
 		setValue("json",jb.toString());
 		return "json";
+	}
+	
+	public String read() throws Exception{
+		discountNewsService.readDiscountNews(dn_id);
+		return null;
 	}
 	
 	

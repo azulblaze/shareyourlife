@@ -5,10 +5,13 @@
 <struts>
 
 	<package name="admin" extends="tiles-default" namespace="/admin">
-
 		<global-results>
+			<result name="exception">/html/error.html</result>
 			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
 		</global-results>
+		<global-exception-mappings>   
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
 		
 		<action name="login" class="adminAction" method="login" >
 			<result name="input" type="tiles">admin.login</result>
@@ -20,7 +23,22 @@
 			<result name="login" type="redirect-action">login</result>
 		</action>
 		
-		<action name="del_news" class="adminAction" method="delDiscountNews"/>
+		<action name="approve_news" class="adminAction" method="approve"/>
+		
+		<action name="edit_news" class="adminAction" method="edit">
+			<result name="input" type="tiles">admin.news_edit</result>
+			<result name="login" type="redirect-action">login</result>
+			<result name="success" type="redirect-action">
+				<param name="actionName">review_news</param>
+				<param name="dn_id">${dn_id}</param>
+			</result>
+		</action>
+		
+		<action name="review_news" class="adminAction" method="view">
+			<result name="success" type="tiles">admin.news_detail</result>
+			<result name="login" type="redirect-action">login</result>
+		</action>
+		
 				
 		<action name="program_list" class="programAction" method="listProgram">
 			<result name="success" type="tiles">admin.programlist</result>
@@ -48,6 +66,7 @@
 		<action name="child_category" class="categoryAction" method="childCategory"/>
 		
 		<action name="del_category" class="categoryAction" method="delCategory"/>
+		
 		
 	</package>
 
