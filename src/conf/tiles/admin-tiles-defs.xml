@@ -3,7 +3,6 @@
          "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 	<definition name="admin.layout" template="/WEB-INF/pages/admin/layout/layout.jsp">
-		
 		<put-attribute name="footer" value="/WEB-INF/pages/admin/tiles/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="admin.login" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
@@ -35,4 +34,20 @@
 		<put-attribute name="nav_title" type="string" value="商家列表"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/program_list.jsp"></put-attribute>
 	</definition>
+	
+	
+	<definition name="admin.general.layout" template="/WEB-INF/pages/admin/layout/general_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/pages/admin/tiles/general_header.jsp"></put-attribute>
+		<put-attribute name="right" value="/WEB-INF/pages/admin/tiles/general_index_right.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/pages/admin/tiles/general_footer.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.news_edit" template="/WEB-INF/pages/admin/layout/general_layout.jsp" extends="admin.general.layout">
+		<put-attribute name="title" type="string" value="编辑折扣新闻"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/admin/tiles/general_news_submit.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.news_detail" template="/WEB-INF/pages/admin/layout/general_layout.jsp" extends="admin.general.layout">
+		<put-attribute name="title" type="string" value="预览折扣新闻"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/admin/tiles/general_detail.jsp"></put-attribute>
+	</definition>
+	
 </tiles-definitions>

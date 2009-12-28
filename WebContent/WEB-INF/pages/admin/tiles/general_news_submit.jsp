@@ -8,65 +8,7 @@
 <script type="text/javascript" src="/scripts/jquery.calendar.js"></script>
 <script>
 var categorys = new Set();
-function createSelect(data,id){
-	var select = $("<select id='category_select"+id+"'></select>");
-	select.append("<option value='0'>全部类别</option>");
-	for(var i in data){
-		$(select).append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
-	}
-	$("#category_select select:last").after(select);
-	bindChange("#category_select" + id);
-}
-function getCategory(){
-	var select_s = $("#category_select select option:selected");
-	var before = "全部类别";
-	var current = "全部类别";
-	var len = select_s.length;
-	for(var i=0;i<len;i++){
-		current = $(select_s.get(i)).text();
-		if(current!=null&&current!="全部类别"){
-			before = current;
-		}
-	}
-	return before;
-}
-function bindChange(id){
-	$(id).bind("change",function(event){
-		var father_id = parseInt($(id+' option:selected').val());
-		$(id+" ~ select").each(function(){
-			$(this).remove();
-		}) 
-		if(father_id>0){
-			$.ajax( {
-				type : "POST",
-				url : "/admin/child_category.zl?f_id="+father_id,
-				dataType:"json",
-				cache : true,
-				success : function(data, textStatus) {
-					if(data.result=="success"){
-						if(data.data.length>0){
-							createSelect(data.data,father_id);
-						}
-					}
-					if(data.result=="fail"){
-						//showError("#sub_msg_div",data.msg);
-					}
-				}
-			});
-		}
-		
-	});
-}
-function putcategory(){
-	_category = getCategory();
-	if(_category=="全部类别"){
-		categorys.clear();
-		$('#categorys').empty();
-	}else{
-		if(categorys.remove("全部类别")){
-			$('#categorys').empty();
-		}
-	}
+function putcategory(_category){
 	if(categorys.put(_category)){
 		$('#categorys').append('<div class="b_link"><a href="#">'+_category+'</a></div>');
 		$('#categorys .b_link').each(function(index,e){
@@ -95,7 +37,6 @@ function initcategory(){
 		}
 	}
 }
-
 function setArea(){
 	var area_id = parseInt($('#city').val());
 	var area_str = "全部地区";
@@ -120,14 +61,14 @@ function initProgramInfo(){
 }
 $(document).ready(function(){
 	initcategory();
-	bindChange("#category_select0");
 	initProgramInfo();
 	$('#discountStart').cld();
 	$('#discountEnd').cld();
 	$('#news_review').xheditor(true);
 	$('#news_content').xheditor(true);
 	$('#category_add').bind("click", function(event) {
-		putcategory();
+		var _category = $('#category_select option:selected').val();
+		putcategory(_category);
 	});
 	$("#v_code_img").bind("click",function(event){
 		var timer=new Date();
@@ -218,9 +159,6 @@ $(document).ready(function(){
 			"dnews.newsContent": {
 				required: true
 			},
-			"validate_code": {
-				required: true
-			},
 			"dnews.senderLink":{
 				url:true
 			}
@@ -258,9 +196,6 @@ $(document).ready(function(){
 			"dnews.newsContent": {
 				required: ""
 			},
-			"validate_code": {
-				required: ""
-			},
 			"dnews.senderLink":{
 				url:"请输入正确的url地址，http://开头"
 			}
@@ -279,10 +214,11 @@ $(document).ready(function(){
                     <li>5. 编辑也许会对投递进行适当修改, 以适合在本站发表.</li>
                 </ul>
             </div>
-            <form action="/news_submit.zl" method="post" id="_submit">
+            <form action="/admin/edit_news.zl" method="post" id="_submit">
             <div class="line">
             	<div class="input">
                 	<div class="label">标题:</div>
+                	<input type="hidden" value='<s:property value="dnews.id"/>' name="dnews.id" />
                     <input type="text" class="w200" value='<s:property value="dnews.newsTitle"/>' name="dnews.newsTitle" />
                     <div class="error"></div>
                 </div>
@@ -291,9 +227,9 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">折扣开始时间:</div>
-                    <input type="text" class="w100" value='<s:property value="dnews.discountStartStr"/>' id="discountStart" bj="cBj" name="dnews.discountStartStr" />
+                    <input type="text" class="w100" value='<s:date name="dnews.discountStart" format="yyyy-MM-dd"/>' id="discountStart" bj="cBj" name="dnews.discountStartStr" />
                     <div class="label">结束时间</div>
-                    <input type="text" class="w100" value='<s:property value="dnews.discountEndStr"/>' id="discountEnd" bj="cBj" name="dnews.discountEndStr" />
+                    <input type="text" class="w100" value='<s:date name="dnews.discountEnd" format="yyyy-MM-dd"/>' id="discountEnd" bj="cBj" name="dnews.discountEndStr" />
                      
                 </div>
                 <div class="notice"><em>(必填*)</em>请注明折扣开始时间和结束时间。</div>
@@ -337,12 +273,11 @@ $(document).ready(function(){
                 <div class="notice"><em>(必填*)</em>打折设计的范围，请根据需要选择</div>
             </div>
             <div class="line">
-            	<div class="input" id="category_select">
+            	<div class="input">
                 	<div class="label">商品类别:</div>
-                    <select id="category_select0">
-                    	<option value='0' select='selected'>全部类别</option>
+                    <select id="category_select">
                     <s:iterator value="categorys">
-                    	<option value='<s:property value="id"/>'><s:property value="name"/></option>
+                    	<option value='<s:property value="name"/>'><s:property value="name"/></option>
                     </s:iterator>
                     </select>
                     <input type="button" id="category_add" class="w60" value="增加" />
@@ -389,14 +324,6 @@ $(document).ready(function(){
                     
                 </div>
                 <div class="notice"><em>(必填*)</em>请留下您的邮箱作为联系方式。</div>
-            </div>
-            <div class="line">
-            	<div class="input">
-                	<div class="label">验证码:</div>
-                    <input type="text" class="w60" name="validate_code" id="validate_code"/>
-                    <img src="images/v_code.png" id="v_code_img" style="display:none;"/>
-                </div>
-                <div class="notice"><em>(必填*)</em>终于到最后一步啦，填写好验证码提交，如果看不清楚点击图片刷新，再次感谢您的无私贡献。</div>
             </div>
             <s:if test="error!=null">
             <div class="line">

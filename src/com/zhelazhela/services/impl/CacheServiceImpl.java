@@ -26,7 +26,7 @@ public class CacheServiceImpl implements CacheService {
 	private static final int ID_CATEGORY = 3;
 	
 	private static final int ID_PROGRAMINFO = 4;
-	
+		
 	private static DiscountNewsList weeklyhot = null;
 	
 	private static DiscountNewsList weeklywelcome = null;
@@ -44,9 +44,9 @@ public class CacheServiceImpl implements CacheService {
 	private static long category_time = 0l;
 	
 	private static long programinfo_time = 0l;
-	
-	private static final long time_between = 1000*60*60*3;
-	
+		
+	private long time_between = 1000*60*10;
+		
 	@Override
 	public DiscountNewsList loadWeeklyHot() throws Exception {
 		if(weeklyhot==null){
@@ -111,7 +111,10 @@ public class CacheServiceImpl implements CacheService {
 		calendar.set(java.util.Calendar.MINUTE, 0);
 		calendar.set(java.util.Calendar.SECOND, 0);
 		try {
-			weeklyhot = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "read_times desc");
+			DiscountNewsList tmp = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "read_times desc");
+			if(tmp!=null&&tmp.getSize()>0){
+				weeklyhot = tmp;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -125,7 +128,11 @@ public class CacheServiceImpl implements CacheService {
 		calendar.set(java.util.Calendar.MINUTE, 0);
 		calendar.set(java.util.Calendar.SECOND, 0);
 		try {
-			weeklywelcome = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "support_times desc");
+			DiscountNewsList tmp = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "support_times desc");
+			if(tmp!=null&&tmp.getSize()>0){
+				weeklywelcome = tmp;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -195,6 +202,14 @@ public class CacheServiceImpl implements CacheService {
 
 	public void setProgramInfoService(ProgramInfoService programInfoService) {
 		this.programInfoService = programInfoService;
+	}
+
+	public long getTime_between() {
+		return time_between;
+	}
+
+	public void setTime_between(long timeBetween) {
+		time_between = timeBetween;
 	}
 
 }

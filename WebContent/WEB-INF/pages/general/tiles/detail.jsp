@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/style/rater-star.css" type="text/css"/>
 <script type="text/javascript" src="/scripts/jquery.validate.pack.js"></script>
 <script type="text/javascript" src="/scripts/rater-star.js"></script>
+<script type="text/javascript" src="/scripts/display.js"></script>
 <script>
 function writeCategory(categorys){
 	var sub_cat_arry = categorys.split(",");
@@ -211,6 +212,9 @@ $(document).ready(function(){
 			},
 			"validate_code":{
 				required: true
+			},
+			"comments.userIndex":{
+				url:true
 			}
 		},
 		messages: {
@@ -229,9 +233,13 @@ $(document).ready(function(){
 			},
 			"validate_code":{
 				required: ""
+			},
+			"comments.userIndex":{
+				url:""
 			}
 		}
 	});
+	$(this).displayzhela({extStr:"",zhelazhela:<s:property value='dn.id'/>,delay:3000});
 })
 </script>
         	<div class="post_head">

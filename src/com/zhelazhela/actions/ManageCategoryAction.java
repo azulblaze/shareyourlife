@@ -113,13 +113,7 @@ public class ManageCategoryAction extends BaseAction{
 	}
 	
 	public String childCategory() throws Exception{
-		ManageUser mu = (ManageUser)this.getSession("manager");
 		JSONObject jb = new JSONObject();
-		if(mu==null){
-			jb.put("result", "login");
-			setValue("json", jb.toString());
-			return "json";
-		}
 		try{
 			java.util.List<MerchandiseCategory> list = utilService.loadCategorys(f_id);
 			JSONArray ja = new JSONArray();

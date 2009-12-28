@@ -8,19 +8,14 @@
 	<constant name="struts.multipart.parser" value="monitorMultiPartRequest"/>
 	 -->
 	<package name="default" extends="tiles-default">
-		<!-- 
+
 		<global-results>
-			<result name="exception" type="tiles">error_404</result>
-		</global-results>
-		<global-exception-mappings>
-			<exception-mapping exception="java.lang.Exception" result="exception"/>
-		</global-exception-mappings>
-		 -->
-		 
-		<global-results>
-			<result name="error">/WEB-INF/pages/tiles/error.jsp</result>
+			<result name="exception">/html/error.html</result>
 			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
 		</global-results>
+		<global-exception-mappings>   
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings> 
 		
 		<action name="news_submit" class="newsAction" method="submit">
 			<result name="input" type="tiles">zhela.news_submit</result>
@@ -40,6 +35,8 @@
 		<action name="point_p" class="newsAction" method="point_publish"/>
 		
 		<action name="support" class="newsAction" method="support"/>
+		
+		<action name="view_times" class="newsAction" method="read"/>
 		
 		<action name="thankyou_support_news" class="newsAction" method="thankyou">
 			<result name="success" type="tiles">zhela.thankyou_support_news</result>
