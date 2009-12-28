@@ -4,18 +4,18 @@
 * andy chen
 */
 (function($) {
-  $.fn.displayqiezi = function(options) {
+  $.fn.displayzhela = function(options) {
 	  options = $.extend({
 		dataType: "json",
 		delay: 5000,
-		qiezi:0,
+		zhelazhela:0,
 		day:0.25,
 		extStr:"",
 		progressUrl: "/view_times.do",
 		success: function() {},
 	  }, options);
 	  function display(){
-		  if(options.qiezi<1||loadcookie()){
+		  if(options.zhelazhela<1||loadcookie()){
 			  return;
 		  }
 		  cookie();
@@ -23,17 +23,17 @@
 			   type: "GET",
 			   url:options.progressUrl,
 			   dataType:"json",
-			   data:"id_picture="+options.qiezi,
+			   data:"dn_id="+options.zhelazhela,
 			   success: function(data){
 				 options.success(data);
 			   }
 		  });
 	  }
 	  function cookie(){
-		  $.cookie('myqiezi.com'+options.qiezi+options.extStr, 'true',options.day);
+		  $.cookie('zhelazhela.com'+options.zhelazhela+options.extStr, 'true',options.day);
 	  }
 	  function loadcookie(){
-		  if($.cookie('myqiezi.com'+options.qiezi+options.extStr)){
+		  if($.cookie('zhelazhela.com'+options.zhelazhela+options.extStr)){
 		  	return true;
 		  }
 		  return false;
