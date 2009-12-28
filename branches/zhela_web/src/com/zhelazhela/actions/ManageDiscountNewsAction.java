@@ -6,6 +6,7 @@ import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.ManageUser;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.AccountService;
+import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.UtilService;
 import com.zhelazhela.services.DiscountNewsService;
 @SuppressWarnings("serial")
@@ -22,6 +23,10 @@ public class ManageDiscountNewsAction extends BaseAction {
 	private AccountService accountService;
 	
 	private UtilService utilService;
+	
+	private CacheService cacheService;
+	
+	private boolean edit;
 
 	/** 折扣新闻对象 */
 	private DiscountNews dnews;
@@ -40,7 +45,7 @@ public class ManageDiscountNewsAction extends BaseAction {
 	/** 排列顺序 **/
 	private String order;
 	/** 折扣新闻唯一ID */
-	private int dn_id;
+	private long dn_id;
 	/** 审批操作ID */
 	private int approve_action;
 	/** 管理员对象 */
@@ -69,7 +74,8 @@ public class ManageDiscountNewsAction extends BaseAction {
 		return SUCCESS;
 	}
 	
-	public String delDiscountNews() throws Exception{
+	/** 审批新闻,删除 **/
+	public String approve() throws Exception{
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		JSONObject jb = new JSONObject();
 		if(mu==null){
@@ -77,7 +83,21 @@ public class ManageDiscountNewsAction extends BaseAction {
 			setValue("json", jb.toString());
 			return "json";
 		}
-		if(discountNewsService.delDiscountNews(dn_id)){
+		boolean result = false;
+		switch(approve_action){
+		case DEL:
+			result = discountNewsService.delDiscountNews(dn_id);
+			break;
+		case REJECT:
+			result = discountNewsService.approveDiscountNews(dn_id, mu.getAccount(),false);
+			break;
+		case PASS:
+			result = discountNewsService.approveDiscountNews(dn_id, mu.getAccount(),true);
+			break;
+		default:
+			break;
+		}
+		if(result){
 			jb.put("result", "success");
 		}else{
 			jb.put("result", "fail");
@@ -86,27 +106,6 @@ public class ManageDiscountNewsAction extends BaseAction {
 		return "json";
 	}
 	
-	/** 审批新闻 **/
-	public String approve() throws Exception{
-		ManageUser mu = (ManageUser)this.getSession("manager");
-		if(mu==null){
-			return "fail";
-		}
-		switch(approve_action){
-		case DEL:
-			discountNewsService.delDiscountNews(dn_id);
-			break;
-		case REJECT:
-			discountNewsService.approveDiscountNews(dn_id, mu.getAccount(),false);
-			break;
-		case PASS:
-			discountNewsService.approveDiscountNews(dn_id, mu.getAccount(),true);
-			break;
-		default:
-			break;
-		}
-		return SUCCESS;
-	}
 	/** 管理员登录 */
 	public String login() throws Exception{
 		clearSession("manager");
@@ -123,23 +122,51 @@ public class ManageDiscountNewsAction extends BaseAction {
 	}
 	/** 编辑新闻 */
 	public String edit() throws Exception{
+		
+		//for right side
+		setValue("weeklyhot",cacheService.loadWeeklyHot());
+		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		//for some select
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
+		setValue("programinfos",cacheService.loadProgram());
+		
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		if(mu==null){
-			return "fail";
+			return LOGIN;
 		}
-		String saveandview = (String)this.getSession("saveandview");
-		setValue("dn",discountNewsService.editDiscountNews(dnews.getId(), dnews.getpId(), dnews.getDiscountCategory(), dnews.getDiscountArea(), dnews.getDiscountStart(), dnews.getDiscountEnd(), dnews.getNewsSource(), dnews.getNewsTitle(), dnews.getNewsReview(), dnews.getNewsContent()));
-		if(saveandview!=null&&saveandview.equals("saveandview")){
-			//保存并且预览
-			return "view";
+		DiscountNews tmp = discountNewsService.viewDiscountNews(dnews.getId());
+		if(tmp==null){
+			throw new Exception();
 		}
+		if(edit){
+			long[] location = utilService.getLocation(tmp.getDiscountArea());
+			setValue("province_id",location[0]);
+			setValue("city_id",location[1]);
+			setValue("dnews",tmp);
+			return INPUT;
+		}
+		DiscountNews dn = discountNewsService.editDiscountNews(dnews.getId(), dnews.getpId(), dnews.getDiscountCategory(), dnews.getDiscountArea(), dnews.getDiscountStart(), dnews.getDiscountEnd(), dnews.getNewsSource(), dnews.getNewsTitle(), dnews.getNewsReview(), dnews.getNewsContent());
+		if(dn==null){
+			return INPUT;
+		}
+		this.dn_id = dnews.getId();
 		return SUCCESS;
 	}
 	/** 浏览新闻 */
 	public String view() throws Exception{
+		
+		//for right side
+		setValue("weeklyhot",cacheService.loadWeeklyHot());
+		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		//for some select
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
+		setValue("programinfos",cacheService.loadProgram());
+		
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		if(mu==null){
-			return "fail";
+			return LOGIN;
 		}
 		DiscountNews dn = discountNewsService.viewDiscountNews(dn_id);
 		setValue("dn",dn);
@@ -205,10 +232,10 @@ public class ManageDiscountNewsAction extends BaseAction {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public int getDn_id() {
+	public long getDn_id() {
 		return dn_id;
 	}
-	public void setDn_id(int dnId) {
+	public void setDn_id(long dnId) {
 		dn_id = dnId;
 	}
 	public void setDiscountNewsService(DiscountNewsService discountNewsService) {
@@ -246,6 +273,18 @@ public class ManageDiscountNewsAction extends BaseAction {
 
 	public void setUtilService(UtilService utilService) {
 		this.utilService = utilService;
+	}
+
+	public void setCacheService(CacheService cacheService) {
+		this.cacheService = cacheService;
+	}
+
+	public boolean isEdit() {
+		return edit;
+	}
+
+	public void setEdit(boolean edit) {
+		this.edit = edit;
 	}
 	
 }

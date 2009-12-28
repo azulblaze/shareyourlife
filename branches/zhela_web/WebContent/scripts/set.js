@@ -10,11 +10,14 @@ function Set() {
 		this.values.push(value);
 		return true;
     };
+    this.clear = function(){
+    	this.values = new Array();
+    }
     this.remove = function(value) {
 		for(var i=0;i<this.values.length;i++){
 			if(this.values[i]==value){
 				this.values.splice(i,1);
-				return;
+				return true;
 			}
 		}
     };

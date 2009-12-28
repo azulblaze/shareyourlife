@@ -25,4 +25,5 @@ public interface UtilService {
 	
 	public boolean delCategory(long id) throws Exception;
 	
+	public long[] getLocation(String location) throws Exception;
 }

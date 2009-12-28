@@ -19,6 +19,8 @@ import com.zhelazhela.services.UtilService;
 
 public class UtilServiceImpl implements UtilService {
 	
+	private static final String location_all = "全部地区";
+	
 	private CityDAO cityDAO;
 	
 	private ProvinceDAO provinceDAO;
@@ -216,6 +218,36 @@ public class UtilServiceImpl implements UtilService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public long[] getLocation(String location) throws Exception {
+		long []result = new long[2];
+		result[0] = 0;
+		result[1] = 0;
+		if(location==null){
+			return result;
+		}
+		location = location.trim();
+		if(location.equals(location_all)){
+			return result;
+		}
+		CityExample c_example = new CityExample();
+		c_example.createCriteria().andNameEqualTo(location);
+		List<City> citys = cityDAO.selectByExample(c_example);
+		if(citys.size()>0){
+			result[0] = citys.get(0).getProvinceId();
+			result[1] = citys.get(0).getId();
+			return result;
+		}
+		ProvinceExample p_example = new ProvinceExample();
+		p_example.createCriteria().andNameEqualTo(location);
+		List<Province> provinces = provinceDAO.selectByExample(p_example);
+		if(provinces.size()>0){
+			result[0] = provinces.get(0).getId();
+			return result;
+		}
+		return result;
 	}
 
 

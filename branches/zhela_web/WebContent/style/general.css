@@ -383,21 +383,65 @@ li.intro{
 	background:#060;
 	border:1px solid #093;
 }
-.index_page_link{
+.index_page_link,.index_page_link_left{
 	margin-top:20px;
 	text-align:right;
 	height:30px;
 	line-height:30px;
 }
-.index_page_link a{
+.index_page_link_left{
+	height:80px;
+	line-height:80px;
+	border-top:1px solid #EEE;
+}
+.index_page_link_left,.index_page_link_left{
+	text-align:left;
+	margin-left:0px;
+}
+.index_page_link a,.index_page_link_left a{
 	border:1px solid #3ad1fa;
 	padding:7px 15px;
 	margin-left:20px;
 	font-size:14px;
 	font-weight:bold;
 }
-.index_page_link a:hover{
+.index_page_link_left a{
+	margin-right:20px;
+	margin-left:0px;
+}
+.index_page_link a:hover,.index_page_link_left a:hover{
 	color:#FFF;
 	background:#3ad1fa;
 	text-decoration:none;
+}
+
+h1.thankyou{
+	margin:20px 0px 40px 0px;
+	color:#060;
+}
+
+.control_bar{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	height:80px;
+	width:100%;
+	background:#EEE;
+	border-top:1px groove #CCC;
+	z-index:999;
+}
+.control_bar .control,.control_bar .result{
+	width:960px;
+	padding-top:10px;
+	position:static;
+	margin:0px auto;
+}
+.control_bar .result{
+	color:#063;
+	font-size:14px;
+	font-weight:bold;
+	padding-left:10px;
+}
+.control_bar .control a{
+	margin-right:20px;
 }

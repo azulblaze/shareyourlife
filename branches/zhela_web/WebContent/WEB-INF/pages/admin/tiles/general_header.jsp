@@ -26,8 +26,8 @@ $(document).ready(function() {
         </div>
     	<div class="menu">
             <ul>
-                <li<s:if test="nav=='index'"> class='select'</s:if>><a href="/index.zl">折扣信息</a></li>
-                <li<s:if test="nav=='news_submit'"> class='select'</s:if>><a href="/news_submit.zl">我来投递</a></li>
+                <li class="select"><a href="/index.zl">折扣信息</a></li>
+                <li><a href="/news_submit.zl">我来投递</a></li>
                 <li><a href="/html/about.html">关于我们</a></li>
             </ul>
 		</div>
