@@ -70,7 +70,7 @@ public class DiscountNewsAction extends BaseAction {
 			setValue("error","您必须输入正确的验证码才能提交！");
 			return INPUT;
 		}
-		this.clearSession("validate_code");
+		this.clearSession("news_submit");
 		if(dnews.validate()){
 			try{
 				if(discountNewsService.saveDiscountNews(dnews)!=null){
