@@ -21,6 +21,8 @@ public class UtilServiceImpl implements UtilService {
 	
 	private static final String location_all = "全部地区";
 	
+	private static final String category_all = "全部类别";
+	
 	private CityDAO cityDAO;
 	
 	private ProvinceDAO provinceDAO;
@@ -47,6 +49,7 @@ public class UtilServiceImpl implements UtilService {
 		}
 		String [] areas = area.split(",");
 		Set<String> my_areas = new java.util.HashSet<String>();
+		my_areas.add(location_all);
 		Set<String> _areas = new java.util.HashSet<String>();
 		for(String tmp:areas){
 			if(tmp!=null&&tmp.trim().length()>0){
@@ -64,12 +67,14 @@ public class UtilServiceImpl implements UtilService {
 			my_areas.add(city.getName());
 			prov_ids.add(city.getProvinceId());
 		}
-		ProvinceExample pexample = new ProvinceExample();
-		pexample.createCriteria().andIdIn(prov_ids);
-		pexample.or(pexample.createCriteria().andNameIn(new java.util.ArrayList<String>(_areas)));
-		List<Province> provinces = provinceDAO.selectByExample(pexample);
-		for(Province province:provinces){
-			my_areas.add(province.getName());
+		if(prov_ids.size()>0){
+			ProvinceExample pexample = new ProvinceExample();
+			pexample.createCriteria().andIdIn(prov_ids);
+			pexample.or(pexample.createCriteria().andNameIn(new java.util.ArrayList<String>(_areas)));
+			List<Province> provinces = provinceDAO.selectByExample(pexample);
+			for(Province province:provinces){
+				my_areas.add(province.getName());
+			}
 		}
 		return my_areas;
 	}
@@ -81,6 +86,7 @@ public class UtilServiceImpl implements UtilService {
 		}
 		String [] categorys = category.split(",");
 		Set<String> my_categorys = new java.util.HashSet<String>();
+		my_categorys.add(category_all);
 		Set<String> _categorys = new java.util.HashSet<String>();
 		for(String tmp:categorys){
 			if(tmp!=null&&tmp.trim().length()>0){
@@ -102,7 +108,7 @@ public class UtilServiceImpl implements UtilService {
 		}
 		if(father_ids.size()>0){
 			example.clear();
-			example.createCriteria().andFatherIn(father_ids);
+			example.createCriteria().andIdIn(father_ids);
 			merchandiseCategorys = merchandiseCategoryDAO.selectByExample(example);
 			father_ids.clear();
 			for(MerchandiseCategory merchandiseCategory:merchandiseCategorys){
