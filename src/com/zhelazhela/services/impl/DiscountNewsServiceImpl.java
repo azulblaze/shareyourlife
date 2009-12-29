@@ -88,29 +88,18 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	}
 
 	@Override
-	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,String categorys,String areas,String title,java.util.Date after_approve_time,String orderby)  throws Exception{
-		DiscountNewsExample example = new DiscountNewsExample();
-		if(pagesize>0){
-			example.setLimit(""+(page-1)*pagesize+","+pagesize);
-		}
-		Criteria criteria = example.createCriteria().andApproveResultEqualTo(true);
-		if(title!=null){
-			criteria.andNewsTitleLike(title);
-		}
-		if(after_approve_time!=null){
-			criteria.andApproveTimeGreaterThan(after_approve_time);
-		}
+	public DiscountNewsList loadDiscountNewsList(int page,int pagesize,String categorys,String areas,String title,java.util.Date after_approve_time,String orderby,boolean andor)  throws Exception{
 		java.util.List<String> _categorys = new java.util.ArrayList<String>(utilService.loadCategorys(categorys));
-		for(String category:_categorys){
-			example.or(example.createCriteria().andApproveResultEqualTo(true).andDiscountCategoryLike(category));
-		}
 		java.util.List<String> _areas = new java.util.ArrayList<String>(utilService.loadAreas(areas));
-		for(String _area:_areas){
-			example.or(example.createCriteria().andApproveResultEqualTo(true).andDiscountAreaLike(_area));
+		List<DiscountNews> list = null;
+		int size = 0;
+		if(andor){
+			list = discountNewsDAO.selectWithPrgramInfoConditionAnd("not null", true, title, _categorys, _areas, orderby, page, pagesize);
+			size = discountNewsDAO.countWithPrgramInfoConditionAnd("not null", true, title, _categorys, _areas);
+		}else{
+			list = discountNewsDAO.selectWithPrgramInfoConditionOr("not null", true, title, _categorys, _areas, orderby, page, pagesize);
+			size = discountNewsDAO.countWithPrgramInfoConditionOr("not null", true, title, _categorys, _areas);
 		}
-		example.setOrderByClause(orderby);
-		List<DiscountNews> list = discountNewsDAO.selectWithProgramInfoByExampleWithoutBLOBs(example);
-		int size = discountNewsDAO.countByExample(example);
 		DiscountNewsList dnl = new DiscountNewsList();
 		dnl.setList(list);
 		dnl.setSize(size);

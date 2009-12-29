@@ -36,6 +36,8 @@ public class DiscountNewsAction extends BaseAction {
 	/** 打分 */
 	private int number;
 	
+	private boolean and = false;
+	
 	/**
 	 * 提交新闻
 	 * @return
@@ -109,7 +111,7 @@ public class DiscountNewsAction extends BaseAction {
 		if(order==null){
 			order = "approve_time desc";
 		}
-		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, null, null,order);
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, null, null,order,and);
 		setValue("dnl",dnl);
 		return SUCCESS;
 	}
@@ -129,6 +131,8 @@ public class DiscountNewsAction extends BaseAction {
 			if(dn.getApproveResult()!=null&&dn.getApproveResult()){
 				setValue("dn",dn);
 			}
+		}else{
+			throw new Exception();
 		}
 		return SUCCESS;
 	}
@@ -249,6 +253,14 @@ public class DiscountNewsAction extends BaseAction {
 
 	public void setCacheService(CacheService cacheService) {
 		this.cacheService = cacheService;
+	}
+
+	public boolean isAnd() {
+		return and;
+	}
+
+	public void setAnd(boolean and) {
+		this.and = and;
 	}
 
 }

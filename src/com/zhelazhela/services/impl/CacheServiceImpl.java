@@ -111,7 +111,7 @@ public class CacheServiceImpl implements CacheService {
 		calendar.set(java.util.Calendar.MINUTE, 0);
 		calendar.set(java.util.Calendar.SECOND, 0);
 		try {
-			DiscountNewsList tmp = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "read_times desc");
+			DiscountNewsList tmp = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "read_times desc",false);
 			if(tmp!=null&&tmp.getSize()>0){
 				weeklyhot = tmp;
 			}
@@ -128,7 +128,7 @@ public class CacheServiceImpl implements CacheService {
 		calendar.set(java.util.Calendar.MINUTE, 0);
 		calendar.set(java.util.Calendar.SECOND, 0);
 		try {
-			DiscountNewsList tmp = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "support_times desc");
+			DiscountNewsList tmp = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "support_times desc",false);
 			if(tmp!=null&&tmp.getSize()>0){
 				weeklywelcome = tmp;
 			}

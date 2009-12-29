@@ -3,6 +3,8 @@ package com.zhelazhela.db.dao;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.DiscountNewsExample;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public class DiscountNewsDAOImpl extends SqlMapClientDaoSupport implements DiscountNewsDAO {
@@ -192,7 +194,8 @@ public class DiscountNewsDAOImpl extends SqlMapClientDaoSupport implements Disco
             this.record = record;
         }
 
-        public Object getRecord() {
+        @SuppressWarnings("unused")
+		public Object getRecord() {
             return record;
         }
     }
@@ -216,4 +219,129 @@ public class DiscountNewsDAOImpl extends SqlMapClientDaoSupport implements Disco
         DiscountNews record = (DiscountNews) getSqlMapClientTemplate().queryForObject("discount_news.selectWithProgramInfoByPrimaryKey", key);
         return record;
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DiscountNews> selectWithPrgramInfoConditionAnd(
+			String approveUserCondition, Boolean approveResult,
+			String newsTitle, List<String> categorys, List<String> areas,
+			String orderByClause, int page,int pageSize) {
+		java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
+		if(StringUtils.isNotBlank(approveUserCondition)){
+			approveUserCondition = "approve_user is not null";
+		}else{
+			approveUserCondition = "approve_user is null";
+		}
+		map.put("approve_user_condition", approveUserCondition);
+		if(approveResult!=null){
+			map.put("approve_result", Boolean.valueOf(approveResult));
+		}
+		if(!StringUtils.isBlank(newsTitle)){
+			map.put("news_title", newsTitle);
+		}
+		if(categorys!=null&&categorys.size()>0){
+			map.put("categorys", categorys);
+		}
+		if(areas!=null&&areas.size()>0){
+			map.put("areas", areas);
+		}
+		if(!StringUtils.isBlank(orderByClause)){
+			map.put("orderByClause", orderByClause);
+		}
+		if(pageSize>0){
+			map.put("limit", ""+(page-1)*pageSize+","+pageSize);
+		}
+		List<DiscountNews> list = getSqlMapClientTemplate().queryForList("discount_news.dicount_news_programInfo_conditionand", map);
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DiscountNews> selectWithPrgramInfoConditionOr(
+			String approveUserCondition, Boolean approveResult,
+			String newsTitle, List<String> categorys, List<String> areas,
+			String orderByClause, int page,int pageSize) {
+		java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
+		if(StringUtils.isNotBlank(approveUserCondition)){
+			approveUserCondition = "approve_user is not null";
+		}else{
+			approveUserCondition = "approve_user is null";
+		}
+		map.put("approve_user_condition", approveUserCondition);
+		if(approveResult!=null){
+			map.put("approve_result", Boolean.valueOf(approveResult));
+		}
+		if(!StringUtils.isBlank(newsTitle)){
+			map.put("news_title", newsTitle);
+		}
+		if(categorys!=null&&categorys.size()>0){
+			map.put("categorys", categorys);
+		}
+		if(areas!=null&&areas.size()>0){
+			map.put("areas", areas);
+		}
+		if(!StringUtils.isBlank(orderByClause)){
+			map.put("orderByClause", orderByClause);
+		}
+		if(pageSize>0){
+			map.put("limit", ""+(page-1)*pageSize+","+pageSize);
+		}
+		List<DiscountNews> list = (List<DiscountNews>)getSqlMapClientTemplate().queryForList("discount_news.dicount_news_programInfo_conditionor", map);
+		return list;
+	}
+	
+	@Override
+	public int countWithPrgramInfoConditionAnd(
+			String approveUserCondition, Boolean approveResult,
+			String newsTitle, List<String> categorys, List<String> areas) {
+		java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
+		if(StringUtils.isNotBlank(approveUserCondition)){
+			approveUserCondition = "approve_user is not null";
+		}else{
+			approveUserCondition = "approve_user is null";
+		}
+		map.put("approve_user_condition", approveUserCondition);
+		if(approveResult!=null){
+			map.put("approve_result", Boolean.valueOf(approveResult));
+		}
+		if(!StringUtils.isBlank(newsTitle)){
+			map.put("news_title", newsTitle);
+		}
+		if(categorys!=null&&categorys.size()>0){
+			map.put("categorys", categorys);
+		}
+		if(areas!=null&&areas.size()>0){
+			map.put("areas", areas);
+		}
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("discount_news.count_dicount_news_programInfo_conditionand", map);
+		return count;
+	}
+	
+	@Override
+	public int countWithPrgramInfoConditionOr(
+			String approveUserCondition, Boolean approveResult,
+			String newsTitle, List<String> categorys, List<String> areas) {
+		java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
+		if(StringUtils.isNotBlank(approveUserCondition)){
+			approveUserCondition = "approve_user is not null";
+		}else{
+			approveUserCondition = "approve_user is null";
+		}
+		map.put("approve_user_condition", approveUserCondition);
+		if(approveResult!=null){
+			map.put("approve_result", Boolean.valueOf(approveResult));
+		}
+		if(!StringUtils.isBlank(newsTitle)){
+			map.put("news_title", newsTitle);
+		}
+		if(categorys!=null&&categorys.size()>0){
+			map.put("categorys", categorys);
+		}
+		if(areas!=null&&areas.size()>0){
+			map.put("areas", areas);
+		}
+		
+		Integer count = (Integer) getSqlMapClientTemplate().queryForObject("discount_news.count_dicount_news_programInfo_conditionor", map);
+		return count;
+	}
 }

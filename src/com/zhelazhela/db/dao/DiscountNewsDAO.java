@@ -122,4 +122,12 @@ public interface DiscountNewsDAO {
     List<DiscountNews> selectWithProgramInfoByExampleWithoutBLOBs(DiscountNewsExample example);
     
     DiscountNews selectWithProgramInfoByPrimaryKey(Long id);
+    
+    List<DiscountNews> selectWithPrgramInfoConditionAnd(String approve_user_condition,Boolean approve_result,String news_title,java.util.List<String> categorys,java.util.List<String> areas,String orderByClause,int page,int pageSize);
+    
+    int countWithPrgramInfoConditionAnd(String approve_user_condition,Boolean approve_result,String news_title,java.util.List<String> categorys,java.util.List<String> areas);
+    
+    List<DiscountNews> selectWithPrgramInfoConditionOr(String approve_user_condition,Boolean approve_result,String news_title,java.util.List<String> categorys,java.util.List<String> areas,String orderByClause,int page,int pageSize);
+    
+    int countWithPrgramInfoConditionOr(String approve_user_condition,Boolean approve_result,String news_title,java.util.List<String> categorys,java.util.List<String> areas);
 }

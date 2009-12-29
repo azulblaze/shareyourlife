@@ -6,9 +6,13 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.zhelazhela.db.dao.DiscountNewsDAO;
+import com.zhelazhela.db.model.DiscountNews;
+import com.zhelazhela.db.model.DiscountNewsExample;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
@@ -21,6 +25,7 @@ public class PictureServiceImplTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		Logger.getInstance("log4j.properties");
 		this.m_context = new ClassPathXmlApplicationContext(new String[]{
 				"conf/spring/spring-db.xml", "conf/spring/spring-dao.xml", "conf/spring/spring-service.xml"
 		});;
@@ -31,15 +36,10 @@ public class PictureServiceImplTest extends TestCase {
 	}
 
 	public void testLoadNewsList() throws Exception {
-		DiscountNewsService discountNewsService = (DiscountNewsService) this.m_context.getBean("discountNewsService");
-		java.util.Calendar calendar = java.util.Calendar.getInstance();
-		calendar.set(java.util.Calendar.DAY_OF_WEEK, 1);
-		calendar.set(java.util.Calendar.HOUR, 0);
-		calendar.set(java.util.Calendar.MINUTE, 0);
-		calendar.set(java.util.Calendar.SECOND, 0);
-		System.out.println(calendar.getTime());
-		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(1, 10, null, null, null, calendar.getTime(), "read_times desc");
-		System.out.println(dnl.getList().size());
+		UtilService utilService = (UtilService) this.m_context.getBean("utilService");
+		java.util.List<String> list =  new java.util.ArrayList<String>(utilService.loadCategorys("dd"));
+		list = new java.util.ArrayList<String>(utilService.loadAreas("a,b,c"));
+		System.out.println(list.toString());
 	}
 
 	public static void main(String args[]){
