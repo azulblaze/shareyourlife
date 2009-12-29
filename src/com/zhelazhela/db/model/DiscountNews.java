@@ -758,7 +758,7 @@ public class DiscountNews{
 	}
 
 	public boolean validate(){
-    	if(StringUtils.isBlank(senderName)||StringUtils.isBlank(senderMail)||StringUtils.isBlank(senderLink)||
+    	if(StringUtils.isBlank(senderName)||StringUtils.isBlank(senderMail)||
     			pId==null||StringUtils.isBlank(discountCategory)||StringUtils.isBlank(discountArea)||
     			discountStart==null||discountEnd==null||StringUtils.isBlank(newsSource)||
     			StringUtils.isBlank(newsTitle)||StringUtils.isBlank(newsReview)||StringUtils.isBlank(newsContent)){
