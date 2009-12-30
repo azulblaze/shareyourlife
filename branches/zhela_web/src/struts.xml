@@ -13,9 +13,6 @@
 			<result name="exception">/html/error.html</result>
 			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
 		</global-results>
-		<global-exception-mappings>   
-			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
-		</global-exception-mappings> 
 		
 		<action name="news_submit" class="newsAction" method="submit">
 			<result name="input" type="tiles">zhela.news_submit</result>
@@ -29,6 +26,8 @@
 		<action name="detail" class="newsAction" method="view">
 			<result name="success" type="tiles">zhela.news_detail</result>
 		</action>
+		
+		<action name="rss" class="newsAction" method="rss"/>
 		
 		<action name="point_c" class="newsAction" method="point_content"/>
 		
