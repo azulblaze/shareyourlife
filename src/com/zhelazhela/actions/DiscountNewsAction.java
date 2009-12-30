@@ -1,12 +1,24 @@
 package com.zhelazhela.actions;
 
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+
 import net.sf.json.JSONObject;
 
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.SyndFeedOutput;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
+import com.zhelazhela.system.config.SystemConfig;
 
 @SuppressWarnings("serial")
 public class DiscountNewsAction extends BaseAction {
@@ -14,6 +26,8 @@ public class DiscountNewsAction extends BaseAction {
 	private DiscountNewsService discountNewsService;
 	
 	private CacheService cacheService;
+	
+	private SystemConfig systemConfig;
 	
 	/** 折扣新闻对象 */
 	private DiscountNews dnews;
@@ -37,6 +51,11 @@ public class DiscountNewsAction extends BaseAction {
 	private int number;
 	
 	private boolean and = false;
+	
+	private static final String MIME_TYPE = "application/xml; charset=UTF-8";   
+    
+    // rss_0.90, rss_0.91, rss_0.92, rss_0.93, rss_0.94, rss_1.0, rss_2.0, atom_0.3    
+    private static final String RSS_TYPE = "rss_2.0"; 
 	
 	/**
 	 * 提交新闻
@@ -108,7 +127,7 @@ public class DiscountNewsAction extends BaseAction {
 		if(page<=0){
 			page = 1;
 		}
-		if(order==null){
+		if(StringUtils.isBlank(order)){
 			order = "approve_time desc";
 		}
 		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, null, null,order,and);
@@ -135,6 +154,43 @@ public class DiscountNewsAction extends BaseAction {
 			throw new Exception();
 		}
 		return SUCCESS;
+	}
+	
+	public String rss() throws Exception{
+		SyndFeed feed = new SyndFeedImpl();
+		feed.setAuthor("这啦折啦");
+		feed.setTitle("这啦折啦打折信息");
+		feed.setLink(systemConfig.getDomain());
+		feed.setDescription("这啦折啦是一个分享购物打折信息的地方,为您的购物带来实惠.");
+		if(StringUtils.isBlank(order)){
+			order = "approve_time desc";
+		}
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(1, 30, category, area, null, null,order,and);
+		java.util.List<SyndEntry> entrys = new java.util.ArrayList<SyndEntry>();
+		SyndEntry se = null;
+		SyndContent description = null;
+		for(DiscountNews dn:dnl.getList()){
+			se = new SyndEntryImpl();   
+			se.setTitle(dn.getNewsTitle());   
+			se.setLink(systemConfig.getDomain()+"/detail.zl?dn_id="+dn.getId());   
+			se.setPublishedDate(dn.getApproveTime());   
+			description = new SyndContentImpl();   
+			description.setType("text/html");   
+			description.setValue(dn.getNewsReview());   
+			se.setDescription(description);   
+			entrys.add(se);
+		}
+		feed.setEntries(entrys);
+		feed.setFeedType(RSS_TYPE);
+		HttpServletResponse response = getHttpServletResponse();
+		response.setContentType(MIME_TYPE);
+		try{
+			SyndFeedOutput output = new SyndFeedOutput();
+			output.output(feed, response.getWriter());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public String support() throws Exception{
@@ -261,6 +317,10 @@ public class DiscountNewsAction extends BaseAction {
 
 	public void setAnd(boolean and) {
 		this.and = and;
+	}
+
+	public void setSystemConfig(SystemConfig systemConfig) {
+		this.systemConfig = systemConfig;
 	}
 
 }
