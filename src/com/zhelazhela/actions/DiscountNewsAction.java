@@ -13,6 +13,8 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.feed.synd.SyndImage;
+import com.sun.syndication.feed.synd.SyndImageImpl;
 import com.sun.syndication.io.SyndFeedOutput;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.domain.DiscountNewsList;
@@ -159,9 +161,14 @@ public class DiscountNewsAction extends BaseAction {
 	public String rss() throws Exception{
 		SyndFeed feed = new SyndFeedImpl();
 		feed.setAuthor("这啦折啦");
-		feed.setTitle("这啦折啦打折信息");
+		feed.setTitle("这啦折啦");
 		feed.setLink(systemConfig.getDomain());
 		feed.setDescription("这啦折啦是一个分享购物打折信息的地方,为您的购物带来实惠.");
+		SyndImage image = new SyndImageImpl();
+		image.setTitle("这啦折啦");
+		image.setLink(systemConfig.getDomain());
+		image.setUrl(systemConfig.getDomain()+"/zhelazhela.png");
+		feed.setImage(image);
 		if(StringUtils.isBlank(order)){
 			order = "approve_time desc";
 		}
@@ -180,6 +187,12 @@ public class DiscountNewsAction extends BaseAction {
 			se.setDescription(description);   
 			entrys.add(se);
 		}
+		if(dnl.getList().size()>0){
+			feed.setPublishedDate(dnl.getList().get(0).getApproveTime());
+		}else{
+			feed.setPublishedDate(new java.util.Date());
+		}
+		
 		feed.setEntries(entrys);
 		feed.setFeedType(RSS_TYPE);
 		HttpServletResponse response = getHttpServletResponse();

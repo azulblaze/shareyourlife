@@ -7,6 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="Keywords" content="这啦折啦" />
 	<meta name="Description" content="这啦折啦" />
+	<link href="/rss.zl" title="RSS 2.0" type="application/rss+xml" rel="alternate" />
 	<link rel="bookmark" href="favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link type="images/gif" href="/act_favicon.gif" rel="icon"/>

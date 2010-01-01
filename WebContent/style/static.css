@@ -114,7 +114,7 @@ background:url(images/bgOFF.gif) repeat-x;border-bottom:0px solid #859e2d;/*bott
 	padding-left:20px;
 	height:24px;
 	line-height:24px;
-	color:#267ec5;
+	color:#666;
 }
 .left ul li a:hover,.left ul li.select a{
 	color:#FFF;
