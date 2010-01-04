@@ -40,7 +40,7 @@ $(document).ready(function(){
             <a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>" class="more_link"><img alt="阅读全文" src="images/fatcow_1147.png"><span class="more_txt">继续阅读全文 » »</span></a>
             </div>
             <div class="post_footer">
-            	<span class="first"><img src="images/fatcow_472.png"/>商家:<a target="_blank" href="<s:property value='programInfo.website'/>"><s:property value='programInfo.name'/></a></span><span><img src="images/fatcow_423.png"/>分类:<script>writeCategory('<s:property value="discountCategory"/>');</script></span><span>浏览数:<s:property value='readTimes'/></span><span>支持数:<s:property value='supportTimes'/></span>
+            	<span class="first"><img src="images/fatcow_472.png"/>地区: <a href='<s:url value="/index.zl"><s:param name="area" value="discountArea" /></s:url>'><s:property value="discountArea"/></a></span><span><img src="images/fatcow_423.png"/>分类:<script>writeCategory('<s:property value="discountCategory"/>');</script></span><span>浏览数:<s:property value='readTimes'/></span><span>支持数:<s:property value='supportTimes'/></span>
             </div>
             </s:iterator>
             <div class="index_page_link"></div>

@@ -1,5 +1,7 @@
 package com.zhelazhela.actions;
 
+import org.apache.commons.lang.StringUtils;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -76,6 +78,10 @@ public class CommentAction extends BaseAction {
 			jb.put("result", "fail");
 			setValue("json", jb.toString());
 			return "json";
+		}
+		comments.setIpAddr(getHttpServletRequest().getRemoteAddr());
+		if(StringUtils.isBlank(comments.getUserName())){
+			comments.setUserName("匿名网友");
 		}
 		if(comments!=null&&comments.validate()){
 			comments = commentService.saveComment(comments);

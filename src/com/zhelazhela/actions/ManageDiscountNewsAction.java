@@ -55,6 +55,8 @@ public class ManageDiscountNewsAction extends BaseAction {
 	
 	private static java.util.List<String> navs = new java.util.ArrayList<String>();
 	
+	private String list_type;
+	
 	static{
 		navs.add("add_program");
 		navs.add("add_category");
@@ -184,7 +186,14 @@ public class ManageDiscountNewsAction extends BaseAction {
 		if(order==null){
 			order = "sender_time desc";
 		}
-		DiscountNewsList dnl = discountNewsService.loadUnReleaseDiscountNewsList(page, pagesize, null, category, area, null, order);
+		DiscountNewsList dnl = null;
+		//查看已经发布的信息
+		if(list_type!=null&&list_type.equals("ped")){
+			dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, null, null,order,false);
+			setValue("result",dnl);
+			return SUCCESS;
+		}
+		dnl = discountNewsService.loadUnReleaseDiscountNewsList(page, pagesize, null, category, area, null, order);
 		setValue("result",dnl);
 		return SUCCESS;
 	}
@@ -285,6 +294,14 @@ public class ManageDiscountNewsAction extends BaseAction {
 
 	public void setEdit(boolean edit) {
 		this.edit = edit;
+	}
+
+	public String getList_type() {
+		return list_type;
+	}
+
+	public void setList_type(String listType) {
+		list_type = listType;
 	}
 	
 }
