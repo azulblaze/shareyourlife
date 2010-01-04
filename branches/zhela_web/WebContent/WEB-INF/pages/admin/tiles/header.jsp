@@ -40,6 +40,7 @@
 				<a href="#"><span>折扣新闻<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
 					<li><a href="/admin/news_list.zl">未审批内容</a></li>
+					<li><a href="/admin/news_list.zl?list_type=ped">已发布内容</a></li>
             	</ul>
          	</li>
          	<li>

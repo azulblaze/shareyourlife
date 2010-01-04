@@ -157,6 +157,7 @@ CREATE  TABLE IF NOT EXISTS comments (
   user_name VARCHAR(100) NULL ,
   user_index VARCHAR(200) NULL ,
   user_email VARCHAR(200) NULL ,
+  ip_addr VARCHAR(200) NULL ,
   content VARCHAR(1000) NULL ,
   support_times BIGINT NULL DEFAULT 0 ,
   against_times BIGINT NULL DEFAULT 0 ,
