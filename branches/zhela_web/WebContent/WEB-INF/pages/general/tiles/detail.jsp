@@ -198,11 +198,9 @@ $(document).ready(function(){
 		errorElement: "em",
 		rules: {
 			"comments.userName": {
-				required: true,
-				maxlength:5
+				maxlength:10
 			},
 			"comments.userEmail": {
-				required: true,
 				maxlength:100,
 				email:true
 			},
@@ -219,11 +217,9 @@ $(document).ready(function(){
 		},
 		messages: {
 			"comments.userName": {
-				required: "",
 				maxlength:""
 			},
 			"comments.userEmail": {
-				required: "",
 				maxlength:"",
 				email:""
 			},
@@ -247,7 +243,7 @@ $(document).ready(function(){
                 <div class="small">感谢 <a target="_blank" href="<s:property value='dn.senderLink'/>"><s:property value="dn.senderName"/></a> 投递 | <s:property value='dn.approveUser'/> 审批 | <s:date name="dn.approveTime" format="yyyy-MM-dd hh:mm:ss"/> | 浏览数:<s:property value='dn.readTimes'/> <a target="_blank" href="<s:property value='newsSource'/>">来源</a></div>
             </div>
             <div class="post_footer">
-            	<span class="first"><img src="images/fatcow_472.png"/>商家:<a target="_blank" href="<s:property value='dn.programInfo.website'/>"><s:property value='dn.programInfo.name'/></a></span><span class="time">开始时间: <s:date name="dn.discountStart" format="yyyy年MM月dd日"/></span><span class="time">结束时间: <s:date name="dn.discountEnd" format="yyyy年MM月dd日"/></span><br /><span class="first"><img src="images/fatcow_423.png"/>分类:<script>writeCategory('<s:property value="dn.discountCategory"/>');</script></span>
+            	<span class="first"><img src="images/cart.png"/>商家:<a target="_blank" href="<s:property value='dn.programInfo.website'/>"><s:property value='dn.programInfo.name'/></a></span><span class="time">开始时间: <s:date name="dn.discountStart" format="yyyy年MM月dd日"/></span><span class="time">结束时间: <s:date name="dn.discountEnd" format="yyyy年MM月dd日"/></span><br /><span class="first"><img src="images/fatcow_472.png"/>地区: <a href='<s:url value="/index.zl"><s:param name="area" value="dn.discountArea" /></s:url>'><s:property value="dn.discountArea"/></a></span><span><img src="images/fatcow_423.png"/>分类:<script>writeCategory('<s:property value="dn.discountCategory"/>');</script></span>
             </div>
             <div class="post_body">
             	<p>

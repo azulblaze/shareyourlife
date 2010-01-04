@@ -23,6 +23,6 @@
 		<daoGenerator type="SPRING" targetPackage="com.zhelazhela.db.dao"
 			targetProject="zhela_web/src" />
 		
-		<table tableName="attachments" />
+		<table tableName="comments" />
 	</ibatorContext>
 </ibatorConfiguration>

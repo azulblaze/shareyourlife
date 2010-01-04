@@ -77,12 +77,12 @@ function putcategory(){
 				$(this).remove();
 				$('#dnews_discountCategory').attr("value",categorys.toString());
 				if(categorys.size()==0){
-					$("#category_notice").css("display","");
+					//$("#category_notice").css("display","");
 				}
 			})
 		});
 		$('#dnews_discountCategory').attr("value",categorys.toString());
-		$("#category_notice").css("display","none");
+		//$("#category_notice").css("display","none");
 	}
 }
 function initcategory(){
@@ -124,7 +124,7 @@ $(document).ready(function(){
 	initProgramInfo();
 	$('#discountStart').cld();
 	$('#discountEnd').cld();
-	$('#news_review').xheditor(true);
+	//$('#news_review').xheditor(true);
 	$('#news_content').xheditor(true);
 	$('#category_add').bind("click", function(event) {
 		putcategory();
@@ -176,12 +176,12 @@ $(document).ready(function(){
 	$("#_submit").validate({
 		submitHandler: function(form) {
 			setArea();
-			if(categorys.size()<1){
-				$("#category_notice").css("display","");
-				$("#category_select").focus();
-				return;
-			}
-			$("#category_notice").css("display","none");
+			//if(categorys.size()<1){
+				//$("#category_notice").css("display","");
+				//$("#category_select").focus();
+				//return;
+			//}
+			//$("#category_notice").css("display","none");
 			form.submit();
 		},
 		errorElement: "div",
@@ -190,30 +190,17 @@ $(document).ready(function(){
 				required: true,
 				maxlength:20
 			},
-			"dnews.discountStart": {
-				required: true
-			},
-			"dnews.discountEnd": {
-				required: true
-			},
-			"dnews.discountStart": {
-				required: true
-			},
 			"dnews.newsSource": {
-				required: true
+				url: true
 			},
 			"dnews.senderName": {
 				required: true
 			},
 			"dnews.senderMail": {
-				required: true,
 				email: true
 			},
-			"dnews.pId": {
-				required: true
-			},
 			"dnews.newsReview": {
-				required: true
+				maxlength:500
 			},
 			"dnews.newsContent": {
 				required: true
@@ -230,30 +217,17 @@ $(document).ready(function(){
 				required: "",
 				maxlength:"标题不能超过20个字。"
 			},
-			"dnews.discountStart": {
-				required: ""
-			},
-			"dnews.discountEnd": {
-				required: ""
-			},
-			"dnews.discountStart": {
-				required: ""
-			},
 			"dnews.newsSource": {
-				required: ""
+				url: "必须以http://开头的URL地址"
 			},
 			"dnews.senderName": {
 				required: ""
 			},
 			"dnews.senderMail": {
-				required: "",
 				email: "您的E-mail格式不正确。"
 			},
-			"dnews.pId": {
-				required: ""
-			},
 			"dnews.newsReview": {
-				required: ""
+				maxlength: ""
 			},
 			"dnews.newsContent": {
 				required: ""
@@ -291,12 +265,12 @@ $(document).ready(function(){
             <div class="line">
             	<div class="input">
                 	<div class="label">打折日期:</div>
-                    <input type="text" class="w100" value='<s:property value="dnews.discountStartStr"/>' id="discountStart" bj="cBj" name="dnews.discountStartStr" />
+                    <input type="text" readonly="readonly" class="w100" value='<s:property value="dnews.discountStartStr"/>' id="discountStart" bj="cBj" name="dnews.discountStartStr" />
                     <div class="label">结束时间</div>
-                    <input type="text" class="w100" value='<s:property value="dnews.discountEndStr"/>' id="discountEnd" bj="cBj" name="dnews.discountEndStr" />
+                    <input type="text" readonly="readonly" class="w100" value='<s:property value="dnews.discountEndStr"/>' id="discountEnd" bj="cBj" name="dnews.discountEndStr" />
                      
                 </div>
-                <div class="notice"><em>(必填*)</em>请注明折扣开始时间和结束时间。</div>
+                <div class="notice">请注明折扣开始时间和结束时间。</div>
             </div>
             <div class="line">
             	<div class="input">
@@ -304,7 +278,7 @@ $(document).ready(function(){
                     <input type="text" class="w300" name="dnews.newsSource" value='<s:property value="dnews.newsSource"/>'/>
                     
                 </div>
-                <div class="notice"><em>(必填*)</em>请提供新闻来源的网址或者其他信息。</div>
+                <div class="notice">请提供新闻来源的网址(以http://开头)。</div>
             </div>
             <div class="line">
             	<div class="input">
@@ -317,7 +291,7 @@ $(document).ready(function(){
                     </select>
                     
                 </div>
-                <div class="notice"><em>(必填*)</em>请选择打折信息中提供打折的商家,如果选项中没有您可以选择【其他】，我们会为您补充完整。</div>
+                <div class="notice">请选择打折信息中提供打折的商家,如果选项中没有您可以选择【其他】，我们会为您补充完整。</div>
             </div>
             <div class="line">
             	<div class="input">
@@ -334,7 +308,7 @@ $(document).ready(function(){
                     <input type="hidden" id="dnews_discountArea" name="dnews.discountArea" value=""/>
                     
                 </div>
-                <div class="notice"><em>(必填*)</em>打折设计的范围，请根据需要选择</div>
+                <div class="notice">打折设计的范围，请根据需要选择</div>
             </div>
             <div class="line">
             	<div class="input" id="category_select">
@@ -350,12 +324,12 @@ $(document).ready(function(){
                     <div class="error" id="category_notice" style="display:none;">您必须至少选择一种类别。</div>
                 </div>
                 <div class="option_link" id="categorys"></div>
-                <div class="notice"><em>(必填*)</em>打折产品的类别，可以包含多种，请增加，如果类别实在太多，请选择【各种类别】</div>
+                <div class="notice">打折产品的类别，可以包含多种，请增加，如果类别实在太多，请选择【各种类别】</div>
             </div>
             <div class="line">
             	<div class="input">
                 	<div class="label">信息概要:</div>
-                    <div class="spec"><em>(必填*)</em>打折信息的概要部分(尽量简明概要)。</div>
+                    <div class="spec">打折信息的概要部分(尽量简明概要，不能超过500个字)。</div>
                 </div>
                 <div class="news_review"><textarea name="dnews.newsReview" id="news_review"><s:property value="dnews.newsReview"/></textarea></div>
             </div>
@@ -388,7 +362,7 @@ $(document).ready(function(){
                     <input type="text" class="w200" name="dnews.senderMail" value='<s:property value="dnews.senderMail"/>' />
                     
                 </div>
-                <div class="notice"><em>(必填*)</em>请留下您的邮箱作为联系方式。</div>
+                <div class="notice">请留下您的邮箱作为联系方式。</div>
             </div>
             <div class="line">
             	<div class="input">
