@@ -8,6 +8,8 @@ import org.apache.commons.lang.StringUtils;
 
 public class DiscountNews{
 	
+	public static final String fatherStr = "f:";
+	
 	private static DecimalFormat df = new DecimalFormat("######0.0");
 	
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -764,9 +766,9 @@ public class DiscountNews{
     	return true;
     }
 	
-	 private String discountStartStr;
+	private String discountStartStr;
 
-	 private String discountEndStr;
+	private String discountEndStr;
 
 	public String getDiscountStartStr() {
 		return discountStartStr;
@@ -807,5 +809,21 @@ public class DiscountNews{
 		}
 		double avg_points = (double)getContentPoints()/(double)getContentPointsTimes();
 		return df.format(avg_points);
+	}
+	
+	public void removeFatherStr(){
+		int index = -1;
+		if(this.discountArea!=null){
+			index = this.discountArea.indexOf(fatherStr);
+			if(index>=0){
+	    		this.discountArea = this.discountArea.substring(0,index);
+	    	}
+		}
+    	if(this.discountCategory!=null){
+    		index = this.discountCategory.indexOf(fatherStr);
+        	if(index>=0){
+        		this.discountCategory = this.discountCategory.substring(0,index);
+        	}
+    	}
 	}
 }

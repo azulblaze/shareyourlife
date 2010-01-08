@@ -45,6 +45,9 @@ public class DiscountNewsList {
 	public void setList(java.util.List<DiscountNews> list) {
 		this.list = list;
 		this.c_size = list.size();
+		for(DiscountNews dn:list){
+			dn.removeFatherStr();
+		}
 	}
 
 	public int getC_size() {
