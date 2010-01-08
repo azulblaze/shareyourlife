@@ -46,6 +46,7 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		return true;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public DiscountNews editDiscountNews(long id, Long programId,
 			String discountCategory, String discountArea, Date discountStart,
@@ -57,9 +58,11 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 			discountnews.setpId(programId);
 		}
 		if(!StringUtils.isBlank(discountCategory)){
+			discountCategory = discountCategory + discountnews.fatherStr + new java.util.ArrayList<String>(utilService.loadFatherCategorys(discountCategory)).toString().replaceAll(" ", "");
 			discountnews.setDiscountCategory(discountCategory);
 		}
 		if(!StringUtils.isBlank(discountArea)){
+			discountArea = discountArea + discountnews.fatherStr + new java.util.ArrayList<String>(utilService.loadFatherAreas(discountArea)).toString().replaceAll(" ", "");
 			discountnews.setDiscountArea(discountArea);
 		}
 		if(discountStart!=null){
@@ -82,7 +85,9 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		}
 		int result  = discountNewsDAO.updateByPrimaryKeySelective(discountnews);
 		if(result>0){
-			return discountNewsDAO.selectByPrimaryKey(id);
+			discountnews = discountNewsDAO.selectByPrimaryKey(id);
+			discountnews.removeFatherStr();
+			return discountnews;
 		}
 		return null;
 	}
@@ -153,10 +158,21 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		return 0;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public DiscountNews saveDiscountNews(DiscountNews discountnews)
 			throws Exception {
 		if(discountnews!=null){
+			String discountCategory = discountnews.getDiscountCategory();
+			if(!StringUtils.isBlank(discountCategory)){
+				discountCategory = discountCategory + discountnews.fatherStr + new java.util.ArrayList<String>(utilService.loadFatherCategorys(discountCategory)).toString().replaceAll(" ", "");
+				discountnews.setDiscountCategory(discountCategory);
+			}
+			String discountArea = discountnews.getDiscountArea();
+			if(!StringUtils.isBlank(discountArea)){
+				discountArea = discountArea + discountnews.fatherStr + new java.util.ArrayList<String>(utilService.loadFatherAreas(discountArea)).toString().replaceAll(" ", "");
+				discountnews.setDiscountArea(discountArea);
+			}
 			long result = discountNewsDAO.insertSelectiveReturnId(discountnews);
 			if(result>0){
 				return discountNewsDAO.selectByPrimaryKey(result);
@@ -180,7 +196,11 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 
 	@Override
 	public DiscountNews viewDiscountNews(long id) throws Exception{
-		return discountNewsDAO.selectWithProgramInfoByPrimaryKey(id);
+		DiscountNews dn = discountNewsDAO.selectWithProgramInfoByPrimaryKey(id);
+		if(dn!=null){
+			dn.removeFatherStr();
+		}
+		return dn;
 	}
 
 	@Override
