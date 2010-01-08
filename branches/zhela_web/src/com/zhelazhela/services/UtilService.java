@@ -9,7 +9,11 @@ public interface UtilService {
 	
 	public java.util.Set<String> loadCategorys(String category) throws Exception;
 	
+	public java.util.Set<String> loadFatherCategorys(String category) throws Exception;
+	
 	public java.util.Set<String> loadAreas(String area) throws Exception;
+	
+	public java.util.Set<String> loadFatherAreas(String area) throws Exception;
 	
 	public java.util.List<City> loadCitys(long province_id)throws Exception;
 	
