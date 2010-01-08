@@ -44,7 +44,7 @@ public class UtilServiceImpl implements UtilService {
 
 	@Override
 	public Set<String> loadAreas(String area) throws Exception {
-		if(StringUtils.isBlank(area)){
+		if(StringUtils.isBlank(area)||area.indexOf(location_all)>=0){
 			return new java.util.HashSet<String>();
 		}
 		String [] areas = area.split(",");
@@ -81,7 +81,7 @@ public class UtilServiceImpl implements UtilService {
 
 	@Override
 	public Set<String> loadCategorys(String category) throws Exception {
-		if(StringUtils.isBlank(category)){
+		if(StringUtils.isBlank(category)||category.indexOf(category_all)>=0){
 			return new java.util.HashSet<String>();
 		}
 		String [] categorys = category.split(",");
