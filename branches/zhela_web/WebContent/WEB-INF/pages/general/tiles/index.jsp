@@ -21,11 +21,25 @@ $(document).ready(function(){
 	var pagesize = <s:property value="dnl.pagesize"/>;
 	var page = <s:property value="dnl.page"/>;
 	var c_page = Math.ceil(size/pagesize);
+	var c_url = window.location.href;
+	var c_url_index = c_url.indexOf("index.zl");
+	if(c_url_index>=0){
+		c_url = c_url.substring(c_url_index);
+		if(c_url.length==8){
+			c_url = c_url+"?z=n&";
+		}else{
+			c_url_index = c_url.indexOf("&page=");
+			if(c_url_index>=0){
+				c_url = c_url.substring(0,c_url_index);
+			}
+			c_url = c_url+"&";
+		}
+	}
 	if(page>1&&c_page>1){
-		$(".index_page_link").append('<a href="index.zl?page='+(page-1)+'">&larr; 较新的信息</a>');
+		$(".index_page_link").append('<a href="'+c_url+'page='+(page-1)+'">&larr; 较新的信息</a>');
 	}
 	if(page<c_page){
-		$(".index_page_link").append('<a href="index.zl?page='+(page+1)+'">较旧的信息 &rarr;</a>');
+		$(".index_page_link").append('<a href="'+c_url+'page='+(page+1)+'">较旧的信息 &rarr;</a>');
 	}
 })
 </script>
