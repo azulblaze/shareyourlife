@@ -12,7 +12,7 @@
 		day:0.25,
 		extStr:"",
 		progressUrl: "/view_times.zl",
-		success: function() {},
+		success: function() {}
 	  }, options);
 	  function display(){
 		  if(options.zhelazhela<1||loadcookie()){

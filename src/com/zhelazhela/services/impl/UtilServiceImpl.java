@@ -67,14 +67,14 @@ public class UtilServiceImpl implements UtilService {
 			my_areas.add(city.getName());
 			prov_ids.add(city.getProvinceId());
 		}
+		ProvinceExample pexample = new ProvinceExample();
+		pexample.createCriteria().andNameIn(new java.util.ArrayList<String>(_areas));
 		if(prov_ids.size()>0){
-			ProvinceExample pexample = new ProvinceExample();
-			pexample.createCriteria().andIdIn(prov_ids);
-			pexample.or(pexample.createCriteria().andNameIn(new java.util.ArrayList<String>(_areas)));
-			List<Province> provinces = provinceDAO.selectByExample(pexample);
-			for(Province province:provinces){
-				my_areas.add(province.getName());
-			}
+			pexample.or(pexample.createCriteria().andIdIn(prov_ids));
+		}
+		List<Province> provinces = provinceDAO.selectByExample(pexample);
+		for(Province province:provinces){
+			my_areas.add(province.getName());
 		}
 		return my_areas;
 	}
@@ -101,26 +101,25 @@ public class UtilServiceImpl implements UtilService {
 		for(City city:citys){
 			prov_ids.add(city.getProvinceId());
 		}
+		ProvinceExample pexample = new ProvinceExample();
+		pexample.createCriteria().andNameIn(new java.util.ArrayList<String>(_areas));
 		if(prov_ids.size()>0){
-			ProvinceExample pexample = new ProvinceExample();
-			pexample.createCriteria().andIdIn(prov_ids);
-			pexample.or(pexample.createCriteria().andNameIn(new java.util.ArrayList<String>(_areas)));
-			List<Province> provinces = provinceDAO.selectByExample(pexample);
-			for(Province province:provinces){
-				my_areas.add(province.getName());
-			}
+			pexample.or(pexample.createCriteria().andIdIn(prov_ids));
+		}
+		List<Province> provinces = provinceDAO.selectByExample(pexample);
+		for(Province province:provinces){
+			my_areas.add(province.getName());
 		}
 		return my_areas;
 	}
 
 	@Override
-	public Set<String> loadCategorys(String category) throws Exception {
+	public Set<String> loadFatherCategorys(String category) throws Exception {
 		if(StringUtils.isBlank(category)||category.indexOf(category_all)>=0){
 			return new java.util.HashSet<String>();
 		}
 		String [] categorys = category.split(",");
 		Set<String> my_categorys = new java.util.HashSet<String>();
-		my_categorys.add(category_all);
 		Set<String> _categorys = new java.util.HashSet<String>();
 		for(String tmp:categorys){
 			if(tmp!=null&&tmp.trim().length()>0){
@@ -145,7 +144,9 @@ public class UtilServiceImpl implements UtilService {
 			merchandiseCategorys = merchandiseCategoryDAO.selectByExample(example);
 			father_ids.clear();
 			for(MerchandiseCategory merchandiseCategory:merchandiseCategorys){
-				my_categorys.add(merchandiseCategory.getName());
+				if(category.indexOf(merchandiseCategory.getName())<0){
+					my_categorys.add(merchandiseCategory.getName());
+				}
 				if(merchandiseCategory.getFather()>0){
 					father_ids.add(merchandiseCategory.getFather());
 				}
@@ -155,12 +156,13 @@ public class UtilServiceImpl implements UtilService {
 	}
 	
 	@Override
-	public Set<String> loadFatherCategorys(String category) throws Exception {
+	public Set<String> loadCategorys(String category) throws Exception {
 		if(StringUtils.isBlank(category)||category.indexOf(category_all)>=0){
 			return new java.util.HashSet<String>();
 		}
 		String [] categorys = category.split(",");
 		Set<String> my_categorys = new java.util.HashSet<String>();
+		my_categorys.add(category_all);
 		Set<String> _categorys = new java.util.HashSet<String>();
 		for(String tmp:categorys){
 			if(tmp!=null&&tmp.trim().length()>0){
