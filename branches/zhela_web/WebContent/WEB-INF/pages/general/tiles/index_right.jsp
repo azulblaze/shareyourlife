@@ -1,12 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-        	<div class="configure">
-            	<div class="configure_top"></div>
-            	<div class="configure_main">
-                	<div class="title">定制折扣信息</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	bindChange("#search_category_select0","#searchcategory","#searchcategory_child",'<s:property value="#session.s_category_child"/>',"s_category_child");
+	$("#search_category_select0").val('<s:property value="#session.fathercategory"/>');
+	$("#search_category_select0").change();
+	bindArea("#s_province","#s_city",'<s:property value="#session.s_city_id"/>');
+	<s:if test="#session.s_province_id!=null&&#session.s_province_id>-1">
+	initAreas("#s_province",'<s:property value="#session.s_province_id"/>');
+	</s:if>
+	$("#search_submit").bind("click",function(event){
+		event.preventDefault();
+		setArea('#s_city','#s_province',"#search_discountArea");
+		$("#search_discountCategory").val(getCategory("#searchcategory"));
+		if($("#s_key").val()==null||$("#s_key").val()==""){
+			$("#s_key").css("border","1px solid red");
+			return;
+		}
+		$("#seach_form").submit();
+	})
+});
+</script>
+
+        	<div class="search">
+        		<form action="/index.zl" method="get" id="seach_form">
+            	<h3>搜索折扣</h3>
+                <div class="title_row">
+                	<span>关键字</span><input id="s_key" type="text" name="keyword" value='<s:property value="#session.keyword"/>'/>
                 </div>
-            	<div class="configure_bottom"></div>
+                <div class="title_row">
+                	<div><span>地&nbsp;&nbsp;&nbsp;区</span></div>
+                	<div class="area_select">
+	                	<select id="s_province" name="s_province_id">
+	                    	<option value="-1" selected="selected">全部地区</option>
+	                    <s:iterator value="provinces">
+	                    	<option value='<s:property value="id"/>'><s:property value="name"/></option>
+	                    </s:iterator>
+	                    </select>
+	                    <select id="s_city" name="s_city_id">
+	                    	<option value="-1" selected="selected">全部地区</option>
+	                    </select>
+                    </div>
+                	<input type="hidden" id="search_discountArea" name="area" value="<s:property value='area'/>"/>
+                </div>
+                <div class="clear"></div>
+                <div class="title_row">
+                	<div><span>类&nbsp;&nbsp;&nbsp;别</span></div>
+                	<div class="area_select"  id="searchcategory">
+	                	<select id="search_category_select0" name="fathercategory">
+	                    	<option value='0' select='selected'>全部类别</option>
+	                    <s:iterator value="categorys">
+	                    	<option value='<s:property value="id"/>'><s:property value="name"/></option>
+	                    </s:iterator>
+	                    </select>
+                    </div>
+                	<input type="hidden" id="search_discountCategory" name="category" value="<s:property value='category'/>"/>
+                	<input type="hidden" name="andstr" value="1"/>
+                </div>
+                <div class="s_button">
+                	<a href="#" id="search_submit"><img src="/images/search_b.png" /></a>
+                </div>
+                </form>
+                <div class="clear"></div>
             </div>
             <div class="right_box">
             	<div class="title">本周最受欢迎折扣信息</div>
@@ -29,62 +85,12 @@
                 <ul>
                 	<a href="http://jandan.net/search/youtube">youtube</a>&nbsp;
 <a href="http://jandan.net/search/公司">公司</a>&nbsp;
-<a href="http://jandan.net/search/乐高">乐高</a>&nbsp;
-<a href="http://jandan.net/search/华丽">华丽</a>&nbsp;
-<a href="http://jandan.net/search/火星">火星</a>&nbsp;
-<a href="http://jandan.net/search/变形金刚">变形金刚</a>&nbsp;
-<a href="http://jandan.net/search/机器人">机器人</a>&nbsp;
-<a href="http://jandan.net/search/UFO">UFO</a>&nbsp;
-<a href="http://jandan.net/search/总统">总统</a>&nbsp;
-<a href="http://jandan.net/search/世界">世界</a>&nbsp;
-<a href="http://jandan.net/search/迪拜">迪拜</a>&nbsp;
-<a href="http://jandan.net/search/firefox">firefox</a>&nbsp;
-<a href="http://jandan.net/search/geek">geek</a>&nbsp;
-<a href="http://jandan.net/search/美元">美元</a>&nbsp;
-<a href="http://jandan.net/search/纽约">纽约</a>&nbsp;
-<a href="http://jandan.net/search/传说">传说</a>&nbsp;
-<a href="http://jandan.net/search/blackberry">blackberry</a>&nbsp;
-<a href="http://jandan.net/search/PSP">PSP</a>&nbsp;
-<a href="http://jandan.net/search/月球">月球</a>&nbsp;
-<a href="http://jandan.net/search/黑洞">黑洞</a>&nbsp;
-<a href="http://jandan.net/search/猩猩">猩猩</a>&nbsp;
-<a href="http://jandan.net/search/猴子">猴子</a>&nbsp;
-<a href="http://jandan.net/search/生态">生态</a>&nbsp;
-<a href="http://jandan.net/search/专题">专题</a>&nbsp;
-<a href="http://jandan.net/search/街拍">街拍</a>&nbsp;
-<a href="http://jandan.net/search/月球">月球</a>&nbsp;
-<a href="http://jandan.net/search/每日一美女">美女</a>&nbsp;
-<a href="http://jandan.net/search/苹果">苹果</a>&nbsp;
-<a href="http://jandan.net/search/盖茨">盖茨</a>&nbsp;
-<a href="http://jandan.net/search/印度">印度</a>&nbsp;
-<a href="http://jandan.net/search/日本">日本</a>&nbsp;
-<a href="http://jandan.net/search/太空">太空</a>&nbsp;
-<a href="http://jandan.net/search/山寨">山寨</a>&nbsp;
-<a href="http://jandan.net/search/周末啦">周末啦</a>&nbsp;
-<a href="http://jandan.net/search/一日一狗">一日一狗</a>&nbsp;
-<a href="http://jandan.net/search/greasemonky">GreaseMonky</a>&nbsp;
-<a href="http://jandan.net/search/周末一小坨">周末一小坨</a>&nbsp;
-<a href="http://jandan.net/search/NASA">NASA</a>&nbsp;
-<a href="http://jandan.net/search/无聊图集">无聊图集</a>&nbsp;
-<a href="http://jandan.net/search/低俗">低俗</a>&nbsp;
-<a href="http://jandan.net/search/周末啦">周末啦</a>&nbsp;
-<a href="http://jandan.net/search/猛男">猛男</a>&nbsp;
-<a href="http://jandan.net/search/发霉啦">发霉啦(FML)</a>&nbsp;
-<a href="http://jandan.net/search/YD周一">YD周一</a>&nbsp;
-<a href="http://jandan.net/search/冷新闻">冷新闻</a>&nbsp;
-<a href="http://jandan.net/search/无厘头科学">无厘头科学</a>&nbsp;
                 </ul>
             </div>
             <div class="right_box" style="display:none;">
             	<div class="title">链接</div>
                 <ul class="link">
                 	<li><a href="#">小众软件</a></li>
-                    <li><a href="#">DP|Paveo</a></li>
-                    <li><a href="#">4空间</a></li>
-                    <li><a href="#">阿瓦的家</a></li>
-                    <li><a href="#">就喜欢网</a></li>
-                    <li><a href="#">有意思吧</a></li>
-                    <li><a href="#">美剧迷</a></li>
                 </ul>
             </div>
             <div class="clear"></div>

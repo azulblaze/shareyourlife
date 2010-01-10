@@ -8,57 +8,12 @@
 <script type="text/javascript" src="/scripts/jquery.calendar.js"></script>
 <script>
 var categorys = new Set();
-function createSelect(data,id){
-	var select = $("<select id='category_select"+id+"'></select>");
-	select.append("<option value='0'>全部类别</option>");
-	for(var i in data){
-		$(select).append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+function putcategory(mycategory){
+	if(mycategory!=null){
+		_category = mycategory;
+	}else{
+		_category = getCategory("#category_select");
 	}
-	$("#category_select select:last").after(select);
-	bindChange("#category_select" + id);
-}
-function getCategory(){
-	var select_s = $("#category_select select option:selected");
-	var before = "全部类别";
-	var current = "全部类别";
-	var len = select_s.length;
-	for(var i=0;i<len;i++){
-		current = $(select_s.get(i)).text();
-		if(current!=null&&current!="全部类别"){
-			before = current;
-		}
-	}
-	return before;
-}
-function bindChange(id){
-	$(id).bind("change",function(event){
-		var father_id = parseInt($(id+' option:selected').val());
-		$(id+" ~ select").each(function(){
-			$(this).remove();
-		}) 
-		if(father_id>0){
-			$.ajax( {
-				type : "POST",
-				url : "/admin/child_category.zl?f_id="+father_id,
-				dataType:"json",
-				cache : true,
-				success : function(data, textStatus) {
-					if(data.result=="success"){
-						if(data.data.length>0){
-							createSelect(data.data,father_id);
-						}
-					}
-					if(data.result=="fail"){
-						//showError("#sub_msg_div",data.msg);
-					}
-				}
-			});
-		}
-		
-	});
-}
-function putcategory(){
-	_category = getCategory();
 	if(_category=="全部类别"){
 		categorys.clear();
 		$('#categorys').empty();
@@ -95,32 +50,13 @@ function initcategory(){
 		}
 	}
 }
-
-function setArea(){
-	var area_id = parseInt($('#city').val());
-	var area_str = "全部地区";
-	if(area_id>0){
-		area_str = $('#city option:selected').text();
-	}else{
-		area_id = parseInt($('#province').val());
-		if(area_id>0){
-			area_str = $('#province option:selected').text();
-		}
-	}
-	$("#dnews_discountArea").attr("value",area_str);
-}
-var _city_id = '<s:property value="city_id"/>';
-function initAreas(){
-	$("#province").val('<s:property value="province_id"/>');
-	$("#province").change();
-}
 function initProgramInfo(){
 	$("#dnews_pId").val('<s:property value="dnews.pId"/>');
 	$("#dnews_pId").change();
 }
 $(document).ready(function(){
 	initcategory();
-	bindChange("#category_select0");
+	bindChange("#category_select0","#category_select","#category_select_child","","newschildcategory");
 	initProgramInfo();
 	$('#discountStart').cld();
 	$('#discountEnd').cld();
@@ -139,43 +75,11 @@ $(document).ready(function(){
 			$("#v_code_img").css("display","");
 		}
 	});
-	$("#province").bind("change",function(event){
-		var province_id = parseInt($('#province option:selected').val());
-		if(province_id>0){
-			$.ajax( {
-				type : "POST",
-				url : "/loadcity.zl?province_id="+province_id,
-				dataType:"json",
-				cache : true,
-				success : function(data, textStatus) {
-					if (textStatus == 'success') {
-						$("#city").empty();
-						$("#city").append('<option value="-1" selected="selected">全部地区</option>');
-						try{
-							var options = '';
-							for(var i=0;i<data.result.length;i++){
-								options = options + '<option value="'+data.result[i].id+'">'+data.result[i].name+'</option>';
-							}
-							$("#city").append(options);
-							//just for first load page to init the area information.
-							if(_city_id!=null&&_city_id!=""){
-								$("#city").val(_city_id);
-								_city_id = null;
-							}
-						}catch(error){
-						}
-					}
-				}
-			});
-		}else{
-			$("#city").empty();
-			$("#city").append('<option value="-1" selected="selected">全部地区</option>');
-		}
-	});
-	initAreas();
+	bindArea("#province","#city",'<s:property value="city_id"/>');
+	initAreas("#province",'<s:property value="province_id"/>');
 	$("#_submit").validate({
 		submitHandler: function(form) {
-			setArea();
+			setArea('#city','#province',"#dnews_discountArea");
 			//if(categorys.size()<1){
 				//$("#category_notice").css("display","");
 				//$("#category_select").focus();

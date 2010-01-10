@@ -2,6 +2,7 @@ package com.zhelazhela.actions;
 
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -52,7 +53,9 @@ public class DiscountNewsAction extends BaseAction {
 	/** 打分 */
 	private int number;
 	
-	private boolean and = false;
+	private String andstr;
+	
+	private String keyword;
 	
 	private static final String MIME_TYPE = "application/xml; charset=UTF-8";   
     
@@ -112,6 +115,9 @@ public class DiscountNewsAction extends BaseAction {
 		setValue("nav","news_submit");
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
+		
 		return SUCCESS;
 	}
 	
@@ -126,13 +132,34 @@ public class DiscountNewsAction extends BaseAction {
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
+		setValue("area",area);
+		setValue("category",category);
+		//put search value to session
+		HttpSession session  = getHttpSession();
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("fathercategory", getRequestParameter("fathercategory"));
+		session.setAttribute("s_category_child", getRequestParameter("s_category_child"));
+		session.setAttribute("s_province_id",getRequestParameter("s_province_id"));
+		session.setAttribute("s_city_id",getRequestParameter("s_city_id"));
+		String x = getRequestParameter("x");
+		if(x!=null&&x.equals("c")){
+			session.setAttribute("c_areas", area);
+			session.setAttribute("c_categorys", category);
+		}
 		if(page<=0){
 			page = 1;
 		}
 		if(StringUtils.isBlank(order)){
 			order = "approve_time desc";
 		}
-		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, null, null,order,and);
+		boolean andresult = false;
+		if(andstr!=null&&andstr.equals("1")){
+			setValue("andstr",andstr);
+			andresult = true;
+		}
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(page, pagesize, category, area, keyword, null,order,andresult);
 		setValue("dnl",dnl);
 		return SUCCESS;
 	}
@@ -145,6 +172,8 @@ public class DiscountNewsAction extends BaseAction {
 		//for right side
 		setValue("weeklyhot",cacheService.loadWeeklyHot());
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
 		
 		DiscountNews dn = discountNewsService.viewDiscountNews(dn_id);
 		if(dn!=null){
@@ -172,7 +201,11 @@ public class DiscountNewsAction extends BaseAction {
 		if(StringUtils.isBlank(order)){
 			order = "approve_time desc";
 		}
-		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(1, 30, category, area, null, null,order,and);
+		boolean andresult = false;
+		if(andstr!=null&&andstr.equals("1")){
+			andresult = true;
+		}
+		DiscountNewsList dnl = discountNewsService.loadDiscountNewsList(1, 30, category, area, null, null,order,andresult);
 		java.util.List<SyndEntry> entrys = new java.util.ArrayList<SyndEntry>();
 		SyndEntry se = null;
 		SyndContent description = null;
@@ -324,16 +357,24 @@ public class DiscountNewsAction extends BaseAction {
 		this.cacheService = cacheService;
 	}
 
-	public boolean isAnd() {
-		return and;
+	public String getAndstr() {
+		return andstr;
 	}
 
-	public void setAnd(boolean and) {
-		this.and = and;
+	public void setAndstr(String andstr) {
+		this.andstr = andstr;
 	}
 
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 }
