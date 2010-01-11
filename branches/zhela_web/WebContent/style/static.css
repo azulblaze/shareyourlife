@@ -63,27 +63,7 @@ background:url(images/bgOFF.gif) repeat-x;border-bottom:0px solid #859e2d;/*bott
 }
 .system_error{
 	margin:40px auto;
-	background:url(images/error.png) no-repeat center center;
-	height:340px;
-	width:500px;
-}
-.nav_link{
-	padding-left:160px;
-	padding-top:270px;
-	height:30px;
-	line-height:30px;
-}
-.nav_link a{
-	border:1px solid #3ad1fa;
-	padding:7px 15px;
-	margin-left:20px;
-	font-size:14px;
-	font-weight:bold;
-}
-.nav_link a:hover{
-	color:#FFF;
-	background:#3ad1fa;
-	text-decoration:none;
+	text-align:center;
 }
 .left{
 	float:left;
