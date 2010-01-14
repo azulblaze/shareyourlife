@@ -92,7 +92,7 @@ $(document).ready(function(){
 		rules: {
 			"dnews.newsTitle": {
 				required: true,
-				maxlength:20
+				maxlength:50
 			},
 			"dnews.newsSource": {
 				url: true
@@ -119,7 +119,7 @@ $(document).ready(function(){
 		messages: {
 			"dnews.newsTitle": {
 				required: "",
-				maxlength:"标题不能超过20个字。"
+				maxlength:"标题不能超过50个字。"
 			},
 			"dnews.newsSource": {
 				url: "必须以http://开头的URL地址"
