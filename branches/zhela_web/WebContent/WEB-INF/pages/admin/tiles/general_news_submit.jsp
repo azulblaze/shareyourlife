@@ -7,8 +7,77 @@
 <script type="text/javascript" src="/scripts/jquery.validate.pack.js"></script>
 <script type="text/javascript" src="/scripts/jquery.calendar.js"></script>
 <script>
+function createSelect(container,data,id,prestr,name){
+	var select = $("<select name='"+name+"' id='"+prestr+id+"'></select>");
+	select.append("<option value='0'>全部类别</option>");
+	for(var i in data){
+		$(select).append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+	}
+	$(container+" select:last").after(select);
+	bindChange(prestr + id);
+}
+function getCategory(obj){
+	var select_s = $(obj+" select option:selected");
+	var before = "全部类别";
+	var current = "全部类别";
+	var len = select_s.length;
+	for(var i=0;i<len;i++){
+		current = $(select_s.get(i)).text();
+		if(current!=null&&current!="全部类别"){
+			before = current;
+		}
+	}
+	return before;
+}
+function bindChange(id,container,prestr,child_select,name){
+	$(id).bind("change",function(event){
+		var father_id = parseInt($(id+' option:selected').val());
+		$(id+" ~ select").each(function(){
+			$(this).remove();
+		}) 
+		if(father_id>0){
+			$.ajax( {
+				type : "POST",
+				url : "/admin/child_category.zl?f_id="+father_id,
+				dataType:"json",
+				cache : true,
+				success : function(data, textStatus) {
+					if(data.result=="success"){
+						if(data.data.length>0){
+							createSelect(container,data.data,father_id,prestr,name);
+							try{
+								if(child_select!=null&&child_select!=""){
+									var _select_child = $(container+" select:last");
+									$(_select_child).val(child_select);
+									$(_select_child).change();
+								}
+							}catch(error){}
+						}
+					}
+					if(data.result=="fail"){
+						//showError("#sub_msg_div",data.msg);
+					}
+				}
+			});
+		}
+		
+	});
+}
 var categorys = new Set();
-function putcategory(_category){
+function putcategory(mycategory){
+	if(mycategory!=null){
+		_category = mycategory;
+	}else{
+		_category = getCategory("#category_select");
+	}
+	if(_category=="全部类别"){
+		categorys.clear();
+		$('#categorys').empty();
+	}else{
+		if(categorys.remove("全部类别")){
+			$('#categorys').empty();
+		}
+	}
 	if(categorys.put(_category)){
 		$('#categorys').append('<div class="b_link"><a href="#">'+_category+'</a></div>');
 		$('#categorys .b_link').each(function(index,e){
@@ -19,12 +88,12 @@ function putcategory(_category){
 				$(this).remove();
 				$('#dnews_discountCategory').attr("value",categorys.toString());
 				if(categorys.size()==0){
-					$("#category_notice").css("display","");
+					//$("#category_notice").css("display","");
 				}
 			})
 		});
 		$('#dnews_discountCategory').attr("value",categorys.toString());
-		$("#category_notice").css("display","none");
+		//$("#category_notice").css("display","none");
 	}
 }
 function initcategory(){
@@ -62,13 +131,13 @@ function initProgramInfo(){
 $(document).ready(function(){
 	initcategory();
 	initProgramInfo();
+	bindChange("#category_select0","#category_select","#category_select_child","","newschildcategory");
 	$('#discountStart').cld();
 	$('#discountEnd').cld();
 	$('#news_review').xheditor(true);
 	$('#news_content').xheditor(true);
 	$('#category_add').bind("click", function(event) {
-		var _category = $('#category_select option:selected').val();
-		putcategory(_category);
+		putcategory();
 	});
 	$("#v_code_img").bind("click",function(event){
 		var timer=new Date();
@@ -117,19 +186,13 @@ $(document).ready(function(){
 	$("#_submit").validate({
 		submitHandler: function(form) {
 			setArea();
-			if(categorys.size()<1){
-				$("#category_notice").css("display","");
-				$("#category_select").focus();
-				return;
-			}
-			$("#category_notice").css("display","none");
 			form.submit();
 		},
 		errorElement: "div",
 		rules: {
 			"dnews.newsTitle": {
 				required: true,
-				maxlength:20
+				maxlength:50
 			},
 			"dnews.discountStart": {
 				required: true
@@ -137,18 +200,11 @@ $(document).ready(function(){
 			"dnews.discountEnd": {
 				required: true
 			},
-			"dnews.discountStart": {
-				required: true
-			},
 			"dnews.newsSource": {
 				required: true
 			},
 			"dnews.senderName": {
 				required: true
-			},
-			"dnews.senderMail": {
-				required: true,
-				email: true
 			},
 			"dnews.pId": {
 				required: true
@@ -158,15 +214,12 @@ $(document).ready(function(){
 			},
 			"dnews.newsContent": {
 				required: true
-			},
-			"dnews.senderLink":{
-				url:true
 			}
 		},
 		messages: {
 			"dnews.newsTitle": {
 				required: "",
-				maxlength:"标题不能超过20个字。"
+				maxlength:"标题不能超过50个字。"
 			},
 			"dnews.discountStart": {
 				required: ""
@@ -177,15 +230,8 @@ $(document).ready(function(){
 			"dnews.discountStart": {
 				required: ""
 			},
-			"dnews.newsSource": {
-				required: ""
-			},
 			"dnews.senderName": {
 				required: ""
-			},
-			"dnews.senderMail": {
-				required: "",
-				email: "您的E-mail格式不正确。"
 			},
 			"dnews.pId": {
 				required: ""
@@ -195,9 +241,6 @@ $(document).ready(function(){
 			},
 			"dnews.newsContent": {
 				required: ""
-			},
-			"dnews.senderLink":{
-				url:"请输入正确的url地址，http://开头"
 			}
 		}
 	});
@@ -273,11 +316,12 @@ $(document).ready(function(){
                 <div class="notice"><em>(必填*)</em>打折设计的范围，请根据需要选择</div>
             </div>
             <div class="line">
-            	<div class="input">
+            	<div class="input" id="category_select">
                 	<div class="label">商品类别:</div>
-                    <select id="category_select">
+                    <select id="category_select0">
+                    	<option value='0' select='selected'>全部类别</option>
                     <s:iterator value="categorys">
-                    	<option value='<s:property value="name"/>'><s:property value="name"/></option>
+                    	<option value='<s:property value="id"/>'><s:property value="name"/></option>
                     </s:iterator>
                     </select>
                     <input type="button" id="category_add" class="w60" value="增加" />
@@ -285,7 +329,7 @@ $(document).ready(function(){
                     <div class="error" id="category_notice" style="display:none;">您必须至少选择一种类别。</div>
                 </div>
                 <div class="option_link" id="categorys"></div>
-                <div class="notice"><em>(必填*)</em>打折产品的类别，可以包含多种，请增加，如果类别实在太多，请选择【各种类别】</div>
+                <div class="notice">打折产品的类别，可以包含多种，请增加，如果类别实在太多，请选择【各种类别】</div>
             </div>
             <div class="line">
             	<div class="input">
