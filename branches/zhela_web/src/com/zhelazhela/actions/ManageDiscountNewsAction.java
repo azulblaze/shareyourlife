@@ -1,14 +1,19 @@
 package com.zhelazhela.actions;
 
+import java.io.File;
+
 import net.sf.json.JSONObject;
 
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.ManageUser;
+import com.zhelazhela.db.model.ProgramInfo;
+import com.zhelazhela.db.model.Attachments;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.AccountService;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.UtilService;
 import com.zhelazhela.services.DiscountNewsService;
+import com.zhelazhela.util.CommonMethod;
 @SuppressWarnings("serial")
 public class ManageDiscountNewsAction extends BaseAction {
 	
@@ -56,6 +61,10 @@ public class ManageDiscountNewsAction extends BaseAction {
 	private static java.util.List<String> navs = new java.util.ArrayList<String>();
 	
 	private String list_type;
+	
+	private File pic;
+	
+	private String picContentType;
 	
 	static{
 		navs.add("add_program");
@@ -198,6 +207,46 @@ public class ManageDiscountNewsAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String uploadPic() throws Exception{
+		ManageUser mu = (ManageUser)getSession("manager");
+		JSONObject jb = new JSONObject();
+		if(mu==null){
+			jb.put("result", "login");
+			setValue("json", jb.toString());
+			return "json";
+		}
+		try{
+			String ext_type = CommonMethod.getInstance().isAllowedPicture(picContentType);
+			if(picContentType!=null){
+				if(ext_type==null){
+					jb.put("result", "fail");
+					jb.put("msg", "图片不支持您上传的格式");
+					setValue("json",jb.toString());
+					return "json";
+				}
+			}
+			Attachments am = new Attachments();
+			if(dn_id>0){
+				am.setRelTable("discount_news");
+				am.setRelTableId(dn_id);
+				Attachments tmp = discountNewsService.uploadPic(am, getRootPath(), ext_type, pic);
+				if(tmp!=null){
+					jb.put("result", "success");
+					jb.put("pic", tmp);
+					jb.put("msg", "上传图片成功");
+					setValue("json",jb.toString());
+					return "json";
+				}
+			}
+		}catch(Exception e){
+			jb.put("msg", "提交失败:"+e.getMessage());
+			return null;
+		}
+		jb.put("result", "fail");
+		setValue("json",jb.toString());
+		return "json";
+	}
+	
 	
 	public DiscountNews getDnews() {
 		return dnews;
@@ -302,6 +351,22 @@ public class ManageDiscountNewsAction extends BaseAction {
 
 	public void setList_type(String listType) {
 		list_type = listType;
+	}
+
+	public File getPic() {
+		return pic;
+	}
+
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
+
+	public String getPicContentType() {
+		return picContentType;
+	}
+
+	public void setPicContentType(String picContentType) {
+		this.picContentType = picContentType;
 	}
 	
 }
