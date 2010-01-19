@@ -11,4 +11,5 @@
 	<bean name="merchandiseCategoryDAO" id="merchandiseCategoryDAO" class="com.zhelazhela.db.dao.MerchandiseCategoryDAOImpl" />
 	<bean name="programInfoDAO" id="programInfoDAO" class="com.zhelazhela.db.dao.ProgramInfoDAOImpl" />
 	<bean name="provinceDAO" id="provinceDAO" class="com.zhelazhela.db.dao.ProvinceDAOImpl" />
+	<bean name="attachmentsDAO" id="attachmentsDAO" class="com.zhelazhela.db.dao.AttachmentsDAOImpl" />
 </beans>

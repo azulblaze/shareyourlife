@@ -39,6 +39,8 @@
 			<result name="login" type="redirect-action">login</result>
 		</action>
 		
+		<action name="uploadcontentpic" class="adminAction" method="uploadPic"/>
+		
 				
 		<action name="program_list" class="programAction" method="listProgram">
 			<result name="success" type="tiles">admin.programlist</result>
@@ -66,7 +68,6 @@
 		<action name="child_category" class="categoryAction" method="childCategory"/>
 		
 		<action name="del_category" class="categoryAction" method="delCategory"/>
-		
 		
 	</package>
 
