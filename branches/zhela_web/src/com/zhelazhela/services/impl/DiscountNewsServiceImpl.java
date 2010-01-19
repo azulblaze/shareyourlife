@@ -1,24 +1,42 @@
 package com.zhelazhela.services.impl;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.zhelazhela.db.dao.DiscountNewsDAO;
+import com.zhelazhela.db.dao.AttachmentsDAO;
+import com.zhelazhela.db.model.Attachments;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.DiscountNewsExample;
 import com.zhelazhela.db.model.DiscountNewsExample.Criteria;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.DiscountNewsService;
 import com.zhelazhela.services.UtilService;
+import com.zhelazhela.system.config.SystemConfig;
+import com.zhelazhela.util.CommonMethod;
 
 public class DiscountNewsServiceImpl implements DiscountNewsService {
 
 	private DiscountNewsDAO discountNewsDAO;
 	
 	private UtilService utilService;
+	
+	private AttachmentsDAO attachmentsDAO;
+	
+	private PlatformTransactionManager m_db_tx_manager;
+	
+	protected SystemConfig systemConfig;
+	
+	public void setTxManager(PlatformTransactionManager tx){
+		this.m_db_tx_manager = tx;
+	}
 	
 	@Override
 	public boolean approveDiscountNews(long id, String approveUser,boolean result)
@@ -236,6 +254,33 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 		dnl.setPagesize(pagesize);
 		return dnl;
 	}
+
+
+	@Override
+	public Attachments uploadPic(Attachments record, String rootPath,
+			String filetype, File pic) throws Exception {
+		if(pic!=null&&pic.length()>systemConfig.getUpload_pic_maxlength()){
+			throw new Exception("上次文件大小超过"+systemConfig.getUpload_pic_maxlength()/(1024*1024)+"MB限制");
+		}
+		TransactionStatus  status = this.m_db_tx_manager.getTransaction(new DefaultTransactionDefinition());
+		try{
+			if(pic!=null){
+				CommonMethod cm = CommonMethod.newInstance();
+				record.setFileName(cm.saveLogo(pic, rootPath, systemConfig.getUpload_pic(), filetype));
+			}
+			long result = attachmentsDAO.insertSelectiveReturnId(record);
+			if(result>0){
+				this.m_db_tx_manager.commit(status);
+				return attachmentsDAO.selectByPrimaryKey(result);
+			}else{
+				this.m_db_tx_manager.rollback(status);
+				throw new java.lang.Exception("上传图片失败");
+			}
+		}catch(Exception e){
+			this.m_db_tx_manager.rollback(status);
+			throw new java.lang.Exception(e.getMessage());
+		}
+	}
 	
 	public void setDiscountNewsDAO(DiscountNewsDAO discountNewsDAO) {
 		this.discountNewsDAO = discountNewsDAO;
@@ -246,5 +291,12 @@ public class DiscountNewsServiceImpl implements DiscountNewsService {
 	}
 
 	
+	public void setAttachmentsDAO(AttachmentsDAO attachmentsDAO) {
+		this.attachmentsDAO = attachmentsDAO;
+	}
+
+	public void setSystemConfig(SystemConfig systemConfig) {
+		this.systemConfig = systemConfig;
+	}	
 	
 }

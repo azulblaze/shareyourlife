@@ -1,6 +1,7 @@
 package com.zhelazhela.services;
 
 import com.zhelazhela.db.model.DiscountNews;
+import com.zhelazhela.db.model.Attachments;
 import com.zhelazhela.domain.DiscountNewsList;
 
 public interface DiscountNewsService {
@@ -50,4 +51,6 @@ public interface DiscountNewsService {
 	public DiscountNewsList loadUnReleaseDiscountNewsList(int page,int pagesize,java.util.Map<String,Object> parameters,String categorys,String areas,String title,String orderby) throws Exception;
 	
 	public DiscountNews viewDiscountNews(long id) throws Exception;
+	
+	public Attachments uploadPic(Attachments record,String root_path,String filetype,java.io.File pic) throws Exception ;
 }
