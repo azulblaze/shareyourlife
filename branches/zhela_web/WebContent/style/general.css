@@ -549,3 +549,35 @@ h1.thankyou{
 .control_bar .control a{
 	margin-right:20px;
 }
+#kindnotice{
+	z-index:999;
+	display:none;
+	border:1px solid #e2ca1b;
+	background:url(images/kind_bg.png) repeat-x;
+	height:342px;
+	width:500px;
+	position:fixed;
+	right:5px;
+	bottom:5px;
+}
+#kindnotice .title{
+	clear:both;
+	text-align:center;
+	margin:20px auto 10px auto;
+}
+#kindnotice p{
+	clear:both;
+	padding:0px 10px;
+	margin:10px auto;
+}
+#kindnotice a{
+	color:#F30;
+}
+#kindnotice .close_kindnotice{
+	text-align:right;
+	margin-top:20px;
+}
+#kindnotice .close_kindnotice a{
+	font-weight:800;
+	color:#03F;
+}
