@@ -8,6 +8,9 @@ import org.apache.commons.lang.StringUtils;
 import com.zhelazhela.db.dao.CityDAO;
 import com.zhelazhela.db.dao.MerchandiseCategoryDAO;
 import com.zhelazhela.db.dao.ProvinceDAO;
+import com.zhelazhela.db.dao.AttachmentsDAO;
+import com.zhelazhela.db.model.Attachments;
+import com.zhelazhela.db.model.AttachmentsExample;
 import com.zhelazhela.db.model.City;
 import com.zhelazhela.db.model.CityExample;
 import com.zhelazhela.db.model.MerchandiseCategory;
@@ -16,6 +19,7 @@ import com.zhelazhela.db.model.Province;
 import com.zhelazhela.db.model.ProvinceExample;
 import com.zhelazhela.domain.CategoryList;
 import com.zhelazhela.services.UtilService;
+import com.zhelazhela.util.CommonMethod;
 
 public class UtilServiceImpl implements UtilService {
 	
@@ -28,6 +32,8 @@ public class UtilServiceImpl implements UtilService {
 	private ProvinceDAO provinceDAO;
 	
 	private MerchandiseCategoryDAO merchandiseCategoryDAO;
+	
+	private AttachmentsDAO attachmentsDAO;
 
 	public void setCityDAO(CityDAO cityDAO) {
 		this.cityDAO = cityDAO;
@@ -40,6 +46,10 @@ public class UtilServiceImpl implements UtilService {
 	public void setMerchandiseCategoryDAO(
 			MerchandiseCategoryDAO merchandiseCategoryDAO) {
 		this.merchandiseCategoryDAO = merchandiseCategoryDAO;
+	}
+
+	public void setAttachmentsDAO(AttachmentsDAO attachmentsDAO) {
+		this.attachmentsDAO = attachmentsDAO;
 	}
 
 	@Override
@@ -330,6 +340,24 @@ public class UtilServiceImpl implements UtilService {
 			return result;
 		}
 		return result;
+	}
+
+	@Override
+	public List<Attachments> loadAttachments(long newsId,String tablename) {
+		AttachmentsExample example = new AttachmentsExample();
+		example.createCriteria().andRelTableEqualTo(tablename).andRelTableIdEqualTo(newsId);
+		return attachmentsDAO.selectByExample(example);
+	}
+
+	@Override
+	public boolean removeAttachment(long id,String rootpath) {
+		Attachments record = attachmentsDAO.selectByPrimaryKey(id);
+		if(record!=null){
+			CommonMethod.newInstance().deleteFile(rootpath+record.getFileName());
+			attachmentsDAO.deleteByPrimaryKey(id);
+			return true;
+		}
+		return false;
 	}
 
 

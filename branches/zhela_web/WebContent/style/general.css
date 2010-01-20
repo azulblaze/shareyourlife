@@ -13,6 +13,10 @@
 	height:72px;
 	background:url(images/footerbg.gif) repeat-x;
 }
+.count_web{
+	width:100%;
+	text-align:center;
+}
 .logo a img{
 	padding:10px 0px;
 }

@@ -18,4 +18,5 @@
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/merchandise_category_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/program_info_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/province_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/attachments_SqlMap.xml" />
 </sqlMapConfig>

@@ -1,6 +1,7 @@
 package com.zhelazhela.services;
 
 import com.zhelazhela.db.model.City;
+import com.zhelazhela.db.model.Attachments;
 import com.zhelazhela.db.model.Province;
 import com.zhelazhela.db.model.MerchandiseCategory;
 import com.zhelazhela.domain.CategoryList;
@@ -30,4 +31,8 @@ public interface UtilService {
 	public boolean delCategory(long id) throws Exception;
 	
 	public long[] getLocation(String location) throws Exception;
+	
+	public java.util.List<Attachments> loadAttachments(long news_id,String tablename);
+	
+	public boolean removeAttachment(long id,String rootpath);
 }

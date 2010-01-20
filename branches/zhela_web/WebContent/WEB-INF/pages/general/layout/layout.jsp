@@ -287,6 +287,9 @@ $(document).ready(function(){
     	<div class="clear"></div>
     </div>
 <tiles:insertAttribute name="footer"></tiles:insertAttribute>
+	<div class="count_web">
+		<a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/1445848/tongji.gif"/></a>
+	</div>
 </div>
 </body>
 </html>
