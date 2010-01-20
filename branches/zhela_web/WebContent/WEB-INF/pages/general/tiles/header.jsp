@@ -3,7 +3,11 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script>
 function unConfigNotice(){
-	if((loadConfig("#care_area")=="")&&(loadConfig("#care_category")=="")){
+	var tmp_conf_close = $.cookie('zhelazhela.com_close');
+	if(tmp_conf_close==null){
+		tmp_conf_close = "";
+	}
+	if((loadConfig("#care_area")=="")&&(loadConfig("#care_category")==""&&tmp_conf_close=="")){
 		configNotice("您还没有设置您关注的地区以及您感兴趣的类别哦 :)"); 
 		$(".pop_content").show(500);
 	}
@@ -34,6 +38,7 @@ $(document).ready(function() {
     });
 	$("#c_conf").bind("click",function(event){
 		event.preventDefault();
+		$.cookie('zhelazhela.com_close', "closed",{expires:0.025});
 		$(".pop_content").hide(500);
 	});
 	$("#config").bind("click",function(event){
