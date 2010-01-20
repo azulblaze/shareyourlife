@@ -9,7 +9,7 @@ public interface ProgramInfoService {
 	
 	public ProgramInfo editProgramInfo(long id,String name,String shortname,String website,String email,String log,String description) throws Exception;
 	
-	public boolean delProgramInfo(long id) throws Exception;
+	public boolean delProgramInfo(long id,String rootpath) throws Exception;
 	
 	public ProgramInfo viewProgramInfo(long id) throws Exception;
 	

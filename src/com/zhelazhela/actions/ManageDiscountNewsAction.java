@@ -133,15 +133,6 @@ public class ManageDiscountNewsAction extends BaseAction {
 	}
 	/** 编辑新闻 */
 	public String edit() throws Exception{
-		
-		//for right side
-		setValue("weeklyhot",cacheService.loadWeeklyHot());
-		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
-		//for some select
-		setValue("categorys",cacheService.loadCategory());
-		setValue("provinces",cacheService.loadProvinces());
-		setValue("programinfos",cacheService.loadProgram());
-		
 		ManageUser mu = (ManageUser)this.getSession("manager");
 		if(mu==null){
 			return LOGIN;
@@ -150,6 +141,12 @@ public class ManageDiscountNewsAction extends BaseAction {
 		if(tmp==null){
 			throw new Exception();
 		}
+		//for some select
+		setValue("categorys",cacheService.loadCategory());
+		setValue("provinces",cacheService.loadProvinces());
+		setValue("programinfos",cacheService.loadProgram());
+		setValue("loadpic",utilService.loadAttachments(dnews.getId(), "discount_news"));
+		
 		if(edit){
 			long[] location = utilService.getLocation(tmp.getDiscountArea());
 			setValue("province_id",location[0]);
@@ -167,9 +164,6 @@ public class ManageDiscountNewsAction extends BaseAction {
 	/** 浏览新闻 */
 	public String view() throws Exception{
 		
-		//for right side
-		setValue("weeklyhot",cacheService.loadWeeklyHot());
-		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		//for some select
 		setValue("categorys",cacheService.loadCategory());
 		setValue("provinces",cacheService.loadProvinces());
@@ -247,6 +241,27 @@ public class ManageDiscountNewsAction extends BaseAction {
 		return "json";
 	}
 	
+	public String del_content_pic() throws Exception{
+		ManageUser mu = (ManageUser)this.getSession("manager");
+		JSONObject jb = new JSONObject();
+		if(mu==null){
+			jb.put("result", "login");
+			setValue("json", jb.toString());
+			return "json";
+		}
+		boolean result = false;
+		String pic_id = getRequestParameter("pic_id");
+		if(pic_id!=null){
+			result = utilService.removeAttachment(Long.parseLong(pic_id),getRootPath());
+		}
+		if(result){
+			jb.put("result", "success");
+		}else{
+			jb.put("result", "fail");
+		}
+		setValue("json", jb.toString());
+		return "json";
+	}
 	
 	public DiscountNews getDnews() {
 		return dnews;

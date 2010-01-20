@@ -41,7 +41,8 @@
 		
 		<action name="uploadcontentpic" class="adminAction" method="uploadPic"/>
 		
-				
+		<action name="delcontentpic" class="adminAction" method="del_content_pic"/>
+		
 		<action name="program_list" class="programAction" method="listProgram">
 			<result name="success" type="tiles">admin.programlist</result>
 			<result name="login" type="redirect-action">login</result>
