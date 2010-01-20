@@ -50,7 +50,12 @@ public class ProgramInfoServiceImpl implements ProgramInfoService {
 	}
 
 	@Override
-	public boolean delProgramInfo(long id) throws Exception {
+	public boolean delProgramInfo(long id,String rootpath) throws Exception {
+		ProgramInfo pi = programInfoDAO.selectByPrimaryKey(id);
+		if(pi==null){
+			return false;
+		}
+		CommonMethod.newInstance().deleteFile(rootpath+pi.getLog());
 		long row = programInfoDAO.deleteByPrimaryKey(id);
 		if(row>0){
 			return true;

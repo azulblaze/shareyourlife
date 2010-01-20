@@ -20,8 +20,8 @@ $(document).ready(function() {
     	<div class="logo">
         	<a href="/"><img src="/images/zhelazhela.png" /></a>
             <div class="right-side">
-            	<img src="images/favicon.gif"/><a id="addfav" href="/">加入收藏夹</a>
-                <img src="images/exclamation.gif"/><a href="/help.zl">帮助</a>
+            	<img src="/images/favicon.gif"/><a id="addfav" href="/">加入收藏夹</a>
+                <img src="/images/exclamation.gif"/><a href="/help.zl">帮助</a>
             </div>
         </div>
     	<div class="menu">

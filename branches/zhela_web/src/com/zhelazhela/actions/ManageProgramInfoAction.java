@@ -74,7 +74,7 @@ public class ManageProgramInfoAction extends BaseAction{
 			setValue("json", jb.toString());
 			return "json";
 		}
-		if(programInfoService.delProgramInfo(pi_id)){
+		if(programInfoService.delProgramInfo(pi_id,getRootPath())){
 			jb.put("result", "success");
 		}else{
 			jb.put("result", "fail");

@@ -20,8 +20,8 @@ public class ActionServiceImpl implements ActionService {
 	
 	private HttpClient httpclient;
 	
-	private String userid;
-
+	private SinaUser sinauser;
+	
 	@Override
 	public boolean login(String name, String password) {
 		httpclient = new HttpClient();

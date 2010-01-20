@@ -1,90 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-        	<div class="configure">
-            	<div class="configure_top"></div>
-            	<div class="configure_main">
-                	<div class="title">定制折扣信息</div>
-                </div>
-            	<div class="configure_bottom"></div>
+<s:if test="dnews!=null">
+<script type="text/javascript" src="/scripts/ajaxfileupload.js" charset="utf-8"></script>
+<style>
+.upload{
+	height:24px;
+}
+.submitpic{
+	padding:2px 5px;
+}
+.uploaded{
+	width:100%;
+	border:1px dashed #03F;
+	margin-top:10px;
+	clear:both;
+}
+.uploaded input,.uploaded img{
+	width:280px;
+}
+.uploaded input{
+	height:24px;
+	border:1px solid green;
+}
+#up_loading{
+	display:none;
+}
+</style>
+<script>
+function bindremovePic(c_obj,a_obj){
+	$(a_obj).bind("click",function(event){
+		event.preventDefault();
+		$.ajax({
+			type : "GET",
+			url : $(this).attr("href"),
+			dataType:"json",
+			cache : false,
+			success : function(data, textStatus) {
+				if(data.result=="login"){
+					redirectAdminLogin();
+				}
+				if(data.result=="success"){
+					$(c_obj).remove();
+				}
+				if(data.result=="fail"){
+					alert(data.msg);
+				}
+			}
+		});
+	});
+}
+function create(addr,id){
+	var myhtml = $('<div class="uploaded"><input type="text" value="'+addr+'"/><br /><img src="'+addr+'" /><br/><a href="/admin/delcontentpic.zl?pic_id='+id+'">删除</a></div>');
+	bindremovePic($(myhtml),$(myhtml).find("a"));
+	$("#pic_box").prepend(myhtml);
+}
+function ajaxFileUpload(_json,_pre)
+{
+	$("#up_loading").ajaxStart(function(){
+		$("#upload_submit").attr("disabled","disabled");
+		$(this).show();
+	}).ajaxComplete(function(){
+		$("#contentpic_fileToUpload").val("");
+		$("#upload_submit").removeAttr("disabled");
+		$(this).hide();
+	});
+	$.ajaxFileUpload
+	(
+		{
+			url:'/admin/uploadcontentpic.zl',
+			name_value:_json,
+			pre:_pre,
+			secureuri:false,
+			fileElementId:'contentpic_fileToUpload',
+			dataType: 'json',
+			success: function (data, status)
+			{
+				if(data.result=="login"){
+					redirectAdminLogin();
+				}
+				if(data.result=="success"){
+					create(data.pic.fileName,data.pic.id);
+				}
+				if(data.result=="fail"){
+					showError("#sub_msg_div",data.msg);
+				}
+			},
+			error: function (data, status, e)
+			{
+				alert(e);
+			}
+		}
+	);
+	return false;
+}
+$(document).ready(function(){
+	$(".uploaded").each(function(){
+		var link = $(this).find("a");
+		var pic_obj = $(this);
+		bindremovePic(pic_obj,link);
+	});
+	$("#upload_submit").bind("click",function(){
+		var file_path = $("#contentpic_fileToUpload").val();
+		if(file_path==null||file_path==""){
+			return false;
+		}
+		var json={};
+		json.dn_id = "<s:property value='dnews.id'/>";
+		ajaxFileUpload(json,"");
+		return false;
+	});
+});
+</script>
+        	<div class="right_box">
+            	<div class="title"><strong>如何上传图片？</strong></div>
+                <p style="color:blue;"><img src="/images/howedit.jpg"/><br/>如上图，您可以在这里上传图片到服务器，上传成功后会得到图片地址，然后通过富文本编辑器加入到折扣信息里面。[只能上传PGN,JPG,GIF格式的图片]</p>
             </div>
             <div class="right_box">
-            	<div class="title">本周最受欢迎折扣信息</div>
-                <ul>
-                	<s:iterator  value="weeklywelcome.list">
-                	<li><a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></li>
-                	</s:iterator>
-                </ul>
+                <form action="/admin/uploadcontentpic.zl" method="post" enctype="multipart/form-data">
+                	<input type="file" id="contentpic_fileToUpload" name="pic" value="" class="upload" />
+                    <input type="submit" id="upload_submit" value="上传" class="submitpic"/>
+                </form>
+                <div id="up_loading"><img src="/images/loading.gif" />上传中...</div>
             </div>
-            <div class="right_box">
-            	<div class="title">本周最热门折扣信息</div>
-                <ul>
-                	<s:iterator  value="weeklyhot.list">
-                	<li><a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></li>
-                	</s:iterator>
-                </ul>
-            </div>
-            <div class="right_box" style="display:none;">
-            	<div class="title">关键字</div>
-                <ul>
-                	<a href="http://jandan.net/search/youtube">youtube</a>&nbsp;
-<a href="http://jandan.net/search/公司">公司</a>&nbsp;
-<a href="http://jandan.net/search/乐高">乐高</a>&nbsp;
-<a href="http://jandan.net/search/华丽">华丽</a>&nbsp;
-<a href="http://jandan.net/search/火星">火星</a>&nbsp;
-<a href="http://jandan.net/search/变形金刚">变形金刚</a>&nbsp;
-<a href="http://jandan.net/search/机器人">机器人</a>&nbsp;
-<a href="http://jandan.net/search/UFO">UFO</a>&nbsp;
-<a href="http://jandan.net/search/总统">总统</a>&nbsp;
-<a href="http://jandan.net/search/世界">世界</a>&nbsp;
-<a href="http://jandan.net/search/迪拜">迪拜</a>&nbsp;
-<a href="http://jandan.net/search/firefox">firefox</a>&nbsp;
-<a href="http://jandan.net/search/geek">geek</a>&nbsp;
-<a href="http://jandan.net/search/美元">美元</a>&nbsp;
-<a href="http://jandan.net/search/纽约">纽约</a>&nbsp;
-<a href="http://jandan.net/search/传说">传说</a>&nbsp;
-<a href="http://jandan.net/search/blackberry">blackberry</a>&nbsp;
-<a href="http://jandan.net/search/PSP">PSP</a>&nbsp;
-<a href="http://jandan.net/search/月球">月球</a>&nbsp;
-<a href="http://jandan.net/search/黑洞">黑洞</a>&nbsp;
-<a href="http://jandan.net/search/猩猩">猩猩</a>&nbsp;
-<a href="http://jandan.net/search/猴子">猴子</a>&nbsp;
-<a href="http://jandan.net/search/生态">生态</a>&nbsp;
-<a href="http://jandan.net/search/专题">专题</a>&nbsp;
-<a href="http://jandan.net/search/街拍">街拍</a>&nbsp;
-<a href="http://jandan.net/search/月球">月球</a>&nbsp;
-<a href="http://jandan.net/search/每日一美女">美女</a>&nbsp;
-<a href="http://jandan.net/search/苹果">苹果</a>&nbsp;
-<a href="http://jandan.net/search/盖茨">盖茨</a>&nbsp;
-<a href="http://jandan.net/search/印度">印度</a>&nbsp;
-<a href="http://jandan.net/search/日本">日本</a>&nbsp;
-<a href="http://jandan.net/search/太空">太空</a>&nbsp;
-<a href="http://jandan.net/search/山寨">山寨</a>&nbsp;
-<a href="http://jandan.net/search/周末啦">周末啦</a>&nbsp;
-<a href="http://jandan.net/search/一日一狗">一日一狗</a>&nbsp;
-<a href="http://jandan.net/search/greasemonky">GreaseMonky</a>&nbsp;
-<a href="http://jandan.net/search/周末一小坨">周末一小坨</a>&nbsp;
-<a href="http://jandan.net/search/NASA">NASA</a>&nbsp;
-<a href="http://jandan.net/search/无聊图集">无聊图集</a>&nbsp;
-<a href="http://jandan.net/search/低俗">低俗</a>&nbsp;
-<a href="http://jandan.net/search/周末啦">周末啦</a>&nbsp;
-<a href="http://jandan.net/search/猛男">猛男</a>&nbsp;
-<a href="http://jandan.net/search/发霉啦">发霉啦(FML)</a>&nbsp;
-<a href="http://jandan.net/search/YD周一">YD周一</a>&nbsp;
-<a href="http://jandan.net/search/冷新闻">冷新闻</a>&nbsp;
-<a href="http://jandan.net/search/无厘头科学">无厘头科学</a>&nbsp;
-                </ul>
-            </div>
-            <div class="right_box" style="display:none;">
-            	<div class="title">链接</div>
-                <ul class="link">
-                	<li><a href="#">小众软件</a></li>
-                    <li><a href="#">DP|Paveo</a></li>
-                    <li><a href="#">4空间</a></li>
-                    <li><a href="#">阿瓦的家</a></li>
-                    <li><a href="#">就喜欢网</a></li>
-                    <li><a href="#">有意思吧</a></li>
-                    <li><a href="#">美剧迷</a></li>
-                </ul>
+            <div class="right_box" id="pic_box">
+            	<div class="title"><strong>已上传图片</strong></div>
+                <p>请直接复制图片下面的地址，然后增加到内容里面！</p>
+            	<s:iterator value="loadpic">
+            	<div class="uploaded"><input type="text" value="<s:property value='fileName'/>"/><br /><img src="<s:property value='fileName'/>" /><br/><a href="/admin/delcontentpic.zl?pic_id=<s:property value='id'/>">删除</a></div>
+            	</s:iterator>
             </div>
             <div class="clear"></div>
+</s:if>
