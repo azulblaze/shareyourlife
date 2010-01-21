@@ -157,6 +157,7 @@ background:url(images/bgOFF.gif) repeat-x;border-bottom:0px solid #859e2d;/*bott
 	color:#003399;
 }
 .left .post_body{
+	overflow:hidden;
 	border-bottom:1px dashed #898989;
 	border-top:1px dashed #898989;
 	margin:5px 0px;
