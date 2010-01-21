@@ -174,12 +174,12 @@ public class DiscountNewsAction extends BaseAction {
 		setValue("weeklywelcome",cacheService.loadWeeklyWelcome());
 		setValue("categorys",cacheService.loadCategory());
 		setValue("provinces",cacheService.loadProvinces());
-		
 		DiscountNews dn = discountNewsService.viewDiscountNews(dn_id);
 		if(dn!=null){
 			//只能阅读审批过的内容
 			if(dn.getApproveResult()!=null&&dn.getApproveResult()){
 				setValue("dn",dn);
+				setValue("cust_title",dn.getNewsTitle());
 			}
 		}else{
 			throw new Exception();
