@@ -12,7 +12,7 @@
 	<link rel="bookmark" href="favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link type="images/gif" href="/act_favicon.gif" rel="icon"/>
-	<title><tiles:insertAttribute name="title"/> - 这啦折啦折扣信息分享平台</title>
+	<title><s:property value='cust_title'/><tiles:insertAttribute name="title"/> - 这啦折啦折扣信息分享平台</title>
 	<link href="/style/base.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="/style/general.css" type="text/css"/>
 	<script type="text/javascript" src="/scripts/jquery-1.3.2.min.js" charset="utf-8"></script>

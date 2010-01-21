@@ -238,6 +238,27 @@ $(document).ready(function(){
 	$(this).displayzhela({extStr:"",zhelazhela:<s:property value='dn.id'/>,delay:3000});
 })
 </script>
+<style>
+/*shareIt*/
+.shareIt p,.shareIt ul{
+	float:left;
+	margin:-5px 0px auto auto;
+}
+.shareIt p span img{
+	vertical-align:middle;
+	padding-right:3px;
+}
+.shareIt ul li{ float:left; margin:3px 5px auto 5px; color:#999; font-size:12px;}
+.shareIt ul li a{ width:16px; height:16px; display:block; overflow:hidden; text-indent:-9999em;}
+.shareIt ul li.to_twitter a{background:url() 0 0 no-repeat;}
+.shareIt ul li.to_fb a{background:url(style/images/share_icon.gif) -32px 0 no-repeat;}
+.shareIt ul li.to_delicious a{background:url(style/images/share_icon.gif) -64px 0 no-repeat;}
+.shareIt ul li.to_qqsq a{background:url(style/images/share_icon.gif) -96px 0 no-repeat;}
+.shareIt ul li.to_baidu a{background:url(style/images/share_icon.gif) -130px 0 no-repeat;}
+.shareIt ul li.to_xiaonei a{background:url(style/images/share_icon.gif) -200px 0 no-repeat;}
+.shareIt ul li.to_kaixin a{background:url(style/images/share_icon.gif) -164px 0 no-repeat;}
+.shareIt ul li.to_douban a{background:url(style/images/share_icon.gif) -232px 0 no-repeat;}
+</style>
         	<div class="post_head">
             	<h2><a href="#"><s:property value='dn.newsTitle'/></a></h2>
                 <div class="small">感谢 <a target="_blank" href="<s:property value='dn.senderLink'/>"><s:property value="dn.senderName"/></a> 投递 | <s:property value='dn.approveUser'/> 审批 | <s:date name="dn.approveTime" format="yyyy-MM-dd hh:mm:ss"/> | 浏览数:<s:property value='dn.readTimes'/> <a target="_blank" href="<s:property value='dn.newsSource'/>">来源</a></div>
@@ -245,6 +266,17 @@ $(document).ready(function(){
             <div class="post_footer">
             	<span class="first"><img src="images/cart.png"/>商家:<a target="_blank" href="<s:property value='dn.programInfo.website'/>"><s:property value='dn.programInfo.name'/></a></span><span class="time">开始时间: <s:date name="dn.discountStart" format="yyyy年MM月dd日"/></span><span class="time">结束时间: <s:date name="dn.discountEnd" format="yyyy年MM月dd日"/></span><br /><span class="first"><img src="images/fatcow_472.png"/>地区: <a href='<s:url value="/index.zl"><s:param name="area" value="dn.discountArea" /></s:url>'><s:property value="dn.discountArea"/></a></span><span><img src="images/fatcow_423.png"/>分类:<script>writeCategory('<s:property value="dn.discountCategory"/>');</script></span>
             </div>
+            <div class="shareIt">
+            	<p><span class="first"><img src="images/plugin.png"/>分享:</p>
+                <ul>
+                	<li class="to_qqsq"><a href="javascript:window.open('http://shuqian.qq.com/post?from=3&title='+encodeURIComponent('<s:property value="dn.newsTitle"/>')+'&uri='+encodeURIComponent(location.href)+'&jumpback=2&noui=1','favit','width=930,height=470,left=50,top=50,=no,menubar=no,location=no,scrollbars=yes,status=yes,resizable=yes');void(0)" title="收藏到qq书签">收藏到qq书签</a></li>
+                    <li class="to_baidu"><a href="javascript:window.open('http://cang.baidu.com/do/add?it='+encodeURIComponent('<s:property value="dn.newsTitle"/>')+'&iu='+encodeURIComponent(location.href)+'&fr=ien#nw=1','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0" title="收藏到百度">百度收藏</a></li>
+                    <li class="to_xiaonei"><a href="javascript:u='http://share.xiaonei.com/share/buttonshare.do?link='+encodeURIComponent(location.href)+'&title='+encodeURIComponent('<s:property value="dn.newsTitle"/>');window.open(u,'xiaonei','=0,resizable=1,scrollbars=yes,status=1,width=626,height=436');void(0)" title="收藏到校内">校内</a></li>
+                    <li class="to_kaixin"><a href="javascript:var%20u='http://www.kaixin001.com/~repaste/repaste.php?rtitle='+encodeURIComponent('<s:property value="dn.newsTitle"/>')+'&rurl='+encodeURIComponent(location.href)+'&rcontent='+encodeURIComponent('【这啦折啦】打折信息分享平台http://zhelazhela.com');window.open(u,'kaixin');void(0)" title="收藏到开心网">开心网</a></li>
+                    <li class="to_douban"><a href="javascript:var%20u='http://www.douban.com/recommend/?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent('<s:property value="dn.newsTitle"/>');window.open(u,'douban','=0,resizable=1,scrollbars=yes,status=1,width=450,height=330');void(0)" title="收藏到豆瓣">豆瓣</a></li>
+				</ul>
+                <div class="clear"></div>
+			</div>
             <div class="post_body">
             	<p>
             		<s:property value="dn.newsContent" escape="false"/>

@@ -103,9 +103,6 @@ $(document).ready(function(){
 			"dnews.senderMail": {
 				email: true
 			},
-			"dnews.newsReview": {
-				maxlength:500
-			},
 			"dnews.newsContent": {
 				required: true
 			},
@@ -130,9 +127,6 @@ $(document).ready(function(){
 			"dnews.senderMail": {
 				email: "您的E-mail格式不正确。"
 			},
-			"dnews.newsReview": {
-				maxlength: ""
-			},
 			"dnews.newsContent": {
 				required: ""
 			},
@@ -148,14 +142,7 @@ $(document).ready(function(){
 </script>
         	<div class="rule">
             	<div class="thank_submit">感谢您投递打折信息给<a href="#" class="zhelazhela">这啦折啦</a></div>
-                <ul>
-                	<li class="intro">为了更好的保证信息的完整性，我们建议您在投递前了解以下信息：</li>
-                    <li>1. 请简明扼要地将您所要报道的打折信息叙述完整.最好能配上图片方便阅读。</li>
-                    <li>2. 如消息为转载,请尽量注明文章来源.无主信息可能会被暂缓发表. </li>
-                    <li>3. 欢迎独自报道. 您的独家报料与独特视角是<a href="#" class="zhelazhela">这啦折啦</a>编辑与访客的宝贵财富.</li>
-                    <li>4. 别忘了署名! 写上您的blog地址, 带来意想不到的人气, 也可能发现志同道合的<a href="#" class="zhelazhela">这啦折啦</a>访客.</li>
-                    <li>5. 编辑也许会对投递进行适当修改, 以适合在本站发表.</li>
-                </ul>
+                <br/>
             </div>
             <form action="/news_submit.zl" method="post" id="_submit">
             <div class="line">
@@ -225,17 +212,11 @@ $(document).ready(function(){
                     </select>
                     <input type="button" id="category_add" class="w60" value="增加" />
                     <input type="hidden" id="dnews_discountCategory" name="dnews.discountCategory" value=""/>
+                    <input type="hidden" name="dnews.newsReview" value=""/>
                     <div class="error" id="category_notice" style="display:none;">您必须至少选择一种类别。</div>
                 </div>
                 <div class="option_link" id="categorys"></div>
                 <div class="notice">打折产品的类别，可以包含多种，请增加，如果类别实在太多，请选择【各种类别】</div>
-            </div>
-            <div class="line">
-            	<div class="input">
-                	<div class="label">信息概要:</div>
-                    <div class="spec">打折信息的概要部分(尽量简明概要，不能超过500个字)。</div>
-                </div>
-                <div class="news_review"><textarea name="dnews.newsReview" id="news_review"><s:property value="dnews.newsReview"/></textarea></div>
             </div>
             <div class="line">
             	<div class="input">
