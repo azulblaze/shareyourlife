@@ -258,6 +258,7 @@ $(document).ready(function(){
 .shareIt ul li.to_xiaonei a{background:url(style/images/share_icon.gif) -200px 0 no-repeat;}
 .shareIt ul li.to_kaixin a{background:url(style/images/share_icon.gif) -164px 0 no-repeat;}
 .shareIt ul li.to_douban a{background:url(style/images/share_icon.gif) -232px 0 no-repeat;}
+.shareIt ul li.to_sina a{background:url(style/images/share_icon.gif) -264px 0 no-repeat;}
 </style>
         	<div class="post_head">
             	<h2><a href="#"><s:property value='dn.newsTitle'/></a></h2>
@@ -274,6 +275,7 @@ $(document).ready(function(){
                     <li class="to_xiaonei"><a href="javascript:u='http://share.xiaonei.com/share/buttonshare.do?link='+encodeURIComponent(location.href)+'&title='+encodeURIComponent('<s:property value="dn.newsTitle"/>');window.open(u,'xiaonei','=0,resizable=1,scrollbars=yes,status=1,width=626,height=436');void(0)" title="收藏到校内">校内</a></li>
                     <li class="to_kaixin"><a href="javascript:var%20u='http://www.kaixin001.com/~repaste/repaste.php?rtitle='+encodeURIComponent('<s:property value="dn.newsTitle"/>')+'&rurl='+encodeURIComponent(location.href)+'&rcontent='+encodeURIComponent('【这啦折啦】打折信息分享平台http://zhelazhela.com');window.open(u,'kaixin');void(0)" title="收藏到开心网">开心网</a></li>
                     <li class="to_douban"><a href="javascript:var%20u='http://www.douban.com/recommend/?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent('<s:property value="dn.newsTitle"/>');window.open(u,'douban','=0,resizable=1,scrollbars=yes,status=1,width=450,height=330');void(0)" title="收藏到豆瓣">豆瓣</a></li>
+                    <li class="to_sina"><a href="javascript:var%20u='http://v.t.sina.com.cn/share/share.php?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent('<s:property value="dn.newsTitle"/>')+'&source='+encodeURIComponent('这啦折啦-打折资讯')+'&sourceUrl='+encodeURIComponent('http://zhelazhela.com')+'&content=utf-8&pic=';window.open(u,'douban','=0,resizable=1,scrollbars=yes,status=1,width=450,height=330');void(0)" title="转发到新浪微博">新浪微博</a></li>
 				</ul>
                 <div class="clear"></div>
 			</div>
