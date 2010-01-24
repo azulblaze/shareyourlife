@@ -12,6 +12,18 @@
   	<error-code>500</error-code>
   	<location>/html/error.html</location>
   </error-page>
+  <filter>
+  	<filter-name>UrlRewriteFilter</filter-name>
+	<filter-class>
+		org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
+	</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>UrlRewriteFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+	<dispatcher>REQUEST</dispatcher>  
+	<dispatcher>FORWARD</dispatcher> 
+  </filter-mapping>
   	<!-- 
 		struts 2.0  filter
 	 -->
@@ -23,6 +35,8 @@
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
     <!-- 
