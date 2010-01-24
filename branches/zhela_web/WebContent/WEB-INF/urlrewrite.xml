@@ -18,6 +18,16 @@
         <from>/detail-([0-9]+).html</from>
         <to type="forward">/detail.zl?dn_id=$1</to>
     </rule>
+    
+    <rule>
+    	<from>/index.html</from>
+        <to type="forward">/index.zl</to>
+    </rule>
+    
+    <rule>
+    	<from>/news-submit.html</from>
+        <to type="forward">/news_submit.zl</to>
+    </rule>
 
 
     <outbound-rule>
