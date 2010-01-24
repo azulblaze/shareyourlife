@@ -68,7 +68,7 @@ $(document).ready(function(){
             	<div class="title">本周最受欢迎折扣信息</div>
                 <ul>
                 	<s:iterator  value="weeklywelcome.list">
-                	<li><a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></li>
+                	<li><a target="_blank" href="/detail-<s:property value='id'/>.html"><s:property value='newsTitle'/></a></li>
                 	</s:iterator>
                 </ul>
             </div>
@@ -76,7 +76,7 @@ $(document).ready(function(){
             	<div class="title">本周最热门折扣信息</div>
                 <ul>
                 	<s:iterator  value="weeklyhot.list">
-                	<li><a target="_blank" href="/detail.zl?dn_id=<s:property value='id'/>"><s:property value='newsTitle'/></a></li>
+                	<li><a target="_blank" href="/detail-<s:property value='id'/>.html"><s:property value='newsTitle'/></a></li>
                 	</s:iterator>
                 </ul>
             </div>
