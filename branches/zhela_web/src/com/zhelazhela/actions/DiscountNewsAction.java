@@ -212,7 +212,7 @@ public class DiscountNewsAction extends BaseAction {
 		for(DiscountNews dn:dnl.getList()){
 			se = new SyndEntryImpl();   
 			se.setTitle(dn.getNewsTitle());   
-			se.setLink(systemConfig.getDomain()+"/detail.zl?dn_id="+dn.getId());   
+			se.setLink(systemConfig.getDomain()+"/detail-"+dn.getId()+".html");   
 			se.setPublishedDate(dn.getApproveTime());   
 			description = new SyndContentImpl();   
 			description.setType("text/html");   
