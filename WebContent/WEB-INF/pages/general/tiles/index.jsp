@@ -40,6 +40,7 @@ $(document).ready(function(){
 	var page = <s:property value="dnl.page"/>;
 	var c_page = Math.ceil(size/pagesize);
 	var c_url = window.location.href;
+	c_url = c_url.replace("index.html", "index.zl");
 	var c_url_index = c_url.indexOf("index.zl");
 	if(c_url_index>=0){
 		c_url = c_url.substring(c_url_index);
