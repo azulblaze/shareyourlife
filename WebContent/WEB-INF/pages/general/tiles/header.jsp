@@ -60,7 +60,7 @@ $(document).ready(function() {
 </script>
 	<div id="header">
     	<div class="logo">
-        	<a href="/index.zl" title="查看所有的折扣信息"><img src="/images/zhelazhela.png" /></a>
+        	<a href="/index.html" title="查看所有的折扣信息"><img src="/images/zhelazhela.png" /></a>
             <div class="right-side">
             	<img src="/images/cog.png" title="设置信息"/><a href="#" id="config">设置</a>
                 <img src="/images/feed.png" title="订阅内容"/><a id="rss_link" href='<s:url value="/rss.zl"><s:param name="area" value="#session.c_areas" /><s:param name="category" value="#session.c_categorys" /></s:url>'>订阅信息</a>
@@ -71,7 +71,7 @@ $(document).ready(function() {
     	<div class="menu">
             <ul>
                 <li<s:if test="nav=='index'"> class='select'</s:if>><a href="/">折扣信息</a></li>
-                <li<s:if test="nav=='news_submit'"> class='select'</s:if>><a href="/news_submit.zl">我来投递</a></li>
+                <li<s:if test="nav=='news_submit'"> class='select'</s:if>><a href="/news-submit.html">我来投递</a></li>
                 <li><a href="/html/about.html">关于我们</a></li>
             </ul>
 		</div>
