@@ -288,7 +288,8 @@ $(document).ready(function(){
     </div>
 <tiles:insertAttribute name="footer"></tiles:insertAttribute>
 	<div class="count_web">
-		<a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/1445848/tongji.gif"/></a>
+		<script language="javascript" type="text/javascript" src="http://js.users.51.la/3520251.js"></script>
+<noscript><a href="http://www.51.la/?3520251" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/3520251.asp" style="border:none" /></a></noscript>
 	</div>
 </div>
 </body>
