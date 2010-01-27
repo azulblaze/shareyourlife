@@ -187,3 +187,77 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
 go
+
+-- -----------------------------------------------------
+-- Table blog_detail
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS blog_detail ;
+go
+CREATE  TABLE IF NOT EXISTS blog_detail (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  update_time TIMESTAMP NULL DEFAULT current_timestamp,
+  category VARCHAR(100) NULL ,
+  title VARCHAR(200) NULL ,
+  review VARCHAR(1000) NULL ,
+  content TEXT NULL ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+go
+
+-- -----------------------------------------------------
+-- Table tags
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS tags ;
+go
+CREATE  TABLE IF NOT EXISTS tags (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  update_time TIMESTAMP NULL DEFAULT current_timestamp,
+  name VARCHAR(100) NULL ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+go
+
+
+-- -----------------------------------------------------
+-- Table blog_tag
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS blog_tag ;
+go
+CREATE  TABLE IF NOT EXISTS blog_tag (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  blog_id BIGINT NOT NULL,
+  tag_id BIGINT NOT NULL,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+go
+
+
+
+-- -----------------------------------------------------
+-- Table blog_comments
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS blog_comments ;
+go
+CREATE  TABLE IF NOT EXISTS blog_comments (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  blog_id BIGINT NOT NULL ,
+  user_name VARCHAR(100) NULL ,
+  user_index VARCHAR(200) NULL ,
+  user_email VARCHAR(200) NULL ,
+  ip_addr VARCHAR(200) NULL ,
+  content VARCHAR(1000) NULL ,
+  comment_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+go
+CREATE INDEX I_BLOG ON blog_comments (blog_id ASC) ;
+go
+
