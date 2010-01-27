@@ -195,6 +195,8 @@ DROP TABLE IF EXISTS blog_detail ;
 go
 CREATE  TABLE IF NOT EXISTS blog_detail (
   id BIGINT NOT NULL AUTO_INCREMENT ,
+  published BOOLEAN DEFAULT false ,
+  staticed BOOLEAN DEFAULT false ,
   update_time TIMESTAMP NULL DEFAULT current_timestamp,
   category VARCHAR(100) NULL ,
   title VARCHAR(200) NULL ,
