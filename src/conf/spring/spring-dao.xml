@@ -12,4 +12,9 @@
 	<bean name="programInfoDAO" id="programInfoDAO" class="com.zhelazhela.db.dao.ProgramInfoDAOImpl" />
 	<bean name="provinceDAO" id="provinceDAO" class="com.zhelazhela.db.dao.ProvinceDAOImpl" />
 	<bean name="attachmentsDAO" id="attachmentsDAO" class="com.zhelazhela.db.dao.AttachmentsDAOImpl" />
+	
+	<bean name="blogCommentsDAO" id="blogCommentsDAO" class="com.zhelazhela.db.dao.BlogCommentsDAOImpl" />
+	<bean name="blogDetailDAO" id="blogDetailDAO" class="com.zhelazhela.db.dao.BlogDetailDAOImpl" />
+	<bean name="blogTagDAO" id="blogTagDAO" class="com.zhelazhela.db.dao.BlogTagDAOImpl" />
+	<bean name="tagsDAO" id="tagsDAO" class="com.zhelazhela.db.dao.TagsDAOImpl" />
 </beans>
