@@ -4,7 +4,7 @@
 	
 <struts>
 
-	<package name="blog" extends="tiles-default" namespace="blog">
+	<package name="blog" extends="tiles-default" namespace="/blog">
 		<global-results>
 			<result name="exception">/html/error.html</result>
 			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
@@ -13,62 +13,21 @@
 			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
 		</global-exception-mappings>
 		
-		<action name="index" class="blogAction" method="login" >
-			<result name="input" type="tiles">admin.login</result>
-			<result name="success" type="redirect-action">news_list</result>
-		</action>
-		 
-		<action name="news_list" class="adminAction" method="list">
-			<result name="success" type="tiles">admin.newslist</result>
-			<result name="login" type="redirect-action">login</result>
+		<action name="index" class="blogAction" method="index" >
+			<result name="success" type="tiles">blog.index</result>
 		</action>
 		
-		<action name="approve_news" class="adminAction" method="approve"/>
-		
-		<action name="edit_news" class="adminAction" method="edit">
-			<result name="input" type="tiles">admin.news_edit</result>
-			<result name="login" type="redirect-action">login</result>
-			<result name="success" type="redirect-action">
-				<param name="actionName">review_news</param>
-				<param name="dn_id">${dn_id}</param>
-			</result>
+		<action name="list" class="blogAction" method="list" >
+			<result name="success" type="tiles">blog.index</result>
 		</action>
 		
-		<action name="review_news" class="adminAction" method="view">
-			<result name="success" type="tiles">admin.news_detail</result>
-			<result name="login" type="redirect-action">login</result>
+		<action name="detail" class="blogAction" method="detail" >
+			<result name="success" type="tiles">blog.detail</result>
 		</action>
 		
-		<action name="uploadcontentpic" class="adminAction" method="uploadPic"/>
-		
-		<action name="delcontentpic" class="adminAction" method="del_content_pic"/>
-		
-		<action name="program_list" class="programAction" method="listProgram">
-			<result name="success" type="tiles">admin.programlist</result>
-			<result name="login" type="redirect-action">login</result>
+		<action name="suggest" class="blogAction" method="suggest" >
+			<result name="success" type="tiles">blog.form</result>
 		</action>
-		
-		<action name="category_list" class="categoryAction" method="listCategory">
-			<result name="success" type="tiles">admin.categorylist</result>
-			<result name="login" type="redirect-action">login</result>
-		</action>
-		
-		<action name="static_page" class="adminAction" method="static_page">
-			<result name="success" type="redirect-action">news_list</result>
-			<result name="login" type="redirect-action">login</result>
-			<result name="add_program" type="tiles">admin.programadd</result>
-			<result name="add_category" type="tiles">admin.categoryadd</result>
-		</action>
-		
-		<action name="add_program" class="programAction" method="addProgram"/>
-		
-		<action name="del_program" class="programAction" method="delProgram"/>
-		
-		<action name="add_category" class="categoryAction" method="addCategory"/>
-		
-		<action name="child_category" class="categoryAction" method="childCategory"/>
-		
-		<action name="del_category" class="categoryAction" method="delCategory"/>
 		
 	</package>
 
