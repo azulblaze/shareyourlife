@@ -258,7 +258,7 @@ CREATE  TABLE IF NOT EXISTS blog_comments (
   PRIMARY KEY (id) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci
+COLLATE = utf8_general_ci;
 go
 CREATE INDEX I_BLOG ON blog_comments (blog_id ASC) ;
 go
