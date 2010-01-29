@@ -1,0 +1,110 @@
+/* ::::: http://www.inspira.me/colordreams/style1/reset.css ::::: */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0pt; padding: 0pt; border: 0pt none; outline: 0pt none; font-size: 100%; background: none repeat scroll 0% 0% transparent; vertical-align: top; }
+body { line-height: 1; }
+ol, ul { list-style: none outside none; }
+:focus { outline: 0pt none; }
+button, a { cursor: pointer; }
+small { font-size: 0.625em; }
+html { overflow-x: auto; overflow-y: scroll; }
+a img { border: 0pt none; }
+
+body { background: url('/blog/styles/images/background.jpg') repeat-x scroll center top rgb(26, 2, 5); font-family: Verdana,Arial; font-size: 13px; line-height: 16px; color: rgb(255, 255, 255); }
+h1 { font-size: 36px; font-weight: bold; color: rgb(255, 255, 255); margin-bottom: 8px; font-family: "Segoe UI",Arial; }
+h3 { font-size: 18px; font-weight: bold; }
+h3, h4, h5, h6 { color: rgb(255, 255, 255); margin-bottom: 6px; margin-top: 4px; font-family: "Segoe UI",Arial; }
+p, ul, code, pre { margin-bottom: 6px; line-height: 18px; }
+img { vertical-align: middle; }
+ul { list-style: square inside none; }
+input, textarea { border: 1px solid rgb(217, 9, 75); background: none repeat scroll 0% 0% rgb(26, 2, 5); color: rgb(255, 255, 255); padding: 5px; }
+a { color: rgb(217, 9, 75); }
+a:hover { text-decoration: none; }
+a:active { color: rgb(251, 210, 20); }
+.wrapper { width: 960px; margin: 0pt auto; overflow: hidden; position: relative; }
+#header { margin: 0pt 30px; overflow: hidden; }
+.logo { height: 73px; line-height: 73px; }
+.logo a img { padding-top: 9px; }
+.navbar { height: 64px; margin-bottom: 10px; }
+.navbar ul { list-style: none outside none; margin: 0pt; }
+.navbar ul li { background: url('/blog/styles/images/navbar-separator.png') no-repeat scroll right top transparent; float: left; display: inline; height: 40px; padding: 5px 20px 0pt 0pt ! important; margin: 11px 20px 0pt 0pt; }
+.navbar ul li:last-child { background: none repeat scroll 0% 0% transparent; }
+.navbar ul li a { color: rgb(255, 255, 255); text-decoration: none; font-family: "Segoe UI",Arial; font-size: 18px; font-weight: bold; line-height: 18px; display: block; }
+.navbar ul li span { display: block; font-size: 10px; font-weight: normal; }
+.navbar ul li.current a { color: rgb(228, 89, 99); }
+.navbar ul li a:hover { color: rgb(247, 161, 167); }
+.navbar ul li a:hover span { color: rgb(247, 161, 167); }
+.search { background: url('/blog/styles/images/search.png') no-repeat scroll left top transparent; width: 117px; height: 24px; float: right; display: inline; padding: 7px 30px 0pt 15px; margin: 18px 0pt 0pt; }
+.search input { background: none repeat scroll 0% 0% transparent; border: 0pt none; font-size: 11px; line-height: 11px; height: 14px; position: relative; color: rgb(0, 0, 0); padding: 0pt; }
+#prevBtn, .prevBtn, #nextBtn, .nextBtn { display: block; position: absolute; }
+#prevBtn a, .prevBtn a, #nextBtn a, .nextBtn a { display: block; margin: 0pt auto; width: 48px; height: 48px; }
+#prevBtn, .prevBtn { left: -12px; top: 120px; }
+#prevBtn a, .prevBtn a { background: url('/blog/styles/images/slider-btn-back.png') no-repeat scroll left top transparent; }
+#nextBtn, .nextBtn { right: -16px; top: 120px; z-index: 99; }
+#nextBtn a, .nextBtn a { background: url('/blog/styles/images/slider-btn-next.png') no-repeat scroll left top transparent; }
+.content { width: 920px; padding: 10px; margin: 0pt auto; position: relative; }
+.column { float: left; display: inline; width: 420px; margin: 0pt 10px 20px; padding: 0pt 10px; }
+.post { width: 640px; float: left; display: inline; }
+.post p, .post ul, .poar code, .post pre { line-height: 22px; }
+.post h1 { font-size: 33px; padding-bottom: 18px; margin-bottom: 12px; border-bottom: 1px solid rgb(255, 255, 255); }
+.post h1 a { color: rgb(255, 255, 255); text-decoration: none; display: block; }
+.post h1 a:hover { color: rgb(217, 9, 75); }
+.post .date { float: right; display: inline; font-size: 18px; text-align: center; width: 30px; font-weight: bold; }
+.post .date small { display: block; font-size: 11px; }
+.post .top { background: url('/blog/styles/images/post-top-640w.png') no-repeat scroll 0% 0% transparent; height: 15px; overflow: hidden; }
+.post .middle { background: url('/blog/styles/images/post-middle-640w.png') repeat-y scroll 0% 0% transparent; width: 560px; padding: 20px 40px; }
+.post .bottom { background: url('/blog/styles/images/post-bottom-640w.png') no-repeat scroll 0% 0% transparent; height: 15px; }
+.post .success { background: none repeat scroll 0% 0% rgb(65, 102, 1); padding: 20px; margin: 0pt 0pt 8px; }
+.post .error { background: none repeat scroll 0% 0% rgb(102, 1, 20); padding: 20px; margin: 0pt 0pt 8px; }
+.post .form { list-style: none outside none; margin: 0pt; padding: 10px 59px; height: 1%; overflow: hidden; }
+.post .form li { margin: 3px 0pt 0pt; padding-bottom: 3px; float: left; width: 100%; display: inline; }
+.post .form label { text-align: right; display: inline; float: left; padding: 3px 5px 3px 0pt; width: 120px; }
+.post .form input { display: inline; float: left; line-height: 100%; }
+.post .form .leftNote { color: rgb(255, 153, 51); float: left; padding: 3px 5px 0pt; }
+.post .form .button { display: inline; float: right; }
+.post .readmore { text-align: right; display: block; margin: 10px 0pt; }
+.post .readmore a { display: inline-block; }
+.sidebar { float: right; display: inline; width: 270px; position: relative; }
+.sidebar .top { background: url('/blog/styles/images/sidebar-top-270w.png') no-repeat scroll 0% 0% transparent; height: 15px; overflow: hidden; }
+.sidebar .middle { background: url('/blog/styles/images/sidebar-middle-270w.png') repeat-y scroll 0% 0% transparent; width: 210px; padding: 10px 30px; }
+.sidebar .bottom { background: url('/blog/styles/images/sidebar-bottom-270w.png') no-repeat scroll 0% 0% transparent; height: 15px; }
+.sidebar .green, .sidebar .blue, .sidebar .red { height: 31px; line-height: 25px; padding: 0pt 7px; margin: 6px 0pt 2px; }
+.sidebar .green { background: url('/blog/styles/images/sidebar-title-bg.gif') no-repeat scroll left top transparent; }
+.sidebar .blue { background: url('/blog/styles/images/sidebar-title-bg.gif') no-repeat scroll left -32px transparent; }
+.sidebar ul { list-style: none outside none; padding: 0pt 10px; margin: 0pt; }
+.sidebar ul li { display: block; padding: 5px; border-bottom: 1px solid rgb(128, 88, 88); }
+.sidebar ul li a { display: block; text-decoration: none; color: rgb(255, 255, 255); }
+.sidebar ul li a:hover { color: rgb(0, 0, 0); }
+.sidebar ul li.select a{color:rgb(217, 9, 75);font-weight:800;}
+.comment { clear: both; min-height: 50px; margin: 15px 0pt 0pt; }
+.avatar { float: left; width: 48px; height: 48px; margin: 0pt 10px 5px 0pt; }
+.title, .title a { color: rgb(255, 255, 255); font-size: 13px; font-weight: bold; line-height: 13px; text-decoration: none; }
+.title .date { font-size: 10px; color: rgb(204, 204, 204); float: none; margin: 0pt 10px; }
+.reply { float: right; text-align: right; width: 30px; font-size: 11px; font-weight: bold; display:none;}
+.reply a { color: rgb(255, 255, 255); font-size: 10px; font-weight: bold; text-decoration: none; }
+.navigation { width: 640px; height: 150px; float: left; display: inline; position: relative; text-align: center; }
+.navigation .prevBtn, .navigation .nextBtn { display: inline-block; width: 95px; margin: 20px; position: static; }
+.button a { background: url('/blog/styles/images/button-medium.png') no-repeat scroll left top transparent; width: 97px; padding-right: 2px; height: 28px; overflow: hidden; text-align: center; font-weight: bold; font-size: 12px; line-height: 23px; display: block; }
+.button a { text-decoration: none; font-weight: bold; color: rgb(255, 255, 255); }
+#footer { background: url('/blog/styles/images/footer-bg.png') repeat-x scroll left top transparent; height: 200px; padding: 27px 30px 0pt 0pt; clear: both; font-size: 11px; }
+#footer .wrapper { width: 880px; }
+#footer .column { width: 270px; height: 161px; padding: 0pt; }
+#footer a { color: rgb(255, 255, 255); }
+#footer .copyright { font-size: 11px; clear: both; }
+cufon { text-indent: 0pt ! important; }
+@media screen, projection {
+	cufon { display: inline-block ! important; position: relative ! important; vertical-align: middle ! important; font-size: 1px ! important; line-height: 1px ! important; }
+	cufon cufontext { display: inline-block ! important; width: 0pt ! important; height: 0pt ! important; overflow: hidden ! important; text-indent: -10000in ! important; }
+	cufon canvas { position: relative ! important; }
+}
+
+#SLB-Wrapper { margin: auto; font-family: Verdana; text-align: left; position: absolute; }
+#SLB-Wrapper #SLB-Background { position: absolute; left: 7px; top: 7px; float: left; }
+#SLB-Wrapper #SLB-Top { background: none no-repeat scroll 100% 0pt transparent; height: 28px; margin: 0pt 0pt 0pt 18px; }
+#SLB-Wrapper #SLB-Top a { float: right; display: inline; padding: 0pt; margin: 5px 10px; width: 41px; height: 16px; text-decoration: none; }
+#SLB-Wrapper #SLB-Top a:hover { background-position: 0px -16px; }
+#SLB-Wrapper #SLB-Top div { background: none no-repeat scroll 0pt 0pt transparent; font-size: 0pt; height: 28px; left: -18px; line-height: 0pt; position: relative; width: 18px; margin: 0pt; padding: 0pt; }
+#SLB-Wrapper #SLB-Bottom { background: none no-repeat scroll 0pt 43% transparent; height: 20px; margin: 0pt 18px 0pt 0pt; }
+#SLB-Wrapper #SLB-Bottom #SLB-BottomRight { background: none no-repeat scroll 100% 43% transparent; font-size: 0pt; height: 20px; right: -18px; line-height: 0pt; position: relative; width: 100%; float: right; }
+#SLB-Wrapper #SLB-Contenido { border-left: 7px solid rgb(0, 0, 0); border-right: 7px solid rgb(0, 0, 0); }
+#SLB-Wrapper #SLB-Bottom #SLB-Navegador { font-size: 11px; color: rgb(255, 255, 255); height: 30px; border-left: 0px none; border-right: 0px none; padding: 10px 0px; margin: 0pt; line-height: 11px; float: left; width: 100%; }
+#SLB-Wrapper #SLB-Navegador strong { display: block; padding-top: 5px; overflow: hidden; height: 23px; }
