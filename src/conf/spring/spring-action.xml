@@ -28,7 +28,7 @@
 		<property name="pagesize" value="20" />
 	</bean>
 	
-	<bean name="commonAction" class="com.zhelazhela.actions.CommonAction" singleton="false" >
+	<bean name="commonAction" class="com.zhelazhela.actions.CommonAction" singleton="false" />
 	
 	<bean name="blogAction" class="com.zhelazhela.actions.BlogAction" singleton="false" >
 	</bean>
