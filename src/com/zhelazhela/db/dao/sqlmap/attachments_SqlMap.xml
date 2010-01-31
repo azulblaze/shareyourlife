@@ -55,6 +55,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+        limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByPrimaryKey" parameterClass="com.zhelazhela.db.model.Attachments" resultMap="ibatorgenerated_BaseResultMap">
     <!--
