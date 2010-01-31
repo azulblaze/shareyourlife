@@ -192,4 +192,10 @@ public class BlogDetailDAOImpl extends SqlMapClientDaoSupport implements BlogDet
 	public long insertSelectiveReturnId(BlogDetail record) {
 		return (Long)getSqlMapClientTemplate().insert("blog_detail.insertSelective_returnId", record);
 	}
+
+	@Override
+	public List<String> loadDisCategorys() {
+		java.util.List<String> categorys = getSqlMapClientTemplate().queryForList("blog_detail.selectCategorys");
+		return categorys;
+	}
 }

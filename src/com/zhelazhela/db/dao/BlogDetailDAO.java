@@ -90,4 +90,6 @@ public interface BlogDetailDAO {
 	int updateByPrimaryKeyWithoutBLOBs(BlogDetail record);
 
 	long insertSelectiveReturnId(BlogDetail record);
+	
+	java.util.List<String> loadDisCategorys();
 }
