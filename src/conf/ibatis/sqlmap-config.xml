@@ -23,4 +23,5 @@
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/blog_detail_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/blog_tag_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/tags_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/blog_qa_SqlMap.xml" />
 </sqlMapConfig>
