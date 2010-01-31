@@ -26,7 +26,14 @@
 		</action>
 		
 		<action name="suggest" class="blogAction" method="suggest" >
-			<result name="success" type="tiles">blog.form</result>
+			<result name="input" type="tiles">blog.form</result>
+			<result name="success" type="redirect-action">suggest</result>
+		</action>
+		
+		<action name="comment" class="blogAction" method="comment" />
+		
+		<action name="c_list" class="blogAction" method="comment_list" >
+			<result name="success">/WEB-INF/pages/blog/tiles/comment.jsp</result>
 		</action>
 		
 	</package>

@@ -70,6 +70,54 @@
 		
 		<action name="del_category" class="categoryAction" method="delCategory"/>
 		
+		<action name="blogs_list" class="blogManageAction" method="list">
+			<result name="success" type="tiles">admin.bloglist</result>
+			<result name="login" type="redirect-action">login</result>
+		</action>
+		
+		<action name="review_blogs" class="blogManageAction" method="detail">
+			<result name="success" type="tiles">admin.blog</result>
+			<result name="login" type="redirect-action">login</result>
+		</action>
+		
+		<action name="edit_blogs" class="blogManageAction" method="edit">
+			<result name="input" type="tiles">admin.blogedit</result>
+			<result name="login" type="redirect-action">login</result>
+			<result name="detail" type="redirect-action">
+				<param name="actionName">review_blogs</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+		
+		<action name="add_blog" class="blogManageAction" method="input">
+			<result name="input" type="tiles">admin.blogadd</result>
+			<result name="login" type="redirect-action">login</result>
+			<result name="detail" type="redirect-action">
+				<param name="actionName">review_blogs</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+		
+		<action name="del_blog" class="blogManageAction" method="delblog"/>
+		
+		<action name="pub_blog" class="blogManageAction" method="publish"/>
+		
+		<action name="del_qa" class="blogManageAction" method="delQa"/>
+		
+		<action name="qas_list" class="blogManageAction" method="listQa">
+			<result name="success" type="tiles">admin.qalist</result>
+			<result name="login" type="redirect-action">login</result>
+		</action>
+		
+		<action name="upload_blogpic" class="blogManageAction" method="addBlogPic"/>
+		
+		<action name="del_blogpic" class="blogManageAction" method="delBlogPic"/>
+		
+		<action name="blogpic_list" class="blogManageAction" method="listBlogPic">
+			<result name="success" type="tiles">admin.blogpiclist</result>
+			<result name="login" type="redirect-action">login</result>
+		</action>
+		
 	</package>
 
 </struts>
