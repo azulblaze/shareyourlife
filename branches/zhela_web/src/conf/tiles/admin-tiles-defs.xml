@@ -35,6 +35,34 @@
 		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/program_list.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="admin.bloglist" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="博文列表"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="博文列表"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/blog_list.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.blogadd" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="发布博文"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="发布博文"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/blog_add.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.blogedit" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="编辑博文"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="编辑博文"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/blog_edit.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.blog" template="/WEB-INF/pages/blog/layout/layout.jsp">
+		<put-attribute name="title" type="string" value=""></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/blog/tiles/detail.jsp"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/pages/blog/tiles/header.jsp"></put-attribute>
+		<put-attribute name="right" value="/WEB-INF/pages/blog/tiles/right.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/pages/blog/tiles/footer.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="admin.qalist" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="用户反馈"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="用户反馈"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/qa_list.jsp"></put-attribute>
+	</definition>
 	
 	<definition name="admin.general.layout" template="/WEB-INF/pages/admin/layout/general_layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/pages/admin/tiles/general_header.jsp"></put-attribute>
@@ -50,4 +78,9 @@
 		<put-attribute name="left" value="/WEB-INF/pages/admin/tiles/general_detail.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="admin.blogpiclist" template="/WEB-INF/pages/admin/layout/layout.jsp" extends="admin.layout">
+		<put-attribute name="title" type="string" value="博客附件"></put-attribute>
+		<put-attribute name="nav_title" type="string" value="博客附件管理"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/admin/tiles/blog_pic_list.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
