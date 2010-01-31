@@ -17,6 +17,8 @@ public class SystemConfig {
 	
 	private String upload_logo;
 	
+	private String upload_blog_pic;
+	
 	private String upload_log_maxlength;
 
 	/**
@@ -103,6 +105,14 @@ public class SystemConfig {
 
 	public void setUpload_log_maxlength(String uploadLogMaxlength) {
 		upload_log_maxlength = uploadLogMaxlength;
+	}
+
+	public String getUpload_blog_pic() {
+		return upload_blog_pic;
+	}
+
+	public void setUpload_blog_pic(String uploadBlogPic) {
+		upload_blog_pic = uploadBlogPic;
 	}
 	
 	
