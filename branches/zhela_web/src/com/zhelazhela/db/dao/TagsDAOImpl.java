@@ -166,4 +166,23 @@ public class TagsDAOImpl extends SqlMapClientDaoSupport implements TagsDAO {
 	public long insertSelectiveReturnId(Tags record) {
 		return (Long)getSqlMapClientTemplate().insert("tags.insertSelective_returnId", record);
 	}
+
+	@Override
+	public List<Tags> loadTagsByBlog(long id) {
+		java.util.Map<String,Long> map = new java.util.HashMap<String, Long>();
+		map.put("blogid", id);
+		List<Tags> list = getSqlMapClientTemplate().queryForList("tags.selectByBlogId", map);
+        return list;
+	}
+
+	@Override
+	public List<Tags> loadTopTags(int size) {
+		java.util.Map<String,Integer> map = new java.util.HashMap<String, Integer>();
+		if(size<=0){
+			size = 12;
+		}
+		map.put("limit", size);
+		List<Tags> list = getSqlMapClientTemplate().queryForList("tags.selectTopTags", map);
+        return list;
+	}
 }

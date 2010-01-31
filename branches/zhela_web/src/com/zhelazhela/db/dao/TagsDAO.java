@@ -94,4 +94,8 @@ public interface TagsDAO {
     int updateByPrimaryKey(Tags record);
     
     long insertSelectiveReturnId(Tags record);
+    
+    java.util.List<Tags> loadTagsByBlog(long id);
+    
+    java.util.List<Tags> loadTopTags(int size);
 }

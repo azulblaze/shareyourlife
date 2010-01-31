@@ -1,5 +1,6 @@
 package com.zhelazhela.db.dao;
 
+import com.sun.tools.javac.resources.javac;
 import com.zhelazhela.db.model.BlogTag;
 import com.zhelazhela.db.model.BlogTagExample;
 import java.util.List;
@@ -94,4 +95,6 @@ public interface BlogTagDAO {
     int updateByPrimaryKey(BlogTag record);
     
     long insertSelectiveReturnId(BlogTag record);
+    
+    java.util.List<Long> loadBlogTagIds(String tagname);
 }

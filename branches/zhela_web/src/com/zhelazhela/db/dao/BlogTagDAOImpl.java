@@ -166,4 +166,12 @@ public class BlogTagDAOImpl extends SqlMapClientDaoSupport implements BlogTagDAO
 	public long insertSelectiveReturnId(BlogTag record) {
 		return (Long)getSqlMapClientTemplate().insert("blog_tag.insertSelective_returnId", record);
 	}
+
+	@Override
+	public List<Long> loadBlogTagIds(String tagname) {
+		java.util.Map<String,String> map = new java.util.HashMap<String,String>();
+		map.put("tagName", tagname);
+		List<Long> list = getSqlMapClientTemplate().queryForList("blog_tag.selectBlogTagByName", map);
+        return list;
+	}
 }
