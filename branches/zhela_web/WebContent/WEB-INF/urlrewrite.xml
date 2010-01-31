@@ -15,7 +15,7 @@
             The rule means that requests to /test/status/ will be redirected to /rewrite-status
             the url will be rewritten.
         </note>
-        <from>/detail-([0-9]+).html</from>
+        <from>^/detail-([0-9]+).html</from>
         <to type="forward">/detail.zl?dn_id=$1</to>
     </rule>
     
@@ -28,7 +28,41 @@
     	<from>/news-submit.html</from>
         <to type="forward">/news_submit.zl</to>
     </rule>
-
+    
+    <rule>
+    	<from>/blog/suggest.html$</from>
+    	<to type="forward">/blog/suggest.zl</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog$</from>
+        <to type="forward">/blog/index.zl</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog/([0-9]*)$</from>
+        <to type="forward">/blog/index.zl?page=$1</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog/category/([^/]+)$</from>
+        <to type="forward">/blog/list.zl?category=$1</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog/category/([^/]+)/([0-9]*)</from>
+        <to type="forward">/blog/list.zl?category=$1&amp;page=$2</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog/tag/([^/]+)$</from>
+        <to type="forward">/blog/list.zl?tag=$1</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog/tag/([^/]+)/([0-9]*)</from>
+        <to type="forward">/blog/list.zl?tag=$1&amp;page=$2</to>
+    </rule>
 
     <outbound-rule>
         <note>
