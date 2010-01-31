@@ -34,17 +34,18 @@
 	
 	<bean name="mailServices" class="com.zhelazhela.system.email.MailServices" >
 		<property name="senderName" value="这啦折啦" />
-		<property name="senderAddr" value="webmaster@zhelazhela.com" />
+		<property name="senderAddr" value="zhelazhela@gmail.com" />
 	</bean>
 	
 	<bean name="systemConfig" class="com.zhelazhela.system.config.SystemConfig" >
-		<property name="domain" value="http://www.zhelazhela.com" />
+		<property name="domain" value="http://zhelazhela.com" />
 		<property name="upload_pic" value="/upload/images/pic" />
 		<property name="upload_pic_maxlength" value="4194304" />
 		<property name="upload_header" value="/upload/images/header" />
 		<property name="upload_header_maxlength" value="16384" />
 		<property name="upload_logo" value="/upload/images/logo" />
 		<property name="upload_log_maxlength" value="102400" />
+		<property name="upload_blog_pic" value="/upload/images/blogpic" />
 	</bean>
 	
 	<bean id="accountService" name="accountService" class="com.zhelazhela.services.impl.AccountServiceImpl" />	
@@ -55,4 +56,6 @@
 		<property name="time_between" value="1800000" />
 	</bean>
 	<bean id="programInfoService" name="programInfoService" class="com.zhelazhela.services.impl.ProgramInfoServiceImpl" />
+	<bean id="blogService" name="blogService" class="com.zhelazhela.services.impl.BlogServiceImpl" />
+	
 </beans>

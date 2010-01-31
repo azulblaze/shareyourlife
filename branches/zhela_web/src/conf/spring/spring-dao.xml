@@ -17,4 +17,5 @@
 	<bean name="blogDetailDAO" id="blogDetailDAO" class="com.zhelazhela.db.dao.BlogDetailDAOImpl" />
 	<bean name="blogTagDAO" id="blogTagDAO" class="com.zhelazhela.db.dao.BlogTagDAOImpl" />
 	<bean name="tagsDAO" id="tagsDAO" class="com.zhelazhela.db.dao.TagsDAOImpl" />
+	<bean name="blogQaDAO" id="blogQaDAO" class="com.zhelazhela.db.dao.BlogQaDAOImpl" />
 </beans>
