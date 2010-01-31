@@ -98,4 +98,29 @@ public class Tags {
     public void setName(String name) {
         this.name = name;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Tags){
+			return ((Tags)obj).getName().equals(this.getName());
+		}
+		return false;
+	}
+    
+	public String toString(){
+		return this.name;
+	}
+	
+	private int count;
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
+    
 }
