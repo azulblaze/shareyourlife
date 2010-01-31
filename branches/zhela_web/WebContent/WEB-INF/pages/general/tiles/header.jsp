@@ -72,6 +72,7 @@ $(document).ready(function() {
             <ul>
                 <li<s:if test="nav=='index'"> class='select'</s:if>><a href="/">折扣信息</a></li>
                 <li<s:if test="nav=='news_submit'"> class='select'</s:if>><a href="/news-submit.html">我来投递</a></li>
+                <li><a href="/blog" target="_blank">官方博客</a></li>
                 <li><a href="/html/about.html">关于我们</a></li>
             </ul>
 		</div>
