@@ -31,5 +31,10 @@
 	<bean name="commonAction" class="com.zhelazhela.actions.CommonAction" singleton="false" />
 	
 	<bean name="blogAction" class="com.zhelazhela.actions.BlogAction" singleton="false" >
+		<property name="pagesize" value="12" />
+	</bean>
+	
+	<bean name="blogManageAction" class="com.zhelazhela.actions.ManageBlogAction" singleton="false" >
+		<property name="pagesize" value="20" />
 	</bean>
 </beans>
