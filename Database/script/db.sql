@@ -263,3 +263,20 @@ go
 CREATE INDEX I_BLOG ON blog_comments (blog_id ASC) ;
 go
 
+-- -----------------------------------------------------
+-- Table blog_comments
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS blog_qa ;
+go
+CREATE  TABLE IF NOT EXISTS blog_qa (
+  id BIGINT NOT NULL AUTO_INCREMENT ,
+  user_name VARCHAR(100) NULL ,
+  user_email VARCHAR(200) NULL ,
+  title VARCHAR(200) NULL ,
+  content VARCHAR(2000) NULL ,
+  comment_time TIMESTAMP NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+go
