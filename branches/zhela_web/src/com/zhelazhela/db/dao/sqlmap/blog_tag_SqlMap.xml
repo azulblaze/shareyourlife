@@ -222,4 +222,11 @@
       tag_id = #tagId:BIGINT#
     where id = #id:BIGINT#
   </update>
+  
+  <select id="selectBlogTagByName" resultClass="java.lang.Long" parameterClass="java.util.Map" >
+    select DISTINCT blog_tag.blog_id as id
+    from blog_tag,tags
+    where blog_tag.tag_id=tags.id and tags.name = #tagName:VARCHAR#
+  </select>
+  
 </sqlMap>
