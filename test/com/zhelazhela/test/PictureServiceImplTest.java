@@ -11,9 +11,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zhelazhela.db.dao.DiscountNewsDAO;
+import com.zhelazhela.db.model.BlogDetail;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.DiscountNewsExample;
+import com.zhelazhela.db.model.Tags;
+import com.zhelazhela.domain.BlogDetailList;
 import com.zhelazhela.domain.DiscountNewsList;
+import com.zhelazhela.services.BlogService;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
 import com.zhelazhela.services.ProgramInfoService;
@@ -36,10 +40,16 @@ public class PictureServiceImplTest extends TestCase {
 	}
 
 	public void testLoadNewsList() throws Exception {
-		UtilService utilService = (UtilService) this.m_context.getBean("utilService");
-		java.util.List<String> list =  new java.util.ArrayList<String>(utilService.loadCategorys("dd"));
-		list = new java.util.ArrayList<String>(utilService.loadAreas("a,b,c"));
-		System.out.println(list.toString());
+		BlogService blogService = (BlogService) this.m_context.getBean("blogService");
+		java.util.List<Tags> list = blogService.loadTopTags(6);
+		System.out.println(list.size());
+		System.out.println(list.get(0).getName()+list.get(0).getCount());
+	}
+	
+	public void testBlog() throws Exception {
+		BlogService blogService = (BlogService) this.m_context.getBean("blogService");
+		BlogDetailList bdl = blogService.loadList(1, 2, null, null, null, true, null);
+		System.out.println(bdl.getList().size());
 	}
 
 	public static void main(String args[]){
