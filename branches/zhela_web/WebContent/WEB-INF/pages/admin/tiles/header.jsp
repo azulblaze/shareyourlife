@@ -58,8 +58,18 @@
             	</ul>
          	</li>
          	<li>
+				<a href="#"><span>博客管理<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
+				<ul class="sublist">
+					<li><a href="/admin/add_blog.zl">发表博文</a></li>
+					<li><a href="/admin/qas_list.zl">用户反馈</a></li>
+					<li><a href="/admin/blogs_list.zl?type=0">未发表博文</a></li>
+					<li><a href="/admin/blogs_list.zl?type=1">已发表博文</a></li>
+            	</ul>
+         	</li>
+         	<li>
 				<a href="#"><span>系统设置<em><img src="/images/zonebar-downarrow.png" alt="展开菜单" /></em></span></a>
 				<ul class="sublist">
+					<li><a href="/admin/blogpic_list.zl">博客图片</a></li>
 					<li><a href="#">附件管理</a></li>
             	</ul>
          	</li>
