@@ -1,0 +1,23 @@
+<!DOCTYPE tiles-definitions PUBLIC   
+         "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"   
+         "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="blog.layout" template="/WEB-INF/pages/blog/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/pages/blog/tiles/header.jsp"></put-attribute>
+		<put-attribute name="right" value="/WEB-INF/pages/blog/tiles/right.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/pages/blog/tiles/footer.jsp"></put-attribute>
+	</definition>
+	<definition name="blog.index" template="/WEB-INF/pages/blog/layout/layout.jsp" extends="blog.layout">
+		<put-attribute name="title" type="string" value="博文列表"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/blog/tiles/list.jsp"></put-attribute>
+	</definition>
+	<definition name="blog.detail" template="/WEB-INF/pages/blog/layout/layout.jsp" extends="blog.layout">
+		<put-attribute name="title" type="string" value=""></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/blog/tiles/detail.jsp"></put-attribute>
+	</definition>
+	<definition name="blog.form" template="/WEB-INF/pages/blog/layout/layout.jsp" extends="blog.layout">
+		<put-attribute name="title" type="string" value="联系我们"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/blog/tiles/form.jsp"></put-attribute>
+	</definition>
+	
+</tiles-definitions>
