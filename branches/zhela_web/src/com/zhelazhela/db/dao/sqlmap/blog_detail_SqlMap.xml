@@ -64,6 +64,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+        limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByExample" parameterClass="com.zhelazhela.db.model.BlogDetailExample" resultMap="ibatorgenerated_BaseResultMap">
     <!--
@@ -78,6 +81,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+        limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByPrimaryKey" parameterClass="com.zhelazhela.db.model.BlogDetail" resultMap="ibatorgenerated_ResultMapWithBLOBs">
     <!--
@@ -379,4 +385,8 @@
    		SELECT @@IDENTITY AS id 
     </selectKey>
   </insert>
+  
+  <select id="selectCategorys" resultClass="java.lang.String">
+  	select DISTINCT category FROM blog_detail where category is not NULL
+  </select>
 </sqlMap>
