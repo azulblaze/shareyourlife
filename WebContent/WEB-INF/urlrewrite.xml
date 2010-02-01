@@ -35,8 +35,18 @@
     </rule>
     
     <rule>
+    	<from>/blog/detail/([0-9]+).html</from>
+    	<to type="forward">/blog/detail.zl?id=$1</to>
+    </rule>
+    
+    <rule>
     	<from>/blog$</from>
         <to type="forward">/blog/index.zl</to>
+    </rule>
+    
+    <rule>
+    	<from>/blog/rss$</from>
+    	<to type="forward">/blog/rss.zl</to>
     </rule>
     
     <rule>

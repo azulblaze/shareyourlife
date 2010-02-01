@@ -6,8 +6,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="Keywords" content="这啦折啦  打折 折扣 购物卷  最新折扣  免费 优惠 卷 卡 赠送 礼 卷 卡  折" />
-	<meta name="Description" content="这啦折啦 为您提供最新的打折优惠信息,还有更多购物卡 记分卡分享" />
+	<meta name="Keywords" content="<s:property value='cust_title'/> 这啦折啦  打折 折扣 购物卷  最新折扣  免费 优惠 卷 卡 赠送 礼 卷 卡  折" />
+	<meta name="Description" content="<s:property value='cust_title'/> 这啦折啦 博客 官方博客 为您提供最新的打折优惠信息,还有更多购物卡 记分卡分享" />
+	<link href="/blog/rss" title="RSS 2.0" type="application/rss+xml" rel="alternate" />
 	<link rel="bookmark" href="favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link type="images/gif" href="/act_favicon.gif" rel="icon"/>

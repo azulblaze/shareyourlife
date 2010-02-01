@@ -1,13 +1,26 @@
 package com.zhelazhela.actions;
 
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.feed.synd.SyndImage;
+import com.sun.syndication.feed.synd.SyndImageImpl;
+import com.sun.syndication.io.SyndFeedOutput;
 import com.zhelazhela.db.model.BlogComments;
 import com.zhelazhela.db.model.BlogDetail;
 import com.zhelazhela.db.model.BlogQa;
+import com.zhelazhela.domain.BlogDetailList;
 import com.zhelazhela.services.BlogService;
+import com.zhelazhela.system.config.SystemConfig;
 
 @SuppressWarnings("serial")
 public class BlogAction extends BaseAction {
@@ -29,6 +42,13 @@ public class BlogAction extends BaseAction {
 	private BlogComments blogComment;
 	
 	private String validate_code;
+	
+	private SystemConfig systemConfig;
+	
+	private static final String MIME_TYPE = "application/xml; charset=UTF-8";   
+    
+    // rss_0.90, rss_0.91, rss_0.92, rss_0.93, rss_0.94, rss_1.0, rss_2.0, atom_0.3    
+    private static final String RSS_TYPE = "rss_2.0"; 
 	
 	public int getPage() {
 		return page;
@@ -92,6 +112,10 @@ public class BlogAction extends BaseAction {
 	
 	
 
+	public void setSystemConfig(SystemConfig systemConfig) {
+		this.systemConfig = systemConfig;
+	}
+
 	public String getValidate_code() {
 		return validate_code;
 	}
@@ -101,6 +125,7 @@ public class BlogAction extends BaseAction {
 	}
 
 	public String index() throws Exception{
+		setValue("nav","list");
 		setValue("categorys",blogService.loadCategorys());
 		setValue("tags",blogService.loadTopTags(12));
 		if(page<=0){
@@ -111,6 +136,7 @@ public class BlogAction extends BaseAction {
 	}
 	
 	public String list() throws Exception{
+		setValue("nav","list");
 		setValue("categorys",blogService.loadCategorys());
 		setValue("tags",blogService.loadTopTags(12));
 		/** url rewriter help us to make the code to utf-8
@@ -138,8 +164,10 @@ public class BlogAction extends BaseAction {
 		setValue("categorys",blogService.loadCategorys());
 		setValue("tags",blogService.loadTopTags(12));
 		BlogDetail bd = blogService.loadBlogDetail(id);
+		setValue("nav","detail");
 		if(bd.getPublished()){
 			setValue("blog",bd);
+			setValue("cust_title",bd.getTitle());
 		}else{
 			throw new Exception();
 		}
@@ -151,6 +179,7 @@ public class BlogAction extends BaseAction {
 	public String suggest() throws Exception{
 		setValue("categorys",blogService.loadCategorys());
 		setValue("tags",blogService.loadTopTags(12));
+		setValue("nav","suggest");
 		if(blogQa==null){
 			return INPUT;
 		}
@@ -201,6 +230,51 @@ public class BlogAction extends BaseAction {
 		setValue("comment",bcs);
 		setValue("size",bcs.size());
 		return SUCCESS;
+	}
+	
+	public String rss() throws Exception{
+		SyndFeed feed = new SyndFeedImpl();
+		feed.setAuthor("这啦折啦博客");
+		feed.setTitle("这啦折啦博客");
+		feed.setLink(systemConfig.getDomain());
+		feed.setDescription("这啦折啦博客是这啦折啦与大家分享交流的地方.");
+		SyndImage image = new SyndImageImpl();
+		image.setTitle("这啦折啦博客");
+		image.setLink(systemConfig.getDomain());
+		image.setUrl(systemConfig.getDomain()+"/zhelazhela.png");
+		feed.setImage(image);
+		BlogDetailList dnl = blogService.loadList(1, 30, null, null, null, true, null);
+		java.util.List<SyndEntry> entrys = new java.util.ArrayList<SyndEntry>();
+		SyndEntry se = null;
+		SyndContent description = null;
+		for(BlogDetail dn:dnl.getList()){
+			se = new SyndEntryImpl();   
+			se.setTitle(dn.getTitle());   
+			se.setLink(systemConfig.getDomain()+"/blog/detail/"+dn.getId()+".html");   
+			se.setPublishedDate(dn.getUpdateTime());   
+			description = new SyndContentImpl();   
+			description.setType("text/html");   
+			description.setValue(dn.getReview());   
+			se.setDescription(description);   
+			entrys.add(se);
+		}
+		if(dnl.getList().size()>0){
+			feed.setPublishedDate(dnl.getList().get(0).getUpdateTime());
+		}else{
+			feed.setPublishedDate(new java.util.Date());
+		}
+		
+		feed.setEntries(entrys);
+		feed.setFeedType(RSS_TYPE);
+		HttpServletResponse response = getHttpServletResponse();
+		response.setContentType(MIME_TYPE);
+		try{
+			SyndFeedOutput output = new SyndFeedOutput();
+			output.output(feed, response.getWriter());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }
