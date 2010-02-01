@@ -387,6 +387,6 @@
   </insert>
   
   <select id="selectCategorys" resultClass="java.lang.String">
-  	select DISTINCT category FROM blog_detail where category is not NULL
+  	select DISTINCT category FROM blog_detail where published is true and category is not NULL
   </select>
 </sqlMap>
