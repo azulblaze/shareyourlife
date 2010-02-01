@@ -1,6 +1,5 @@
 package com.zhelazhela.db.dao;
 
-import com.sun.tools.javac.resources.javac;
 import com.zhelazhela.db.model.BlogTag;
 import com.zhelazhela.db.model.BlogTagExample;
 import java.util.List;
