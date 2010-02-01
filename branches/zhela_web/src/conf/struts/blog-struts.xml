@@ -36,6 +36,8 @@
 			<result name="success">/WEB-INF/pages/blog/tiles/comment.jsp</result>
 		</action>
 		
+		<action name="rss" class="blogAction" method="rss"/>
+		
 	</package>
 
 </struts>

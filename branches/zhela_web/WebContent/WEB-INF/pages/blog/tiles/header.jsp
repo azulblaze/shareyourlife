@@ -19,7 +19,7 @@
               <a href="/index.html">这啦折啦<span>最新打折信息</span></a>
             </li>
             
-            <li class="current">
+            <li<s:if test="nav=='list'"> class="current"</s:if>>
               <a href="/blog">官方博客<span>这啦折啦博客</span></a>
             </li>
 
@@ -27,7 +27,7 @@
               <a href="/html/about.html">关于我们<span>关于这啦折啦</span></a>
             </li>
 
-            <li>
+            <li<s:if test="nav=='suggest'"> class="current"</s:if>>
               <a href="/blog/suggest.html">联系我们 <span>提交您的意见</span></a>
             </li>
 

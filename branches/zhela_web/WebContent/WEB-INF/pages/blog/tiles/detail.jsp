@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script type="text/javascript" src="/scripts/jquery.validate.pack.js" charset="utf-8"></script>
+<script type="text/javascript" src="/scripts/thickbox-compressed.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/style/thickbox.css" type="text/css" media="screen" />
 <script>
 function error_msg(msg){
 	if(msg==null||msg==""){
@@ -34,8 +36,18 @@ function loadcomment(){
 		}
 	});
 }
+function thickboxrun(){
+	tb_init('a.thickbox, area.thickbox, input.thickbox');//pass where to apply thickbox
+	imgLoader = new Image();// preload image
+	imgLoader.src = "/images/loadingAnimation.gif";
+}
 $(document).ready(function(){
 	loadcomment();
+	$("#blogcon img").each(function(){
+		$(this).css("cursor","pointer");
+		$(this).wrap('<a href="'+$(this).attr("src")+'" title="'+$(this).attr("alt")+'" class="thickbox" ></a>');
+	});
+	thickboxrun();
 	$("#v_code_img").bind("click",function(event){
 		var timer=new Date();
 		$("#v_code_img").attr("src","/code.zl?sessionName=blog_comment&mytime="+timer.getHours()+timer.getMinutes()+timer.getSeconds());
@@ -128,11 +140,13 @@ $(document).ready(function(){
 </script>
 	<div class="post">
           <div class="top"></div>
-          <div class="middle">
+          <div class="middle" id="blogcon">
             <span class="date"><s:property value="blog.day"/><small><s:property value="blog.month"/></small></span>
             <h1><s:property value="blog.title"/></h1>
             <p><s:property value="blog.content" escape="false"/></p>
+            <s:if test="blog.tags.size>0">
             <p class="detail_tag">标签：<s:iterator value="blog.tags"><a href="/blog/tag/<s:property value='name'/>"/><s:property value='name'/></a></s:iterator><p>
+            </s:if>
           </div>
           <div class="bottom"></div>
         </div><!--/post-->
