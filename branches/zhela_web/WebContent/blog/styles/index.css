@@ -45,10 +45,10 @@ a:active { color: rgb(251, 210, 20); }
 .column { float: left; display: inline; width: 420px; margin: 0pt 10px 20px; padding: 0pt 10px; }
 .post { width: 640px; float: left; display: inline; }
 .post p, .post ul, .poar code, .post pre { line-height: 22px; }
-.post h1 { font-size: 33px; padding-bottom: 18px; margin-bottom: 12px; border-bottom: 1px solid rgb(255, 255, 255); }
-.post h1 a { color: rgb(255, 255, 255); text-decoration: none; display: block; }
+.post h1 {margin-bottom: 12px;font-size: 33px; padding-bottom: 5px; line-height: 40px; border-bottom: 1px solid rgb(255, 255, 255); }
+.post h1 a {  color: rgb(255, 255, 255); text-decoration: none; display: block; }
 .post h1 a:hover { color: rgb(217, 9, 75); }
-.post .date { float: right; display: inline; font-size: 18px; text-align: center; width: 30px; font-weight: bold; }
+.post .date { float: right; display: inline; font-size: 18px; text-align: center; width: 30px; font-weight: bold;  padding-top:3px;}
 .post .date small { display: block; font-size: 11px; }
 .post .top { background: url('/blog/styles/images/post-top-640w.png') no-repeat scroll 0% 0% transparent; height: 15px; overflow: hidden; }
 .post .middle { background: url('/blog/styles/images/post-middle-640w.png') repeat-y scroll 0% 0% transparent; width: 560px; padding: 20px 40px; }
@@ -101,7 +101,7 @@ a:active { color: rgb(251, 210, 20); }
 .navigation .prevBtn, .navigation .nextBtn { display: inline-block; width: 95px; margin: 20px; position: static; }
 .button a { background: url('/blog/styles/images/button-medium.png') no-repeat scroll left top transparent; width: 97px; padding-right: 2px; height: 28px; overflow: hidden; text-align: center; font-weight: bold; font-size: 12px; line-height: 23px; display: block; }
 .button a { text-decoration: none; font-weight: bold; color: rgb(255, 255, 255); }
-#footer { background: url('/blog/styles/images/footer-bg.png') repeat-x scroll left top transparent; height: 200px; padding: 27px 30px 0pt 0pt; clear: both; font-size: 11px; }
+#footer { background: url('/blog/styles/images/footer-bg.png') repeat-x scroll left top transparent; height: 200px; padding: 27px 30px 0pt 0pt; clear: both; font-size: 12px; }
 #footer .wrapper { width: 880px; }
 #footer .column { width: 270px; height: 161px; padding: 0pt; }
 #footer a { color: rgb(255, 255, 255); }
