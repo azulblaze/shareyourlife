@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script type="text/javascript" src="/scripts/jquery.validate.pack.js" charset="utf-8"></script>
@@ -178,7 +178,7 @@ $(document).ready(function(){
                   <label>网址:</label><input value="" name="blogComment.userIndex" type="text">
                 </li>
                 <li>
-                  <label>内容:</label><textarea cols="35" rows="5" name="blogComment.content"></textarea>
+                  <label>内容:</label><textarea cols="32" rows="5" name="blogComment.content"></textarea>
                 </li>
                 <li class="validcode">
                   <label>验证码</label><input id="validate_code" value="" name="validate_code" type="text"><img src="/images/v_code.png" id="v_code_img" style="display:none;" title="看不起请点击图片刷新"/>
