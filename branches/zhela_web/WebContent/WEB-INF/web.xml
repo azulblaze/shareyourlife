@@ -48,7 +48,7 @@
      </context-param>
      <context-param>
      	<param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
-     	<param-value>/WEB-INF/classes/conf/tiles/tiles-defs.xml,/WEB-INF/classes/conf/tiles/admin-tiles-defs.xml,/WEB-INF/classes/conf/tiles/blog-tiles-defs.xml</param-value>
+     	<param-value>/WEB-INF/classes/conf/tiles/tiles-defs.xml,/WEB-INF/classes/conf/tiles/admin-tiles-defs.xml,/WEB-INF/classes/conf/tiles/blog-tiles-defs.xml,/WEB-INF/classes/conf/tiles/sns-tiles-defs.xml</param-value>
      </context-param>
      <listener>
      	<listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
