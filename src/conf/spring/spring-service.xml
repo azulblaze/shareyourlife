@@ -6,8 +6,8 @@
 	<!-- mail service -->
 	<bean name="smtpAuthenticator"
 		class="com.zhelazhela.system.email.SmtpAuthenticator">
-		<constructor-arg value="andy.noreply.mail@gmail.com" />
-		<constructor-arg value="~@$fs#@s*o)p" />
+		<constructor-arg value="zhelazhela@gmail.com" />
+		<constructor-arg value="yanyan1030" />
 	</bean>
 	<bean name="mailSession" class="javax.mail.Session"
 		factory-method="getInstance">
@@ -46,6 +46,7 @@
 		<property name="upload_logo" value="/upload/images/logo" />
 		<property name="upload_log_maxlength" value="102400" />
 		<property name="upload_blog_pic" value="/upload/images/blogpic" />
+		<property name="upload_good_pic" value="/upload/images/good" />
 	</bean>
 	
 	<bean id="accountService" name="accountService" class="com.zhelazhela.services.impl.AccountServiceImpl" />	
@@ -58,4 +59,8 @@
 	<bean id="programInfoService" name="programInfoService" class="com.zhelazhela.services.impl.ProgramInfoServiceImpl" />
 	<bean id="blogService" name="blogService" class="com.zhelazhela.services.impl.BlogServiceImpl" />
 	
+	<bean id="userProfileService" name="userProfileService" class="com.zhelazhela.services.impl.UserProfileServiceImpl" />
+	<bean id="goodsBasicService" name="goodsBasicService" class="com.zhelazhela.services.impl.GoodsBasicServiceImpl" />
+	<bean id="goodsTagService" name="goodsTagService" class="com.zhelazhela.services.impl.GoodsTagServiceImpl" />
+	<bean id="goodsRelationService" name="goodsRelationService" class="com.zhelazhela.services.impl.GoodsRelationServiceImpl" />
 </beans>
