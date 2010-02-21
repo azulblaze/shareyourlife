@@ -53,8 +53,12 @@
 		
 		<action name="loadcity" class="commonAction" method="loadCity"/>
 		
+		<action name="loadurl" class="commonAction" method="loadUrl">
+			<result name="success">/WEB-INF/pages/common/loadurl.jsp</result>
+		</action>
+		
 	</package>
 	
 	<include file="conf/struts/admin-struts.xml"></include>
-	<include file="conf/struts/blog-struts.xml"></include>
+	<include file="conf/struts/sns-struts.xml"></include>
 </struts>
