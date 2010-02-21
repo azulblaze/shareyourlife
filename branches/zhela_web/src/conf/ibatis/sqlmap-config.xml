@@ -24,4 +24,32 @@
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/blog_tag_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/tags_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/blog_qa_SqlMap.xml" />
+	
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/user_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/userinfo_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/block_user_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/inbox_message_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/outbox_message_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/friend_list_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/base_profile_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/security_question_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/contact_profile_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/certification_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/user_certification_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/grouper_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/group_category_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/group_wall_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/group_discussion_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/group_discussion_post_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/group_user_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_comment_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_track_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_tag_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_user_tag_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_price_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/goods_sell_addr_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/web_site_collection_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/url_redirection_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/user_privacy_SqlMap.xml" />
 </sqlMapConfig>
