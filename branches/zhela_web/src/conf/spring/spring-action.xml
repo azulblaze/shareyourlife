@@ -37,4 +37,10 @@
 	<bean name="blogManageAction" class="com.zhelazhela.actions.ManageBlogAction" singleton="false" >
 		<property name="pagesize" value="20" />
 	</bean>
+	
+	<bean name="snsUserAction" class="com.zhelazhela.actions.UserRegAction" singleton="false" >
+	</bean>
+	
+	<bean name="snsMainAction" class="com.zhelazhela.actions.SNSMainAction" singleton="false" >
+	</bean>
 </beans>
