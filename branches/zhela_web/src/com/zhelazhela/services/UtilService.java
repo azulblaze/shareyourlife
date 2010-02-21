@@ -35,4 +35,6 @@ public interface UtilService {
 	public java.util.List<Attachments> loadAttachments(long news_id,String tablename);
 	
 	public boolean removeAttachment(long id,String rootpath);
+	
+	public String loadUrl(String addr);
 }
