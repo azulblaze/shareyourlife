@@ -20,6 +20,8 @@ public class SystemConfig {
 	private String upload_blog_pic;
 	
 	private String upload_log_maxlength;
+	
+	private String upload_good_pic;
 
 	/**
 	 * @return the domain
@@ -113,6 +115,14 @@ public class SystemConfig {
 
 	public void setUpload_blog_pic(String uploadBlogPic) {
 		upload_blog_pic = uploadBlogPic;
+	}
+
+	public String getUpload_good_pic() {
+		return upload_good_pic;
+	}
+
+	public void setUpload_good_pic(String uploadGoodPic) {
+		upload_good_pic = uploadGoodPic;
 	}
 	
 	
