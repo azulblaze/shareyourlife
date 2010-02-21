@@ -1,5 +1,7 @@
 package com.zhelazhela.domain;
 
+import org.apache.commons.lang.StringUtils;
+
 public class GoodsCollection {
 	
 	public String root_path;
@@ -142,5 +144,10 @@ public class GoodsCollection {
 		root_path = rootPath;
 	}
 	
-	
+	public boolean isValid(){
+		if(StringUtils.isNotBlank(name)&&StringUtils.isNotBlank(source)&&(source.startsWith("http://")||source.startsWith("https://"))){
+			return true;
+		}
+		return false;
+	}
 }
