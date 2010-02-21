@@ -1,0 +1,171 @@
+@charset "UTF-8";
+/* CSS Document */
+body {
+	margin:0;
+	padding:0;
+	font:12px 宋体, 新宋体, Tahoma, arial, sans-serif;
+	line-height:20px;
+}
+
+ul,li {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+h1,h2,h3 {
+	margin:0;
+	line-height:none;
+	padding:0;
+}
+
+img {
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+form,input {
+	margin:0;
+	padding:0;
+}
+
+a {
+	margin:0;
+	padding:0;
+	color:#3ad1fa;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#003399;
+	text-decoration:underline;	
+}
+.clear{
+	clear:both;
+}
+.error{
+	color:red;
+	padding:0px 5px;
+}
+input.error{
+	border:1px dashed #F00;
+}
+
+#wrap{
+	width:960px;
+	margin:0px auto;
+}
+#header{
+	min-height: 55px;
+	padding: 0px;
+	background:#EEE;
+	width:100%;
+	margin:0px;
+}
+#header img{
+	padding-top:5px;
+}
+.right-side {
+	float: right;
+	padding-top: 15px;
+}
+.right-side a {
+	color: #F60;
+	border-left: 1px solid #F60;
+	height: 10px;
+	padding-left: 10px;
+}
+.right-side a.first {
+	border: none;
+	padding: 0;
+}
+#content,#footer{
+	width:100%;
+	margin:0px;
+	clear:both;
+}
+#footer{
+	height:50px;
+	background:#EEE;
+}
+#content #left{
+	background:#993;
+	float:left;
+	width:230px;
+	margin:0px;
+}
+#content #center{
+	height:600px;
+	float:left;
+	width:460px;
+	background:#939;
+	margin:0px 20px;
+}
+#content #right{
+	height:450px;
+	background:#06C;
+	float:left;
+	width:230px;
+	margin:0px;
+}
+#content .line{
+	margin:10px 0px;
+}
+
+.userinfo{padding:15px 10px 25px;zoom:1;overflow:hidden;}
+.userinfo .user_head{zoom:1;overflow:auto;margin:0 0 18px 5px;}
+.userinfo .user_head .picborder_r{margin-right:10px;}
+.userinfo .user_head .picborder_r img{width:50px;height:50px;}
+.userinfo .user_head p{padding:3px 0 5px 0; width:112px; overflow:hidden;white-space:nowrap;}
+.userinfo .user_head p.font_14{word-break:break-all;word-wrap:break-word; white-space:normal;}
+.userinfo .user_head p em{margin-right:7px;}.userinfo .user_atten{clear:both;height:55px;}
+.userinfo .user_atten ul li{border-right-width:1px; min-width:43px;_width:43px; _overflow:visible;float:left;padding-left:5px;line-height:1.6em; white-space:nowrap;}
+.userinfo .user_atten ul li .num{font-family:Arial;font-size:18px; margin-right:5px;}
+.userinfo .user_atten ul li.funs_num .num{font-size:15px;}
+.lf{float:left;}
+
+.good{
+	border-top:1px solid #DDD;
+	clear:both;
+	margin:5px 0px;
+	padding:5px 0px;
+}
+.good .mytag{
+	padding-left:55px;
+}
+.good .pic{
+	float:left;
+	vertical-align:middle;
+}
+.good .middle{
+	float:left;
+	width:360px;
+	vertical-align:top;
+	padding:0px;
+}
+.good .middle h4{
+	line-height:20px;
+	padding:0px;
+	margin:0px;
+}
+.good .right{
+	float:left;
+	width:50px;
+	vertical-align:middle;
+}
+.search{
+	padding:5px 0px;
+}
+.config_nav a,.config_main .config_info a{
+	margin-right:10px;
+	font-weight:bold;
+	font-size:14px;
+	color:#03F;
+}
+.config_main{
+	margin-top:10px;
+}
+.config_main .config_info a{
+	font-size:12px;
+}
