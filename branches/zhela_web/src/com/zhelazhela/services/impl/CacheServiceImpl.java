@@ -2,9 +2,12 @@ package com.zhelazhela.services.impl;
 
 import java.util.List;
 
+import com.zhelazhela.db.dao.SecurityQuestionDAO;
 import com.zhelazhela.db.model.MerchandiseCategory;
 import com.zhelazhela.db.model.ProgramInfo;
 import com.zhelazhela.db.model.Province;
+import com.zhelazhela.db.model.SecurityQuestion;
+import com.zhelazhela.db.model.SecurityQuestionExample;
 import com.zhelazhela.domain.DiscountNewsList;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
@@ -46,7 +49,17 @@ public class CacheServiceImpl implements CacheService {
 	private static long programinfo_time = 0l;
 		
 	private long time_between = 1000*60*10;
+	
+	private static  List<SecurityQuestion> questions; 
+	
+	private static long lastquestion_time = 0l;
+	
+	private SecurityQuestionDAO securityQuestionDAO;
 		
+	public void setSecurityQuestionDAO(SecurityQuestionDAO securityQuestionDAO) {
+		this.securityQuestionDAO = securityQuestionDAO;
+	}
+
 	@Override
 	public DiscountNewsList loadWeeklyHot() throws Exception {
 		if(weeklyhot==null){
@@ -210,6 +223,17 @@ public class CacheServiceImpl implements CacheService {
 
 	public void setTime_between(long timeBetween) {
 		time_between = timeBetween;
+	}
+
+	@Override
+	public List<SecurityQuestion> loadSecurityQuestions() throws Exception {
+		if(System.currentTimeMillis()-lastquestion_time>time_between){
+			SecurityQuestionExample example = new SecurityQuestionExample();
+			example.createCriteria().andIdIsNotNull();
+			questions = securityQuestionDAO.selectByExample(example);
+			lastquestion_time = System.currentTimeMillis();
+		}
+		return questions;
 	}
 
 }
