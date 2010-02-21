@@ -51,4 +51,15 @@ public class Mail {
 				+" content:"+content;
 	}
 	
+	public static synchronized Mail getActvityEmail(long user_id,String email,String code,String domain){
+		Mail m = new Mail();
+		String tmp = "请使用下面的链接激活您的账号：<a href=\""+domain+"/sns/act.zl?id="+user_id+"&code="+code+"\">"+domain+"/sns/act.zl?id="+user_id+"&code="+code+"</a>";
+		tmp = tmp + "<br/>或者复制下面的地址到浏览器中激活："+domain+"/sns/act.zl?id="+user_id+"&code="+code;
+		m.setContent(tmp);
+		m.setSubject("激活您的账号 -- 这啦折啦");
+		m.setToAddr(email);
+		m.setType(MAIL_TYPE_HTML);
+		return m;
+	}
+	
 }
