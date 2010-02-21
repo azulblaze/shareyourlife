@@ -1,0 +1,47 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+
+	<package name="sns" extends="tiles-default" namespace="/sns">
+		<global-results>
+			<result name="exception">/html/error.html</result>
+			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>
+			<result name="login" type="redirect-action">
+				<param name="actionName">login</param>
+				<param name="url">${url}</param>
+			</result>
+		</global-results>
+		<global-exception-mappings>   
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="reg" class="snsUserAction" method="reg" >
+			<result name="input" type="tiles">sns.reg</result>
+			<result name="success" type="tiles">sns.act</result>
+		</action>
+		
+		<action name="act" class="snsUserAction" method="activity" >
+			<result name="success" type="tiles">sns.actresult</result>
+		</action>
+		
+		<action name="login" class="snsUserAction" method="login" >
+			<result name="input" type="tiles">sns.login</result>
+			<result name="success" type="redirect-action">main</result>
+			<result name="url" type="redirect">${url}</result>
+			<result name="act" type="tiles">sns.act</result>
+		</action>
+		
+		<action name="remail" class="snsUserAction" method="remail"/>
+		
+		<action name="main" class="snsMainAction" method="main">
+			<result name="success" type="tiles">sns.main</result>
+		</action>
+		
+		<action name="collection" class="snsMainAction" method="collection">
+			<result name="success">/WEB-INF/pages/sns/tiles/collect.jsp</result>
+		</action>
+	</package>
+
+</struts>
