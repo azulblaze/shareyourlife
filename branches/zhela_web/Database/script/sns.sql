@@ -402,8 +402,9 @@ CREATE  TABLE IF NOT EXISTS goods_tag (
   name VARCHAR(100) NULL ,
   update_time TIMESTAMP NULL ,
   PRIMARY KEY (id) )
-ENGINE = InnoDB;
-
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 CREATE INDEX i_gt ON goods_tag (name ASC) ;
 
 -- -----------------------------------------------------
