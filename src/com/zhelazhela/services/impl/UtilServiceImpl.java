@@ -3,6 +3,10 @@ package com.zhelazhela.services.impl;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;
 
 import com.zhelazhela.db.dao.CityDAO;
@@ -360,6 +364,37 @@ public class UtilServiceImpl implements UtilService {
 		return false;
 	}
 
-
+	@Override
+	public String loadUrl(String addr) {
+		try{
+			HttpClient hc = new HttpClient();
+			HttpMethod get =  new GetMethod();
+			get.setURI(new URI(addr,true));
+			get.setRequestHeader("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; zh-CN; rv:1.9.2) Gecko/20100115 Firefox/3.6");
+			get.setRequestHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+			hc.executeMethod(get);
+			CommonMethod cm = CommonMethod.newInstance();
+			String tmp_char = cm.findCharSet(get.getResponseHeader("Content-Type").getValue());
+			byte b[] = new byte[4096];
+			java.io.InputStream is = get.getResponseBodyAsStream();
+			int read = 0;
+			java.io.ByteArrayOutputStream fos = new java.io.ByteArrayOutputStream();
+			while((read=is.read(b))!=-1){
+				fos.write(b, 0, read);
+			}
+			if(tmp_char==null){
+				tmp_char = cm.findCharSet(fos.toString());
+			}
+			if(tmp_char==null){
+				tmp_char = "utf-8";
+			}
+			String content  = fos.toString(tmp_char);
+			return content;
+		}catch(Exception e){
+			
+		}
+		return "";
+	}
+	
 
 }
