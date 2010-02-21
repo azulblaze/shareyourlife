@@ -23,6 +23,12 @@ public class CommonAction extends BaseAction {
 		return "json";
 	}
 	
+	public String loadUrl() throws Exception{
+		String url = this.getRequestParameter("url");
+		setValue("content",utilService.loadUrl(url).replaceAll(".location",""));
+		return SUCCESS;
+	}
+	
 	public long getProvince_id() {
 		return province_id;
 	}
