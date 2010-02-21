@@ -84,12 +84,11 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 				goodsCommentDAO.insert(record);
 			}
 			m_db_tx_manager.commit(status);
+			return new GoodsDetail();
 		}catch(Exception e){
 			m_db_tx_manager.rollback(status);
 			throw e;
 		}
-		
-		return null;
 	}
 
 	@Override
