@@ -38,4 +38,7 @@ function Set() {
 	this.toString = function(){
 		return this.values.toString();
     }
+	this.toArray = function(){
+		return this.values;
+	}
 }  
