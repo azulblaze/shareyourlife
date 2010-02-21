@@ -18,4 +18,32 @@
 	<bean name="blogTagDAO" id="blogTagDAO" class="com.zhelazhela.db.dao.BlogTagDAOImpl" />
 	<bean name="tagsDAO" id="tagsDAO" class="com.zhelazhela.db.dao.TagsDAOImpl" />
 	<bean name="blogQaDAO" id="blogQaDAO" class="com.zhelazhela.db.dao.BlogQaDAOImpl" />
+	
+	<bean name="userDAO" id="userDAO" class="com.zhelazhela.db.dao.UserDAOImpl" />
+	<bean name="userinfoDAO" id="userinfoDAO" class="com.zhelazhela.db.dao.UserinfoDAOImpl" />
+	<bean name="blockUserDAO" id="blockUserDAO" class="com.zhelazhela.db.dao.BlockUserDAOImpl" />
+	<bean name="inboxMessageDAO" id="inboxMessageDAO" class="com.zhelazhela.db.dao.InboxMessageDAOImpl" />
+	<bean name="outboxMessageDAO" id="outboxMessageDAO" class="com.zhelazhela.db.dao.OutboxMessageDAOImpl" />
+	<bean name="friendListDAO" id="friendListDAO" class="com.zhelazhela.db.dao.FriendListDAOImpl" />
+	<bean name="baseProfileDAO" id="baseProfileDAO" class="com.zhelazhela.db.dao.BaseProfileDAOImpl" />
+	<bean name="securityQuestionDAO" id="securityQuestionDAO" class="com.zhelazhela.db.dao.SecurityQuestionDAOImpl" />
+	<bean name="contactProfileDAO" id="contactProfileDAO" class="com.zhelazhela.db.dao.ContactProfileDAOImpl" />
+	<bean name="certificationDAO" id="certificationDAO" class="com.zhelazhela.db.dao.CertificationDAOImpl" />
+	<bean name="userCertificationDAO" id="userCertificationDAO" class="com.zhelazhela.db.dao.UserCertificationDAOImpl" />
+	<bean name="grouperDAO" id="grouperDAO" class="com.zhelazhela.db.dao.GrouperDAOImpl" />
+	<bean name="groupCategoryDAO" id="groupCategoryDAO" class="com.zhelazhela.db.dao.GroupCategoryDAOImpl" />
+	<bean name="groupWallDAO" id="groupWallDAO" class="com.zhelazhela.db.dao.GroupWallDAOImpl" />
+	<bean name="groupDiscussionDAO" id="groupDiscussionDAO" class="com.zhelazhela.db.dao.GroupDiscussionDAOImpl" />
+	<bean name="groupDiscussionPostDAO" id="groupDiscussionPostDAO" class="com.zhelazhela.db.dao.GroupDiscussionPostDAOImpl" />
+	<bean name="groupUserDAO" id="groupUserDAO" class="com.zhelazhela.db.dao.GroupUserDAOImpl" />
+	<bean name="goodsDAO" id="goodsDAO" class="com.zhelazhela.db.dao.GoodsDAOImpl" />
+	<bean name="goodsCommentDAO" id="goodsCommentDAO" class="com.zhelazhela.db.dao.GoodsCommentDAOImpl" />
+	<bean name="goodsTrackDAO" id="goodsTrackDAO" class="com.zhelazhela.db.dao.GoodsTrackDAOImpl" />
+	<bean name="goodsTagDAO" id="goodsTagDAO" class="com.zhelazhela.db.dao.GoodsTagDAOImpl" />
+	<bean name="goodsUserTagDAO" id="goodsUserTagDAO" class="com.zhelazhela.db.dao.GoodsUserTagDAOImpl" />
+	<bean name="goodsPriceDAO" id="goodsPriceDAO" class="com.zhelazhela.db.dao.GoodsPriceDAOImpl" />
+	<bean name="goodsSellAddrDAO" id="goodsSellAddrDAO" class="com.zhelazhela.db.dao.GoodsSellAddrDAOImpl" />
+	<bean name="webSiteCollectionDAO" id="webSiteCollectionDAO" class="com.zhelazhela.db.dao.WebSiteCollectionDAOImpl" />
+	<bean name="urlRedirectionDAO" id="urlRedirectionDAO" class="com.zhelazhela.db.dao.UrlRedirectionDAOImpl" />
+	<bean name="userPrivacyDAO" id="userPrivacyDAO" class="com.zhelazhela.db.dao.UserPrivacyDAOImpl" />
 </beans>
