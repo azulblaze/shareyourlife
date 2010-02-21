@@ -42,6 +42,11 @@
 		<action name="collection" class="snsMainAction" method="collection">
 			<result name="success">/WEB-INF/pages/sns/tiles/collect.jsp</result>
 		</action>
+		
+		<action name="addgoods" class="snsMainAction" method="addgoods">
+			<result name="input">/WEB-INF/pages/sns/tiles/collection.jsp</result>
+			<result name="success">/WEB-INF/pages/sns/tiles/close_window.jsp</result>
+		</action>
 	</package>
 
 </struts>
