@@ -5,6 +5,7 @@ import java.util.List;
 import com.zhelazhela.db.model.MerchandiseCategory;
 import com.zhelazhela.db.model.ProgramInfo;
 import com.zhelazhela.db.model.Province;
+import com.zhelazhela.db.model.SecurityQuestion;
 import com.zhelazhela.domain.DiscountNewsList;
 
 public interface CacheService {
@@ -18,5 +19,7 @@ public interface CacheService {
 	public List<ProgramInfo> loadProgram() throws Exception;
 	
 	public List<Province> loadProvinces() throws Exception;
+	
+	public List<SecurityQuestion> loadSecurityQuestions() throws Exception;
 	
 }
