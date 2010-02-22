@@ -248,4 +248,13 @@
       status = #status:INTEGER#
     where id = #id:BIGINT#
   </update>
+  
+  <select id="selectUserPriceByGoods" parameterClass="com.zhelazhela.db.model.GoodsPriceExample" resultMap="ibatorgenerated_BaseResultMap">
+    select gp.id as id,gp.good_id as goods_id,gp.provide_user_id as user_id, ui.name as user_name,ui.avatar as user_avatar,gp.price as price,gp.topic as topic,cc.id as cert_id,cc.name as cert_name,cc.icon as cert_icon,cc.description as cert_description,IFNULL(uc.parameter,-1) as cert_parameter,uc.start_date as cert_date  
+    from goods_price gp 
+    left join userinfo ui on gp.provide_user_id = ui.user_id 
+    left join user_certification uc on gp.provide_user_id = uc.user_id and uc.cert_id =1 and (uc.end_date is null or uc.end_date &lt; CURRENT_TIMESTAMP) 
+    left join certification cc on cc.id = uc.cert_id 
+    order by cert_parameter DESC;
+  </select>
 </sqlMap>
