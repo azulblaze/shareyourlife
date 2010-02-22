@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsTrack;
 import com.zhelazhela.db.model.GoodsTrackExample;
+import com.zhelazhela.db.model.define.UserTrack;
+
 import java.util.List;
 
 public interface GoodsTrackDAO {
@@ -92,4 +94,8 @@ public interface GoodsTrackDAO {
      * @ibatorgenerated Fri Feb 12 23:38:37 CST 2010
      */
     int updateByPrimaryKey(GoodsTrack record);
+    
+    public List<UserTrack> loadUserTrack(Long userid, List<Long> beenblocked,int page,int pagesize);
+    
+    public int countUserTrack(Long userid, List<Long> beenblocked);
 }

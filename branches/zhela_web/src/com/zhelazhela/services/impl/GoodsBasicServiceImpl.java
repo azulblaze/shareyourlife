@@ -6,10 +6,13 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.zhelazhela.db.dao.GoodsCommentDAO;
 import com.zhelazhela.db.dao.GoodsDAO;
+import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.model.Goods;
 import com.zhelazhela.db.model.GoodsComment;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
+import com.zhelazhela.domain.SNSUser;
+import com.zhelazhela.domain.UserTrackList;
 import com.zhelazhela.services.GoodsBasicService;
 import com.zhelazhela.services.GoodsRelationService;
 import com.zhelazhela.system.config.SystemConfig;
@@ -26,6 +29,8 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 	private GoodsCommentDAO goodsCommentDAO;
 	
 	private GoodsRelationService goodsRelationService;
+	
+	private GoodsTrackDAO goodsTrackDAO;
 	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
@@ -45,6 +50,10 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 
 	public void setGoodsRelationService(GoodsRelationService goodsRelationService) {
 		this.goodsRelationService = goodsRelationService;
+	}
+
+	public void setGoodsTrackDAO(GoodsTrackDAO goodsTrackDAO) {
+		this.goodsTrackDAO = goodsTrackDAO;
 	}
 
 	@Override
@@ -92,9 +101,27 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 	}
 
 	@Override
-	public GoodsDetail loadGoodsDetail(long id, String sn) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public GoodsDetail loadGoodsDetail(long id,SNSUser user, String sn,int page,int pagesize) throws Exception {
+		Goods g = goodsDAO.selectByPrimaryKey(id);
+		if(g==null){
+			return null;
+		}
+		GoodsDetail gd = new GoodsDetail();
+		gd.setGoods(g);
+		UserTrackList utl = new UserTrackList();
+		utl.setPage(page);
+		utl.setPagesize(pagesize);
+		if(user!=null){
+			utl.setList(goodsTrackDAO.loadUserTrack(user.getId(), user.getBeen_blocked(), page, pagesize));
+			utl.setSize(goodsTrackDAO.countUserTrack(user.getId(), user.getBeen_blocked()));
+		}else{
+			utl.setList(goodsTrackDAO.loadUserTrack(null, null, page, pagesize));
+			utl.setSize(goodsTrackDAO.countUserTrack(null, null));
+		}
+		gd.setTrackuser(utl);
+		gd.setTrack_size(utl.getSize());
+		//gd.setComment_size(commentSize)
+		return gd;
 	}
 
 }
