@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsTrack;
 import com.zhelazhela.db.model.GoodsTrackExample;
+import com.zhelazhela.db.model.define.UserTrack;
+
 import java.util.List;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -161,4 +163,37 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
             return record;
         }
     }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<UserTrack> loadUserTrack(Long userid, List<Long> beenblocked,int page,int pagesize) {
+		// TODO Auto-generated method stub
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		if(userid!=null&&userid>0){
+			map.put("user_id", userid);
+		}
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		if(beenblocked!=null&&beenblocked.size()>0){
+			map.put("been_blocked", beenblocked);
+		}
+		List<UserTrack> list = (List<UserTrack>)getSqlMapClientTemplate().queryForList("goods_track.selectUserTrackByGoods", map);
+		return list;
+	}
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public int countUserTrack(Long userid, List<Long> beenblocked) {
+		// TODO Auto-generated method stub
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		if(userid!=null&&userid>0){
+			map.put("user_id", userid);
+		}
+		if(beenblocked!=null&&beenblocked.size()>0){
+			map.put("been_blocked", beenblocked);
+		}
+		List<UserTrack> list = (List<UserTrack>)getSqlMapClientTemplate().queryForList("goods_track.countUserTrackByGoods", map);
+		return list.size();
+	}
 }

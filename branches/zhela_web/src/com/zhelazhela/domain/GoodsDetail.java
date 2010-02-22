@@ -1,6 +1,9 @@
 package com.zhelazhela.domain;
 
 import org.apache.commons.httpclient.URI;
+import org.apache.commons.lang.StringUtils;
+
+import com.zhelazhela.db.model.Goods;
 
 public class GoodsDetail {
 
@@ -11,6 +14,10 @@ public class GoodsDetail {
 	public String source;
 	
 	public String source_domain;
+	
+	public String buylink;
+	
+	public String buylink_domain;
 	
 	public String pic;
 	
@@ -26,13 +33,15 @@ public class GoodsDetail {
 	
 	public int comment_size;
 	
-	public SNSUserBaseinfoList trackuser;
+	public UserTrackList trackuser;
 	
 	public int track_size;
 	
 	public GoodsOfferList offers;
 	
 	public int offer_size;
+	
+	public java.util.Date update_time;
 
 	public String getName() {
 		return name;
@@ -57,7 +66,7 @@ public class GoodsDetail {
 	public void setSource(String source) {
 		this.source = source;
 		try{
-			URI uri = new URI("http://xx.google.com.cn/dlf/dgflg/test.jsp",false);
+			URI uri = new URI(source,false);
 			if(uri!=null){
 				this.source_domain = uri.getHost();
 			}
@@ -130,11 +139,11 @@ public class GoodsDetail {
 		comment_size = commentSize;
 	}
 
-	public SNSUserBaseinfoList getTrackuser() {
+	public UserTrackList getTrackuser() {
 		return trackuser;
 	}
 
-	public void setTrackuser(SNSUserBaseinfoList trackuser) {
+	public void setTrackuser(UserTrackList trackuser) {
 		this.trackuser = trackuser;
 	}
 
@@ -162,4 +171,50 @@ public class GoodsDetail {
 		offer_size = offerSize;
 	}
 	
+	public java.util.Date getUpdate_time() {
+		return update_time;
+	}
+
+	public void setUpdate_time(java.util.Date updateTime) {
+		update_time = updateTime;
+	}
+
+	public String getBuylink() {
+		return buylink;
+	}
+
+	public void setBuylink(String buylink) {
+		this.buylink = buylink;
+		try{
+			URI uri = new URI(buylink,false);
+			if(uri!=null){
+				this.buylink_domain = uri.getHost();
+			}
+		}catch(Exception e){
+			
+		}
+	}
+
+	public String getBuylink_domain() {
+		return buylink_domain;
+	}
+
+	public void setBuylink_domain(String buylinkDomain) {
+		buylink_domain = buylinkDomain;
+	}
+
+	public void setGoods(Goods g){
+		this.category = g.getCategory();
+		this.desc = g.getDescription();
+		this.icon = g.getIcon();
+		this.id = g.getId();
+		this.pic = g.getPicture();
+		this.sn = g.getSn();
+		setSource(g.getSource());
+		this.name = g.getTopic();
+		this.update_time = g.getUpdateTime();
+		if(StringUtils.isNotBlank(g.getBuyLink())){
+			setBuylink(g.getBuyLink());
+		}
+	}
 }
