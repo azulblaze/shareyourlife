@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsComment;
 import com.zhelazhela.db.model.GoodsCommentExample;
+import com.zhelazhela.db.model.define.UserComment;
+
 import java.util.List;
 
 public interface GoodsCommentDAO {
@@ -72,4 +74,8 @@ public interface GoodsCommentDAO {
 	 * @ibatorgenerated  Mon Feb 15 01:04:29 CST 2010
 	 */
 	int updateByPrimaryKey(GoodsComment record);
+	
+	java.util.List<UserComment> loadUserComment(long goods_id,String goods_sn,int page,int pagesize);
+	
+	int countUserComment(long goods_id,String goods_sn);
 }

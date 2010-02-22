@@ -2,7 +2,11 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsComment;
 import com.zhelazhela.db.model.GoodsCommentExample;
+import com.zhelazhela.db.model.define.UserComment;
+
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public class GoodsCommentDAOImpl extends SqlMapClientDaoSupport implements GoodsCommentDAO {
@@ -150,5 +154,34 @@ public class GoodsCommentDAOImpl extends SqlMapClientDaoSupport implements Goods
 		public Object getRecord() {
 			return record;
 		}
+	}
+
+	@Override
+	public int countUserComment(long goodsId, String goodsSn) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("goodsid", goodsId);
+		if(StringUtils.isNotBlank(goodsSn)){
+			map.put("goodssn", goodsSn);
+		}
+		Integer count = (Integer) getSqlMapClientTemplate().queryForObject(
+				"goods_comment.countUserCommentByGoods", map);
+		return count;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserComment> loadUserComment(long goodsId, String goodsSn,
+			int page, int pagesize) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("goodsid", goodsId);
+		if(StringUtils.isNotBlank(goodsSn)){
+			map.put("goodssn", goodsSn);
+		}
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		List<UserComment> list = (List<UserComment>)getSqlMapClientTemplate().queryForList(
+				"goods_comment.selectUserCommentByGoods", map);
+		return list;
 	}
 }
