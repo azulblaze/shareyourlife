@@ -1,6 +1,7 @@
 package com.zhelazhela.actions;
 
-import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
+
+import org.apache.commons.lang.StringUtils;
 
 import net.sf.json.JSONObject;
 
