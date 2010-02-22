@@ -1,6 +1,7 @@
 package com.zhelazhela.domain;
 
-import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.zhelazhela.util.CommonMethod;
 
