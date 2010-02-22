@@ -9,6 +9,7 @@ import com.zhelazhela.db.dao.GoodsDAO;
 import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.model.Goods;
 import com.zhelazhela.db.model.GoodsComment;
+import com.zhelazhela.domain.GoodCommentList;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
 import com.zhelazhela.domain.SNSUser;
@@ -108,20 +109,35 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		}
 		GoodsDetail gd = new GoodsDetail();
 		gd.setGoods(g);
+		UserTrackList utl = loadUserTrack(id,user,sn,page,pagesize);
+		gd.setTrackuser(utl);
+		gd.setTrack_size(utl.getSize());
+		GoodCommentList gcl = loadUserComment(id,sn,page,pagesize);
+		gd.setComment_size(gcl.getSize());
+		gd.setComments(gcl);
+		return gd;
+	}
+
+	public UserTrackList loadUserTrack(long id,SNSUser user, String sn,int page,int pagesize) throws Exception {
 		UserTrackList utl = new UserTrackList();
 		utl.setPage(page);
 		utl.setPagesize(pagesize);
 		if(user!=null){
-			utl.setList(goodsTrackDAO.loadUserTrack(user.getId(), user.getBeen_blocked(), page, pagesize));
-			utl.setSize(goodsTrackDAO.countUserTrack(user.getId(), user.getBeen_blocked()));
+			utl.setList(goodsTrackDAO.loadUserTrack(id,user.getId(), user.getBeen_blocked(), page, pagesize));
+			utl.setSize(goodsTrackDAO.countUserTrack(id,user.getId(), user.getBeen_blocked()));
 		}else{
-			utl.setList(goodsTrackDAO.loadUserTrack(null, null, page, pagesize));
-			utl.setSize(goodsTrackDAO.countUserTrack(null, null));
+			utl.setList(goodsTrackDAO.loadUserTrack(id,null, null, page, pagesize));
+			utl.setSize(goodsTrackDAO.countUserTrack(id,null, null));
 		}
-		gd.setTrackuser(utl);
-		gd.setTrack_size(utl.getSize());
-		//gd.setComment_size(commentSize)
-		return gd;
+		return utl;
 	}
-
+	
+	public GoodCommentList loadUserComment(long id,String sn,int page,int pagesize) throws Exception {
+		GoodCommentList gcl = new GoodCommentList();
+		gcl.setPage(page);
+		gcl.setPagesize(pagesize);
+		gcl.setList(goodsCommentDAO.loadUserComment(id, sn, page, pagesize));
+		gcl.setSize(goodsCommentDAO.countUserComment(id, sn));
+		return gcl;
+	}
 }
