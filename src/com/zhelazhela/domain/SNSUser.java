@@ -144,6 +144,15 @@ public class SNSUser {
 	public void setBeen_blocked(java.util.List<Long> beenBlocked) {
 		been_blocked = beenBlocked;
 	}
+
+	@Override
+	public boolean equals(Object arg0) {
+		if(arg0 instanceof SNSUser){			
+			Long _id = ((SNSUser) arg0).getId();
+			return _id.equals(this.id);
+		}
+		return false;
+	}
 	
 	
 }
