@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.zhelazhela.services.ImageService;
 
