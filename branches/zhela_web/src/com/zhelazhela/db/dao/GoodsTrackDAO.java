@@ -95,7 +95,7 @@ public interface GoodsTrackDAO {
      */
     int updateByPrimaryKey(GoodsTrack record);
     
-    public List<UserTrack> loadUserTrack(Long userid, List<Long> beenblocked,int page,int pagesize);
+    public List<UserTrack> loadUserTrack(long goodid,Long userid, List<Long> beenblocked,int page,int pagesize);
     
-    public int countUserTrack(Long userid, List<Long> beenblocked);
+    public int countUserTrack(long goodid,Long userid, List<Long> beenblocked);
 }
