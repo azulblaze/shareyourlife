@@ -285,7 +285,11 @@
     left join userinfo ui on gp.provide_user_id = ui.user_id 
     left join user_certification uc on gp.provide_user_id = uc.user_id and uc.cert_id =1 and (uc.end_date is null or uc.end_date &lt; CURRENT_TIMESTAMP) 
     left join certification cc on cc.id = uc.cert_id 
-    order by cert_parameter DESC;
+    where gp.good_id = #good_id:BIGINT#
+    order by cert_parameter DESC
+    <isNotNull property="limit">
+    	limit $limit$
+    </isNotNull>
   </select>
   
   <select id="selectPriceAddrById" parameterClass="java.lang.Long" resultMap="define_UserPriceMap">
