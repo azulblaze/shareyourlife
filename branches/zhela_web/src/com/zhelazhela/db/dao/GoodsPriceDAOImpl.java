@@ -2,7 +2,11 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsPrice;
 import com.zhelazhela.db.model.GoodsPriceExample;
+import com.zhelazhela.db.model.define.UserPrice;
+
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public class GoodsPriceDAOImpl extends SqlMapClientDaoSupport implements GoodsPriceDAO {
@@ -148,5 +152,22 @@ public class GoodsPriceDAOImpl extends SqlMapClientDaoSupport implements GoodsPr
 		public Object getRecord() {
 			return record;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserPrice> loadUserPrice(long goodsid, String goodssn,
+			int page, int pagesize) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("good_id", goodsid);
+		if(StringUtils.isNotBlank(goodssn)){
+			map.put("goodssn", goodssn);
+		}
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		List<UserPrice> list = getSqlMapClientTemplate().queryForList(
+				"goods_price.selectUserPriceByGoods", map);
+		return list;
 	}
 }
