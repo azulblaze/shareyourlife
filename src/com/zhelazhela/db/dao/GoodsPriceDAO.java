@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsPrice;
 import com.zhelazhela.db.model.GoodsPriceExample;
+import com.zhelazhela.db.model.define.UserPrice;
+
 import java.util.List;
 
 public interface GoodsPriceDAO {
@@ -71,4 +73,6 @@ public interface GoodsPriceDAO {
 	 * @ibatorgenerated  Sun Feb 14 23:42:49 CST 2010
 	 */
 	int updateByPrimaryKey(GoodsPrice record);
+	
+	java.util.List<UserPrice> loadUserPrice(long goodsid,String goodssn,int page,int pagesize);
 }
