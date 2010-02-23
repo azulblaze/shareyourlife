@@ -458,7 +458,7 @@ CREATE  TABLE IF NOT EXISTS goods_sell_addr (
   buy_country VARCHAR(45) NULL ,
   buy_state_province VARCHAR(45) NULL ,
   buy_city VARCHAR(45) NULL ,
-  buty_addr VARCHAR(45) NULL ,
+  buy_addr VARCHAR(45) NULL ,
   status INT NULL ,
   longitude FLOAT NULL ,
   latitude FLOAT NULL ,
