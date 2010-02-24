@@ -338,6 +338,15 @@
 		</isNotEmpty>
 		)
     </dynamic>
+  </select>
+  
+  <select id="selectUserGoodsByUser" resultMap="define_UserTrackMap" parameterClass="java.util.Map" >
+    select gt.id as track_id,gt.goods_id as goods_id,gt.SN as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time 
+    from goods_track gt 
+    left join goods_tag gtg on gt.goods_tag_id=gtg.id 
+    left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
+    where user_id=1 
+    order by gt.update_time desc
     <isNotNull property="limit">
     	limit $limit$
     </isNotNull>
