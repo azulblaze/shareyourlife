@@ -75,4 +75,6 @@ public interface GoodsPriceDAO {
 	int updateByPrimaryKey(GoodsPrice record);
 	
 	java.util.List<UserPrice> loadUserPrice(long goodsid,String goodssn,int page,int pagesize);
+	
+	int countUserPrice(long goodsid,String goodssn);
 }

@@ -170,4 +170,15 @@ public class GoodsPriceDAOImpl extends SqlMapClientDaoSupport implements GoodsPr
 				"goods_price.selectUserPriceByGoods", map);
 		return list;
 	}
+	
+	public int countUserPrice(long goodsid, String goodssn) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("good_id", goodsid);
+		if(StringUtils.isNotBlank(goodssn)){
+			map.put("goodssn", goodssn);
+		}
+		Integer count = (Integer) getSqlMapClientTemplate().queryForObject(
+				"goods_price.countUserPriceByGoods", map);
+		return count;
+	}
 }

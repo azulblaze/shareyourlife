@@ -4,6 +4,9 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.lang.StringUtils;
 
 import com.zhelazhela.db.model.Goods;
+import com.zhelazhela.db.model.GoodsSellAddr;
+import com.zhelazhela.db.model.define.UserPrice;
+import com.zhelazhela.db.model.define.UserPriceAddr;
 
 public class GoodsDetail {
 
@@ -161,6 +164,15 @@ public class GoodsDetail {
 
 	public void setOffers(GoodsOfferList offers) {
 		this.offers = offers;
+		if(offers!=null&&offers.getC_size()>0){
+			UserPrice up = offers.getList().get(0);
+			if(up!=null&&up.getPriceaddr().size()>0){
+				UserPriceAddr upa = up.getPriceaddr().get(0);
+				if(upa!=null&&upa.getAddr_type()==GoodsSellAddr.WEB){
+					setBuylink(upa.getBuy_link());
+				}
+			}
+		}
 	}
 
 	public int getOffer_size() {

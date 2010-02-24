@@ -6,12 +6,14 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.zhelazhela.db.dao.GoodsCommentDAO;
 import com.zhelazhela.db.dao.GoodsDAO;
+import com.zhelazhela.db.dao.GoodsPriceDAO;
 import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.model.Goods;
 import com.zhelazhela.db.model.GoodsComment;
 import com.zhelazhela.domain.GoodCommentList;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
+import com.zhelazhela.domain.GoodsOfferList;
 import com.zhelazhela.domain.SNSUser;
 import com.zhelazhela.domain.UserTrackList;
 import com.zhelazhela.services.GoodsBasicService;
@@ -32,6 +34,8 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 	private GoodsRelationService goodsRelationService;
 	
 	private GoodsTrackDAO goodsTrackDAO;
+	
+	private GoodsPriceDAO goodsPriceDAO;
 	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
@@ -55,6 +59,10 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 
 	public void setGoodsTrackDAO(GoodsTrackDAO goodsTrackDAO) {
 		this.goodsTrackDAO = goodsTrackDAO;
+	}
+
+	public void setGoodsPriceDAO(GoodsPriceDAO goodsPriceDAO) {
+		this.goodsPriceDAO = goodsPriceDAO;
 	}
 
 	@Override
@@ -115,6 +123,9 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		GoodCommentList gcl = loadUserComment(id,sn,page,pagesize);
 		gd.setComment_size(gcl.getSize());
 		gd.setComments(gcl);
+		GoodsOfferList gol = loadGoodsOffer(id,sn,page,pagesize);
+		gd.setOffers(gol);
+		gd.setOffer_size(gol.getSize());
 		return gd;
 	}
 
@@ -139,5 +150,14 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		gcl.setList(goodsCommentDAO.loadUserComment(id, sn, page, pagesize));
 		gcl.setSize(goodsCommentDAO.countUserComment(id, sn));
 		return gcl;
+	}
+	
+	public GoodsOfferList loadGoodsOffer(long id,String sn,int page,int pagesize) throws Exception{
+		GoodsOfferList gol = new GoodsOfferList();
+		gol.setPage(page);
+		gol.setPagesize(pagesize);
+		gol.setList(goodsPriceDAO.loadUserPrice(id, sn, page, pagesize));
+		gol.setSize(goodsPriceDAO.countUserPrice(id, sn));
+		return gol;
 	}
 }
