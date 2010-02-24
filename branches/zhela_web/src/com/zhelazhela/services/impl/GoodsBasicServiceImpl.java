@@ -15,6 +15,7 @@ import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
 import com.zhelazhela.domain.GoodsOfferList;
 import com.zhelazhela.domain.SNSUser;
+import com.zhelazhela.domain.UserGoodsList;
 import com.zhelazhela.domain.UserTrackList;
 import com.zhelazhela.services.GoodsBasicService;
 import com.zhelazhela.services.GoodsRelationService;
@@ -159,5 +160,12 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		gol.setList(goodsPriceDAO.loadUserPrice(id, sn, page, pagesize));
 		gol.setSize(goodsPriceDAO.countUserPrice(id, sn));
 		return gol;
+	}
+
+	@Override
+	public UserGoodsList loadUserGoodsList(long userId, long loadUserId,
+			int page, int pagesize) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

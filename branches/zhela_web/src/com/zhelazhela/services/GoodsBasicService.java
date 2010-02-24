@@ -5,6 +5,7 @@ import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
 import com.zhelazhela.domain.GoodsOfferList;
 import com.zhelazhela.domain.SNSUser;
+import com.zhelazhela.domain.UserGoodsList;
 import com.zhelazhela.domain.UserTrackList;
 
 public interface GoodsBasicService {
@@ -18,4 +19,6 @@ public interface GoodsBasicService {
 	public GoodCommentList loadUserComment(long id,String sn,int page,int pagesize) throws Exception;
 	
 	public GoodsOfferList loadGoodsOffer(long id,String sn,int page,int pagesize) throws Exception;
+	
+	public UserGoodsList loadUserGoodsList(long user_id,long load_user_id,int page,int pagesize ) throws Exception;
 }
