@@ -2,6 +2,7 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsTrack;
 import com.zhelazhela.db.model.GoodsTrackExample;
+import com.zhelazhela.db.model.define.UserGoods;
 import com.zhelazhela.db.model.define.UserTrack;
 
 import java.util.List;
@@ -98,4 +99,6 @@ public interface GoodsTrackDAO {
     public List<UserTrack> loadUserTrack(long goodid,Long userid, List<Long> beenblocked,int page,int pagesize);
     
     public int countUserTrack(long goodid,Long userid, List<Long> beenblocked);
+    
+    public List<UserGoods> loadUserGoodsbyUser(long myid,long destuser_id,int page,int pagesize);
 }

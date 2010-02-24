@@ -2,6 +2,7 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsTrack;
 import com.zhelazhela.db.model.GoodsTrackExample;
+import com.zhelazhela.db.model.define.UserGoods;
 import com.zhelazhela.db.model.define.UserTrack;
 
 import java.util.List;
@@ -183,7 +184,6 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 		return list;
 	}
     
-    @SuppressWarnings("unchecked")
 	@Override
 	public int countUserTrack(long goodsId,Long userid, List<Long> beenblocked) {
 		// TODO Auto-generated method stub
@@ -195,7 +195,27 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 		if(beenblocked!=null&&beenblocked.size()>0){
 			map.put("been_blocked", beenblocked);
 		}
-		List<UserTrack> list = (List<UserTrack>)getSqlMapClientTemplate().queryForList("goods_track.countUserTrackByGoods", map);
-		return list.size();
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("goods_track.countUserTrackByGoods", map);
+		return count;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserGoods> loadUserGoodsbyUser(long myid, long destuserId,
+			int page, int pagesize) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", destuserId);
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		List<UserGoods> list = (List<UserGoods>)getSqlMapClientTemplate().queryForList("goods_track.selectUserGoodsByUser", map);
+		if(myid>0){
+			for(UserGoods ug:list){
+				if(ug.getTrack_user_id().contains(myid)){
+					ug.setIstrack(1);
+				}
+			}
+		}
+		return list;
 	}
 }
