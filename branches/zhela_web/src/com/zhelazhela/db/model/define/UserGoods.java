@@ -22,9 +22,11 @@ public class UserGoods {
 	
 	private Integer track_count;
 	
+	private java.util.List<Long> track_user_id;
+	
 	private java.util.Date track_time;
 	
-	private Integer istrack;
+	private Integer istrack = 0;
 
 	public Long getGoods_id() {
 		return goods_id;
@@ -121,6 +123,14 @@ public class UserGoods {
 	public void setTag_id(Integer tagId) {
 		tag_id = tagId;
 	}
-	
+
+	public java.util.List<Long> getTrack_user_id() {
+		return track_user_id;
+	}
+
+	public void setTrack_user_id(java.util.List<Long> trackUserId) {
+		track_user_id = trackUserId;
+		this.track_count = trackUserId.size();
+	}
 	
 }
