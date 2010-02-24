@@ -292,6 +292,13 @@
     </isNotNull>
   </select>
   
+  <select id="countUserPriceByGoods" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+    select count(gp.id)  
+    from goods_price gp 
+    left join user_certification uc on gp.provide_user_id = uc.user_id and uc.cert_id =1 and (uc.end_date is null or uc.end_date &lt; CURRENT_TIMESTAMP) 
+    where gp.good_id = #good_id:BIGINT#
+  </select>
+  
   <select id="selectPriceAddrById" parameterClass="java.lang.Long" resultMap="define_UserPriceMap">
     select id as  buy_addr_id,goods_price_id as price_id,addr_type,buy_link,buy_country,buy_state_province,buy_city,buy_addr,status as addr_status,longitude,latitude 
     from goods_sell_addr 
