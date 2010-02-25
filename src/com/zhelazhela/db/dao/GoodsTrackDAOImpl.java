@@ -218,4 +218,12 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 		}
 		return list;
 	}
+
+	@Override
+	public int countUserGoodsbyUser(long destuserId) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", destuserId);
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("goods_track.countUserGoodsByUser", map);
+        return count;
+	}
 }

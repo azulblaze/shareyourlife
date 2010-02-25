@@ -101,4 +101,6 @@ public interface GoodsTrackDAO {
     public int countUserTrack(long goodid,Long userid, List<Long> beenblocked);
     
     public List<UserGoods> loadUserGoodsbyUser(long myid,long destuser_id,int page,int pagesize);
+    
+    public int countUserGoodsbyUser(long destuser_id);
 }

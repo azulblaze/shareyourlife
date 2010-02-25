@@ -5,14 +5,23 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.zhelazhela.db.dao.BlockUserDAO;
+import com.zhelazhela.db.dao.FriendListDAO;
+import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.dao.UserDAO;
 import com.zhelazhela.db.dao.UserinfoDAO;
+import com.zhelazhela.db.model.BlockUserExample;
+import com.zhelazhela.db.model.FriendList;
+import com.zhelazhela.db.model.FriendListExample;
+import com.zhelazhela.db.model.GoodsTrackExample;
 import com.zhelazhela.db.model.User;
 import com.zhelazhela.db.model.UserExample;
 import com.zhelazhela.db.model.Userinfo;
 import com.zhelazhela.db.model.UserinfoExample;
 import com.zhelazhela.domain.Mail;
 import com.zhelazhela.domain.SNSUser;
+import com.zhelazhela.domain.SNSUserBaseinfo;
+import com.zhelazhela.domain.UserPrivate;
 import com.zhelazhela.services.UserProfileService;
 import com.zhelazhela.system.config.SystemConfig;
 import com.zhelazhela.system.email.MailServices;
@@ -24,11 +33,17 @@ public class UserProfileServiceImpl implements UserProfileService {
 	
 	private UserinfoDAO userinfoDAO;
 	
+	private FriendListDAO friendListDAO;
+	
+	private BlockUserDAO blockUserDAO;
+	
 	private MailServices mailServices;
 	
 	private PlatformTransactionManager m_db_tx_manager;
 	
 	private SystemConfig systemConfig;
+	
+	private GoodsTrackDAO goodsTrackDAO;
 	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
@@ -48,6 +63,18 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	public void setUserinfoDAO(UserinfoDAO userinfoDAO) {
 		this.userinfoDAO = userinfoDAO;
+	}
+
+	public void setFriendListDAO(FriendListDAO friendListDAO) {
+		this.friendListDAO = friendListDAO;
+	}
+
+	public void setBlockUserDAO(BlockUserDAO blockUserDAO) {
+		this.blockUserDAO = blockUserDAO;
+	}
+
+	public void setGoodsTrackDAO(GoodsTrackDAO goodsTrackDAO) {
+		this.goodsTrackDAO = goodsTrackDAO;
 	}
 
 	@Override
@@ -167,6 +194,49 @@ public class UserProfileServiceImpl implements UserProfileService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public SNSUserBaseinfo loadUserBaseInfo(long id,long myid) throws Exception {
+		Userinfo ui = userinfoDAO.selectByPrimaryKey(id);
+		if(ui==null){
+			return null;
+		}
+		SNSUserBaseinfo user = new SNSUserBaseinfo();
+		UserPrivate up = new UserPrivate();
+		up.setValid(true);
+		if(myid>0){
+			BlockUserExample example = new BlockUserExample();
+			example.createCriteria().andUserIdEqualTo(id).andBlockedUserIdEqualTo(myid);
+			if(blockUserDAO.countByExample(example)>0){
+				up.setNotice("您存在于改用户的黑名单中,无法查看他的信息");
+				up.setValid(false);
+				up.setPrivate_level(1);
+				up.setPrivate_type(UserPrivate.BLOCK_USER);
+			}
+		}
+		user.setUserPrivate(up);
+		user.setUserinfo(ui);
+		user.setTracks(countUserWatching(id));
+		user.setBeen_tracks(countUserWatcher(id));
+		GoodsTrackExample ge = new GoodsTrackExample();
+		ge.createCriteria().andUserIdEqualTo(id);
+		user.setGoods(goodsTrackDAO.countByExample(ge));
+		return user;
+	}
+
+	@Override
+	public int countUserWatcher(long userId) throws Exception {
+		FriendListExample example = new FriendListExample();
+		example.createCriteria().andFriendIdEqualTo(userId).andStatusEqualTo(FriendList.STATUS_SUCCESS);
+		return friendListDAO.countByExample(example);
+	}
+
+	@Override
+	public int countUserWatching(long userId) throws Exception {
+		FriendListExample example = new FriendListExample();
+		example.createCriteria().andUserIdEqualTo(userId).andStatusEqualTo(FriendList.STATUS_SUCCESS);
+		return friendListDAO.countByExample(example);
 	}
 
 }

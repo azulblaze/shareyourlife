@@ -3,10 +3,11 @@ package com.zhelazhela.domain;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.zhelazhela.db.model.Userinfo;
 import com.zhelazhela.util.CommonMethod;
 
 public class SNSUser {
-	
+		
 	private boolean md5 = false;
 	
 	private String mdpass;
@@ -28,6 +29,14 @@ public class SNSUser {
 	private long questionid;
 	
 	private String answer;
+	
+	private String avatar;
+	
+	private String avatar_pic;
+	
+	private java.util.Date reg_date;
+	
+	private java.util.Date last_log;
 	
 	private int reg_level = 0;
 	
@@ -145,6 +154,38 @@ public class SNSUser {
 		been_blocked = beenBlocked;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getAvatar_pic() {
+		return avatar_pic;
+	}
+
+	public void setAvatar_pic(String avatarPic) {
+		avatar_pic = avatarPic;
+	}
+
+	public java.util.Date getReg_date() {
+		return reg_date;
+	}
+
+	public void setReg_date(java.util.Date regDate) {
+		reg_date = regDate;
+	}
+
+	public java.util.Date getLast_log() {
+		return last_log;
+	}
+
+	public void setLast_log(java.util.Date lastLog) {
+		last_log = lastLog;
+	}
+
 	@Override
 	public boolean equals(Object arg0) {
 		if(arg0 instanceof SNSUser){			
@@ -154,5 +195,13 @@ public class SNSUser {
 		return false;
 	}
 	
-	
+	public void setUserinfo(Userinfo ui){
+		setId(ui.getUserId());
+		setAvatar(ui.getAvatar());
+		setAvatar_pic(ui.getAvatarPic());
+		setEmail(ui.getEmail());
+		setName(ui.getName());
+		setReg_date(ui.getRegisteredDate());
+		setLast_log(ui.getLastLogin());
+	}
 }
