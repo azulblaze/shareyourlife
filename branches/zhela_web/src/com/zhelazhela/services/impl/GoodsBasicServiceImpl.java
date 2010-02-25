@@ -118,12 +118,15 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		}
 		GoodsDetail gd = new GoodsDetail();
 		gd.setGoods(g);
+		//获取该商品被哪些用户关注,分页
 		UserTrackList utl = loadUserTrack(id,user,sn,page,pagesize);
 		gd.setTrackuser(utl);
 		gd.setTrack_size(utl.getSize());
+		//获取该商品的评论信息,分页
 		GoodCommentList gcl = loadUserComment(id,sn,page,pagesize);
 		gd.setComment_size(gcl.getSize());
 		gd.setComments(gcl);
+		//获取该商品的销售提供信息
 		GoodsOfferList gol = loadGoodsOffer(id,sn,page,pagesize);
 		gd.setOffers(gol);
 		gd.setOffer_size(gol.getSize());
