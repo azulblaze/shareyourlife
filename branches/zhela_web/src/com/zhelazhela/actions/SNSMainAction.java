@@ -3,7 +3,10 @@ package com.zhelazhela.actions;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
 import com.zhelazhela.domain.SNSUser;
+import com.zhelazhela.domain.SNSUserBaseinfo;
+import com.zhelazhela.domain.UserGoodsList;
 import com.zhelazhela.services.GoodsBasicService;
+import com.zhelazhela.services.UserProfileService;
 
 public class SNSMainAction extends BaseAction {
 	
@@ -11,10 +14,26 @@ public class SNSMainAction extends BaseAction {
 	
 	private GoodsBasicService goodsBasicService;
 	
+	private UserProfileService userProfileService;
+	
 	private GoodsCollection gc;
+	
+	private Long goods_id;
+	
+	private String goods_sn;
+	
+	private Integer page;
+	
+	private Integer pagesize;
+	
+	private Long user_id;
 
 	public void setGoodsBasicService(GoodsBasicService goodsBasicService) {
 		this.goodsBasicService = goodsBasicService;
+	}
+
+	public void setUserProfileService(UserProfileService userProfileService) {
+		this.userProfileService = userProfileService;
 	}
 
 	public GoodsCollection getGc() {
@@ -23,6 +42,46 @@ public class SNSMainAction extends BaseAction {
 
 	public void setGc(GoodsCollection gc) {
 		this.gc = gc;
+	}
+
+	public Long getGoods_id() {
+		return goods_id;
+	}
+
+	public void setGoods_id(Long goodsId) {
+		goods_id = goodsId;
+	}
+
+	public String getGoods_sn() {
+		return goods_sn;
+	}
+
+	public void setGoods_sn(String goodsSn) {
+		goods_sn = goodsSn;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long userId) {
+		user_id = userId;
 	}
 
 	public String main() throws Exception{
@@ -70,5 +129,39 @@ public class SNSMainAction extends BaseAction {
 			setValue("error","信息不完整");
 		}
 		return INPUT;
+	}
+	
+	public String loadgoods() throws Exception{
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		if(goods_id!=null&&goods_id>0){
+			GoodsDetail gd = goodsBasicService.loadGoodsDetail(goods_id, tmp, goods_sn, page, 3);
+			if(gd==null){
+				return "error";
+			}
+			setValue("gd",gd);
+			return SUCCESS;
+		}
+		throw new Exception();
+	}
+	
+	public String loadUserPage() throws Exception{
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		if(tmp==null){
+			return LOGIN;
+		}
+		if(user_id==null||user_id<1){
+			throw new Exception();
+		}
+		SNSUserBaseinfo dest_user = userProfileService.loadUserBaseInfo(user_id,tmp.getId());
+		if(dest_user==null){
+			throw new Exception();
+		}
+		setValue("destUser",dest_user);
+		if(!dest_user.getUserPrivate().isValid()){
+			return "hidden";
+		}
+		UserGoodsList ugl = goodsBasicService.loadUserGoodsList(tmp.getId(), user_id, page, pagesize);
+		setValue("ugl",ugl);
+		return SUCCESS;
 	}
 }

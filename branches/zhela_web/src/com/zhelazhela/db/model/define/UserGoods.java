@@ -1,5 +1,9 @@
 package com.zhelazhela.db.model.define;
-
+/**
+ * 商品的信息,用于商品在用户页面的列表,里面包含商品被多少用户关注,商品基本信息,该用户关注商品时使用的标签.
+ * @author andy
+ *
+ */
 public class UserGoods {
 	
 	private Long track_id;

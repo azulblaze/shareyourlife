@@ -1,5 +1,7 @@
 package com.zhelazhela.domain;
-
+/**
+ * 用户关注商品的列表页面
+ */
 import com.zhelazhela.db.model.define.UserGoods;
 
 public class UserGoodsList extends BaseList {

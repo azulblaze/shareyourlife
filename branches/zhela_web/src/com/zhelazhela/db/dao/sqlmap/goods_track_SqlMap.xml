@@ -369,5 +369,11 @@
     </isNotNull>
   </select>
   
+  <select id="countUserGoodsByUser" resultClass="java.lang.Integer" parameterClass="java.util.Map" >
+    select count(gt.id) 
+    from goods_track gt 
+    where user_id= #user_id:BIGINT# 
+  </select>
+  
   
 </sqlMap>
