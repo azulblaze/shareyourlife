@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.FriendList;
 import com.zhelazhela.db.model.FriendListExample;
+import com.zhelazhela.domain.SNSUserBaseinfo;
+
 import java.util.List;
 
 public interface FriendListDAO {
@@ -60,4 +62,19 @@ public interface FriendListDAO {
      * @ibatorgenerated Fri Feb 12 23:38:36 CST 2010
      */
     int updateByExample(FriendList record, FriendListExample example);
+    
+    /**
+     * 获得该用户跟踪了哪些用户
+     * @param userid
+     * @param blocked_user
+     * @return
+     */
+    java.util.List<SNSUserBaseinfo> loadUserTracked(long userid,java.util.List<Long> blocked_user,int page,int pagesize);
+    /**
+     * 获得该用户被哪些用户跟踪
+     * @param userid
+     * @param blocked_user
+     * @return
+     */
+    java.util.List<SNSUserBaseinfo> loadUserBeenTracked(long userid,java.util.List<Long> blocked_user,int page,int pagesize);
 }
