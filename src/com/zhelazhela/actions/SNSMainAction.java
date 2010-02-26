@@ -164,4 +164,18 @@ public class SNSMainAction extends BaseAction {
 		setValue("ugl",ugl);
 		return SUCCESS;
 	}
+	
+	public String loadUserFriend() throws Exception{
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		if(tmp==null){
+			return LOGIN;
+		}
+		SNSUserBaseinfo dest_user = userProfileService.loadUserBaseInfo(user_id,tmp.getId());
+		if(dest_user==null){
+			throw new Exception();
+		}
+		setValue("destUser",dest_user);
+		
+		return "";
+	}
 }

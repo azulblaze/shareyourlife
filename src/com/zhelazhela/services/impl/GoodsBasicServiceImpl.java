@@ -168,7 +168,11 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 	@Override
 	public UserGoodsList loadUserGoodsList(long userId, long loadUserId,
 			int page, int pagesize) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		UserGoodsList ugl = new UserGoodsList();
+		ugl.setPage(page);
+		ugl.setPagesize(pagesize);
+		ugl.setAllpage(goodsTrackDAO.countUserGoodsbyUser(loadUserId));
+		ugl.setList(goodsTrackDAO.loadUserGoodsbyUser(userId, loadUserId, page, pagesize));
+		return ugl;
 	}
 }

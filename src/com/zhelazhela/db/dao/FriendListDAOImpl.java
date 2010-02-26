@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.FriendList;
 import com.zhelazhela.db.model.FriendListExample;
+import com.zhelazhela.domain.SNSUserBaseinfo;
+
 import java.util.List;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -113,4 +115,36 @@ public class FriendListDAOImpl extends SqlMapClientDaoSupport implements FriendL
             return record;
         }
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SNSUserBaseinfo> loadUserBeenTracked(long userid,
+			List<Long> blockedUser, int page, int pagesize) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", userid);
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		if(blockedUser!=null&&blockedUser.size()>0){
+			map.put("been_blocked", blockedUser);
+		}
+		List<SNSUserBaseinfo> list = getSqlMapClientTemplate().queryForList("friend_list.loadUserBeenTrackedByUser", map);
+        return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SNSUserBaseinfo> loadUserTracked(long userid,
+			List<Long> blockedUser, int page, int pagesize) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", userid);
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		if(blockedUser!=null&&blockedUser.size()>0){
+			map.put("been_blocked", blockedUser);
+		}
+		List<SNSUserBaseinfo> list = getSqlMapClientTemplate().queryForList("friend_list.loadUserTrackByUser", map);
+        return list;
+	}
 }

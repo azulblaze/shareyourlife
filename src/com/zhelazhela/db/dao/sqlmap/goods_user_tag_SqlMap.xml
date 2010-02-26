@@ -202,4 +202,7 @@
       update_time = #updateTime:TIMESTAMP#
     where id = #id:BIGINT#
   </update>
+  <select id="">
+  	select gut.id as id,gut.user_id as user_id,gt.name as tag_name,(select count(*) from goods_track gtr where gtr.user_id = gut.user_id and gtr.goods_tag_id = gt.id) as tag_count from goods_user_tag gut left join goods_tag gt on gut.goods_tag_id =gt.id
+  </select>
 </sqlMap>
