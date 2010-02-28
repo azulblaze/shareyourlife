@@ -6,6 +6,7 @@ import com.zhelazhela.domain.SNSUser;
 import com.zhelazhela.domain.SNSUserBaseinfo;
 import com.zhelazhela.domain.UserGoodsList;
 import com.zhelazhela.services.GoodsBasicService;
+import com.zhelazhela.services.GoodsTagService;
 import com.zhelazhela.services.UserProfileService;
 
 public class SNSMainAction extends BaseAction {
@@ -15,6 +16,8 @@ public class SNSMainAction extends BaseAction {
 	private GoodsBasicService goodsBasicService;
 	
 	private UserProfileService userProfileService;
+	
+	private GoodsTagService goodsTagService;
 	
 	private GoodsCollection gc;
 	
@@ -162,10 +165,11 @@ public class SNSMainAction extends BaseAction {
 		}
 		UserGoodsList ugl = goodsBasicService.loadUserGoodsList(tmp.getId(), user_id, page, pagesize);
 		setValue("ugl",ugl);
+		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		return SUCCESS;
 	}
 	
-	public String loadUserFriend() throws Exception{
+	public String loadUserWatching() throws Exception{
 		SNSUser tmp = (SNSUser)this.getSession("user");
 		if(tmp==null){
 			return LOGIN;
@@ -175,7 +179,25 @@ public class SNSMainAction extends BaseAction {
 			throw new Exception();
 		}
 		setValue("destUser",dest_user);
-		
-		return "";
+		setValue("firend",userProfileService.loadUserWatching(user_id, null));
+		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
+		return SUCCESS;
 	}
+	
+	public String loadUserWatcher() throws Exception{
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		if(tmp==null){
+			return LOGIN;
+		}
+		SNSUserBaseinfo dest_user = userProfileService.loadUserBaseInfo(user_id,tmp.getId());
+		if(dest_user==null){
+			throw new Exception();
+		}
+		setValue("destUser",dest_user);
+		setValue("firend",userProfileService.loadUserWatcher(user_id, null));
+		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
+		return SUCCESS;
+	}
+	
+	
 }
