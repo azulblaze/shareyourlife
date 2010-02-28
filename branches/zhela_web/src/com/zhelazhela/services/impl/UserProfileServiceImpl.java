@@ -1,5 +1,7 @@
 package com.zhelazhela.services.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -21,6 +23,7 @@ import com.zhelazhela.db.model.UserinfoExample;
 import com.zhelazhela.domain.Mail;
 import com.zhelazhela.domain.SNSUser;
 import com.zhelazhela.domain.SNSUserBaseinfo;
+import com.zhelazhela.domain.SNSUserBaseinfoList;
 import com.zhelazhela.domain.UserPrivate;
 import com.zhelazhela.services.UserProfileService;
 import com.zhelazhela.system.config.SystemConfig;
@@ -237,6 +240,34 @@ public class UserProfileServiceImpl implements UserProfileService {
 		FriendListExample example = new FriendListExample();
 		example.createCriteria().andUserIdEqualTo(userId).andStatusEqualTo(FriendList.STATUS_SUCCESS);
 		return friendListDAO.countByExample(example);
+	}
+
+	@Override
+	public SNSUserBaseinfoList loadUserWatcher(long userId,
+			List<Long> blockedUser) throws Exception {
+		SNSUserBaseinfoList sbl = new SNSUserBaseinfoList();
+		int size = countUserWatcher(userId);
+		sbl.setSize(0);
+		if(size==0){
+			sbl.setC_size(0);
+			return sbl;
+		}
+		sbl.setList(friendListDAO.loadUserBeenTracked(userId, null, 1, -1));
+		return sbl;
+	}
+
+	@Override
+	public SNSUserBaseinfoList loadUserWatching(long userId,
+			List<Long> blockedUser) throws Exception {
+		SNSUserBaseinfoList sbl = new SNSUserBaseinfoList();
+		int size = countUserWatching(userId);
+		sbl.setSize(0);
+		if(size==0){
+			sbl.setC_size(0);
+			return sbl;
+		}
+		sbl.setList(friendListDAO.loadUserTracked(userId, null, 1, -1));
+		return sbl;
 	}
 
 }
