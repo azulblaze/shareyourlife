@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsUserTag;
 import com.zhelazhela.db.model.GoodsUserTagExample;
+import com.zhelazhela.db.model.define.UserTagInfo;
+
 import java.util.List;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -161,4 +163,13 @@ public class GoodsUserTagDAOImpl extends SqlMapClientDaoSupport implements Goods
             return record;
         }
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserTagInfo> loadUserTagInfos(long userid) {
+		java.util.Map<String, Object> map = new java.util.HashMap<String, Object>();
+		map.put("user_id", userid);
+		List<UserTagInfo> list = getSqlMapClientTemplate().queryForList("goods_user_tag.loadUserTagInfoByUser", map);
+        return list;
+	}
 }

@@ -2,6 +2,8 @@ package com.zhelazhela.db.dao;
 
 import com.zhelazhela.db.model.GoodsUserTag;
 import com.zhelazhela.db.model.GoodsUserTagExample;
+import com.zhelazhela.db.model.define.UserTagInfo;
+
 import java.util.List;
 
 public interface GoodsUserTagDAO {
@@ -92,4 +94,6 @@ public interface GoodsUserTagDAO {
      * @ibatorgenerated Fri Feb 12 23:38:37 CST 2010
      */
     int updateByPrimaryKey(GoodsUserTag record);
+    
+    java.util.List<UserTagInfo> loadUserTagInfos(long userid);
 }
