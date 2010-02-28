@@ -168,7 +168,25 @@
     select fl.friend_id as id,ui.name as name,ui.avatar as header,(select count(*) from friend_list tmp where tmp.user_id = fl.friend_id)as tracks,(select count(*) from friend_list tmp2 where tmp2.friend_id = fl.friend_id)as been_tracks,(select count(*) from goods_track gt_tmp where gt_tmp.user_id=fl.friend_id) as goods 
     from friend_list fl 
     left join userinfo ui on fl.friend_id=ui.user_id 
-    where fl.user_id= #user_id:BIGINT# 
+    where fl.user_id= #user_id:BIGINT# and fl.status = 1 
+    <dynamic prepend="and">
+    	 fl.friend_id not in (
+	    <isNotEmpty property="been_blocked">
+			<iterate property="been_blocked" conjunction="," >
+				$been_blocked[]$
+			</iterate>  			
+		</isNotEmpty>
+		)
+    </dynamic>
+    <isNotNull property="limit">
+    	limit $limit$
+    </isNotNull>
+  </select>
+  
+  <select id="countUserTrackByUser" resultClass="java.lang.Integer" parameterClass="java.util.Map" >
+    select count(fl.friend_id) 
+    from friend_list fl 
+    where fl.user_id= #user_id:BIGINT# and fl.status = 1 
     <dynamic prepend="and">
     	 fl.friend_id not in (
 	    <isNotEmpty property="been_blocked">
@@ -183,8 +201,26 @@
   <select id="loadUserBeenTrackedByUser" resultMap="userBaseInfoMap" parameterClass="java.util.Map" >
     select fl.user_id as id,ui.name as name,ui.avatar as header,(select count(*) from friend_list tmp where tmp.user_id = fl.user_id)as tracks,(select count(*) from friend_list tmp2 where tmp2.friend_id = fl.user_id)as been_tracks,(select count(*) from goods_track gt_tmp where gt_tmp.user_id=fl.user_id) as goods 
     from friend_list fl 
-    left join userinfo ui on fl.user_id=ui.user_id 
+    left join userinfo ui on fl.user_id=ui.user_id and fl.status = 1 
     where fl.friend_id= #user_id:BIGINT# 
+    <dynamic prepend="and">
+    	  and fl.user_id not in (
+	    <isNotEmpty property="been_blocked">
+			<iterate property="been_blocked" conjunction="," >
+				$been_blocked[]$
+			</iterate>  			
+		</isNotEmpty>
+		)
+    </dynamic>
+    <isNotNull property="limit">
+    	limit $limit$
+    </isNotNull>
+  </select>
+  
+  <select id="countUserBeenTrackedByUser" resultClass="java.lang.Integer" parameterClass="java.util.Map" >
+    select count(fl.user_id) 
+    from friend_list fl 
+    where fl.friend_id = #user_id:BIGINT# and fl.status = 1 
     <dynamic prepend="and">
     	  and fl.user_id not in (
 	    <isNotEmpty property="been_blocked">
