@@ -147,4 +147,26 @@ public class FriendListDAOImpl extends SqlMapClientDaoSupport implements FriendL
 		List<SNSUserBaseinfo> list = getSqlMapClientTemplate().queryForList("friend_list.loadUserTrackByUser", map);
         return list;
 	}
+
+	@Override
+	public int countUserBeenTracked(long userid, List<Long> blockedUser) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", userid);
+		if(blockedUser!=null&&blockedUser.size()>0){
+			map.put("been_blocked", blockedUser);
+		}
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("friend_list.countUserBeenTrackedByUser", map);
+        return count;
+	}
+
+	@Override
+	public int countUserTracked(long userid, List<Long> blockedUser) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", userid);
+		if(blockedUser!=null&&blockedUser.size()>0){
+			map.put("been_blocked", blockedUser);
+		}
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("friend_list.countUserTrackByUser", map);
+        return count;
+	}
 }
