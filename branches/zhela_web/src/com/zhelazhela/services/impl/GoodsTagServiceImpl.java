@@ -1,11 +1,14 @@
 package com.zhelazhela.services.impl;
 
+import java.util.List;
+
 import com.zhelazhela.db.dao.GoodsTagDAO;
 import com.zhelazhela.db.dao.GoodsUserTagDAO;
 import com.zhelazhela.db.model.GoodsTag;
 import com.zhelazhela.db.model.GoodsTagExample;
 import com.zhelazhela.db.model.GoodsUserTag;
 import com.zhelazhela.db.model.GoodsUserTagExample;
+import com.zhelazhela.db.model.define.UserTagInfo;
 import com.zhelazhela.services.GoodsTagService;
 
 public class GoodsTagServiceImpl implements GoodsTagService {
@@ -71,6 +74,11 @@ public class GoodsTagServiceImpl implements GoodsTagService {
 		gut.setUserId(user_id);
 		gut.setUpdateTime(new java.util.Date());
 		goodsUserTagDAO.insertSelective(gut);
+	}
+
+	@Override
+	public List<UserTagInfo> loadUserTagInfo(long userId) throws Exception {
+		return goodsUserTagDAO.loadUserTagInfos(userId);
 	}
 
 
