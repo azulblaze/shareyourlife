@@ -60,6 +60,9 @@
         order by $orderByClause$
       </isNotNull>
     </isParameterPresent>
+    <isNotNull property="limit">
+    	limit $limit$
+    </isNotNull>
   </select>
   <select id="ibatorgenerated_selectByPrimaryKey" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.zhelazhela.db.model.OutboxMessage" >
     <!--
@@ -95,7 +98,10 @@
     insert into outbox_message (id, user_id, to_id, subject, message_type, message_status, message,
       update_time, is_deleted)
     values (#id:BIGINT#, #userId:BIGINT#, #toId:BIGINT#, #subject:VARCHAR#, #messageType:INTEGER#,
-      #messageStatus:VARCHAR#, #message:VARCHAR#, #updateTime:TIMESTAMP#, #isDeleted:BIT#)
+      #messageStatus:VARCHAR#, #message:VARCHAR#, #updateTime:TIMESTAMP#, #isDeleted:BIT#) 
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <insert id="ibatorgenerated_insertSelective" parameterClass="com.zhelazhela.db.model.OutboxMessage" >
     <!--
@@ -164,6 +170,9 @@
       </isNotNull>
       )
     </dynamic>
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <select id="ibatorgenerated_countByExample" parameterClass="com.zhelazhela.db.model.OutboxMessageExample" resultClass="java.lang.Integer" >
     <!--
