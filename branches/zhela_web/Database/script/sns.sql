@@ -68,7 +68,7 @@ CREATE  TABLE IF NOT EXISTS inbox_message (
   parameters VARCHAR(45) NULL ,
   message VARCHAR(1000) NULL ,
   update_time TIMESTAMP NULL ,
-  is_deleted VARCHAR(200) NULL ,
+  is_deleted TINYINT(1) NULL ,
   PRIMARY KEY (id) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
