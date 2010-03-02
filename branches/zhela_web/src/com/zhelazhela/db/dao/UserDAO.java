@@ -92,4 +92,8 @@ public interface UserDAO {
      * @ibatorgenerated Fri Feb 12 23:38:36 CST 2010
      */
     int updateByPrimaryKey(User record);
+    
+    int countAllUser();
+    
+    java.util.List<Long> loadAllUserIdByPage(int page,int pagesize);
 }

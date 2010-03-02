@@ -161,4 +161,21 @@ public class UserDAOImpl extends SqlMapClientDaoSupport implements UserDAO {
             return record;
         }
     }
+
+	@Override
+	public int countAllUser() {
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("user.coutAllUser", null);
+        return count;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Long> loadAllUserIdByPage(int page, int pagesize) {
+		java.util.Map<String, String> map = new java.util.HashMap<String, String>();
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		List<Long> list = getSqlMapClientTemplate().queryForList("user.loadAllUser", map);
+        return list;
+	}
 }
