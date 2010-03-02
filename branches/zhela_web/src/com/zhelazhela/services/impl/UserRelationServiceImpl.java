@@ -37,7 +37,7 @@ public class UserRelationServiceImpl implements UserRelationService {
 			bue.createCriteria().andUserIdEqualTo(af.getD_user_id()).andBlockedUserIdEqualTo(af.getS_user_id());
 			int size  = blockUserDAO.selectByExample(bue).size();
 			if(size>0){
-				throw new Exception("该用户不允许您关注他");
+				throw new Exception("该用户把您列入了黑名单，所以您不能关注他");
 			}
 			FriendListExample fle = new FriendListExample();
 			fle.createCriteria().andUserIdEqualTo(af.getS_user_id()).andFriendIdEqualTo(af.getD_user_id());
