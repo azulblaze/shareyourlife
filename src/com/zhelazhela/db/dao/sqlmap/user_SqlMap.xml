@@ -190,4 +190,15 @@
       password = #password:VARCHAR#
     where id = #id:BIGINT#
   </update>
+  
+  <select id="coutAllUser" parameterClass="java.lang.Integer" resultClass="java.lang.Integer" >
+    select count(*) from user
+  </select>
+  
+  <select id="loadAllUser" parameterClass="java.util.Map" resultClass="java.lang.Long" >
+    select id from user
+    <isNotNull property="limit">
+        limit $limit$
+    </isNotNull>
+  </select>
 </sqlMap>
