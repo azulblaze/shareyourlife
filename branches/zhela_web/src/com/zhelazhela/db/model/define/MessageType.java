@@ -22,5 +22,10 @@ public class MessageType {
 	 * 拒绝信息
 	 */
 	public final static int BLOCK = 4;
+	/**
+	 * 系统消息
+	 */
+	public final static int SYSTEM = -1;
 	
+	public final static int GROUP_MSG = 5;
 }
