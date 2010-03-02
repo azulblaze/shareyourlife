@@ -11,6 +11,10 @@ public class MessageStatus {
 	 */
 	public static final String READ = "read";
 	/**
+	 * 标记消息未读
+	 */
+	public static final String UNREAD = "unread";
+	/**
 	 * 标记消息被回复过了
 	 */
 	public static final String REPLY = "reply";
