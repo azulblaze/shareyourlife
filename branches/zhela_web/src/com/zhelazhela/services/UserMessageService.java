@@ -1,5 +1,7 @@
 package com.zhelazhela.services;
 
+import java.util.List;
+
 import com.zhelazhela.db.model.InboxMessage;
 import com.zhelazhela.db.model.OutboxMessage;
 
@@ -17,7 +19,7 @@ public interface UserMessageService {
 	 * @return
 	 * @throws Exception
 	 */
-	public OutboxMessage sendMessage(long from,long to,String subject,int type,String status,String parameter,String message) throws Exception;
+	public OutboxMessage sendMessage(long from,long to,String subject,int type,String status,String parameter,String message,boolean savesendbox) throws Exception;
 	/**
 	 * 获取用户收件箱的消息
 	 * @param user_id
@@ -79,13 +81,14 @@ public interface UserMessageService {
 	 * 给所有用户发送消息
 	 * @throws Exception
 	 */
-	public void sendAllUser() throws Exception;
+	public void sendAllUser(String subject,String msg) throws Exception;
 	/**
 	 * 给指定的用户发送消息
 	 * @param user_ids
 	 * @throws Exception
 	 */
-	public void sendUsers(java.util.List<Long> user_ids) throws Exception;
+	public void sendUsers(List<Long> userIds,long source,String subject,
+			int type, String status, String parameter, String message,boolean savesendbox) throws Exception;
 	/**
 	 * 用户对用户发送消息
 	 * @param source
@@ -93,7 +96,7 @@ public interface UserMessageService {
 	 * @param content
 	 * @throws Exception
 	 */
-	public void sendFriend(long source,long dest,String content) throws Exception;
+	public void sendFriend(long source,long dest,String subject,String content) throws Exception;
 	
 	/**
 	 * 管理员给组用户发送信息
@@ -102,7 +105,7 @@ public interface UserMessageService {
 	 * @param content
 	 * @throws Exception
 	 */
-	public void sendGroupMembers(long user_id,long group_id,String content) throws Exception;
+	public void sendGroupMembers(long user_id,long group_id,String subject,String content) throws Exception;
 	/**
 	 * 用户关注用户的时候有时候需要发送信息申请通过
 	 * @param source
@@ -110,7 +113,7 @@ public interface UserMessageService {
 	 * @param content
 	 * @throws Exception
 	 */
-	public void sendCareApply(long source,long dest,String content) throws Exception;
+	public void sendCareApply(long source,long dest,String subject,String content) throws Exception;
 	
 	/**
 	 * 用户申请加入组
@@ -119,7 +122,7 @@ public interface UserMessageService {
 	 * @param content
 	 * @throws Exception
 	 */
-	public void sendGroupApply(long source,long groupid,String content) throws Exception;
+	public void sendGroupApply(long source,long groupid,String subject,String content) throws Exception;
 	/**
 	 * 用户发送组加入邀请
 	 * @param source
@@ -128,5 +131,5 @@ public interface UserMessageService {
 	 * @param content
 	 * @throws Exception
 	 */
-	public void sendGroupInvition(long source,long groupid,long user_id,String content) throws Exception;
+	public void sendGroupInvition(long source,long groupid,List<Long> userIds,String subject,String content) throws Exception;
 }
