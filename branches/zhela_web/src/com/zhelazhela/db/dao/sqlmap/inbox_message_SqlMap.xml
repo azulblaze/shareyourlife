@@ -98,6 +98,9 @@
     values (#id:BIGINT#, #fromId:BIGINT#, #userId:BIGINT#, #subject:VARCHAR#, #messageType:INTEGER#,
       #messageStatus:VARCHAR#, #parameters:VARCHAR#, #message:VARCHAR#, #updateTime:TIMESTAMP#,
       #isDeleted:BIT#)
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <insert id="ibatorgenerated_insertSelective" parameterClass="com.zhelazhela.db.model.InboxMessage">
     <!--
@@ -172,6 +175,9 @@
       </isNotNull>
       )
     </dynamic>
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <select id="ibatorgenerated_countByExample" parameterClass="com.zhelazhela.db.model.InboxMessageExample" resultClass="java.lang.Integer">
     <!--
