@@ -11,7 +11,7 @@ public interface GroupService {
 		
 	public void applyPermisson(long my_id,long user_id,long group_id,int permisson) throws Exception;
 	
-	public void removeUserFromGroup(long user_id,long group_id) throws Exception;
+	public void removeUserFromGroup(long my_id,long user_id,long group_id) throws Exception;
 	
 	public void delGroup(long my_id,long group_id,String msg) throws Exception;
 	
