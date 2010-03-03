@@ -35,6 +35,10 @@ public interface UserPrivacyService {
 	 * 拒绝
 	 */
 	public final static int ALLOW_PRAMETER_DENEY = 4;
+	/**
+	 * 允许创建组的默认最大数量
+	 */
+	public final static int ALLOW_MAX_GROUP = 1;
 
 	public java.util.List<UserPrivacy> loadUserPrivacy(long user_id) throws Exception;
 	

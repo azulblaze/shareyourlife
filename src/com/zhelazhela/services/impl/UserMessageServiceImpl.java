@@ -176,9 +176,9 @@ public class UserMessageServiceImpl implements UserMessageService {
 	@Override
 	public void sendCareApply(long source, long dest,String subject, String content)
 			throws Exception {
-		Userinfo u = userinfoDAO.selectByPrimaryKey(source);
 		if(StringUtils.isBlank(subject)){
-			subject = "用户 "+u.getName()+" 希望关注您得状态";
+			Userinfo u = userinfoDAO.selectByPrimaryKey(source);
+			subject = "用户 "+u.getName()+" 希望关注您的状态";
 		}
 		sendMessage(source, dest, subject,
 				MessageType.APPLY_CARE, MessageStatus.SEND, null, content,false);
@@ -196,8 +196,8 @@ public class UserMessageServiceImpl implements UserMessageService {
 			throws Exception {
 		Grouper g = grouperDAO.selectByPrimaryKey(groupid);
 		if(g!=null){
-			Userinfo u = userinfoDAO.selectByPrimaryKey(source);
 			if(StringUtils.isBlank(subject)){
+				Userinfo u = userinfoDAO.selectByPrimaryKey(source);
 				subject = "用户 "+u.getName()+" 申请加入您的小组 "+g.getName();
 			}
 			GroupUserExample example = new GroupUserExample();

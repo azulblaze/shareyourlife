@@ -3,6 +3,7 @@ package com.zhelazhela.services.impl;
 import java.util.List;
 
 import com.zhelazhela.db.dao.UserPrivacyDAO;
+import com.zhelazhela.db.model.GroupUser;
 import com.zhelazhela.db.model.UserPrivacy;
 import com.zhelazhela.db.model.UserPrivacyExample;
 import com.zhelazhela.services.UserPrivacyService;
@@ -28,6 +29,11 @@ public class UserPrivacyServiceImpl implements UserPrivacyService {
 		_up = new UserPrivacy();
 		_up.setType(UserPrivacyService.TYPE_ALLOW_VIEW);
 		_up.setParameter1(UserPrivacyService.ALLOW_PRAMETER_USER);
+		initPrivacy.add(_up);
+		//允许创建组的数量
+		_up = new UserPrivacy();
+		_up.setType(UserPrivacyService.TYPE_MAX_GROUP);
+		_up.setParameter1(UserPrivacyService.ALLOW_MAX_GROUP);
 		initPrivacy.add(_up);
 	}
 
