@@ -1,9 +1,15 @@
 package com.zhelazhela.services.impl;
 
+import com.zhelazhela.db.dao.GroupDiscussionDAO;
+import com.zhelazhela.db.dao.GroupDiscussionPostDAO;
 import com.zhelazhela.db.dao.GroupUserDAO;
+import com.zhelazhela.db.dao.GroupWallDAO;
 import com.zhelazhela.db.dao.GrouperDAO;
+import com.zhelazhela.db.model.GroupDiscussionExample;
+import com.zhelazhela.db.model.GroupDiscussionPostExample;
 import com.zhelazhela.db.model.GroupUser;
 import com.zhelazhela.db.model.GroupUserExample;
+import com.zhelazhela.db.model.GroupWallExample;
 import com.zhelazhela.db.model.Grouper;
 import com.zhelazhela.db.model.GrouperExample;
 import com.zhelazhela.db.model.UserPrivacy;
@@ -18,12 +24,35 @@ public class GroupServiceImpl implements GroupService {
 	
 	private UserPrivacyService userPrivacyService;
 	
+	private GroupDiscussionDAO groupDiscussionDAO;
+	
+	private GroupDiscussionPostDAO groupDiscussionPostDAO;
+	
+	private GroupWallDAO groupWallDAO;
+	
 	public void setGrouperDAO(GrouperDAO grouperDAO) {
 		this.grouperDAO = grouperDAO;
 	}
 
 	public void setUserPrivacyService(UserPrivacyService userPrivacyService) {
 		this.userPrivacyService = userPrivacyService;
+	}
+
+	public void setGroupUserDAO(GroupUserDAO groupUserDAO) {
+		this.groupUserDAO = groupUserDAO;
+	}
+
+	public void setGroupDiscussionDAO(GroupDiscussionDAO groupDiscussionDAO) {
+		this.groupDiscussionDAO = groupDiscussionDAO;
+	}
+
+	public void setGroupDiscussionPostDAO(
+			GroupDiscussionPostDAO groupDiscussionPostDAO) {
+		this.groupDiscussionPostDAO = groupDiscussionPostDAO;
+	}
+
+	public void setGroupWallDAO(GroupWallDAO groupWallDAO) {
+		this.groupWallDAO = groupWallDAO;
 	}
 
 	@Override
@@ -42,7 +71,7 @@ public class GroupServiceImpl implements GroupService {
 		gue.createCriteria().andGroupIdEqualTo(groupId);
 		size = groupUserDAO.countByExample(gue);
 		if(size>=g.getMaxUser()){
-			throw new Exception("该组的用户数已经打到上限");
+			throw new Exception("该组的用户数已经达到上限");
 		}
 		GroupUser gu = new GroupUser();
 		gu.setPermission(GroupUser.PERMISSION_GEN);
@@ -100,14 +129,42 @@ public class GroupServiceImpl implements GroupService {
 
 	@Override
 	public void delGroup(long myId, long groupId,String msg) throws Exception {
-		// TODO Auto-generated method stub
-
+		GroupUserExample gue = new GroupUserExample();
+		gue.createCriteria().andGroupIdEqualTo(groupId).andUserIdEqualTo(myId).andPermissionEqualTo(GroupUser.PERMISSION_CREATER);
+		java.util.List<GroupUser> gus = groupUserDAO.selectByExample(gue);
+		if(gus.size()==0){
+			throw new Exception("该组不存在或者您不是改组得创建者");
+		}
+		grouperDAO.deleteByPrimaryKey(groupId);
+		gue.clear();
+		gue.createCriteria().andGroupIdEqualTo(groupId);
+		groupUserDAO.deleteByExample(gue);
+		GroupDiscussionExample gde = new GroupDiscussionExample();
+		gde.createCriteria().andGroupIdEqualTo(groupId);
+		groupDiscussionDAO.deleteByExample(gde);
+		GroupDiscussionPostExample gdpe = new GroupDiscussionPostExample();
+		gdpe.createCriteria().andGroupDisIdEqualTo(groupId);
+		groupDiscussionPostDAO.deleteByExample(gdpe);
+		GroupWallExample gwe = new GroupWallExample();
+		gwe.createCriteria().andGroupIdEqualTo(groupId);
+		groupWallDAO.deleteByExample(gwe);
 	}
 
 	@Override
-	public void removeUserFromGroup(long userId, long groupId) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void removeUserFromGroup(long my_id,long userId, long groupId) throws Exception {
+		GroupUserExample gue = new GroupUserExample();
+		gue.createCriteria().andGroupIdEqualTo(groupId).andUserIdEqualTo(my_id);
+		java.util.List<GroupUser> gus = groupUserDAO.selectByExample(gue);
+		if(gus.size()==0){
+			throw new Exception("该组不存在或者您无权执行该操作");
+		}
+		if(gus.get(0).getPermission()==GroupUser.PERMISSION_ADMIN||gus.get(0).getPermission()==GroupUser.PERMISSION_CREATER){
+			gue.clear();
+			gue.createCriteria().andGroupIdEqualTo(groupId).andUserIdEqualTo(userId);
+			groupUserDAO.deleteByExample(gue);
+		}else{
+			throw new Exception("您无权执行该操作");
+		}
 	}
 
 }
