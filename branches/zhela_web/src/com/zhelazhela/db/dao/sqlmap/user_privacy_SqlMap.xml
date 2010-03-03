@@ -90,6 +90,9 @@
     insert into user_privacy (id, user_id, type, parameter1, parameter2, update_time)
     values (#id:BIGINT#, #userId:BIGINT#, #type:INTEGER#, #parameter1:INTEGER#,
       #parameter2:INTEGER#, #updateTime:TIMESTAMP#)
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <insert id="ibatorgenerated_insertSelective" parameterClass="com.zhelazhela.db.model.UserPrivacy" >
     <!--
@@ -140,6 +143,9 @@
       </isNotNull>
       )
     </dynamic>
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <select id="ibatorgenerated_countByExample" parameterClass="com.zhelazhela.db.model.UserPrivacyExample" resultClass="java.lang.Integer" >
     <!--

@@ -99,6 +99,9 @@
     values (#id:BIGINT#, #userId:BIGINT#, #visibility:INTEGER#, #name:VARCHAR#,
       #description:VARCHAR#, #category:VARCHAR#, #avatar:VARCHAR#, #avatarPic:VARCHAR#,
       #maxUser:INTEGER#, #currUser:INTEGER#, #updateTime:TIMESTAMP#)
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <insert id="ibatorgenerated_insertSelective" parameterClass="com.zhelazhela.db.model.Grouper" >
     <!--
@@ -179,6 +182,9 @@
       </isNotNull>
       )
     </dynamic>
+    <selectKey resultClass="java.lang.Long" keyProperty="id" > 
+   		SELECT @@IDENTITY AS id 
+    </selectKey>
   </insert>
   <select id="ibatorgenerated_countByExample" parameterClass="com.zhelazhela.db.model.GrouperExample" resultClass="java.lang.Integer" >
     <!--
