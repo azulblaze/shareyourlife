@@ -23,7 +23,10 @@ import com.zhelazhela.db.model.UserExample;
 import com.zhelazhela.db.model.Userinfo;
 import com.zhelazhela.db.model.define.MessageStatus;
 import com.zhelazhela.db.model.define.MessageType;
+import com.zhelazhela.domain.form.AddFriend;
+import com.zhelazhela.services.GroupService;
 import com.zhelazhela.services.UserMessageService;
+import com.zhelazhela.services.UserRelationService;
 
 public class UserMessageServiceImpl implements UserMessageService {
 
@@ -38,6 +41,10 @@ public class UserMessageServiceImpl implements UserMessageService {
 	private GrouperDAO grouperDAO;
 	
 	private GroupUserDAO groupUserDAO;
+	
+	private UserRelationService userRelationService;
+	
+	private GroupService groupService;
 	
 	public void setInboxMessageDAO(InboxMessageDAO inboxMessageDAO) {
 		this.inboxMessageDAO = inboxMessageDAO;
@@ -61,6 +68,14 @@ public class UserMessageServiceImpl implements UserMessageService {
 
 	public void setGroupUserDAO(GroupUserDAO groupUserDAO) {
 		this.groupUserDAO = groupUserDAO;
+	}
+
+	public void setUserRelationService(UserRelationService userRelationService) {
+		this.userRelationService = userRelationService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
 	}
 
 	@Override
@@ -211,7 +226,7 @@ public class UserMessageServiceImpl implements UserMessageService {
 				guIds.add(gu.getUserId());
 			}
 			sendUsers(guIds,source,subject,
-					MessageType.APPLY_GROUP, MessageStatus.SEND, null, content,false);
+					MessageType.APPLY_GROUP, MessageStatus.SEND, g.getId()+"", content,false);
 		}
 		throw new Exception("该组不存在或者已经解散");
 	}
@@ -226,7 +241,7 @@ public class UserMessageServiceImpl implements UserMessageService {
 				subject = "用户 "+u.getName()+" 邀请您加入他所管理的小组 "+g.getName();
 			}
 			sendUsers(userIds,source,subject,
-					MessageType.IVENT_GROUP, MessageStatus.SEND, null, content,false);
+					MessageType.IVENT_GROUP, MessageStatus.SEND, groupid+"", content,false);
 		}
 		throw new Exception("该组不存在或者已经解散");
 	}
@@ -284,7 +299,90 @@ public class UserMessageServiceImpl implements UserMessageService {
 			throw new Exception("你要发送得用户均无效");
 		}
 	}
+	
+	@Override
+	public boolean dealMessage(long msgId, long myId, int action)
+			throws Exception {
+		InboxMessage im = inboxMessageDAO.selectByPrimaryKey(myId);
+		if(im==null){
+			throw new Exception("该消息不存在或者已经被删除");
+		}
+		if(!im.getUserId().equals(myId)){
+			throw new Exception("您不具有该消息的操作权限");
+		}
+		switch(im.getMessageType()){
+		case MessageType.APPLY_CARE:
+			return ApplyCareMessage(im,action);
+		case MessageType.APPLY_GROUP:
+			return ApplyGroupMessage(im,action);
+		case MessageType.IVENT_GROUP:
+			return IventGroupMessage(im,action);
+		default:
+			break;
+		}
+		return true;
+	}
 
+	/**
+	 * 
+	 * @param im
+	 * @param action >0 ok; <0: block
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean ApplyCareMessage(InboxMessage im,int action) throws Exception{
+		AddFriend af = new AddFriend();
+		af.setD_user_id(im.getFromId());
+		af.setS_user_id(im.getUserId());
+		af.setMsg(im.getMessage());
+		if(action>0){
+			return userRelationService.allowFriend(af);
+		}else{
+			return userRelationService.blockFriend(af);
+		}
+	}
+	/**
+	 * 
+	 * @param im
+	 * @param action >0 ok; <0: block
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean ApplyGroupMessage(InboxMessage im,int action) throws Exception{
+		Grouper g = grouperDAO.selectByPrimaryKey(Long.parseLong(im.getParameters()));
+		if(action>0){
+			GroupUser gu = groupService.addUserToGroup(im.getFromId(), Long.parseLong(im.getParameters()), null);
+			if(gu!=null){
+				sendFriend(im.getUserId(), im.getFromId(),"["+g.getName()+"]通过了您的加入小组申请", "您已经通过申请,加入了["+g.getName()+"]小组. 您现在可以在这个小组发言了.");
+				return true;
+			}
+		}else{
+			sendFriend(im.getUserId(), im.getFromId(),"["+g.getName()+"]拒绝了您的加入小组", "非常抱歉,小组["+g.getName()+"]拒绝了您的申请,您可以直接回复该消息,告诉管理员您是谁.");
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param im
+	 * @param action >0 ok; <0: block
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean IventGroupMessage(InboxMessage im,int action) throws Exception{
+		Userinfo ui = userinfoDAO.selectByPrimaryKey(im.getUserId());
+		if(action>0){
+			GroupUser gu = groupService.addUserToGroup(im.getUserId(), Long.parseLong(im.getParameters()), null);
+			if(gu!=null){
+				sendFriend(im.getFromId(), im.getUserId(),"["+ui.getName()+"]接受了申请加入了小组", "用户["+ui.getName()+"]接受了您的邀请,加入了小组.");
+				return true;
+			}
+		}else{
+			sendFriend(im.getFromId(), im.getUserId(),"["+ui.getName()+"]拒绝了您的小组邀请", "非常抱歉,用户["+ui.getName()+"]拒绝了您的邀请不想加入小组,您可以直接回复该消息,告诉他您是谁.");
+		}
+		return false;
+	}
+	
 	class sendHugeMessage extends Thread{
 		
 		private InboxMessageDAO _inboxMessageDAO;
@@ -343,4 +441,5 @@ public class UserMessageServiceImpl implements UserMessageService {
 			}
 		}
 	}
+
 }
