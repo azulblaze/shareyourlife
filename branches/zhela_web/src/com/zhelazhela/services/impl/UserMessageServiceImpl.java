@@ -5,12 +5,15 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 
+import com.zhelazhela.db.dao.BlockUserDAO;
 import com.zhelazhela.db.dao.GroupUserDAO;
 import com.zhelazhela.db.dao.GrouperDAO;
 import com.zhelazhela.db.dao.InboxMessageDAO;
 import com.zhelazhela.db.dao.OutboxMessageDAO;
 import com.zhelazhela.db.dao.UserDAO;
 import com.zhelazhela.db.dao.UserinfoDAO;
+import com.zhelazhela.db.model.BlockUser;
+import com.zhelazhela.db.model.BlockUserExample;
 import com.zhelazhela.db.model.GroupUser;
 import com.zhelazhela.db.model.GroupUserExample;
 import com.zhelazhela.db.model.Grouper;
@@ -46,6 +49,8 @@ public class UserMessageServiceImpl implements UserMessageService {
 	
 	private GroupService groupService;
 	
+	private BlockUserDAO blockUserDAO;
+	
 	public void setInboxMessageDAO(InboxMessageDAO inboxMessageDAO) {
 		this.inboxMessageDAO = inboxMessageDAO;
 	}
@@ -78,6 +83,12 @@ public class UserMessageServiceImpl implements UserMessageService {
 		this.groupService = groupService;
 	}
 
+	public void setBlockUserDAO(BlockUserDAO blockUserDAO) {
+		this.blockUserDAO = blockUserDAO;
+	}
+
+	
+	
 	@Override
 	public InboxMessage readInBoxMessage(long id) {
 		return inboxMessageDAO.selectByPrimaryKey(id);
@@ -94,6 +105,11 @@ public class UserMessageServiceImpl implements UserMessageService {
 			throws Exception {
 		if(userDAO.selectByPrimaryKey(to)==null){
 			throw new Exception("该用户不存在");
+		}
+		BlockUserExample bue = new BlockUserExample();
+		bue.createCriteria().andBlockedUserIdEqualTo(from).andUserIdEqualTo(to);
+		if(blockUserDAO.selectByExample(bue).size()>0){
+			throw new Exception("该用户把您加入了黑名单,不能接收您的消息");
 		}
 		InboxMessage im = new InboxMessage();
 		im.setFromId(from);
