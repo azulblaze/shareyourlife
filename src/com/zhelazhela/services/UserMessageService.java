@@ -132,4 +132,6 @@ public interface UserMessageService {
 	 * @throws Exception
 	 */
 	public void sendGroupInvition(long source,long groupid,List<Long> userIds,String subject,String content) throws Exception;
+	
+	public boolean dealMessage(long msg_id,long my_id,int action) throws Exception;
 }
