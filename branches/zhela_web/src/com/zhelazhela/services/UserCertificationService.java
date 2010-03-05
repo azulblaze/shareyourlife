@@ -20,7 +20,7 @@ public interface UserCertificationService {
 
 	public boolean applyCertification(long myId,long user_id,String certName,java.util.Date start,java.util.Date end) throws Exception;
 	
-	public Certification editCertification(long myId,long user_id,String certName,java.util.Date start,java.util.Date end) throws Exception;
+	public Certification editCertification(long myId,long user_id,long usercertId,String certName,java.util.Date start,java.util.Date end) throws Exception;
 	
 	public boolean cancelCertification(long myId,long cert_id) throws Exception;
 }
