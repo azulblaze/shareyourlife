@@ -9,6 +9,7 @@ import com.zhelazhela.db.model.GroupDiscussionExample;
 import com.zhelazhela.db.model.GroupDiscussionPostExample;
 import com.zhelazhela.db.model.GroupUser;
 import com.zhelazhela.db.model.GroupUserExample;
+import com.zhelazhela.db.model.GroupWall;
 import com.zhelazhela.db.model.GroupWallExample;
 import com.zhelazhela.db.model.Grouper;
 import com.zhelazhela.db.model.GrouperExample;
@@ -165,6 +166,52 @@ public class GroupServiceImpl implements GroupService {
 		}else{
 			throw new Exception("您无权执行该操作");
 		}
+	}
+
+	@Override
+	public GroupWall createWall(GroupWall gw, long userId) throws Exception {
+		GroupUserExample gue = new GroupUserExample();
+		gue.createCriteria().andGroupIdEqualTo(gw.getGroupId()).andUserIdEqualTo(userId);
+		java.util.List<GroupUser> gus = groupUserDAO.selectByExample(gue);
+		if(gus.size()==0){
+			throw new Exception("该组不存在或者您无权执行该操作");
+		}
+		if(gus.get(0).getPermission()==GroupUser.PERMISSION_ADMIN||gus.get(0).getPermission()==GroupUser.PERMISSION_CREATER){
+			GroupWallExample gwe = new GroupWallExample();
+			gwe.createCriteria().andGroupIdEqualTo(gw.getGroupId());
+			java.util.List<GroupWall> gws = groupWallDAO.selectByExample(gwe);
+			if(gws.size()>0){
+				GroupWall record = gws.get(0);
+				boolean update = false;
+				if(!gw.getDescription().equals(record.getDescription())){
+					record.setDescription(gw.getDescription());
+					update = true;
+				}
+				if(!gw.getName().equals(record.getName())){
+					record.setName(gw.getName());
+					update = true;
+				}
+				if(!gw.getPostUserId().equals(record.getPostUserId())){
+					record.setPostUserId(gw.getPostUserId());
+					update = true;
+				}
+				if(!record.getStatus().equals(gw.getStatus())){
+					record.setStatus(gw.getStatus());
+					update = true;
+				}
+				if(update){
+					record.setUpdateTime(new java.util.Date());
+					groupWallDAO.updateByPrimaryKey(record);
+					return record;
+				}
+			}else{
+				groupWallDAO.insert(gw);
+				return gw;
+			}
+		}else{
+			throw new Exception("您无权执行该操作");
+		}
+		return null;
 	}
 
 }

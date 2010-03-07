@@ -263,7 +263,7 @@ CREATE  TABLE IF NOT EXISTS group_wall (
   post_user_id BIGINT NULL ,
   name VARCHAR(200) NULL ,
   description VARCHAR(1000) NULL ,
-  update_time VARCHAR(45) NULL ,
+  update_time TIMESTAMP NULL ,
   status INT NULL DEFAULT 0 ,
   PRIMARY KEY (group_id) )
 ENGINE = InnoDB
