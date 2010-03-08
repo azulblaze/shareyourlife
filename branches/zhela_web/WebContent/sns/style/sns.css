@@ -169,3 +169,78 @@ input.error{
 .config_main .config_info a{
 	font-size:12px;
 }
+#content #content-wrapper{
+	width:710px;
+	float:left;
+	margin:0px 20px 0px 0px;
+}
+#content  h3{
+	font-size:16px;
+	padding:10px 0px;
+}
+.wrapper-line{
+	clear:both;
+	margin-bottom:10px;
+}
+.wrapper-line .goods_thumb{
+	width:140px;
+	float:left;
+	margin:0 20px 0px 0px;
+}
+.wrapper-line .goods_thumb img{
+	width:140px;
+}
+.wrapper-line .goods-sum{
+	float:left;
+}
+#content #content-wrapper .wrapper-line .goods-sum .line{
+	margin:0px 0px;
+	clear:both;
+}
+.wrapper-line .goods-sum .line .left,.wrapper-line .goods-sum .right{
+	float:left;
+	width:225px;
+}
+.wrapper-line .care_user,.goods_offer{
+	width:710px;
+	border:1px solid #DDD;
+	padding:5px;
+}
+.wrapper-line .care_user .user{
+	margin:5px;
+	border:1px solid #EEE;
+	padding:3px;
+	width:159px;
+	float:left;
+}
+.wrapper-line .care_user .user .tagname{
+	float:left;
+	margin-left:5px;
+}
+.wrapper-line .care_user .user .header,.wrapper-line .goods_comment .comment .header{
+	float:left;
+}
+.wrapper-line .care_user .user .header img,.wrapper-line .goods_comment .comment .header img{
+	width:30px;
+}
+.goods_desc{
+	margin-top:20px;
+}
+.goods_desc .subject{
+	font-weight:bold;
+}
+.goods_comment .subject{
+	font-weight:bold;
+	border-bottom:1px solid #DDD;
+	margin:10px 0px;
+	padding-bottom:5px;
+}
+.goods_comment  .comment {
+	border-bottom:1px dashed #DDD;
+	padding-bottom:5px;
+	margin-bottom:10px;
+	clear:both;
+}
+.goods_comment  .comment .comment_content{
+	float:left;
+}

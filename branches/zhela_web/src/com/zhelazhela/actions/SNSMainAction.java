@@ -136,6 +136,9 @@ public class SNSMainAction extends BaseAction {
 	
 	public String loadgoods() throws Exception{
 		SNSUser tmp = (SNSUser)this.getSession("user");
+		if(page==null||page==0){
+			page = 1;
+		}
 		if(goods_id!=null&&goods_id>0){
 			GoodsDetail gd = goodsBasicService.loadGoodsDetail(goods_id, tmp, goods_sn, page, 3);
 			if(gd==null){

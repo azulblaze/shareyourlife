@@ -167,10 +167,13 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
     
     @SuppressWarnings("unchecked")
 	@Override
-	public List<UserTrack> loadUserTrack(long goodsId,Long userid, List<Long> beenblocked,int page,int pagesize) {
+	public List<UserTrack> loadUserTrack(long goodsId,String goodsSN,Long userid, List<Long> beenblocked,int page,int pagesize) {
 		// TODO Auto-generated method stub
 		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
 		map.put("goodsId", goodsId);
+		if(goodsSN!=null){
+			map.put("goodsSN", goodsSN);
+		}
 		if(userid!=null&&userid>0){
 			map.put("user_id", userid);
 		}
@@ -185,10 +188,13 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 	}
     
 	@Override
-	public int countUserTrack(long goodsId,Long userid, List<Long> beenblocked) {
+	public int countUserTrack(long goodsId,String goodsSN,Long userid, List<Long> beenblocked) {
 		// TODO Auto-generated method stub
 		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
 		map.put("goodsId", goodsId);
+		if(goodsSN!=null){
+			map.put("goodsSN", goodsSN);
+		}
 		if(userid!=null&&userid>0){
 			map.put("user_id", userid);
 		}

@@ -1,5 +1,6 @@
 package com.zhelazhela.services;
 
+import com.zhelazhela.db.model.GoodsComment;
 import com.zhelazhela.domain.GoodCommentList;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
@@ -17,6 +18,8 @@ public interface GoodsBasicService {
 	public UserTrackList loadUserTrack(long id,SNSUser user, String sn,int page,int pagesize) throws Exception;
 	
 	public GoodCommentList loadUserComment(long id,String sn,int page,int pagesize) throws Exception;
+	
+	public GoodsComment commentGoods(GoodsComment gc) throws Exception;
 	
 	public GoodsOfferList loadGoodsOffer(long id,String sn,int page,int pagesize) throws Exception;
 	
