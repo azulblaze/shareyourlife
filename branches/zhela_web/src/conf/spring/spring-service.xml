@@ -63,4 +63,13 @@
 	<bean id="goodsBasicService" name="goodsBasicService" class="com.zhelazhela.services.impl.GoodsBasicServiceImpl" />
 	<bean id="goodsTagService" name="goodsTagService" class="com.zhelazhela.services.impl.GoodsTagServiceImpl" />
 	<bean id="goodsRelationService" name="goodsRelationService" class="com.zhelazhela.services.impl.GoodsRelationServiceImpl" />
+	
+	<bean id="groupDiscussionService" name="groupDiscussionService" class="com.zhelazhela.services.impl.GroupDiscussionServiceImpl" />
+	<bean id="groupService" name="groupService" class="com.zhelazhela.services.impl.GroupServiceImpl" />
+	
+	<bean id="userCertificationService" name="userCertificationService" class="com.zhelazhela.services.impl.UserCertificationServiceImpl" />
+	<bean id="userMessageService" name="userMessageService" class="com.zhelazhela.services.impl.UserMessageServiceImpl" />
+	<bean id="userPrivacyService" name="userPrivacyService" class="com.zhelazhela.services.impl.UserPrivacyServiceImpl" />
+	<bean id="userRelationService" name="userRelationService" class="com.zhelazhela.services.impl.UserRelationServiceImpl" />
+	
 </beans>

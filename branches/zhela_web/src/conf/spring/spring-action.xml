@@ -42,5 +42,6 @@
 	</bean>
 	
 	<bean name="snsMainAction" class="com.zhelazhela.actions.SNSMainAction" singleton="false" >
+		<property name="pagesize" value="20" />
 	</bean>
 </beans>

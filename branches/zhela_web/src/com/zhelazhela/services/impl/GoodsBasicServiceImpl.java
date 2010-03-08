@@ -100,7 +100,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 				record.setSn(null);
 				record.setUpdateTime(new java.util.Date());
 				record.setUserId(gc.getUser_id());
-				goodsCommentDAO.insert(record);
+				commentGoods(record);
 			}
 			m_db_tx_manager.commit(status);
 			return new GoodsDetail();
@@ -138,11 +138,11 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		utl.setPage(page);
 		utl.setPagesize(pagesize);
 		if(user!=null){
-			utl.setList(goodsTrackDAO.loadUserTrack(id,user.getId(), user.getBeen_blocked(), page, pagesize));
-			utl.setSize(goodsTrackDAO.countUserTrack(id,user.getId(), user.getBeen_blocked()));
+			utl.setList(goodsTrackDAO.loadUserTrack(id,sn,user.getId(), user.getBeen_blocked(), page, pagesize));
+			utl.setSize(goodsTrackDAO.countUserTrack(id,sn,user.getId(), user.getBeen_blocked()));
 		}else{
-			utl.setList(goodsTrackDAO.loadUserTrack(id,null, null, page, pagesize));
-			utl.setSize(goodsTrackDAO.countUserTrack(id,null, null));
+			utl.setList(goodsTrackDAO.loadUserTrack(id,sn,null, null, page, pagesize));
+			utl.setSize(goodsTrackDAO.countUserTrack(id,sn,null, null));
 		}
 		return utl;
 	}
@@ -174,5 +174,12 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		ugl.setAllpage(goodsTrackDAO.countUserGoodsbyUser(loadUserId));
 		ugl.setList(goodsTrackDAO.loadUserGoodsbyUser(userId, loadUserId, page, pagesize));
 		return ugl;
+	}
+
+	@Override
+	public GoodsComment commentGoods(GoodsComment gc) throws Exception {
+		goodsCommentDAO.insert(gc);
+		gc.setUpdateTime(new java.util.Date());
+		return gc;
 	}
 }

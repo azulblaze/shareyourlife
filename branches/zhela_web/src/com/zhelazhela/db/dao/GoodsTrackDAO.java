@@ -96,9 +96,9 @@ public interface GoodsTrackDAO {
      */
     int updateByPrimaryKey(GoodsTrack record);
     
-    public List<UserTrack> loadUserTrack(long goodid,Long userid, List<Long> beenblocked,int page,int pagesize);
+    public List<UserTrack> loadUserTrack(long goodid,String goodsSN,Long userid, List<Long> beenblocked,int page,int pagesize);
     
-    public int countUserTrack(long goodid,Long userid, List<Long> beenblocked);
+    public int countUserTrack(long goodid,String goodsSN,Long userid, List<Long> beenblocked);
     
     public List<UserGoods> loadUserGoodsbyUser(long myid,long destuser_id,int page,int pagesize);
     
