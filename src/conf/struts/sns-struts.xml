@@ -47,6 +47,10 @@
 			<result name="input">/WEB-INF/pages/sns/tiles/collection.jsp</result>
 			<result name="success">/WEB-INF/pages/sns/tiles/close_window.jsp</result>
 		</action>
+		
+		<action name="goods_detail" class="snsMainAction" method="loadgoods">
+			<result name="success" type="tiles">sns.goods_detail</result>
+		</action>
 	</package>
 
 </struts>

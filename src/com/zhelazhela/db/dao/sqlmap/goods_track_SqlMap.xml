@@ -312,21 +312,23 @@
   <select id="selectUserTrackByGoods" resultMap="define_UserTrackMap" parameterClass="java.util.Map" >
     select gtag.name as tag,gtag.id as tag_id,gt.ratting,gt.trackprice,gt.update_time as track_time,gt.visibility,ui.name as user_name,ui.avatar,ui.user_id 
     from goods_track gt,userinfo ui,goods_tag gtag 
-    where gt.goods_id = #goodsId:BIGINT# and (
-    gt.visibility = 0
+    where (gt.goods_id = #goodsId:BIGINT# 
+    <isNotNull property="goodsSN">
+    or gt.SN = #goodsSN:VARCHAR#
+    </isNotNull>) 
+     and (
+    gt.visibility = 0 
     <isNotNull prepend="or" property="user_id" >
-    gt.visibility = 1
+    gt.visibility = 1 
     </isNotNull>
-    ) and ui.user_id = gt.user_id and gt.goods_tag_id = gtag.id
-    <dynamic prepend="and">
-    	 gt.user_id not in (
-	    <isNotEmpty property="been_blocked">
-			<iterate property="been_blocked" conjunction="," >
-				$been_blocked[]$
-			</iterate>  			
-		</isNotEmpty>
-		)
-    </dynamic>
+    ) and ui.user_id = gt.user_id and gt.goods_tag_id = gtag.id 
+    <isNotEmpty property="been_blocked">
+    	and gt.user_id not in (
+		<iterate property="been_blocked" conjunction="," >
+			$been_blocked[]$
+		</iterate>  			
+		) 
+    </isNotEmpty>
     <isNotNull property="limit">
     	limit $limit$
     </isNotNull>
@@ -335,21 +337,23 @@
   <select id="countUserTrackByGoods" resultClass="java.lang.Integer" parameterClass="java.util.Map" >
     select count(ui.user_id) 
     from goods_track gt,userinfo ui,goods_tag gtag 
-    where gt.goods_id = #goodsId:BIGINT# and (
-    gt.visibility = 0
+    where (gt.goods_id = #goodsId:BIGINT# 
+    <isNotNull property="goodsSN">
+    or gt.SN = #goodsSN:VARCHAR#
+    </isNotNull>) 
+     and (
+    gt.visibility = 0 
     <isNotNull prepend="or" property="user_id" >
-    gt.visibility = 1
+    gt.visibility = 1 
     </isNotNull>
-    ) and ui.user_id = gt.user_id and gt.goods_tag_id = gtag.id
-    <dynamic prepend="and">
-    	 gt.user_id not in (
-	    <isNotEmpty property="been_blocked">
-			<iterate property="been_blocked" conjunction="," >
-				$been_blocked[]$
-			</iterate>  			
-		</isNotEmpty>
-		)
-    </dynamic>
+    ) and ui.user_id = gt.user_id and gt.goods_tag_id = gtag.id 
+    <isNotEmpty property="been_blocked">
+    	and gt.user_id not in (
+		<iterate property="been_blocked" conjunction="," >
+			$been_blocked[]$
+		</iterate>  			
+		) 
+    </isNotEmpty>
   </select>
   
   <select id="countGoodsIsTrackedByUser" resultClass="java.lang.Long">

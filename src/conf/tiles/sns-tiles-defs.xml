@@ -14,6 +14,12 @@
 		<put-attribute name="right" value="/WEB-INF/pages/sns/tiles/right.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/pages/sns/tiles/footer.jsp"></put-attribute>
 	</definition>
+	<definition name="sns.layout_lr" template="/WEB-INF/pages/sns/layout/layout_lr.jsp">
+		<put-attribute name="title" type="string" value=""></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/pages/sns/tiles/left.jsp"></put-attribute>
+		<put-attribute name="right" value="/WEB-INF/pages/sns/tiles/right.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/pages/sns/tiles/footer.jsp"></put-attribute>
+	</definition>
 	<definition name="sns.login" extends="sns.layout">
 		<put-attribute name="body" value="/WEB-INF/pages/sns/tiles/login.jsp"></put-attribute>
 	</definition>
@@ -27,6 +33,9 @@
 		<put-attribute name="body" value="/WEB-INF/pages/sns/tiles/act_result.jsp"></put-attribute>
 	</definition>
 	<definition name="sns.main" extends="sns.layout_lcr">
+	</definition>
+	<definition name="sns.goods_detail" extends="sns.layout_lr">
+		<put-attribute name="left" value="/WEB-INF/pages/sns/tiles/goods_detail.jsp"></put-attribute>
 	</definition>
 	
 </tiles-definitions>
