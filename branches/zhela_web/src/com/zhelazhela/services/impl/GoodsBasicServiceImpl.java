@@ -176,10 +176,29 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		return ugl;
 	}
 
+	
+	
 	@Override
 	public GoodsComment commentGoods(GoodsComment gc) throws Exception {
 		goodsCommentDAO.insert(gc);
 		gc.setUpdateTime(new java.util.Date());
 		return gc;
+	}
+
+	@Override
+	public UserGoodsList loadMyGoodsList(long userId, int page, int pagesize)
+			throws Exception {
+		return loadUserGoodsList(userId,userId,page,pagesize);
+	}
+
+	@Override
+	public UserGoodsList loadMyLatestList(long userId, int page, int pagesize)
+			throws Exception {
+		UserGoodsList ugl = new UserGoodsList();
+		ugl.setPage(page);
+		ugl.setPagesize(pagesize);
+		ugl.setAllpage(goodsTrackDAO.countUserGoodsbyUser(userId));
+		ugl.setList(goodsTrackDAO.loadLatestGoodsbyUser(userId, page, pagesize));
+		return ugl;
 	}
 }

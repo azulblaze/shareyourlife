@@ -31,6 +31,8 @@ public class UserGoods {
 	private java.util.Date track_time;
 	
 	private Integer istrack = 0;
+	
+	private Long myid;
 
 	public Long getGoods_id() {
 		return goods_id;
@@ -135,6 +137,9 @@ public class UserGoods {
 	public void setTrack_user_id(java.util.List<Long> trackUserId) {
 		track_user_id = trackUserId;
 		this.track_count = trackUserId.size();
+		if(myid!=null&&myid>0&&track_user_id.contains(myid)){
+			istrack = 1;
+		}
 	}
 	
 }
