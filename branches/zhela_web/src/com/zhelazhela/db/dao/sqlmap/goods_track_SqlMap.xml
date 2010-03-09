@@ -362,12 +362,12 @@
   </select>
   
   <select id="selectUserGoodsByUser" resultMap="define_GoodsTrackMap" parameterClass="java.util.Map" >
-    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'undefine') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time
+    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time
     from goods_track gt 
     left join goods_tag gtg on gt.goods_tag_id=gtg.id 
     left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
     where user_id= #user_id:BIGINT# 
-    order by gt.update_time desc
+    order by gt.id desc
     <isNotNull property="limit">
     	limit $limit$
     </isNotNull>
@@ -379,5 +379,24 @@
     where user_id= #user_id:BIGINT# 
   </select>
   
+  <select id="selectLatestGoodsByUser" resultMap="define_GoodsTrackMap" parameterClass="java.util.Map" >
+    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time
+    from goods_track gt 
+    left join goods_tag gtg on gt.goods_tag_id=gtg.id 
+    left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
+    where gt.user_id= #user_id:BIGINT# or gt.user_id in (select fl.friend_id from friend_list fl where fl.user_id= #user_id:BIGINT# and fl.status=1) 
+    order by gt.id desc 
+    <isNotNull property="limit">
+    	limit $limit$
+    </isNotNull>
+  </select>
+  
+  <select id="countLatestGoodsByUser" resultClass="java.lang.Integer" parameterClass="java.util.Map" >
+    select count(gt.id) 
+    from goods_track gt 
+    left join goods_tag gtg on gt.goods_tag_id=gtg.id 
+    left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
+    where gt.user_id= #user_id:BIGINT# or gt.user_id in (select fl.friend_id from friend_list fl where fl.user_id= #user_id:BIGINT# and fl.status=1)
+  </select>
   
 </sqlMap>

@@ -92,6 +92,9 @@ public class SNSMainAction extends BaseAction {
 		if(tmp==null||tmp.getReg_level()<=0){
 			return LOGIN;
 		}
+		UserGoodsList ugl = goodsBasicService.loadMyGoodsList(tmp.getId(), page, pagesize);
+		setValue("ugl",ugl);
+		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		return SUCCESS;
 	}
 	
@@ -154,6 +157,9 @@ public class SNSMainAction extends BaseAction {
 		SNSUser tmp = (SNSUser)this.getSession("user");
 		if(tmp==null){
 			return LOGIN;
+		}
+		if(tmp.getId()==user_id){
+			return "mypage";
 		}
 		if(user_id==null||user_id<1){
 			throw new Exception();

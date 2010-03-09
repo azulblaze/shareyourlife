@@ -32,7 +32,11 @@
 	<definition name="sns.actresult" extends="sns.layout">
 		<put-attribute name="body" value="/WEB-INF/pages/sns/tiles/act_result.jsp"></put-attribute>
 	</definition>
-	<definition name="sns.main" extends="sns.layout_lcr">
+	<definition name="sns.mypage" extends="sns.layout_lcr">
+	</definition>
+	<definition name="sns.user_page" extends="sns.layout_lcr">
+		<put-attribute name="left" value="/WEB-INF/pages/sns/tiles/userinfo.jsp"></put-attribute>
+		<put-attribute name="center" value="/WEB-INF/pages/sns/tiles/goods_list.jsp"></put-attribute>
 	</definition>
 	<definition name="sns.goods_detail" extends="sns.layout_lr">
 		<put-attribute name="left" value="/WEB-INF/pages/sns/tiles/goods_detail.jsp"></put-attribute>
