@@ -215,13 +215,6 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
 		}
 		List<UserGoods> list = (List<UserGoods>)getSqlMapClientTemplate().queryForList("goods_track.selectUserGoodsByUser", map);
-		if(myid>0){
-			for(UserGoods ug:list){
-				if(ug.getTrack_user_id().contains(myid)){
-					ug.setIstrack(1);
-				}
-			}
-		}
 		return list;
 	}
 
@@ -230,6 +223,27 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
 		map.put("user_id", destuserId);
 		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("goods_track.countUserGoodsByUser", map);
+        return count;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserGoods> loadLatestGoodsbyUser(long myid,
+			int page, int pagesize) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", myid);
+		if(pagesize>0){
+			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
+		}
+		List<UserGoods> list = (List<UserGoods>)getSqlMapClientTemplate().queryForList("goods_track.selectLatestGoodsByUser", map);
+		return list;
+	}
+
+	@Override
+	public int countLatestGoodsbyUser(long destuserId) {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("user_id", destuserId);
+		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("goods_track.countLatestGoodsByUser", map);
         return count;
 	}
 }
