@@ -95,14 +95,14 @@ public class UserRelationServiceImpl implements UserRelationService {
 				break;
 			case UserPrivacyService.ALLOW_PRAMETER_DENEY:
 				//send message to tell source that can't be care
-				ui = userinfoDAO.selectByPrimaryKey(af.getD_user_id());
-				userMessageService.sendFriend(af.getD_user_id(), af.getS_user_id(), "用户["+ui.getName()+"]不允许被关注", "用户["+ui.getName()+"]通过设置拒绝被关注,您可以直接回复该消息告诉他您是谁.");
-				break;
+				//ui = userinfoDAO.selectByPrimaryKey(af.getD_user_id());
+				//userMessageService.sendFriend(af.getD_user_id(), af.getS_user_id(), "用户["+ui.getName()+"]不允许被关注", "用户["+ui.getName()+"]通过设置拒绝被关注,您可以直接回复该消息告诉他您是谁.");
+				return false;
 			default:
 				throw new Exception("该用户的数据可能有错误");
 			}			
 		}
-		throw new Exception("该用户不存在");
+		throw new Exception("非常抱歉,发生错误,您不能关注该用户");
 	}
 
 	@Override
