@@ -18,7 +18,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public abstract class BaseAction extends ActionSupport {
 	
 	protected final static String ROOT_PARENT_ID = "0";
-	protected String urlBack;	
+	protected String urlBack;
+	protected String JSON = "json";
 	public String getUrlBack() {
 		return urlBack;
 	}
