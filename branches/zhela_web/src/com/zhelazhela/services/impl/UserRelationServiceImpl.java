@@ -56,7 +56,7 @@ public class UserRelationServiceImpl implements UserRelationService {
 
 	
 	@Override
-	public boolean addFriend(AddFriend af) throws Exception {
+	public int addFriend(AddFriend af) throws Exception {
 		// TODO Auto-generated method stub
 		if(userDAO.selectByPrimaryKey(af.getD_user_id())!=null){
 			BlockUserExample bue = new BlockUserExample();
@@ -74,7 +74,7 @@ public class UserRelationServiceImpl implements UserRelationService {
 				if(fl.getStatus().equals(FriendList.STATUS_BLOCK)){
 					throw new Exception("该用户不允许您关注他,您可以发消息告诉他您是谁.");
 				}
-				return true;
+				return -9;
 			}
 			UserPrivacy up = userPrivacyService.loadUserPrivacy(af.getD_user_id(), UserPrivacyService.TYPE_ALLOW_CARE);
 			Userinfo ui = userinfoDAO.selectByPrimaryKey(af.getS_user_id());
@@ -88,16 +88,16 @@ public class UserRelationServiceImpl implements UserRelationService {
 				fl.setUpdateTime(new java.util.Date());
 				friendListDAO.insert(fl);
 				userMessageService.sendFriend(af.getS_user_id(), af.getD_user_id(), "用户["+ui.getName()+"]关注了您", "用户于 "+sdf.format(new java.util.Date())+" ["+ui.getName()+"]关注了您,您可以通过用户设置中的权限来设置是否被关注.");
-				return true;
+				return -9;
 			case UserPrivacyService.ALLOW_PRAMETER_APPLY:
 				//send message to apply
-				userMessageService.sendCareApply(af.getS_user_id(), af.getD_user_id(), "用户["+ui.getName()+"]申请关注您", "用户于 "+sdf.format(new java.util.Date())+" ["+ui.getName()+"]申请关注您的状态,您可以通过用户设置中的权限来设置是否被关注.");
-				break;
+				//userMessageService.sendCareApply(af.getS_user_id(), af.getD_user_id(), "用户["+ui.getName()+"]申请关注您", "用户于 "+sdf.format(new java.util.Date())+" ["+ui.getName()+"]申请关注您的状态,您可以通过用户设置中的权限来设置是否被关注.");
+				return UserPrivacyService.ALLOW_PRAMETER_APPLY;
 			case UserPrivacyService.ALLOW_PRAMETER_DENEY:
 				//send message to tell source that can't be care
 				//ui = userinfoDAO.selectByPrimaryKey(af.getD_user_id());
 				//userMessageService.sendFriend(af.getD_user_id(), af.getS_user_id(), "用户["+ui.getName()+"]不允许被关注", "用户["+ui.getName()+"]通过设置拒绝被关注,您可以直接回复该消息告诉他您是谁.");
-				return false;
+				return UserPrivacyService.ALLOW_PRAMETER_DENEY;
 			default:
 				throw new Exception("该用户的数据可能有错误");
 			}			

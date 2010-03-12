@@ -4,7 +4,7 @@ import com.zhelazhela.domain.form.AddFriend;
 
 public interface UserRelationService {
 
-	public boolean addFriend(AddFriend af) throws Exception;
+	public int addFriend(AddFriend af) throws Exception;
 	
 	public boolean delFriend(AddFriend af) throws Exception;
 	
