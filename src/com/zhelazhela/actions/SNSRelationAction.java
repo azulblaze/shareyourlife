@@ -134,6 +134,7 @@ public class SNSRelationAction extends BaseAction {
 				jb.put("result", "success");
 				jb.put("data", gt);
 				jb.put("msg", "关注成功");
+				setValue("json", jb.toString());
 				return JSON;
 			}else{
 				jb.put("msg", "非常抱歉发生了错误");
@@ -142,6 +143,7 @@ public class SNSRelationAction extends BaseAction {
 			jb.put("msg", e.getMessage());
 		}
 		jb.put("result", "fail");
+		setValue("json", jb.toString());
 		return JSON;
 	}
 	
@@ -159,6 +161,7 @@ public class SNSRelationAction extends BaseAction {
 				jb.put("result", "success");
 				jb.put("data", gt);
 				jb.put("msg", "编辑成功");
+				setValue("json", jb.toString());
 				return JSON;
 			}else{
 				jb.put("msg", "非常抱歉发生了错误");
@@ -167,6 +170,7 @@ public class SNSRelationAction extends BaseAction {
 			jb.put("msg", e.getMessage());
 		}
 		jb.put("result", "fail");
+		setValue("json", jb.toString());
 		return JSON;
 	}
 	
@@ -182,12 +186,15 @@ public class SNSRelationAction extends BaseAction {
 			boolean result = goodsRelationService.delTrack(track_id, tmp.getId());
 			if(result){
 				jb.put("result", "success");
+				setValue("json", jb.toString());
+				setValue("json", jb.toString());
 				return JSON;
 			}
 		}catch(Exception e){
 			jb.put("msg", e.getMessage());
 		}
 		jb.put("result", "fail");
+		setValue("json", jb.toString());
 		return JSON;
 	}
 	
@@ -201,26 +208,70 @@ public class SNSRelationAction extends BaseAction {
 		}
 		try{
 			addFriend.setS_user_id(tmp.getId());
-			boolean result = userRelationService.addFriend(addFriend);
-			if(result){
+			int result = userRelationService.addFriend(addFriend);
+			if(result==-9){
 				jb.put("result", "success");
 				jb.put("msg", "关注成功");
+				setValue("json", jb.toString());
 				return JSON;
 			}else{
-				jb.put("msg", "非常抱歉发生了错误");
+				jb.put("data", result);
 			}
 		}catch(Exception e){
 			jb.put("msg", e.getMessage());
 		}
 		jb.put("result", "fail");
+		setValue("json", jb.toString());
 		return JSON;
 	}
 	
 	public String delFriend() throws Exception{
-		return SUCCESS;
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		JSONObject jb = new JSONObject();
+		if(tmp==null){
+			jb.put("result", "login");
+			this.setValue("json", jb.toString());
+			return JSON;
+		}
+		try{
+			addFriend.setS_user_id(tmp.getId());
+			boolean result = userRelationService.delFriend(addFriend);
+			if(result){
+				jb.put("result", "success");
+				jb.put("msg", "取消成功");
+				setValue("json", jb.toString());
+				return JSON;
+			}
+		}catch(Exception e){
+			jb.put("msg", e.getMessage());
+		}
+		jb.put("result", "fail");
+		setValue("json", jb.toString());
+		return JSON;
 	}
 	
 	public String blockUser() throws Exception{
-		return SUCCESS;
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		JSONObject jb = new JSONObject();
+		if(tmp==null){
+			jb.put("result", "login");
+			this.setValue("json", jb.toString());
+			return JSON;
+		}
+		try{
+			addFriend.setS_user_id(tmp.getId());
+			boolean result = userRelationService.blockFriend(addFriend);
+			if(result){
+				jb.put("result", "success");
+				jb.put("msg", "取消成功");
+				setValue("json", jb.toString());
+				return JSON;
+			}
+		}catch(Exception e){
+			jb.put("msg", e.getMessage());
+		}
+		jb.put("result", "fail");
+		setValue("json", jb.toString());
+		return JSON;
 	}
 }

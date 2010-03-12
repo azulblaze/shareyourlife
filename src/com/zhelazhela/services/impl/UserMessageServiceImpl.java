@@ -12,7 +12,6 @@ import com.zhelazhela.db.dao.InboxMessageDAO;
 import com.zhelazhela.db.dao.OutboxMessageDAO;
 import com.zhelazhela.db.dao.UserDAO;
 import com.zhelazhela.db.dao.UserinfoDAO;
-import com.zhelazhela.db.model.BlockUser;
 import com.zhelazhela.db.model.BlockUserExample;
 import com.zhelazhela.db.model.GroupUser;
 import com.zhelazhela.db.model.GroupUserExample;
@@ -90,17 +89,42 @@ public class UserMessageServiceImpl implements UserMessageService {
 	
 	
 	@Override
-	public InboxMessage readInBoxMessage(long id) {
-		return inboxMessageDAO.selectByPrimaryKey(id);
+	public InboxMessage readInBoxMessage(long id,long user_id) {
+		InboxMessage im = inboxMessageDAO.selectByPrimaryKey(id);
+		if(im!=null&&im.getUserId().equals(user_id)){
+			InboxMessage _im = new InboxMessage();
+			_im.setId(id);
+			_im.setMessageStatus(MessageStatus.READ);
+			_im.setUpdateTime(new java.util.Date());
+			inboxMessageDAO.updateByPrimaryKeySelective(_im);
+			if(im.getSendId()>0){
+				OutboxMessage om = outboxMessageDAO.selectByPrimaryKey(im.getSendId());
+				if(om!=null){
+					OutboxMessage _om = new OutboxMessage();
+					_om.setId(om.getId());
+					_om.setMessageStatus(MessageStatus.READ);
+					_om.setUpdateTime(new java.util.Date());
+					outboxMessageDAO.updateByPrimaryKeySelective(_om);
+				}
+				
+			}
+			
+			return im;
+		}
+		return null;
 	}
 
 	@Override
-	public OutboxMessage readOutBoxMessage(long id) {
-		return outboxMessageDAO.selectByPrimaryKey(id);
+	public OutboxMessage readOutBoxMessage(long id,long user_id) {
+		OutboxMessage om = outboxMessageDAO.selectByPrimaryKey(id);
+		if(om!=null&&om.getUserId().equals(user_id)){
+			return om;
+		}
+		return null;
 	}
 
 	@Override
-	public OutboxMessage sendMessage(long from, long to, String subject,
+	public OutboxMessage sendMessage(long from, long to, long reply, String subject,
 			int type, String status, String parameter, String message,boolean savesendbox)
 			throws Exception {
 		if(userDAO.selectByPrimaryKey(to)==null){
@@ -119,20 +143,23 @@ public class UserMessageServiceImpl implements UserMessageService {
 		im.setMessageType(type);
 		im.setParameters(parameter);
 		im.setSubject(subject);
+		im.setReplyId(reply);
 		im.setUpdateTime(new java.util.Date());
 		OutboxMessage om = new OutboxMessage();
 		om.setIsDeleted(false);
 		om.setMessage(message);
+		om.setReplyId(reply);
 		om.setMessageStatus(MessageStatus.UNREAD);
 		om.setMessageType(type);
 		om.setSubject(subject);
 		om.setToId(to);
 		om.setUpdateTime(new java.util.Date());
 		om.setUserId(from);
-		inboxMessageDAO.insert(im);
 		if(savesendbox){
 			outboxMessageDAO.insert(om);
+			im.setSendId(om.getId());
 		}
+		inboxMessageDAO.insert(im);
 		return om;
 	}
 
@@ -179,9 +206,9 @@ public class UserMessageServiceImpl implements UserMessageService {
 	}
 
 	@Override
-	public void delInbox(List<Long> ids) throws Exception {
+	public void delInbox(List<Long> ids,long user_id) throws Exception {
 		InboxMessageExample example = new InboxMessageExample();
-		example.createCriteria().andIdIn(ids).andIsDeletedEqualTo(false);
+		example.createCriteria().andUserIdEqualTo(user_id).andIdIn(ids).andIsDeletedEqualTo(false);
 		InboxMessage record = new InboxMessage();
 		record.setIsDeleted(true);
 		record.setUpdateTime(new java.util.Date());
@@ -190,9 +217,9 @@ public class UserMessageServiceImpl implements UserMessageService {
 	}
 
 	@Override
-	public void delOutbox(List<Long> ids) throws Exception {
+	public void delOutbox(List<Long> ids,long user_id) throws Exception {
 		OutboxMessageExample example = new OutboxMessageExample();
-		example.createCriteria().andIdIn(ids).andIsDeletedEqualTo(false);
+		example.createCriteria().andUserIdEqualTo(user_id).andIdIn(ids).andIsDeletedEqualTo(false);
 		OutboxMessage record = new OutboxMessage();
 		record.setIsDeleted(true);
 		record.setUpdateTime(new java.util.Date());
@@ -211,14 +238,14 @@ public class UserMessageServiceImpl implements UserMessageService {
 			Userinfo u = userinfoDAO.selectByPrimaryKey(source);
 			subject = "用户 "+u.getName()+" 希望关注您的状态";
 		}
-		sendMessage(source, dest, subject,
+		sendMessage(source, dest,0, subject,
 				MessageType.APPLY_CARE, MessageStatus.SEND, null, content,false);
 	}
 
 	@Override
-	public void sendFriend(long source, long dest,String subject, String content)
+	public OutboxMessage sendFriend(long source, long dest,String subject, String content)
 			throws Exception {
-		sendMessage(source, dest, subject,
+		return sendMessage(source, dest,0, subject,
 				MessageType.GENERAL, MessageStatus.SEND, null, content,true);
 	}
 
@@ -456,6 +483,13 @@ public class UserMessageServiceImpl implements UserMessageService {
 				_outboxMessageDAO.insert(om);
 			}
 		}
+	}
+
+	@Override
+	public int countUnReadMessage(long userId) throws Exception {
+		OutboxMessageExample ome = new OutboxMessageExample();
+		ome.createCriteria().andUserIdEqualTo(userId).andMessageStatusEqualTo(MessageStatus.UNREAD);
+		return outboxMessageDAO.countByExample(ome);
 	}
 
 }
