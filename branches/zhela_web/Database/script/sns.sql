@@ -60,6 +60,8 @@ DROP TABLE IF EXISTS inbox_message ;
 
 CREATE  TABLE IF NOT EXISTS inbox_message (
   id BIGINT NOT NULL AUTO_INCREMENT ,
+  reply_id BIGINT NULL ,
+  send_id BIGINT NULL ,
   from_id BIGINT NULL ,
   user_id BIGINT NULL ,
   subject VARCHAR(100) NULL ,
@@ -83,6 +85,7 @@ DROP TABLE IF EXISTS outbox_message ;
 
 CREATE  TABLE IF NOT EXISTS outbox_message (
   id BIGINT NOT NULL AUTO_INCREMENT ,
+  reply_id BIGINT NULL ,
   user_id BIGINT NULL ,
   to_id BIGINT NULL ,
   subject VARCHAR(100) NULL ,

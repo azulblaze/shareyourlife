@@ -19,7 +19,7 @@ public interface UserMessageService {
 	 * @return
 	 * @throws Exception
 	 */
-	public OutboxMessage sendMessage(long from,long to,String subject,int type,String status,String parameter,String message,boolean savesendbox) throws Exception;
+	public OutboxMessage sendMessage(long from,long to,long reply,String subject,int type,String status,String parameter,String message,boolean savesendbox) throws Exception;
 	/**
 	 * 获取用户收件箱的消息
 	 * @param user_id
@@ -43,13 +43,13 @@ public interface UserMessageService {
 	 * @param ids
 	 * @throws Exception
 	 */
-	public void delInbox(java.util.List<Long> ids) throws Exception;
+	public void delInbox(java.util.List<Long> ids,long user_id) throws Exception;
 	/**
 	 * 删除发件箱中选种的消息
 	 * @param ids
 	 * @throws Exception
 	 */
-	public void delOutbox(java.util.List<Long> ids) throws Exception;
+	public void delOutbox(java.util.List<Long> ids,long user_id) throws Exception;
 	/**
 	 * 清空收件箱
 	 * @param user_id
@@ -68,14 +68,14 @@ public interface UserMessageService {
 	 * @return
 	 * @throws Exception
 	 */
-	public InboxMessage readInBoxMessage(long id) throws Exception;
+	public InboxMessage readInBoxMessage(long id,long user_id) throws Exception;
 	/**
 	 * 读取发件箱中的详细消息
 	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
-	public OutboxMessage readOutBoxMessage(long id) throws Exception;
+	public OutboxMessage readOutBoxMessage(long id,long user_id) throws Exception;
 	
 	/**
 	 * 给所有用户发送消息
@@ -96,7 +96,7 @@ public interface UserMessageService {
 	 * @param content
 	 * @throws Exception
 	 */
-	public void sendFriend(long source,long dest,String subject,String content) throws Exception;
+	public OutboxMessage sendFriend(long source,long dest,String subject,String content) throws Exception;
 	
 	/**
 	 * 管理员给组用户发送信息
@@ -132,6 +132,20 @@ public interface UserMessageService {
 	 * @throws Exception
 	 */
 	public void sendGroupInvition(long source,long groupid,List<Long> userIds,String subject,String content) throws Exception;
-	
+	/**
+	 * 处理消息,根据类型和状态. 会导致好友关注等情况
+	 * @param msg_id
+	 * @param my_id
+	 * @param action
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean dealMessage(long msg_id,long my_id,int action) throws Exception;
+	/**
+	 * 统计未读消息条数
+	 * @param user_id
+	 * @return
+	 * @throws Exception
+	 */
+	public int countUnReadMessage(long user_id) throws Exception;
 }
