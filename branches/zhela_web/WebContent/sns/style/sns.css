@@ -244,3 +244,28 @@ input.error{
 .goods_comment  .comment .comment_content{
 	float:left;
 }
+#right .right_line{
+	margin:0px 0px 10px 0px;
+}
+#right .right_line .right_h4{
+	margin-bottom:5px;
+	font-weight:bold;
+}
+#right .right_line .img_group a{
+	margin:0px;
+	padding:0px;
+	display:block;
+	float:left;
+	width:35px;
+	height:35px;
+	margin:2px;
+}
+#right .right_line .img_group a img{
+	margin:0px;
+	padding:0px;
+	width:35px;
+	height:35px;
+}
+#right .right_line .right_ul li{
+	list-style:disc;
+}
