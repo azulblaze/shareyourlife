@@ -44,4 +44,12 @@
 	<bean name="snsMainAction" class="com.zhelazhela.actions.SNSMainAction" singleton="false" >
 		<property name="pagesize" value="20" />
 	</bean>
+	
+	<bean name="snsMessageAction" class="com.zhelazhela.actions.SNSMessageAction" singleton="false" >
+		<property name="pagesize" value="20" />
+	</bean>
+	
+	<bean name="snsRelationAction" class="com.zhelazhela.actions.SNSRelationAction" singleton="false" >
+		<property name="pagesize" value="20" />
+	</bean>
 </beans>

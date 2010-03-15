@@ -20,6 +20,11 @@
     </rule>
     
     <rule>
+    	<from>^/sns/user/([0-9]+)</from>
+    	<to type="forward">/sns/user_page.zl?user_id=$1</to>
+    </rule>
+    
+    <rule>
     	<from>/index.html</from>
         <to type="forward">/index.zl</to>
     </rule>
