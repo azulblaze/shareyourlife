@@ -39,6 +39,10 @@ public class SNSMainAction extends BaseAction {
 		this.userProfileService = userProfileService;
 	}
 
+	public void setGoodsTagService(GoodsTagService goodsTagService) {
+		this.goodsTagService = goodsTagService;
+	}
+
 	public GoodsCollection getGc() {
 		return gc;
 	}
@@ -92,9 +96,14 @@ public class SNSMainAction extends BaseAction {
 		if(tmp==null||tmp.getReg_level()<=0){
 			return LOGIN;
 		}
+		if(page==null||page<1){
+			page = 1;
+		}
 		UserGoodsList ugl = goodsBasicService.loadMyGoodsList(tmp.getId(), page, pagesize);
 		setValue("ugl",ugl);
-		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
+		setValue("tag",goodsTagService.loadUserTagInfo(tmp.getId()));
+		setValue("list_title","我的收藏");
+		setValue("userinfo",userProfileService.loadUserBaseInfo(tmp.getId(),-1));
 		return SUCCESS;
 	}
 	
@@ -168,9 +177,12 @@ public class SNSMainAction extends BaseAction {
 		if(dest_user==null){
 			throw new Exception();
 		}
-		setValue("destUser",dest_user);
+		setValue("userinfo",dest_user);
 		if(!dest_user.getUserPrivate().isValid()){
 			return "hidden";
+		}
+		if(page==null||page<1){
+			page = 1;
 		}
 		UserGoodsList ugl = goodsBasicService.loadUserGoodsList(tmp.getId(), user_id, page, pagesize);
 		setValue("ugl",ugl);
@@ -187,7 +199,7 @@ public class SNSMainAction extends BaseAction {
 		if(dest_user==null){
 			throw new Exception();
 		}
-		setValue("destUser",dest_user);
+		setValue("userinfo",dest_user);
 		setValue("firend",userProfileService.loadUserWatching(user_id, null));
 		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		return SUCCESS;

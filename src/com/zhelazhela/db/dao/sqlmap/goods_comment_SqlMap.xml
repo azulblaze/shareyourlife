@@ -273,8 +273,8 @@
   </select>
   
   <select id="countUserCommentByGoods" parameterClass="java.util.Map" resultClass="java.lang.Integer">
-    select gc.id as id,gc.goods_id as goods_id,gc.sn as goods_sn,gc.replied_id as reply_id,gc.content as content,gc.update_time as comment_time,ui.user_id as user_id,ui.name as user_name,ui.avatar as avatar 
-    from goods_comment gc left join userinfo ui on gc.user_id=ui.user_id 
+    select count(gc.id)  
+    from goods_comment gc 
     where gc.goods_id= #goodsid:BIGINT#
     <isNotNull property="goodssn" >
      or gc.sn = #goodssn:VARCHAR#

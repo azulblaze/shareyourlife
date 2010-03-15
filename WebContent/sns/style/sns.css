@@ -90,21 +90,16 @@ input.error{
 	background:#EEE;
 }
 #content #left{
-	background:#993;
 	float:left;
 	width:230px;
 	margin:0px;
 }
 #content #center{
-	height:600px;
 	float:left;
 	width:460px;
-	background:#939;
 	margin:0px 20px;
 }
 #content #right{
-	height:450px;
-	background:#06C;
 	float:left;
 	width:230px;
 	margin:0px;

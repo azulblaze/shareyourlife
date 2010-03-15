@@ -1,4 +1,7 @@
 package com.zhelazhela.db.model.define;
+
+import org.apache.commons.httpclient.URI;
+
 /**
  * 商品的信息,用于商品在用户页面的列表,里面包含商品被多少用户关注,商品基本信息,该用户关注商品时使用的标签.
  * @author andy
@@ -33,6 +36,10 @@ public class UserGoods {
 	private Integer istrack = 0;
 	
 	private Long myid;
+	
+	private Integer comment_count;
+	
+	private Float ratting;
 
 	public Long getGoods_id() {
 		return goods_id;
@@ -72,6 +79,14 @@ public class UserGoods {
 
 	public void setSource(String source) {
 		this.source = source;
+		try{
+			URI uri = new URI(source,false);
+			if(uri!=null){
+				this.source_domain = uri.getHost();
+			}
+		}catch(Exception e){
+			
+		}
 	}
 
 	public String getSource_domain() {
@@ -128,6 +143,30 @@ public class UserGoods {
 
 	public void setTag_id(Integer tagId) {
 		tag_id = tagId;
+	}
+
+	public Long getMyid() {
+		return myid;
+	}
+
+	public void setMyid(Long myid) {
+		this.myid = myid;
+	}
+
+	public Integer getComment_count() {
+		return comment_count;
+	}
+
+	public void setComment_count(Integer commentCount) {
+		comment_count = commentCount;
+	}
+
+	public Float getRatting() {
+		return ratting;
+	}
+
+	public void setRatting(Float ratting) {
+		this.ratting = ratting;
 	}
 
 	public java.util.List<Long> getTrack_user_id() {
