@@ -25,7 +25,7 @@
     <result column="visibility" property="visibility" jdbcType="INTEGER" />
     <result column="user_name" property="user_name" jdbcType="VARCHAR" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
-     <result column="user_id" property="user_id" jdbcType="BIGINT" />
+    <result column="user_id" property="user_id" jdbcType="BIGINT" />
   </resultMap>
   <resultMap id="define_GoodsTrackMap" class="com.zhelazhela.db.model.define.UserGoods" >
     <result column="track_id" property="track_id" jdbcType="BIGINT" />
@@ -36,6 +36,8 @@
     <result column="source" property="source" jdbcType="VARCHAR" />
     <result column="tag" property="tag" jdbcType="VARCHAR" />
     <result column="tag_id" property="tag_id" jdbcType="BIGINT" />
+    <result column="comment_count" property="comment_count" jdbcType="INTEGER" />
+    <result column="ratting" property="ratting" jdbcType="REAL" />
     <result column="track_time" property="track_time" jdbcType="TIMESTAMP" />
     <result column="gid=goods_id,gsn=goods_sn" select="goods_track.countGoodsIsTrackedByUser" property="track_user_id" />
   </resultMap>
@@ -362,7 +364,7 @@
   </select>
   
   <select id="selectUserGoodsByUser" resultMap="define_GoodsTrackMap" parameterClass="java.util.Map" >
-    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time
+    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time,gt.ratting as ratting,(select count(*) from goods_comment gc where gt.goods_id=gc.goods_id or gt.SN=gc.SN) as comment_count 
     from goods_track gt 
     left join goods_tag gtg on gt.goods_tag_id=gtg.id 
     left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
@@ -380,7 +382,7 @@
   </select>
   
   <select id="selectLatestGoodsByUser" resultMap="define_GoodsTrackMap" parameterClass="java.util.Map" >
-    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time
+    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time,gt.ratting as ratting,(select count(*) from goods_comment gc where gt.goods_id=gc.goods_id or gt.SN=gc.SN) as comment_count 
     from goods_track gt 
     left join goods_tag gtg on gt.goods_tag_id=gtg.id 
     left join goods g on gt.goods_id=g.id or gt.SN = g.SN 

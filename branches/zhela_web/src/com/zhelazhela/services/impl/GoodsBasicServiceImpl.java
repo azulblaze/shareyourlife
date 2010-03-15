@@ -171,7 +171,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		UserGoodsList ugl = new UserGoodsList();
 		ugl.setPage(page);
 		ugl.setPagesize(pagesize);
-		ugl.setAllpage(goodsTrackDAO.countUserGoodsbyUser(loadUserId));
+		ugl.setSize(goodsTrackDAO.countUserGoodsbyUser(loadUserId));
 		ugl.setList(goodsTrackDAO.loadUserGoodsbyUser(userId, loadUserId, page, pagesize));
 		return ugl;
 	}
@@ -197,7 +197,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		UserGoodsList ugl = new UserGoodsList();
 		ugl.setPage(page);
 		ugl.setPagesize(pagesize);
-		ugl.setAllpage(goodsTrackDAO.countUserGoodsbyUser(userId));
+		ugl.setSize(goodsTrackDAO.countUserGoodsbyUser(userId));
 		ugl.setList(goodsTrackDAO.loadLatestGoodsbyUser(userId, page, pagesize));
 		return ugl;
 	}
