@@ -77,5 +77,7 @@ public interface GoodsCommentDAO {
 	
 	java.util.List<UserComment> loadUserComment(long goods_id,String goods_sn,int page,int pagesize);
 	
+	UserComment loadComment(long id) throws Exception;
+	
 	int countUserComment(long goods_id,String goods_sn);
 }

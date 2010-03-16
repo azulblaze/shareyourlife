@@ -184,4 +184,13 @@ public class GoodsCommentDAOImpl extends SqlMapClientDaoSupport implements Goods
 				"goods_comment.selectUserCommentByGoods", map);
 		return list;
 	}
+
+	@Override
+	public UserComment loadComment(long id) throws Exception {
+		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
+		map.put("id", id);
+		UserComment record = (UserComment) getSqlMapClientTemplate()
+		.queryForObject("goods_comment.selectUserCommentById", map);
+		return record;
+	}
 }

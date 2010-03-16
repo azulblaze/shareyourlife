@@ -10,6 +10,7 @@ public class UserComment {
 	private Long user_id;
 	private String user_name;
 	private String avatar;
+	private UserComment reply_uc;
 
 	public long getId() {
 		return id;
@@ -81,6 +82,14 @@ public class UserComment {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public UserComment getReply_uc() {
+		return reply_uc;
+	}
+
+	public void setReply_uc(UserComment replyUc) {
+		reply_uc = replyUc;
 	}
 
 }

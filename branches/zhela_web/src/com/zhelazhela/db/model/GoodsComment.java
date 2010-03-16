@@ -2,6 +2,8 @@ package com.zhelazhela.db.model;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
 public class GoodsComment {
 
 	/**
@@ -164,5 +166,12 @@ public class GoodsComment {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	public boolean isValid(){
+		if(goodsId!=null&&goodsId>0&&StringUtils.isNotBlank(content)){
+			return true;
+		}
+		return false;
 	}
 }

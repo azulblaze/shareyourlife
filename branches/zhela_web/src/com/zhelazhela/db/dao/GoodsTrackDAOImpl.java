@@ -207,10 +207,13 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserGoods> loadUserGoodsbyUser(long myid, long destuserId,
+	public List<UserGoods> loadUserGoodsbyUser(long myid, long destuserId,long tagid,
 			int page, int pagesize) {
 		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
 		map.put("user_id", destuserId);
+		if(tagid>0){
+			map.put("tagid", tagid);
+		}
 		if(pagesize>0){
 			map.put("limit", ""+(page-1)*pagesize+","+pagesize);
 		}
@@ -219,9 +222,12 @@ public class GoodsTrackDAOImpl extends SqlMapClientDaoSupport implements GoodsTr
 	}
 
 	@Override
-	public int countUserGoodsbyUser(long destuserId) {
+	public int countUserGoodsbyUser(long destuserId,long tagid) {
 		java.util.Map<String,Object> map = new java.util.HashMap<String,Object>();
 		map.put("user_id", destuserId);
+		if(tagid>0){
+			map.put("tagid", tagid);
+		}
 		Integer count = (Integer)  getSqlMapClientTemplate().queryForObject("goods_track.countUserGoodsByUser", map);
         return count;
 	}
