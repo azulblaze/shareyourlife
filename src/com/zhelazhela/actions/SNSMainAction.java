@@ -195,6 +195,9 @@ public class SNSMainAction extends BaseAction {
 		if(tmp==null){
 			return LOGIN;
 		}
+		if(user_id==null||user_id<0){
+			user_id = tmp.getId();
+		}
 		SNSUserBaseinfo dest_user = userProfileService.loadUserBaseInfo(user_id,tmp.getId());
 		if(dest_user==null){
 			throw new Exception();
@@ -210,11 +213,14 @@ public class SNSMainAction extends BaseAction {
 		if(tmp==null){
 			return LOGIN;
 		}
+		if(user_id==null||user_id<0){
+			user_id = tmp.getId();
+		}
 		SNSUserBaseinfo dest_user = userProfileService.loadUserBaseInfo(user_id,tmp.getId());
 		if(dest_user==null){
 			throw new Exception();
 		}
-		setValue("destUser",dest_user);
+		setValue("userinfo",dest_user);
 		setValue("firend",userProfileService.loadUserWatcher(user_id, null));
 		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		return SUCCESS;
