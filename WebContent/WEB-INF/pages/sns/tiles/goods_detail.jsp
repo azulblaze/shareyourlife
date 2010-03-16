@@ -41,7 +41,7 @@
                         </s:iterator>
                     </table>
                 </div>
-                 <div class="goods_comment">
+                <div class="goods_comment">
                 	<div class="subject">评论(<s:property value='gd.comment_size'/>条)</div>
                 	<s:iterator value="gd.comments.list">
                     <div class="comment">
@@ -49,5 +49,16 @@
                     </div>
                     </s:iterator>
                     <div class="clear"></div>
+                </div>
+                <div class="goods_comment">
+                	<form action="/sns/comment.zl" method="post">
+                	<input type="hidden" name="goodcomment.goodsId" value="<s:property value='gd.id'/>"/>
+                	<s:if test="gd.sn!=null&&gd.sn!='000'">
+                	<input name="goodcomment.sn" type="hidden" value="<s:property value='gd.sn'/>"/>
+                	</s:if>
+                	<div>回复:XXXX<a href="">清除</a></div>
+                	<div><textarea name="goodcomment.content"></textarea></div>
+                	<div><input type="submit" value="确定"/></div>
+                	</form>
                 </div>
             </div>

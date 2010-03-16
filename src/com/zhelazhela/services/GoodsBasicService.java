@@ -1,6 +1,7 @@
 package com.zhelazhela.services;
 
 import com.zhelazhela.db.model.GoodsComment;
+import com.zhelazhela.db.model.define.UserComment;
 import com.zhelazhela.domain.GoodCommentList;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
@@ -56,7 +57,7 @@ public interface GoodsBasicService {
 	 * @return
 	 * @throws Exception
 	 */
-	public GoodsComment commentGoods(GoodsComment gc) throws Exception;
+	public UserComment commentGoods(GoodsComment gc) throws Exception;
 	/**
 	 * 返回指定商品的销售提供信息
 	 * @param id
@@ -76,7 +77,7 @@ public interface GoodsBasicService {
 	 * @return
 	 * @throws Exception
 	 */
-	public UserGoodsList loadUserGoodsList(long user_id,long load_user_id,int page,int pagesize ) throws Exception;
+	public UserGoodsList loadUserGoodsList(long user_id,long load_user_id,int page,int pagesize,long tagid ) throws Exception;
 	/**
 	 * 返回我关注的商品列表
 	 * @param userId
@@ -85,7 +86,7 @@ public interface GoodsBasicService {
 	 * @return
 	 * @throws Exception
 	 */
-	public UserGoodsList loadMyGoodsList(long userId,int page, int pagesize) throws Exception;
+	public UserGoodsList loadMyGoodsList(long userId,int page, int pagesize,long tagid) throws Exception;
 	/**
 	 * 返回最近我关注用户所关注产品的列表
 	 * @param userId
@@ -95,4 +96,6 @@ public interface GoodsBasicService {
 	 * @throws Exception
 	 */
 	public UserGoodsList loadMyLatestList(long userId,int page, int pagesize) throws Exception;
+	
+	public UserComment loadComment(long id) throws Exception;
 }

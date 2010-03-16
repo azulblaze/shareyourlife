@@ -30,6 +30,8 @@ public class SNSMainAction extends BaseAction {
 	private Integer pagesize;
 	
 	private Long user_id;
+	
+	private Long tagid;
 
 	public void setGoodsBasicService(GoodsBasicService goodsBasicService) {
 		this.goodsBasicService = goodsBasicService;
@@ -91,6 +93,16 @@ public class SNSMainAction extends BaseAction {
 		user_id = userId;
 	}
 
+	public Long getTagid() {
+		return tagid;
+	}
+
+	public void setTagid(Long tagid) {
+		this.tagid = tagid;
+	}
+
+	
+	
 	public String main() throws Exception{
 		SNSUser tmp = (SNSUser)this.getSession("user");
 		if(tmp==null||tmp.getReg_level()<=0){
@@ -99,7 +111,10 @@ public class SNSMainAction extends BaseAction {
 		if(page==null||page<1){
 			page = 1;
 		}
-		UserGoodsList ugl = goodsBasicService.loadMyGoodsList(tmp.getId(), page, pagesize);
+		if(tagid==null||tagid<=0){
+			tagid = -1l;
+		}
+		UserGoodsList ugl = goodsBasicService.loadMyGoodsList(tmp.getId(), page, pagesize,tagid);
 		setValue("ugl",ugl);
 		setValue("tag",goodsTagService.loadUserTagInfo(tmp.getId()));
 		setValue("list_title","我的收藏");
@@ -184,7 +199,10 @@ public class SNSMainAction extends BaseAction {
 		if(page==null||page<1){
 			page = 1;
 		}
-		UserGoodsList ugl = goodsBasicService.loadUserGoodsList(tmp.getId(), user_id, page, pagesize);
+		if(tagid==null||tagid<=0){
+			tagid = -1l;
+		}
+		UserGoodsList ugl = goodsBasicService.loadUserGoodsList(tmp.getId(), user_id, page, pagesize,tagid);
 		setValue("ugl",ugl);
 		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		return SUCCESS;

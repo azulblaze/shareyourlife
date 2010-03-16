@@ -100,9 +100,9 @@ public interface GoodsTrackDAO {
     
     public int countUserTrack(long goodid,String goodsSN,Long userid, List<Long> beenblocked);
     
-    public List<UserGoods> loadUserGoodsbyUser(long myid,long destuser_id,int page,int pagesize);
+    public List<UserGoods> loadUserGoodsbyUser(long myid,long destuser_id,long tagid,int page,int pagesize);
     
-    public int countUserGoodsbyUser(long destuser_id);
+    public int countUserGoodsbyUser(long destuser_id,long tagid);
     
     public List<UserGoods> loadLatestGoodsbyUser(long myid,int page,int pagesize);
     
