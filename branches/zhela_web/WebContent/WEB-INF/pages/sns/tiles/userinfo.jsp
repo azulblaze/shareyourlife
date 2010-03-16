@@ -20,14 +20,11 @@
                     </div>
                 </div>
                 <div>
-                    <div><b><a href="#">我的主页</a></b></div>
+                    <div><b><a href="#">他的主页</a></b></div>
                 </div>
                 <div>
-                    <div><b><a href="#">我的收藏</a>(<s:property value='userinfo.goods'/>)</b></div>
+                    <div><b><a href="/sns/user_page.zl?user_id=<s:property value='userinfo.id'/>">他的收藏</a>(<s:property value='userinfo.goods'/>)</b></div>
                     <s:iterator value="tag">
-                    <div style="margin-left:10px;"><a href=""><s:property value='tag_name'/></a>(<s:property value='tag_count'/>)</div>
+                    <div style="margin-left:10px;"><a href="/sns/user_page.zl?user_id=<s:property value='userinfo.id'/>&tagid=<s:property value='tag_id'/>"><s:property value='tag_name'/></a>(<s:property value='tag_count'/>)</div>
                     </s:iterator>
-                </div>
-                <div>
-                    <div><b><a href="#">好友收藏</a>(12)</b></div>
                 </div>

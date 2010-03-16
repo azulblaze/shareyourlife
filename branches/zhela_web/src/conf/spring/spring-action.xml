@@ -52,4 +52,8 @@
 	<bean name="snsRelationAction" class="com.zhelazhela.actions.SNSRelationAction" singleton="false" >
 		<property name="pagesize" value="20" />
 	</bean>
+	
+	<bean name="snsCommentAction" class="com.zhelazhela.actions.SNSCommentAction" singleton="false" >
+		<property name="pagesize" value="20" />
+	</bean>
 </beans>

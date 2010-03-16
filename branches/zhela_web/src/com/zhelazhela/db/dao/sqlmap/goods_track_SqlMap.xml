@@ -369,6 +369,9 @@
     left join goods_tag gtg on gt.goods_tag_id=gtg.id 
     left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
     where user_id= #user_id:BIGINT# 
+    <isNotNull property="tagid">
+    and gt.goods_tag_id = #tagid:BIGINT# 
+    </isNotNull>
     order by gt.id desc
     <isNotNull property="limit">
     	limit $limit$
@@ -379,6 +382,9 @@
     select count(gt.id) 
     from goods_track gt 
     where user_id= #user_id:BIGINT# 
+    <isNotNull property="tagid">
+    and gt.goods_tag_id = #tagid:BIGINT# 
+    </isNotNull>
   </select>
   
   <select id="selectLatestGoodsByUser" resultMap="define_GoodsTrackMap" parameterClass="java.util.Map" >

@@ -10,6 +10,7 @@ import com.zhelazhela.db.dao.GoodsPriceDAO;
 import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.model.Goods;
 import com.zhelazhela.db.model.GoodsComment;
+import com.zhelazhela.db.model.define.UserComment;
 import com.zhelazhela.domain.GoodCommentList;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
@@ -37,7 +38,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 	private GoodsTrackDAO goodsTrackDAO;
 	
 	private GoodsPriceDAO goodsPriceDAO;
-	
+		
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
 	}
@@ -123,7 +124,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		gd.setTrackuser(utl);
 		gd.setTrack_size(utl.getSize());
 		//获取该商品的评论信息,分页
-		GoodCommentList gcl = loadUserComment(id,sn,page,pagesize);
+		GoodCommentList gcl = loadUserComment(id,sn,page,10);
 		gd.setComment_size(gcl.getSize());
 		gd.setComments(gcl);
 		//获取该商品的销售提供信息
@@ -147,11 +148,36 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		return utl;
 	}
 	
+	public UserComment loadComment(long id) throws Exception{
+		UserComment uc = goodsCommentDAO.loadComment(id);
+		UserComment reply = null;
+		UserComment tmp = null;
+		if(uc!=null&&uc.getReply_id()>0){
+			reply = loadComment(uc.getReply_id());
+			tmp = uc;
+			while(reply!=null){
+				tmp.setReply_uc(reply);
+				tmp = reply;
+				if(tmp.getReply_id()>0){
+					reply = goodsCommentDAO.loadComment(tmp.getReply_id());
+				}
+			}
+		}
+		return uc;
+		
+	}
+	
 	public GoodCommentList loadUserComment(long id,String sn,int page,int pagesize) throws Exception {
 		GoodCommentList gcl = new GoodCommentList();
 		gcl.setPage(page);
 		gcl.setPagesize(pagesize);
-		gcl.setList(goodsCommentDAO.loadUserComment(id, sn, page, pagesize));
+		java.util.List<UserComment> list = goodsCommentDAO.loadUserComment(id, sn, page, pagesize);
+		for(UserComment uc:list){
+			if(uc.getReply_id()>0){
+				uc.setReply_uc(loadComment(uc.getReply_id()));
+			}
+		}
+		gcl.setList(list);
 		gcl.setSize(goodsCommentDAO.countUserComment(id, sn));
 		return gcl;
 	}
@@ -167,28 +193,28 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 
 	@Override
 	public UserGoodsList loadUserGoodsList(long userId, long loadUserId,
-			int page, int pagesize) throws Exception {
+			int page, int pagesize,long tagid) throws Exception {
 		UserGoodsList ugl = new UserGoodsList();
 		ugl.setPage(page);
 		ugl.setPagesize(pagesize);
-		ugl.setSize(goodsTrackDAO.countUserGoodsbyUser(loadUserId));
-		ugl.setList(goodsTrackDAO.loadUserGoodsbyUser(userId, loadUserId, page, pagesize));
+		ugl.setSize(goodsTrackDAO.countUserGoodsbyUser(loadUserId,tagid));
+		ugl.setList(goodsTrackDAO.loadUserGoodsbyUser(userId, loadUserId,tagid, page, pagesize));
 		return ugl;
 	}
 
 	
 	
 	@Override
-	public GoodsComment commentGoods(GoodsComment gc) throws Exception {
-		goodsCommentDAO.insert(gc);
+	public UserComment commentGoods(GoodsComment gc) throws Exception {
 		gc.setUpdateTime(new java.util.Date());
-		return gc;
+		goodsCommentDAO.insert(gc);
+		return loadComment(gc.getId());
 	}
 
 	@Override
-	public UserGoodsList loadMyGoodsList(long userId, int page, int pagesize)
+	public UserGoodsList loadMyGoodsList(long userId, int page, int pagesize,long tagid)
 			throws Exception {
-		return loadUserGoodsList(userId,userId,page,pagesize);
+		return loadUserGoodsList(userId,userId,page,pagesize,tagid);
 	}
 
 	@Override
@@ -197,7 +223,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 		UserGoodsList ugl = new UserGoodsList();
 		ugl.setPage(page);
 		ugl.setPagesize(pagesize);
-		ugl.setSize(goodsTrackDAO.countUserGoodsbyUser(userId));
+		ugl.setSize(goodsTrackDAO.countLatestGoodsbyUser(userId));
 		ugl.setList(goodsTrackDAO.loadLatestGoodsbyUser(userId, page, pagesize));
 		return ugl;
 	}
