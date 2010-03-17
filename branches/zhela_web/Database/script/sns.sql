@@ -343,6 +343,7 @@ CREATE  TABLE IF NOT EXISTS goods (
   SN VARCHAR(50) NULL ,
   icon VARCHAR(200) NULL ,
   picture VARCHAR(200) NULL ,
+  goods_type VARCHAR(100) NULL ,
   category VARCHAR(100) NULL ,
   source VARCHAR(300) NULL ,
   buy_link VARCHAR(300) NULL ,

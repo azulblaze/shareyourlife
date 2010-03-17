@@ -146,6 +146,7 @@ public class SNSMainAction extends BaseAction {
 		if(gc!=null&&gc.isValid()){
 			gc.setUser_id(tmp.getId());
 			gc.setRoot_path(getRootPath());
+			gc.setGoods_type(GoodsDetail.TYPE_GOODS);
 			try{
 				GoodsDetail gd = goodsBasicService.addSiteGoods(gc);
 				if(gd!=null){

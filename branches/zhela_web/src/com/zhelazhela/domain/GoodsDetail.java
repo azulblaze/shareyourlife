@@ -10,6 +10,8 @@ import com.zhelazhela.db.model.define.UserPriceAddr;
 
 public class GoodsDetail {
 
+	public final static String TYPE_GOODS = "goods";
+	
 	public String name;
 	
 	public String category;
@@ -45,6 +47,8 @@ public class GoodsDetail {
 	public int offer_size;
 	
 	public java.util.Date update_time;
+	
+	public String goods_type;
 
 	public String getName() {
 		return name;
@@ -222,6 +226,7 @@ public class GoodsDetail {
 		this.id = g.getId();
 		this.pic = g.getPicture();
 		this.sn = g.getSn();
+		this.goods_type = g.getGoodsType();
 		setSource(g.getSource());
 		this.name = g.getTopic();
 		this.update_time = g.getUpdateTime();
@@ -229,4 +234,14 @@ public class GoodsDetail {
 			setBuylink(g.getBuyLink());
 		}
 	}
+
+	public String getGoods_type() {
+		return goods_type;
+	}
+
+	public void setGoods_type(String goodsType) {
+		goods_type = goodsType;
+	}
+	
+	
 }
