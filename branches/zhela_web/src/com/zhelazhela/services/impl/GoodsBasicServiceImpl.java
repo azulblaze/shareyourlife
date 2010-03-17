@@ -80,6 +80,7 @@ public class GoodsBasicServiceImpl implements GoodsBasicService {
 			goods.setPicture(path[1]);
 			//others
 			goods.setSn("");
+			goods.setGoodsType(gc.getGoods_type());
 			goods.setSource(gc.getSource());
 			goods.setTopic(gc.getName());
 			goods.setUpdateTime(new java.util.Date());

@@ -30,6 +30,7 @@ import com.zhelazhela.domain.SNSUser;
 import com.zhelazhela.domain.SNSUserBaseinfo;
 import com.zhelazhela.domain.SNSUserBaseinfoList;
 import com.zhelazhela.domain.UserPrivate;
+import com.zhelazhela.services.UserPrivacyService;
 import com.zhelazhela.services.UserProfileService;
 import com.zhelazhela.system.config.SystemConfig;
 import com.zhelazhela.system.email.MailServices;
@@ -57,12 +58,18 @@ public class UserProfileServiceImpl implements UserProfileService {
 	
 	private BaseProfileDAO baseProfileDAO;
 	
+	private UserPrivacyService userPrivacyService;
+	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
 	}
 
 	public void setTxManager(PlatformTransactionManager tx){
 		this.m_db_tx_manager = tx;
+	}
+
+	public void setUserPrivacyService(UserPrivacyService userPrivacyService) {
+		this.userPrivacyService = userPrivacyService;
 	}
 
 	public void setUserDAO(UserDAO userDAO) {
@@ -217,6 +224,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		if(code.equals(ui.getActivationKey())){
 			ui.setActivationKey("");
 			userinfoDAO.updateByPrimaryKey(ui);
+			userPrivacyService.initPrivacy(id);
 			return true;
 		}
 		return false;
@@ -239,6 +247,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 				up.setValid(false);
 				up.setPrivate_level(1);
 				up.setPrivate_type(UserPrivate.BLOCK_USER);
+			}else{
+				FriendListExample fle = new FriendListExample();
+				fle.createCriteria().andUserIdEqualTo(myid).andFriendIdEqualTo(id).andStatusEqualTo(FriendList.STATUS_SUCCESS);
+				if(friendListDAO.selectByExample(fle).size()>0){
+					user.setIsfriend(1);
+				}
 			}
 		}
 		user.setUserPrivate(up);

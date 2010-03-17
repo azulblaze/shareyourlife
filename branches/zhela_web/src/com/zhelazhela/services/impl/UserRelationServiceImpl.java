@@ -57,7 +57,6 @@ public class UserRelationServiceImpl implements UserRelationService {
 	
 	@Override
 	public int addFriend(AddFriend af) throws Exception {
-		// TODO Auto-generated method stub
 		if(userDAO.selectByPrimaryKey(af.getD_user_id())!=null){
 			BlockUserExample bue = new BlockUserExample();
 			bue.createCriteria().andUserIdEqualTo(af.getD_user_id()).andBlockedUserIdEqualTo(af.getS_user_id());

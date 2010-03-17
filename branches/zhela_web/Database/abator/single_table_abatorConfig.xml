@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
 <ibatorConfiguration >
-	<classPathEntry location="D:\Program Files\eclipse\workspace\zhela_web\WebContent\WEB-INF\lib\mysql-connector-java-5.1.5-bin.jar" />
+	<classPathEntry location="/Users/yan/Documents/java/workspace/zhela_web/WebContent/WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar" />
 	<ibatorContext id="context1" targetRuntime="Ibatis2Java5">
 		<!-- 连接产品服务器 
 		<jdbcConnection 
@@ -23,6 +23,6 @@
 		<daoGenerator type="SPRING" targetPackage="com.zhelazhela.db.dao"
 			targetProject="zhela_web/src" />
 		
-		<table tableName="comments" />
+		<table tableName="goods" />
 	</ibatorContext>
 </ibatorConfiguration>
