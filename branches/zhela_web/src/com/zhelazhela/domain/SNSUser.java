@@ -20,6 +20,8 @@ public class SNSUser {
 	
 	private String repassword;
 	
+	private String newpassword;
+	
 	private String name;
 	
 	private String email;
@@ -204,4 +206,14 @@ public class SNSUser {
 		setReg_date(ui.getRegisteredDate());
 		setLast_log(ui.getLastLogin());
 	}
+
+	public String getNewpassword() {
+		return newpassword;
+	}
+
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+	
+	
 }
