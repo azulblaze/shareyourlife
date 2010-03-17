@@ -42,4 +42,13 @@
 		<put-attribute name="left" value="/WEB-INF/pages/sns/tiles/goods_detail.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="sns.destuserlist" extends="sns.layout_lr">
+		<put-attribute name="left" value="/WEB-INF/pages/sns/tiles/userinfo.jsp"></put-attribute>
+		<put-attribute name="center" value="/WEB-INF/pages/sns/tiles/userlist.jsp"></put-attribute>
+ 	</definition>
+	
+	<definition name="sns.myuserlist" extends="sns.layout_lr">
+		<put-attribute name="center" value="/WEB-INF/pages/sns/tiles/userlist.jsp"></put-attribute>
+	</definition>
+	
 </tiles-definitions>

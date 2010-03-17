@@ -93,6 +93,9 @@ public class SNSCommentAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		if(goodcomment==null||!goodcomment.isValid()){
 			jb.put("result", "fail");
 			jb.put("msg", "信息不完整");

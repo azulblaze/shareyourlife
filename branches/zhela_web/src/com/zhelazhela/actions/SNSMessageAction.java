@@ -92,6 +92,9 @@ public class SNSMessageAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		if(StringUtils.isBlank(subject)){
 			jb.put("result", "fail");
 			jb.put("msg", "您必须填写好标题");
@@ -128,6 +131,9 @@ public class SNSMessageAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		try{
 			boolean result = userMessageService.dealMessage(msgid, tmp.getId(), action);
 			if(result){
@@ -150,6 +156,9 @@ public class SNSMessageAction extends BaseAction {
 			jb.put("result", "login");
 			this.setValue("json", jb.toString());
 			return JSON;
+		}
+		if(tmp.getReg_level()<=0){
+			return "act";
 		}
 		switch(target){
 		//inbox
@@ -186,6 +195,9 @@ public class SNSMessageAction extends BaseAction {
 		if(tmp==null){
 			return LOGIN;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		switch(target){
 		//inbox
 		case 1:
@@ -208,6 +220,9 @@ public class SNSMessageAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		jb.put("result", "success");
 		jb.put("data", userMessageService.countUnReadMessage(tmp.getId()));
 		setValue("json",jb.toString());
@@ -221,6 +236,9 @@ public class SNSMessageAction extends BaseAction {
 			jb.put("result", "login");
 			this.setValue("json", jb.toString());
 			return JSON;
+		}
+		if(tmp.getReg_level()<=0){
+			return "act";
 		}
 		String []_ids = getRequestParameterValues("ids");
 		java.util.List<Long> ids = new java.util.ArrayList<Long>();

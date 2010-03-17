@@ -8,6 +8,7 @@
 		<global-results>
 			<result name="exception">/html/error.html</result>
 			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>
+			<result name="act" type="tiles">sns.act</result>
 			<result name="login" type="redirect-action">
 				<param name="actionName">login</param>
 				<param name="url">${url}</param>
@@ -30,7 +31,6 @@
 			<result name="input" type="tiles">sns.login</result>
 			<result name="success" type="redirect-action">mypage</result>
 			<result name="url" type="redirect">${url}</result>
-			<result name="act" type="tiles">sns.act</result>
 		</action>
 		
 		<action name="remail" class="snsUserAction" method="remail"/>
@@ -60,6 +60,46 @@
 		<action name="comment" class="snsCommentAction" method="comment"/>
 		
 		<action name="load_comment" class="snsCommentAction" method="load_comment"/>
+		
+		<action name="fans" class="snsMainAction" method="loadUserWatcher">
+			<result name="dest" type="tiles">sns.destuserlist</result>
+			<result name="my" type="tiles">sns.myuserlist</result>
+		</action>
+		
+		<action name="care" class="snsMainAction" method="loadUserWatching">
+			<result name="dest" type="tiles">sns.destuserlist</result>
+			<result name="my" type="tiles">sns.myuserlist</result>
+		</action>
+		
+		<!-- relation -->
+		<action name="tag_goods" class="snsRelationAction" method="tagGoods"/>
+		<action name="edit_tagGoods" class="snsRelationAction" method="editTagGoods"/>
+		<action name="del_tagGoods" class="snsRelationAction" method="delTagGoods"/>
+		<action name="add_friend" class="snsRelationAction" method="addFriend"/>
+		<action name="block_user" class="snsRelationAction" method="blockUser"/>
+		<action name="del_friend" class="snsRelationAction" method="delFriend"/>
+		<!-- relation end -->
+		
+		<!-- send message -->
+		<action name="send_msg" class="snsMessageAction" method="sendNormalMessage"/>
+		<action name="deal_msg" class="snsMessageAction" method="dealMessage"/>
+		<action name="read_msg" class="snsMessageAction" method="readMessage"/>
+		<action name="count_unread_msg" class="snsMessageAction" method="countUnReadMessage"/>
+		<action name="del_msg" class="snsMessageAction" method="delMessage"/>
+		
+		<action name="load_msg_list" class="snsMessageAction" method="loadMessageList">
+		</action>
+		
+		<!-- send message end -->
+		
+		<!-- userprofile -->
+		<action name="profile" class="snsUserAction" method="profile"/>
+		<action name="add_profile" class="snsUserAction" method="addProfile"/>
+		<action name="add_contact" class="snsUserAction" method="addContact"/>
+		<action name="del_contact" class="snsUserAction" method="delContact"/>
+		<action name="load_contact" class="snsUserAction" method="loadContact"/>
+		<!-- userprofile end -->
+		
 	</package>
 
 </struts>
