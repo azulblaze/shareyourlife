@@ -128,6 +128,9 @@ public class SNSRelationAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		try{
 			GoodsTrack gt = goodsRelationService.track(goodsid, goodssn, tmp.getId(), rate, tag, visibility, track_price);
 			if(gt!=null){
@@ -154,6 +157,9 @@ public class SNSRelationAction extends BaseAction {
 			jb.put("result", "login");
 			this.setValue("json", jb.toString());
 			return JSON;
+		}
+		if(tmp.getReg_level()<=0){
+			return "act";
 		}
 		try{
 			GoodsTrack gt = goodsRelationService.editTrack(track_id, tmp.getId(), rate, tag, visibility, track_price);
@@ -182,6 +188,9 @@ public class SNSRelationAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		try{
 			boolean result = goodsRelationService.delTrack(track_id, tmp.getId());
 			if(result){
@@ -205,6 +214,9 @@ public class SNSRelationAction extends BaseAction {
 			jb.put("result", "login");
 			this.setValue("json", jb.toString());
 			return JSON;
+		}
+		if(tmp.getReg_level()<=0){
+			return "act";
 		}
 		try{
 			addFriend.setS_user_id(tmp.getId());
@@ -233,6 +245,9 @@ public class SNSRelationAction extends BaseAction {
 			this.setValue("json", jb.toString());
 			return JSON;
 		}
+		if(tmp.getReg_level()<=0){
+			return "act";
+		}
 		try{
 			addFriend.setS_user_id(tmp.getId());
 			boolean result = userRelationService.delFriend(addFriend);
@@ -257,6 +272,9 @@ public class SNSRelationAction extends BaseAction {
 			jb.put("result", "login");
 			this.setValue("json", jb.toString());
 			return JSON;
+		}
+		if(tmp.getReg_level()<=0){
+			return "act";
 		}
 		try{
 			addFriend.setS_user_id(tmp.getId());

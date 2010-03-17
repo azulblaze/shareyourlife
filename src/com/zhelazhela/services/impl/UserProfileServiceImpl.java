@@ -7,12 +7,17 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.zhelazhela.db.dao.BaseProfileDAO;
 import com.zhelazhela.db.dao.BlockUserDAO;
+import com.zhelazhela.db.dao.ContactProfileDAO;
 import com.zhelazhela.db.dao.FriendListDAO;
 import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.dao.UserDAO;
 import com.zhelazhela.db.dao.UserinfoDAO;
+import com.zhelazhela.db.model.BaseProfile;
 import com.zhelazhela.db.model.BlockUserExample;
+import com.zhelazhela.db.model.ContactProfile;
+import com.zhelazhela.db.model.ContactProfileExample;
 import com.zhelazhela.db.model.FriendList;
 import com.zhelazhela.db.model.FriendListExample;
 import com.zhelazhela.db.model.GoodsTrackExample;
@@ -48,6 +53,10 @@ public class UserProfileServiceImpl implements UserProfileService {
 	
 	private GoodsTrackDAO goodsTrackDAO;
 	
+	private ContactProfileDAO contactProfileDAO;
+	
+	private BaseProfileDAO baseProfileDAO;
+	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
 	}
@@ -80,6 +89,15 @@ public class UserProfileServiceImpl implements UserProfileService {
 		this.goodsTrackDAO = goodsTrackDAO;
 	}
 
+	public void setContactProfileDAO(ContactProfileDAO contactProfileDAO) {
+		this.contactProfileDAO = contactProfileDAO;
+	}
+
+	public void setBaseProfileDAO(BaseProfileDAO baseProfileDAO) {
+		this.baseProfileDAO = baseProfileDAO;
+	}
+
+	
 	@Override
 	public SNSUser regUser(SNSUser user,long recommendUserId) throws Exception {
 		if(!checkUser(user)){
@@ -172,8 +190,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 			if(ui==null){
 				throw new Exception("不存在该用户");
 			}
+			user.setPassword("");
+			user.setRepassword("");
+			user.setNewpassword("");
+			user.setAccount(user.getAccount());
 			user.setEmail(ui.getEmail());
 			user.setName(ui.getName());
+			user.setUserinfo(ui);
 			if(StringUtils.isBlank(ui.getActivationKey())){
 				user.setReg_level(1);
 			}else{
@@ -268,6 +291,77 @@ public class UserProfileServiceImpl implements UserProfileService {
 		}
 		sbl.setList(friendListDAO.loadUserTracked(userId, null, 1, -1));
 		return sbl;
+	}
+
+	@Override
+	public ContactProfile addContactProfile(ContactProfile cp) throws Exception {
+		ContactProfileExample cpe = new ContactProfileExample();
+		cpe.createCriteria().andUserIdEqualTo(cp.getUserId());
+		int size = contactProfileDAO.countByExample(cpe);
+		if(size>=ContactProfile.MAX_CONTACT){
+			throw new Exception("您最多只能保存3个联系地址");
+		}else{
+			contactProfileDAO.insert(cp);
+		}
+		return cp;
+	}
+
+	@Override
+	public boolean delContactProfile(long id,long userid) throws Exception {
+		ContactProfileExample cpe = new ContactProfileExample();
+		cpe.createCriteria().andIdEqualTo(id).andUserIdEqualTo(userid);
+		int row = contactProfileDAO.deleteByExample(cpe);
+		if(row>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public BaseProfile editBaseProfile(BaseProfile bp) throws Exception {
+		if(baseProfileDAO.selectByPrimaryKey(bp.getUserId())==null){
+			baseProfileDAO.insert(bp);
+		}else{
+			baseProfileDAO.updateByPrimaryKey(bp);
+		}
+		return bp;
+	}
+
+	@Override
+	public ContactProfile editContactProfile(ContactProfile cp)
+			throws Exception {
+		contactProfileDAO.updateByPrimaryKey(cp);
+		return cp;
+	}
+
+	@Override
+	public Userinfo editUserinfo(Userinfo ui) throws Exception {
+		userinfoDAO.updateByPrimaryKeySelective(ui);
+		return ui;
+	}
+
+	@Override
+	public BaseProfile loadBaseProfile(long id) throws Exception {
+		return baseProfileDAO.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<ContactProfile> loadContactProfile(long id) throws Exception {
+		ContactProfileExample cpe = new ContactProfileExample();
+		cpe.createCriteria().andUserIdEqualTo(id);
+		return contactProfileDAO.selectByExample(cpe);
+	}
+
+	@Override
+	public boolean updatePassword(long userId, String newpass) throws Exception {
+		User u = new User();
+		u.setId(userId);
+		u.setPassword(newpass);
+		int row  = userDAO.updateByPrimaryKeySelective(u);
+		if(row>0){
+			return true;
+		}
+		return false;
 	}
 
 }
