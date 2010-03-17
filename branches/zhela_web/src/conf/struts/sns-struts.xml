@@ -93,11 +93,14 @@
 		<!-- send message end -->
 		
 		<!-- userprofile -->
-		<action name="profile" class="snsUserAction" method="profile"/>
+		<action name="profile" class="snsUserAction" method="profile">
+			<result name="my" type="tiles">sns.myuserlist</result>
+		</action>
 		<action name="add_profile" class="snsUserAction" method="addProfile"/>
 		<action name="add_contact" class="snsUserAction" method="addContact"/>
 		<action name="del_contact" class="snsUserAction" method="delContact"/>
 		<action name="load_contact" class="snsUserAction" method="loadContact"/>
+		<action name="update_password" class="snsUserAction" method="updatePassword"/>
 		<!-- userprofile end -->
 		
 	</package>
