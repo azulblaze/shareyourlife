@@ -31,6 +31,8 @@ public class GoodsCollection {
 	public int privacy;
 	
 	public long user_id;
+	
+	public String goods_type;
 
 	public String getName() {
 		return name;
@@ -150,4 +152,14 @@ public class GoodsCollection {
 		}
 		return false;
 	}
+
+	public String getGoods_type() {
+		return goods_type;
+	}
+
+	public void setGoods_type(String goodsType) {
+		goods_type = goodsType;
+	}
+	
+	
 }

@@ -22,26 +22,26 @@
         	<div class="right_line">
                 <div class="right_h4">活跃用户</div>
                 <div class="img_group">
-                    <a href="#" title="哈哈利"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
-                    <a href="#"><img src="images/good.jpg" /></a>
+                    <a href="#" title="哈哈利"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
+                    <a href="#"><img src="/sns/images/good.jpg" /></a>
                 </div>
                 <div class="clear"></div>
             </div>

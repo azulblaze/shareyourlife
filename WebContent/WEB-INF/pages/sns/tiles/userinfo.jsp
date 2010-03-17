@@ -18,6 +18,7 @@
                                 <a href="/zhelazhela/profile">收藏</a></li>
                         </ul>
                     </div>
+                    <div><s:if test="userinfo.isfriend<=0"><a href="/sns/add_friend.zl?addFriend.d_user_id=<s:property value='userinfo.id'/>">加关注</a></s:if><s:if test="userinfo.isfriend>0">已关注<a href="/sns/del_friend.zl?addFriend.d_user_id=<s:property value='userinfo.id'/>">取消</a></s:if>&nbsp;&nbsp;<a href="">发短讯</a></div>
                 </div>
                 <div>
                     <div><b><a href="#">他的主页</a></b></div>

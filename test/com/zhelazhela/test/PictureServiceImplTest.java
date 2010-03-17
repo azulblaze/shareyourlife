@@ -11,17 +11,29 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zhelazhela.db.dao.DiscountNewsDAO;
+import com.zhelazhela.db.dao.GoodsCommentDAO;
+import com.zhelazhela.db.dao.GoodsPriceDAO;
+import com.zhelazhela.db.dao.GoodsTagDAO;
+import com.zhelazhela.db.dao.GoodsTrackDAO;
 import com.zhelazhela.db.model.BlogDetail;
 import com.zhelazhela.db.model.DiscountNews;
 import com.zhelazhela.db.model.DiscountNewsExample;
+import com.zhelazhela.db.model.GoodsTag;
+import com.zhelazhela.db.model.GoodsTagExample;
 import com.zhelazhela.db.model.Tags;
+import com.zhelazhela.db.model.define.UserComment;
+import com.zhelazhela.db.model.define.UserGoods;
+import com.zhelazhela.db.model.define.UserPrice;
 import com.zhelazhela.domain.BlogDetailList;
 import com.zhelazhela.domain.DiscountNewsList;
+import com.zhelazhela.domain.Mail;
 import com.zhelazhela.services.BlogService;
 import com.zhelazhela.services.CacheService;
 import com.zhelazhela.services.DiscountNewsService;
 import com.zhelazhela.services.ProgramInfoService;
+import com.zhelazhela.services.UserPrivacyService;
 import com.zhelazhela.services.UtilService;
+import com.zhelazhela.system.email.MailServices;
 
 public class PictureServiceImplTest extends TestCase {
 	
@@ -40,16 +52,21 @@ public class PictureServiceImplTest extends TestCase {
 	}
 
 	public void testLoadNewsList() throws Exception {
-		BlogService blogService = (BlogService) this.m_context.getBean("blogService");
-		java.util.List<Tags> list = blogService.loadTopTags(6);
-		System.out.println(list.size());
-		System.out.println(list.get(0).getName()+list.get(0).getCount());
+		//BlogService blogService = (BlogService) this.m_context.getBean("blogService");
+		//java.util.List<Tags> list = blogService.loadTopTags(6);
+		//System.out.println(list.size());
+		//System.out.println(list.get(0).getName()+list.get(0).getCount());
 	}
 	
 	public void testBlog() throws Exception {
-		BlogService blogService = (BlogService) this.m_context.getBean("blogService");
-		BlogDetailList bdl = blogService.loadList(1, 2, null, null, null, true, null);
-		System.out.println(bdl.getList().size());
+		//BlogService blogService = (BlogService) this.m_context.getBean("blogService");
+		//BlogDetailList bdl = blogSeqrvice.loadList(1, 2, null, null, null, true, null);
+		//System.out.println(bdl.getList().size());
+	}
+	
+	public void testSendMail() throws Exception{
+		UserPrivacyService goodsTrackDAO = (UserPrivacyService) this.m_context.getBean("userPrivacyService");
+		goodsTrackDAO.initPrivacy(3);
 	}
 
 	public static void main(String args[]){

@@ -27,6 +27,8 @@ public class SNSUserBaseinfo {
 	private int been_tracks;
 	
 	private int goods;
+	
+	private int isfriend = 0;
 
 	public long getId() {
 		return id;
@@ -132,4 +134,14 @@ public class SNSUserBaseinfo {
 		setReg_date(ui.getRegisteredDate());
 		setLast_log(ui.getLastLogin());
 	}
+
+	public int getIsfriend() {
+		return isfriend;
+	}
+
+	public void setIsfriend(int isfriend) {
+		this.isfriend = isfriend;
+	}
+	
+	
 }
