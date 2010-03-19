@@ -30,6 +30,7 @@ import com.zhelazhela.domain.SNSUser;
 import com.zhelazhela.domain.SNSUserBaseinfo;
 import com.zhelazhela.domain.SNSUserBaseinfoList;
 import com.zhelazhela.domain.UserPrivate;
+import com.zhelazhela.services.UserMessageService;
 import com.zhelazhela.services.UserPrivacyService;
 import com.zhelazhela.services.UserProfileService;
 import com.zhelazhela.system.config.SystemConfig;
@@ -60,6 +61,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 	
 	private UserPrivacyService userPrivacyService;
 	
+	private UserMessageService userMessageService;
+	
 	public void setSystemConfig(SystemConfig systemConfig) {
 		this.systemConfig = systemConfig;
 	}
@@ -70,6 +73,10 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	public void setUserPrivacyService(UserPrivacyService userPrivacyService) {
 		this.userPrivacyService = userPrivacyService;
+	}
+
+	public void setUserMessageService(UserMessageService userMessageService) {
+		this.userMessageService = userMessageService;
 	}
 
 	public void setUserDAO(UserDAO userDAO) {
@@ -224,7 +231,26 @@ public class UserProfileServiceImpl implements UserProfileService {
 		if(code.equals(ui.getActivationKey())){
 			ui.setActivationKey("");
 			userinfoDAO.updateByPrimaryKey(ui);
+			//insert privacy settings
 			userPrivacyService.initPrivacy(id);
+			if(ui.getRecommendUserId()>0&&userinfoDAO.selectByPrimaryKey(ui.getRecommendUserId())!=null){
+				try{
+					FriendList fl = new FriendList();
+					fl.setUserId(id);
+					fl.setFriendId(ui.getRecommendUserId());
+					fl.setStatus(FriendList.STATUS_SUCCESS);
+					fl.setUpdateTime(new java.util.Date());
+					friendListDAO.insert(fl);
+					fl.setUserId(ui.getRecommendUserId());
+					fl.setFriendId(id);
+					fl.setStatus(FriendList.STATUS_SUCCESS);
+					fl.setUpdateTime(new java.util.Date());
+					friendListDAO.insert(fl);
+					userMessageService.sendFriend(ui.getRecommendUserId(), ui.getUserId(), "您的好友"+ui.getName()+"加入了这啦折啦", "您的好友"+ui.getName()+"接受了您的邀请加入了这啦折啦,系统自动把你们互加为好友,您可以直接回复该信息与您的好友交流.");
+				}catch(Exception e){
+					
+				}
+			}
 			return true;
 		}
 		return false;
