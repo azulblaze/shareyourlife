@@ -36,7 +36,11 @@
 		<action name="remail" class="snsUserAction" method="remail"/>
 		
 		<action name="mypage" class="snsMainAction" method="main">
-			<result name="success" type="tiles">sns.mypage</result>
+			<result name="success" type="tiles">sns.usergoods</result>
+		</action>
+		
+		<action name="mygoods" class="snsMainAction" method="mygoods">
+			<result name="success" type="tiles">sns.mygoods</result>
 		</action>
 		
 		<action name="collection" class="snsMainAction" method="collection">
@@ -53,7 +57,7 @@
 		</action>
 		
 		<action name="user_page" class="snsMainAction" method="loadUserPage">
-			<result name="success" type="tiles">sns.user_page</result>
+			<result name="success" type="tiles">sns.usergoods</result>
 			<result name="mypage" type="redirect-action">mypage</result>
 		</action>
 		
@@ -62,13 +66,12 @@
 		<action name="load_comment" class="snsCommentAction" method="load_comment"/>
 		
 		<action name="fans" class="snsMainAction" method="loadUserWatcher">
-			<result name="dest" type="tiles">sns.destuserlist</result>
-			<result name="my" type="tiles">sns.myuserlist</result>
+			<result name="success" type="tiles">sns.user_list</result>
 		</action>
 		
 		<action name="care" class="snsMainAction" method="loadUserWatching">
-			<result name="dest" type="tiles">sns.destuserlist</result>
-			<result name="my" type="tiles">sns.myuserlist</result>
+			<result name="dest" type="tiles">sns.user_list</result>
+			<result name="my" type="tiles">sns.my_friends</result>
 		</action>
 		
 		<!-- relation -->

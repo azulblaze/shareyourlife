@@ -1,5 +1,6 @@
 package com.zhelazhela.actions;
 
+import com.zhelazhela.db.model.define.UserGoods;
 import com.zhelazhela.domain.GoodsCollection;
 import com.zhelazhela.domain.GoodsDetail;
 import com.zhelazhela.domain.SNSUser;
@@ -111,6 +112,26 @@ public class SNSMainAction extends BaseAction {
 		if(page==null||page<1){
 			page = 1;
 		}
+		UserGoodsList ugl = goodsBasicService.loadMyLatestList(tmp.getId(), page, pagesize);
+		for(UserGoods ug:ugl.getList()){
+			ug.setMyid(tmp.getId());
+			ug.setTrack_user_id(ug.getTrack_user_id());
+		}
+		setValue("ugl",ugl);
+		setValue("tag",goodsTagService.loadUserTagInfo(tmp.getId()));
+		setValue("list_title","我的主页");
+		setValue("userinfo",userProfileService.loadUserBaseInfo(tmp.getId(),-1));
+		return SUCCESS;
+	}
+	
+	public String mygoods() throws Exception{
+		SNSUser tmp = (SNSUser)this.getSession("user");
+		if(tmp==null||tmp.getReg_level()<=0){
+			return LOGIN;
+		}
+		if(page==null||page<1){
+			page = 1;
+		}
 		if(tagid==null||tagid<=0){
 			tagid = -1l;
 		}
@@ -204,6 +225,10 @@ public class SNSMainAction extends BaseAction {
 			tagid = -1l;
 		}
 		UserGoodsList ugl = goodsBasicService.loadUserGoodsList(tmp.getId(), user_id, page, pagesize,tagid);
+		for(UserGoods ug:ugl.getList()){
+			ug.setMyid(tmp.getId());
+			ug.setTrack_user_id(ug.getTrack_user_id());
+		}
 		setValue("ugl",ugl);
 		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		return SUCCESS;
@@ -223,8 +248,11 @@ public class SNSMainAction extends BaseAction {
 		if(dest_user==null){
 			throw new Exception();
 		}
+		if(page==null||page<1){
+			page = 1;
+		}
 		setValue("userinfo",dest_user);
-		setValue("firend",userProfileService.loadUserWatching(user_id, null));
+		setValue("firend",userProfileService.loadUserWatching(user_id, null,page,pagesize));
 		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
 		if(myuser){
 			return "my";
@@ -237,22 +265,17 @@ public class SNSMainAction extends BaseAction {
 		if(tmp==null){
 			return LOGIN;
 		}
-		boolean myuser = false;
-		if(user_id==null||user_id<0){
-			user_id = tmp.getId();
-			myuser = true;
-		}
 		SNSUserBaseinfo dest_user = userProfileService.loadUserBaseInfo(user_id,tmp.getId());
 		if(dest_user==null){
 			throw new Exception();
 		}
-		setValue("userinfo",dest_user);
-		setValue("firend",userProfileService.loadUserWatcher(user_id, null));
-		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
-		if(myuser){
-			return "my";
+		if(page==null||page<1){
+			page = 1;
 		}
-		return "dest";
+		setValue("userinfo",dest_user);
+		setValue("firend",userProfileService.loadUserWatcher(user_id, null,page,pagesize));
+		setValue("tag",goodsTagService.loadUserTagInfo(user_id));
+		return SUCCESS;
 	}
 	
 	
