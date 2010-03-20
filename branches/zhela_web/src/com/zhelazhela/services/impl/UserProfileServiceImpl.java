@@ -213,6 +213,10 @@ public class UserProfileServiceImpl implements UserProfileService {
 			user.setUserinfo(ui);
 			if(StringUtils.isBlank(ui.getActivationKey())){
 				user.setReg_level(1);
+				Userinfo _ui = new Userinfo();
+				_ui.setUserId(ui.getUserId());
+				_ui.setLastLogin(new java.util.Date());
+				userinfoDAO.updateByPrimaryKeySelective(_ui);
 			}else{
 				user.setReg_level(0);
 			}
@@ -230,6 +234,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		}
 		if(code.equals(ui.getActivationKey())){
 			ui.setActivationKey("");
+			ui.setRegisteredDate(new java.util.Date());
 			userinfoDAO.updateByPrimaryKey(ui);
 			//insert privacy settings
 			userPrivacyService.initPrivacy(id);
@@ -307,7 +312,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	@Override
 	public SNSUserBaseinfoList loadUserWatcher(long userId,
-			List<Long> blockedUser) throws Exception {
+			List<Long> blockedUser,int page,int pagesize) throws Exception {
 		SNSUserBaseinfoList sbl = new SNSUserBaseinfoList();
 		int size = countUserWatcher(userId);
 		sbl.setSize(0);
@@ -315,13 +320,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 			sbl.setC_size(0);
 			return sbl;
 		}
-		sbl.setList(friendListDAO.loadUserBeenTracked(userId, null, 1, -1));
+		sbl.setList(friendListDAO.loadUserBeenTracked(userId, blockedUser, page, pagesize));
 		return sbl;
 	}
 
 	@Override
 	public SNSUserBaseinfoList loadUserWatching(long userId,
-			List<Long> blockedUser) throws Exception {
+			List<Long> blockedUser,int page,int pagesize) throws Exception {
 		SNSUserBaseinfoList sbl = new SNSUserBaseinfoList();
 		int size = countUserWatching(userId);
 		sbl.setSize(0);
@@ -329,7 +334,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 			sbl.setC_size(0);
 			return sbl;
 		}
-		sbl.setList(friendListDAO.loadUserTracked(userId, null, 1, -1));
+		sbl.setList(friendListDAO.loadUserTracked(userId, blockedUser, page, pagesize));
 		return sbl;
 	}
 

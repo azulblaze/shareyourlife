@@ -388,11 +388,13 @@
   </select>
   
   <select id="selectLatestGoodsByUser" resultMap="define_GoodsTrackMap" parameterClass="java.util.Map" >
-    select gt.id as track_id,gt.goods_id as goods_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time,gt.ratting as ratting,(select count(*) from goods_comment gc where gt.goods_id=gc.goods_id or gt.SN=gc.SN) as comment_count 
+    select distinct (gt.goods_id) as goods_id,gt.id as track_id,IFNULL(gt.SN,'000') as goods_sn,g.topic as goods_topic,g.icon as goods_pic,g.source as source,gt.goods_tag_id as tag_id,gtg.name as tag,gt.update_time as track_time,gt.ratting as ratting,(select count(*) from goods_comment gc where gt.goods_id=gc.goods_id or gt.SN=gc.SN) as comment_count 
     from goods_track gt 
+    inner join friend_list fl on (gt.user_id =fl.user_id or (gt.user_id =fl.friend_id  and fl.status=1))
     left join goods_tag gtg on gt.goods_tag_id=gtg.id 
     left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
-    where gt.user_id= #user_id:BIGINT# or gt.user_id in (select fl.friend_id from friend_list fl where fl.user_id= #user_id:BIGINT# and fl.status=1) 
+    where fl.user_id = #user_id:BIGINT# or gt.user_id = #user_id:BIGINT# 
+    group by goods_id
     order by gt.id desc 
     <isNotNull property="limit">
     	limit $limit$
@@ -400,11 +402,12 @@
   </select>
   
   <select id="countLatestGoodsByUser" resultClass="java.lang.Integer" parameterClass="java.util.Map" >
-    select count(gt.id) 
+    select count(distinct gt.goods_id) 
     from goods_track gt 
+    inner join friend_list fl on (gt.user_id =fl.user_id or (gt.user_id =fl.friend_id  and fl.status=1))
     left join goods_tag gtg on gt.goods_tag_id=gtg.id 
     left join goods g on gt.goods_id=g.id or gt.SN = g.SN 
-    where gt.user_id= #user_id:BIGINT# or gt.user_id in (select fl.friend_id from friend_list fl where fl.user_id= #user_id:BIGINT# and fl.status=1)
+    where fl.user_id = #user_id:BIGINT# or gt.user_id = #user_id:BIGINT#
   </select>
   
 </sqlMap>
