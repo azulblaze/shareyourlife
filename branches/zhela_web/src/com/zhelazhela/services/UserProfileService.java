@@ -64,14 +64,14 @@ public interface UserProfileService {
 	 * @return
 	 * @throws Exception
 	 */
-	public SNSUserBaseinfoList loadUserWatcher(long user_id,java.util.List<Long> blocked_user) throws Exception;
+	public SNSUserBaseinfoList loadUserWatcher(long user_id,java.util.List<Long> blocked_user,int page,int pagesize) throws Exception;
 	/**
 	 * 关注他人
 	 * @param user_id
 	 * @return
 	 * @throws Exception
 	 */
-	public SNSUserBaseinfoList loadUserWatching(long user_id,java.util.List<Long> blocked_user) throws Exception;
+	public SNSUserBaseinfoList loadUserWatching(long user_id,java.util.List<Long> blocked_user,int page,int pagesize) throws Exception;
 	
 	/**
 	 * 获取用户基本信息

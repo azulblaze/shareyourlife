@@ -18,6 +18,7 @@
     <result column="tracks" property="tracks" jdbcType="INTEGER" />
     <result column="been_tracks" property="been_tracks" jdbcType="INTEGER" />
     <result column="goods" property="goods" jdbcType="INTEGER" />
+    <result column="isfriend" property="isfriend" jdbcType="INTEGER" />
   </resultMap>
   <sql id="ibatorgenerated_Example_Where_Clause" >
     <!--
@@ -165,19 +166,10 @@
   </update>
   
   <select id="loadUserTrackByUser" resultMap="userBaseInfoMap" parameterClass="java.util.Map" >
-    select fl.friend_id as id,ui.name as name,ui.avatar as header,(select count(*) from friend_list tmp where tmp.user_id = fl.friend_id)as tracks,(select count(*) from friend_list tmp2 where tmp2.friend_id = fl.friend_id)as been_tracks,(select count(*) from goods_track gt_tmp where gt_tmp.user_id=fl.friend_id) as goods 
+    select fl.friend_id as id,ui.name as name,ui.avatar as header,(select count(*) from friend_list tmp where tmp.user_id = fl.friend_id)as tracks,(select count(*) from friend_list tmp2 where tmp2.friend_id = fl.friend_id)as been_tracks,(select count(*) from goods_track gt_tmp where gt_tmp.user_id=fl.friend_id) as goods,(select count(*) from friend_list tmp where tmp.user_id=fl.friend_id and tmp.friend_id=fl.user_id) as isfriend  
     from friend_list fl 
     left join userinfo ui on fl.friend_id=ui.user_id 
     where fl.user_id= #user_id:BIGINT# and fl.status = 1 
-    <dynamic prepend="and">
-    	 fl.friend_id not in (
-	    <isNotEmpty property="been_blocked">
-			<iterate property="been_blocked" conjunction="," >
-				$been_blocked[]$
-			</iterate>  			
-		</isNotEmpty>
-		)
-    </dynamic>
     <isNotNull property="limit">
     	limit $limit$
     </isNotNull>
@@ -187,31 +179,13 @@
     select count(fl.friend_id) 
     from friend_list fl 
     where fl.user_id= #user_id:BIGINT# and fl.status = 1 
-    <dynamic prepend="and">
-    	 fl.friend_id not in (
-	    <isNotEmpty property="been_blocked">
-			<iterate property="been_blocked" conjunction="," >
-				$been_blocked[]$
-			</iterate>  			
-		</isNotEmpty>
-		)
-    </dynamic>
   </select>
   
   <select id="loadUserBeenTrackedByUser" resultMap="userBaseInfoMap" parameterClass="java.util.Map" >
-    select fl.user_id as id,ui.name as name,ui.avatar as header,(select count(*) from friend_list tmp where tmp.user_id = fl.user_id)as tracks,(select count(*) from friend_list tmp2 where tmp2.friend_id = fl.user_id)as been_tracks,(select count(*) from goods_track gt_tmp where gt_tmp.user_id=fl.user_id) as goods 
+    select fl.user_id as id,ui.name as name,ui.avatar as header,(select count(*) from friend_list tmp where tmp.user_id = fl.user_id)as tracks,(select count(*) from friend_list tmp2 where tmp2.friend_id = fl.user_id)as been_tracks,(select count(*) from goods_track gt_tmp where gt_tmp.user_id=fl.user_id) as goods,(select count(*) from friend_list tmp where tmp.user_id=fl.friend_id and tmp.friend_id=fl.user_id) as isfriend  
     from friend_list fl 
     left join userinfo ui on fl.user_id=ui.user_id and fl.status = 1 
     where fl.friend_id= #user_id:BIGINT# 
-    <dynamic prepend="and">
-    	  and fl.user_id not in (
-	    <isNotEmpty property="been_blocked">
-			<iterate property="been_blocked" conjunction="," >
-				$been_blocked[]$
-			</iterate>  			
-		</isNotEmpty>
-		)
-    </dynamic>
     <isNotNull property="limit">
     	limit $limit$
     </isNotNull>
@@ -221,14 +195,5 @@
     select count(fl.user_id) 
     from friend_list fl 
     where fl.friend_id = #user_id:BIGINT# and fl.status = 1 
-    <dynamic prepend="and">
-    	  and fl.user_id not in (
-	    <isNotEmpty property="been_blocked">
-			<iterate property="been_blocked" conjunction="," >
-				$been_blocked[]$
-			</iterate>  			
-		</isNotEmpty>
-		)
-    </dynamic>
   </select>
 </sqlMap>

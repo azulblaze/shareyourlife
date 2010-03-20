@@ -11,21 +11,23 @@
                     <div class="user_atten MIB_linedot">
                         <ul id="profile_following_follower_update">
                             <li class="MIB_line_r" style="position: relative;"><div class="num"><a href="/1679048885/follow"><s:property value='userinfo.tracks'/></a></div>
-                                <a href="/1679048885/follow">关注</a></li>
+                                <a href="/sns/care.zl?user_id=<s:property value='userinfo.id'/>">关注</a></li>
                             <li class="MIB_line_r" style="position: relative;"><div class="num"><a href="/1679048885/fans"><s:property value='userinfo.been_tracks'/></a></div>
-                                <a href="/1679048885/fans">追随</a></li>
+                                <a href="/sns/fans.zl?user_id=<s:property value='userinfo.id'/>">追随</a></li>
                             <li class="" style="position: relative;"><div class="num"><a href="/zhelazhela/profile"><s:property value='userinfo.goods'/></a></div>
                                 <a href="/zhelazhela/profile">收藏</a></li>
                         </ul>
                     </div>
-                    <div><s:if test="userinfo.isfriend<=0"><a href="/sns/add_friend.zl?addFriend.d_user_id=<s:property value='userinfo.id'/>">加关注</a></s:if><s:if test="userinfo.isfriend>0">已关注<a href="/sns/del_friend.zl?addFriend.d_user_id=<s:property value='userinfo.id'/>">取消</a></s:if>&nbsp;&nbsp;<a href="">发短讯</a></div>
                 </div>
                 <div>
-                    <div><b><a href="#">他的主页</a></b></div>
+                    <div><b><a href="/sns/mypage.zl">我的主页</a></b></div>
                 </div>
                 <div>
-                    <div><b><a href="/sns/user_page.zl?user_id=<s:property value='userinfo.id'/>">他的收藏</a>(<s:property value='userinfo.goods'/>)</b></div>
+                    <div><b><a href="#">我的消息</a></b></div>
+                </div>
+                <div>
+                    <div><b><a href="/sns/mygoods.zl">我的收藏</a>(<s:property value='userinfo.goods'/>)</b></div>
                     <s:iterator value="tag">
-                    <div style="margin-left:10px;"><a href="/sns/user_page.zl?user_id=<s:property value='userinfo.id'/>&tagid=<s:property value='tag_id'/>"><s:property value='tag_name'/></a>(<s:property value='tag_count'/>)</div>
+                    <div style="margin-left:10px;"><a href="/sns/mygoods.zl?tagid=<s:property value='tag_id'/>"><s:property value='tag_name'/></a>(<s:property value='tag_count'/>)</div>
                     </s:iterator>
                 </div>

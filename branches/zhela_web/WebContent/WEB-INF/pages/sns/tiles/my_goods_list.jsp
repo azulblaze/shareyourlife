@@ -14,6 +14,6 @@
 			<div>查看产品详细信息：<a target="_blank" href="<s:property value='source'/>"><s:property value='source_domain'/></a></div>
 			<div><a href=""><s:property value='track_count'/></a> 个人收藏&nbsp;&nbsp;<a href="">分享</a>&nbsp;&nbsp;<a href="">评论(<s:property value='comment_count'/>)</a></div>
 		</div>
-		<div class="right"><a href="#">取消关注</a><br/><a href="#">编辑</a></div>
+		<div class="right"><a href="#">取消收藏</a><br/><a href="#">编辑</a></div>
      </div>
      </s:iterator>
