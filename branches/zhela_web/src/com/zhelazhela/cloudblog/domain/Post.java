@@ -15,6 +15,8 @@ public class Post{
 	private String orignal_pic;
 	private User user;
 	private Post forward_post;
+	private String forward_count;
+	private String reply_count;
 	
 	/**
 	 * 发布时间
@@ -197,6 +199,34 @@ public class Post{
 	 */
 	public void setForward_post(Post forwardPost) {
 		forward_post = forwardPost;
+	}
+	/**
+	 * 转发次数
+	 * @return
+	 */
+	public String getForward_count() {
+		return forward_count;
+	}
+	/**
+	 * 转发次数
+	 * @param forwardCount
+	 */
+	public void setForward_count(String forwardCount) {
+		forward_count = forwardCount;
+	}
+	/**
+	 * 回复次数
+	 * @return
+	 */
+	public String getReply_count() {
+		return reply_count;
+	}
+	/**
+	 * 回复次数
+	 * @param replyCount
+	 */
+	public void setReply_count(String replyCount) {
+		reply_count = replyCount;
 	}
 	
 }
