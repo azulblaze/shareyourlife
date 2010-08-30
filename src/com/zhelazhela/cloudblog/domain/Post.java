@@ -1,6 +1,6 @@
 package com.zhelazhela.cloudblog.domain;
 
-public class Post {
+public class Post{
 
 	private String created_at;
 	private String id;
