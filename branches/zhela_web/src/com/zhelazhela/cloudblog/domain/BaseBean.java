@@ -18,6 +18,7 @@ public class BaseBean {
 		xs.alias(node_name, this.getClass());
 		xs.alias("user", User.class);
 		xs.alias("post", Post.class);
+		xs.alias("reply", Reply.class);
 	}
 	
 	private String result;
