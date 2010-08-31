@@ -4,6 +4,7 @@ import com.zhelazhela.cloudblog.domain.ACK;
 import com.zhelazhela.cloudblog.domain.ForwardResult;
 import com.zhelazhela.cloudblog.domain.PostList;
 import com.zhelazhela.cloudblog.domain.PostResult;
+import com.zhelazhela.cloudblog.domain.ReplyList;
 import com.zhelazhela.cloudblog.domain.ReplyResult;
 
 public interface PostService {
@@ -99,7 +100,7 @@ public interface PostService {
 	public PostList followpost(java.util.Map<String,String> parameters);
 	
 	/**
-	 * 获取制定用户的微薄
+	 * 获取指定用户的微薄
 	 * GET
 	 * getpost/user
 	 * id:用户唯一ID
@@ -112,5 +113,44 @@ public interface PostService {
 	 */
 	public PostList userpost(java.util.Map<String,String> parameters);
 	
+	/**
+	 * 获取指定微博的评论
+	 * GET
+	 * getpost/postreply
+	 * id:post唯一ID
+	 * count:数量
+	 * max_id:可选参数，返回小于max_id的微薄
+	 * min_id:可选参数，返回大于min_id的微薄
+	 * max_id和min_id同时只能有一个有效
+	 * @param parameters
+	 * @return
+	 */
+	public ReplyList postreply(java.util.Map<String,String> parameters);
+	
+	/**
+	 * 获取指定用户收到的评论
+	 * GET
+	 * getpost/getreply
+	 * count:数量
+	 * max_id:可选参数，返回小于max_id的微薄
+	 * min_id:可选参数，返回大于min_id的微薄
+	 * max_id和min_id同时只能有一个有效
+	 * @param parameters
+	 * @return
+	 */
+	public ReplyList getreply(java.util.Map<String,String> parameters);
+	
+	/**
+	 * 获取指定用户发表的评论
+	 * GET
+	 * getpost/sentreply
+	 * count:数量
+	 * max_id:可选参数，返回小于max_id的微薄
+	 * min_id:可选参数，返回大于min_id的微薄
+	 * max_id和min_id同时只能有一个有效
+	 * @param parameters
+	 * @return
+	 */
+	public ReplyList sentreply(java.util.Map<String,String> parameters);
 	
 }
