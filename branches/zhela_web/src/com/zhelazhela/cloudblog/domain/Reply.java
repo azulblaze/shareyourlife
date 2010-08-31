@@ -7,6 +7,7 @@ public class Reply {
 	private String text;
 	private String source;
 	private User user;
+	private Post post;
 	public String getCreated_at() {
 		return created_at;
 	}
@@ -36,6 +37,20 @@ public class Reply {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	/**
+	 * 回复的微薄
+	 * @return
+	 */
+	public Post getPost() {
+		return post;
+	}
+	/**
+	 * 回复的微薄
+	 * @param post
+	 */
+	public void setPost(Post post) {
+		this.post = post;
 	}
 	
 }
