@@ -5,7 +5,7 @@ public class UserList extends BaseBean {
 	public UserList(){
 		super("userlist");
 	}
-	
+	private String cursor = "0";
 	public java.util.List<User> users;
 
 	public java.util.List<User> getUsers() {
@@ -28,4 +28,13 @@ public class UserList extends BaseBean {
 			users.remove(users);
 		}
 	}
+
+	public String getCursor() {
+		return cursor;
+	}
+
+	public void setCursor(String cursor) {
+		this.cursor = cursor;
+	}
+	
 }

@@ -5,13 +5,7 @@ import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class BaseBean {
-
-	public final static String SUCCESS  = "1";
 	
-	public final static String FAIL  = "0";
-	
-	public final static String NEEDLOGIN  = "2";
-		
 	private static XStream xs = new XStream(new XppDriver(new XmlFriendlyReplacer("__", "_")));;
 	
 	protected BaseBean(String node_name){
@@ -19,16 +13,45 @@ public class BaseBean {
 		xs.alias("user", User.class);
 		xs.alias("post", Post.class);
 		xs.alias("reply", Reply.class);
+		xs.alias("message", Message.class);
 	}
 	
-	private String result;
+	private Result result;
 
-	public String getResult() {
+	public Result getResult() {
 		return result;
 	}
 
-	public void setResult(String result) {
+	public void setResult(Result result) {
 		this.result = result;
+	}
+	
+	public String getResultCode(){
+		if(result!=null){
+			return result.getCode();
+		}
+		return Result.FAIL;
+	}
+	
+	public void setResultCode(String code){
+		if(result==null){
+			result = new Result();
+		}
+		result.setCode(code);
+	}
+	
+	public String getResultDesc(){
+		if(result!=null){
+			return result.getDescription();
+		}
+		return "";
+	}
+	
+	public void setResultDesc(String desc){
+		if(result==null){
+			result = new Result();
+		}
+		result.setDescription(desc);
 	}
 	
 	public String toXML(){
