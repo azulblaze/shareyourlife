@@ -52,4 +52,6 @@
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/web_site_collection_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/url_redirection_SqlMap.xml" />
 	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/user_privacy_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/providers_SqlMap.xml" />
+	<sqlMap resource="com/zhelazhela/db/dao/sqlmap/providers_log_SqlMap.xml" />
 </sqlMapConfig>
