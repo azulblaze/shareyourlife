@@ -6,7 +6,7 @@ package com.zhelazhela.cloudblog.domain;
  */
 public class ACK extends BaseBean {
 
-	protected ACK() {
+	public ACK() {
 		super("ack");
 	}
 

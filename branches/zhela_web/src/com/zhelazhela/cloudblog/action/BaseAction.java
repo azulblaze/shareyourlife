@@ -6,10 +6,24 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-public class BaseAction {
-	
-	
-	
+import com.opensymphony.xwork2.ActionSupport;
+
+public class BaseAction extends ActionSupport{
+
+	private static final long serialVersionUID = 5611868727923971420L;
+	protected String provider;
+	protected final static String ALLOW = "allow"; 
+	protected final static String XML = "xml";
+	protected final static String PROVIDER_PRE = "ppre_";
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
 	public String getRootPath(){
 		return ServletActionContext.getServletContext().getRealPath("/");
 	}

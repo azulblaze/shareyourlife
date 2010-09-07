@@ -2,7 +2,9 @@ package com.zhelazhela.test;
 
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -10,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.zhelazhela.cloudblog.domain.ACK;
+import com.zhelazhela.cloudblog.services.Maintenance;
 import com.zhelazhela.db.dao.DiscountNewsDAO;
 import com.zhelazhela.db.dao.GoodsCommentDAO;
 import com.zhelazhela.db.dao.GoodsPriceDAO;
@@ -41,7 +45,7 @@ public class PictureServiceImplTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		Logger.getInstance("log4j.properties");
+		//Logger.getInstance("log4j.properties");
 		this.m_context = new ClassPathXmlApplicationContext(new String[]{
 				"conf/spring/spring-db.xml", "conf/spring/spring-dao.xml", "conf/spring/spring-service.xml"
 		});;
@@ -65,12 +69,22 @@ public class PictureServiceImplTest extends TestCase {
 	}
 	
 	public void testSendMail() throws Exception{
-		UserPrivacyService goodsTrackDAO = (UserPrivacyService) this.m_context.getBean("userPrivacyService");
-		goodsTrackDAO.initPrivacy(3);
+		Maintenance maintenance = (Maintenance) this.m_context.getBean("maintenance");
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("appkey", "846676903732584882l");
+		param.put("serialid", "24dc18324efc92605acf14d78ae94b5b");
+		ACK ack = maintenance.getSerialID(param);
+		System.out.println(ack.toXML());
+		param.put("enc_serialid", "eac1c0465bddb2a2426fda8e3dbadd30");
+		param.put("serialid", ack.getResultDesc());
+		System.out.println(maintenance.checkSerialID(param).toXML());
 	}
 
-	public static void main(String args[]){
-		DecimalFormat df = new DecimalFormat("######0.0");
-		System.out.println(df.format(3.14));
+	public static void main(String args[]) throws Exception{
+		//DecimalFormat df = new DecimalFormat("######0.0");
+		//System.out.println(df.format(3.14));
+		PictureServiceImplTest t = new PictureServiceImplTest();
+		t.setUp();
+		t.testSendMail();
 	}
 }

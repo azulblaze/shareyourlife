@@ -72,4 +72,9 @@
 	<bean id="userPrivacyService" name="userPrivacyService" class="com.zhelazhela.services.impl.UserPrivacyServiceImpl" />
 	<bean id="userRelationService" name="userRelationService" class="com.zhelazhela.services.impl.UserRelationServiceImpl" />
 	
+	<bean id="maintenance" name="maintenance" class="com.zhelazhela.cloudblog.services.impl.MaintenanceImpl" />
+	<bean id="messageService" name="messageService" class="com.zhelazhela.cloudblog.services.impl.MessageServiceImpl" />
+	<bean id="postService" name="postService" class="com.zhelazhela.cloudblog.services.impl.PostServiceImpl" />
+	<bean id="userService" name="userService" class="com.zhelazhela.cloudblog.services.impl.UserServiceImpl" />
+	
 </beans>
