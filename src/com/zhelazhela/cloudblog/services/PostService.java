@@ -128,7 +128,7 @@ public interface PostService {
 	public ReplyList postreply(java.util.Map<String,String> parameters);
 	
 	/**
-	 * 获取指定用户收到的评论
+	 * 获取用户收到的评论
 	 * GET
 	 * getpost/getreply
 	 * count:数量
@@ -141,7 +141,7 @@ public interface PostService {
 	public ReplyList getreply(java.util.Map<String,String> parameters);
 	
 	/**
-	 * 获取指定用户发表的评论
+	 * 获取用户发表的评论
 	 * GET
 	 * getpost/sentreply
 	 * count:数量
