@@ -11,7 +11,6 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public ACK del(Map<String, String> parameters) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
