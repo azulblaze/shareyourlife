@@ -99,7 +99,6 @@ public class MaintenanceImpl implements Maintenance {
 				}
 				md5 = md5+md5_array[i];
 			}
-			System.out.println(md5);
 			if(md5.equals(enc_serialid)){
 				ack.setResultCode(Result.SUCCESS);
 				ack.setResultDesc("Thank you!");
