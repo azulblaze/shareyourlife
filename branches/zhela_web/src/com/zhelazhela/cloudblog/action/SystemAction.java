@@ -10,7 +10,20 @@ public class SystemAction extends BaseAction {
 
 	private static final long serialVersionUID = -846676903732584882L;
 	private Maintenance maintenance;
+	private String lastupdate;
 	
+	public String getLastupdate() {
+		return lastupdate;
+	}
+
+	public void setLastupdate(String lastupdate) {
+		this.lastupdate = lastupdate;
+	}
+
+	public void setMaintenance(Maintenance maintenance) {
+		this.maintenance = maintenance;
+	}
+
 	public String testNetwork() throws Exception{
 		Map<String,String> param = new HashMap<String,String>();
 		param.put("provider", provider);
@@ -45,4 +58,12 @@ public class SystemAction extends BaseAction {
 		setValue(XML,ack.toXML());
 		return SUCCESS;
 	}
+	
+	public String loadProvider() throws Exception{
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("lastupdate", lastupdate);
+		setValue(XML,maintenance.loadProviders(param));
+		return SUCCESS;
+	}
+	
 }
