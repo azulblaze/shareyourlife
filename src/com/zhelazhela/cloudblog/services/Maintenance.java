@@ -1,6 +1,7 @@
 package com.zhelazhela.cloudblog.services;
 
 import com.zhelazhela.cloudblog.domain.ACK;
+import com.zhelazhela.cloudblog.domain.ProviderList;
 
 public interface Maintenance {
 
@@ -17,4 +18,6 @@ public interface Maintenance {
 	public ACK getSerialID(java.util.Map<String,String> parameters);
 	
 	public ACK checkSerialID(java.util.Map<String, String> parameters);
+	
+	public ProviderList loadProviders(java.util.Map<String, String> parameters);
 }

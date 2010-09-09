@@ -29,7 +29,7 @@ CREATE  TABLE IF NOT EXISTS providers_log (
   end_time TIMESTAMP NULL ,
   time_lenght VARCHAR(45) NULL ,
   remark VARCHAR(45) NULL ,
-  update_time VARCHAR(45) NULL ,
+  update_time TIMESTAMP NULL ,
   PRIMARY KEY (id) ,
   INDEX PL_INDEX (id ASC, provider_id ASC) )
 ENGINE = InnoDB

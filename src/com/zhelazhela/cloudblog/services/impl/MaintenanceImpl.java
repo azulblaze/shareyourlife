@@ -6,18 +6,27 @@ import java.util.Random;
 
 
 import com.zhelazhela.cloudblog.domain.ACK;
+import com.zhelazhela.cloudblog.domain.ProviderList;
 import com.zhelazhela.cloudblog.domain.Result;
 import com.zhelazhela.cloudblog.services.Maintenance;
 import com.zhelazhela.db.dao.ProvidersDAO;
+import com.zhelazhela.db.dao.ProvidersLogDAO;
 import com.zhelazhela.db.model.Providers;
 import com.zhelazhela.db.model.ProvidersExample;
+import com.zhelazhela.db.model.ProvidersLogExample;
 
 public class MaintenanceImpl implements Maintenance {
 
 	private ProvidersDAO providersDAO;
 	
+	private ProvidersLogDAO providersLogDAO;
+	
 	public void setProvidersDAO(ProvidersDAO providersDAO) {
 		this.providersDAO = providersDAO;
+	}
+
+	public void setProvidersLogDAO(ProvidersLogDAO providersLogDAO) {
+		this.providersLogDAO = providersLogDAO;
 	}
 
 	@Override
@@ -126,4 +135,28 @@ public class MaintenanceImpl implements Maintenance {
         }  
         return md5StrBuff.toString();  
     }
+
+	@Override
+	public ProviderList loadProviders(Map<String, String> parameters) {
+		String lastupdate = parameters.get("lastupdate");
+		ProviderList pl = new ProviderList();
+		pl.setNeedupdate(ProviderList.NEEDUPDATE_NO);
+		try{
+			java.util.Date date = new java.util.Date();
+			date.setTime(Long.parseLong(lastupdate));
+			ProvidersLogExample ple = new ProvidersLogExample();
+			ple.createCriteria().andUpdateTimeGreaterThan(date);
+			if(providersLogDAO.selectByExample(ple).size()>0){
+				pl.setNeedupdate(ProviderList.NEEDUPDATE_YES);
+				ProvidersExample pe = new ProvidersExample();
+				pe.createCriteria().andLevelEqualTo(Providers.LEVEL_OK);
+				java.util.List<Providers> list = providersDAO.selectByExample(pe);
+				pl.setProviders(list);
+				return pl;
+			}
+		}catch(Exception e){
+			
+		}
+		return pl;
+	}
 }
