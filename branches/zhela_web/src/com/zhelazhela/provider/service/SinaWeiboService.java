@@ -44,16 +44,6 @@ public class SinaWeiboService implements WeiboService {
 			System.out.println("Access token: " + accessToken.getToken());
 			System.out.println("Access token secret: " + accessToken.getTokenSecret());
 			weibo.setToken(accessToken.getToken(), accessToken.getTokenSecret());
-
-			Status status = weibo.updateStatus("测试消息from zhela ");
-			System.out.println("Successfully updated the status to [" + status.getText() + "].");
-
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		} catch (Exception te) {
 			System.out.println("Failed to get timeline: " + te.getMessage());
 		} 
@@ -110,12 +100,14 @@ public class SinaWeiboService implements WeiboService {
 		System.setProperty("weibo4j.oauth.consumerSecret",Weibo.CONSUMER_SECRET);
 		Weibo weibo = new Weibo();
 		weibo.setToken("fdbcad19eb31e8167be26108d6b94004", "2511fd402388db7ec2d34076c1bce0f7");
-		//Status status = weibo.updateStatus("再来测试消息，大家可以忽略。");
-		//System.out.println("Successfully updated the status to [" + status.getText() + "].");
+		Status status = weibo.updateStatus("再来测试消息，大家可以忽略。如果超过了140个字会是什么样子呢？哈哈，我们来测试下。");
+		System.out.println("Successfully updated the status to [" + status.getText() + "].");
+		/**
 		java.util.List<Status> status = weibo.getFriendsTimeline();
 		System.out.println(status.size());
 		for(Status statu:status){
 			System.out.println(statu.getText());
 		}
+		**/
 	}
 }
