@@ -1,0 +1,111 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+
+	<package name="sns" extends="tiles-default" namespace="/sns">
+		<global-results>
+			<result name="exception">/html/error.html</result>
+			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>
+			<result name="act" type="tiles">sns.act</result>
+			<result name="login" type="redirect-action">
+				<param name="actionName">login</param>
+				<param name="url">${url}</param>
+			</result>
+		</global-results>
+		<global-exception-mappings>   
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="reg" class="snsUserAction" method="reg" >
+			<result name="input" type="tiles">sns.reg</result>
+			<result name="success" type="tiles">sns.act</result>
+		</action>
+		
+		<action name="act" class="snsUserAction" method="activity" >
+			<result name="success" type="tiles">sns.actresult</result>
+		</action>
+		
+		<action name="login" class="snsUserAction" method="login" >
+			<result name="input" type="tiles">sns.login</result>
+			<result name="success" type="redirect-action">mypage</result>
+			<result name="url" type="redirect">${url}</result>
+		</action>
+		
+		<action name="remail" class="snsUserAction" method="remail"/>
+		
+		<action name="mypage" class="snsMainAction" method="main">
+			<result name="success" type="tiles">sns.usergoods</result>
+		</action>
+		
+		<action name="mygoods" class="snsMainAction" method="mygoods">
+			<result name="success" type="tiles">sns.mygoods</result>
+		</action>
+		
+		<action name="collection" class="snsMainAction" method="collection">
+			<result name="success">/WEB-INF/pages/sns/tiles/collect.jsp</result>
+		</action>
+		
+		<action name="addgoods" class="snsMainAction" method="addgoods">
+			<result name="input">/WEB-INF/pages/sns/tiles/collection.jsp</result>
+			<result name="success">/WEB-INF/pages/sns/tiles/close_window.jsp</result>
+		</action>
+		
+		<action name="goods_detail" class="snsMainAction" method="loadgoods">
+			<result name="success" type="tiles">sns.goods_detail</result>
+		</action>
+		
+		<action name="user_page" class="snsMainAction" method="loadUserPage">
+			<result name="success" type="tiles">sns.usergoods</result>
+			<result name="mypage" type="redirect-action">mypage</result>
+		</action>
+		
+		<action name="comment" class="snsCommentAction" method="comment"/>
+		
+		<action name="load_comment" class="snsCommentAction" method="load_comment"/>
+		
+		<action name="fans" class="snsMainAction" method="loadUserWatcher">
+			<result name="success" type="tiles">sns.user_list</result>
+		</action>
+		
+		<action name="care" class="snsMainAction" method="loadUserWatching">
+			<result name="dest" type="tiles">sns.user_list</result>
+			<result name="my" type="tiles">sns.my_friends</result>
+		</action>
+		
+		<!-- relation -->
+		<action name="tag_goods" class="snsRelationAction" method="tagGoods"/>
+		<action name="edit_tagGoods" class="snsRelationAction" method="editTagGoods"/>
+		<action name="del_tagGoods" class="snsRelationAction" method="delTagGoods"/>
+		<action name="add_friend" class="snsRelationAction" method="addFriend"/>
+		<action name="block_user" class="snsRelationAction" method="blockUser"/>
+		<action name="del_friend" class="snsRelationAction" method="delFriend"/>
+		<!-- relation end -->
+		
+		<!-- send message -->
+		<action name="send_msg" class="snsMessageAction" method="sendNormalMessage"/>
+		<action name="deal_msg" class="snsMessageAction" method="dealMessage"/>
+		<action name="read_msg" class="snsMessageAction" method="readMessage"/>
+		<action name="count_unread_msg" class="snsMessageAction" method="countUnReadMessage"/>
+		<action name="del_msg" class="snsMessageAction" method="delMessage"/>
+		
+		<action name="load_msg_list" class="snsMessageAction" method="loadMessageList">
+		</action>
+		
+		<!-- send message end -->
+		
+		<!-- userprofile -->
+		<action name="profile" class="snsUserAction" method="profile">
+			<result name="my" type="tiles">sns.myuserlist</result>
+		</action>
+		<action name="add_profile" class="snsUserAction" method="addProfile"/>
+		<action name="add_contact" class="snsUserAction" method="addContact"/>
+		<action name="del_contact" class="snsUserAction" method="delContact"/>
+		<action name="load_contact" class="snsUserAction" method="loadContact"/>
+		<action name="update_password" class="snsUserAction" method="updatePassword"/>
+		<!-- userprofile end -->
+		
+	</package>
+
+</struts>
