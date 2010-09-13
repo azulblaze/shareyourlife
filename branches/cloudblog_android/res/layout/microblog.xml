@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FF00ffff"
+    >
+    <ImageView android:layout_width="46px"
+		android:src="@drawable/header"
+		android:adjustViewBounds="true"
+		android:layout_height="46px"
+		android:padding="2px"
+		android:layout_alignParentLeft="true"
+		android:id="@+id/header">
+    </ImageView>
+    <TextView android:layout_toRightOf="@id/header"
+    	android:id="@+id/blog_text"
+		android:layout_marginLeft="5px"
+		android:minHeight="50px"
+		android:paddingBottom="5px"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="This is content">
+	</TextView>
+    <ImageView android:layout_alignParentLeft="true"
+    	android:layout_width="fill_parent"
+    	android:layout_below="@id/blog_text"
+    	android:layout_height="1px"
+    	android:background="@drawable/line"
+    	android:src="@drawable/line">
+    </ImageView>
+</RelativeLayout>
