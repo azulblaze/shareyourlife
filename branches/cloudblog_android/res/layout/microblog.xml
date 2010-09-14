@@ -15,7 +15,7 @@
     </ImageView>
     <TextView android:layout_toRightOf="@id/header"
     	android:id="@+id/blog_text"
-		android:layout_marginLeft="5px"
+		android:layout_marginLeft="2px"
 		android:minHeight="50px"
 		android:paddingBottom="5px"
 		android:layout_width="fill_parent"
