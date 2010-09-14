@@ -3,13 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#FF00ffff"
+    android:paddingTop="10px"
     >
-    <ImageView android:layout_width="46px"
+    <ImageView android:layout_width="50px"
 		android:src="@drawable/header"
 		android:adjustViewBounds="true"
-		android:layout_height="46px"
-		android:padding="2px"
+		android:layout_height="50px"
 		android:layout_alignParentLeft="true"
+		android:paddingLeft="2px"
 		android:id="@+id/header">
     </ImageView>
     <TextView android:layout_toRightOf="@id/header"
