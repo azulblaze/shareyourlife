@@ -18,85 +18,17 @@
 			<ImageView android:id="@+id/message" android:layout_toLeftOf="@id/shortcut" android:layout_marginRight="10px" android:layout_centerVertical="true" android:src="@drawable/message" android:layout_width="30px" android:layout_height="30px"></ImageView>
 		</RelativeLayout>
 	</LinearLayout>
-	<ScrollView android:id="@+id/blogs_container"
-		android:layout_gravity="top"
+	<ScrollView android:layout_gravity="top"
 		android:scrollbars="none"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-		<LinearLayout android:orientation="vertical"
+		android:layout_height="fill_parent"
+		android:fillViewport="true"
+		android:focusable="true"
+		android:layout_marginBottom="0dip">
+		<ListView android:id="@+id/blogs_container_list"
+			android:layout_gravity="top"
 			android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
-			<TextView android:layout_height="wrap_content"
-				android:layout_width="fill_parent"
-				android:id="@+id/blog_new"
-				android:text="">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-			<TextView android:layout_height="100px"
-				android:layout_width="fill_parent"
-				android:text="Hello">
-				
-			</TextView>
-		</LinearLayout>
+			android:layout_height="fill_parent">
+		</ListView>
 	</ScrollView>
 </LinearLayout>
