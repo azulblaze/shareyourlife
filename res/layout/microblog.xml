@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#FF00ffff"
+    android:background="#FFffffff"
     android:paddingTop="10dip"
     >
     <ImageView android:layout_width="50dip"
@@ -33,7 +33,7 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 		<TextView android:id="@+id/blog_text"
-			android:textColor="#000000"
+			android:textColor="#ff000000"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:text="This is content">
@@ -42,15 +42,14 @@
 	    	android:id="@+id/blog_from"
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="wrap_content"
-	    	android:textColor="#777777"
-	    	android:text="1 小时之前 来自 sina">
+	    	android:textColor="#ff777777">
 	    </TextView>
 	</LinearLayout>
     <ImageView android:layout_alignParentLeft="true"
     	android:layout_width="fill_parent"
     	android:layout_below="@id/blog_text_line"
     	android:layout_height="1dip"
-    	android:background="@drawable/line"
-    	android:src="@drawable/line">
+    	android:background="#ffe7e6e7"
+    	>
     </ImageView>
 </RelativeLayout>
