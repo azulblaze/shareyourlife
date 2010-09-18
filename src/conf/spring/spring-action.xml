@@ -55,4 +55,16 @@
 	<bean name="snsCommentAction" class="com.zhelazhela.actions.SNSCommentAction" singleton="false" >
 		<property name="pagesize" value="20" />
 	</bean>
+	
+	<bean name="cbMessageAction" class="com.zhelazhela.cloudblog.action.MessageAction" singleton="false" >
+	</bean>
+	
+	<bean name="cbPostAction" class="com.zhelazhela.cloudblog.action.PostAction" singleton="false" >
+	</bean>
+	
+	<bean name="cbSystemAction" class="com.zhelazhela.cloudblog.action.SystemAction" singleton="false" >
+	</bean>
+	
+	<bean name="cbUserAction" class="com.zhelazhela.cloudblog.action.UserAction" singleton="false" >
+	</bean>
 </beans>
