@@ -44,17 +44,33 @@
 			</ImageView>
 		</RelativeLayout>
 	</LinearLayout>
-	<ScrollView android:layout_gravity="top"
-		android:scrollbars="none"
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="37dip"
+		android:text="@string/post"
+		android:textStyle="bold">
+	</TextView>
+	<EditText android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/post_content"
+		android:minHeight="100dip"
+		android:gravity="top">
+	</EditText>
+	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:fillViewport="true"
-		android:focusable="true"
-		android:layout_marginBottom="0dip">
-		<ListView android:id="@+id/blogs_container_list"
-			android:layout_gravity="top"
+		android:layout_height="wrap_content">
+		<Button android:gravity="center"
+			android:id="@+id/post"
 			android:layout_width="fill_parent"
-			android:layout_height="fill_parent">
-		</ListView>
-	</ScrollView>
+			android:layout_height="wrap_content"
+			android:text="@string/update"
+			android:layout_weight="1">
+		</Button>
+		<Button android:gravity="center"
+			android:id="@+id/cancel"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/cancel"
+			android:layout_weight="1">
+		</Button>
+	</LinearLayout>
 </LinearLayout>

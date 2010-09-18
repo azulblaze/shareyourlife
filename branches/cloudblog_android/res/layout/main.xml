@@ -3,6 +3,39 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#FFffffff"
     >
-<ProgressBar android:layout_centerInParent="true" android:id="@+id/plash_loading" android:layout_width="wrap_content" android:layout_height="wrap_content"></ProgressBar>
+	<ProgressBar android:layout_centerInParent="true"
+		android:id="@+id/plash_loading"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</ProgressBar>
+	<Button android:id="@+id/startapp"
+		android:text="Start App"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		>
+	</Button>
+	<Button android:id="@+id/postblog"
+		android:text="Post Blog"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		>
+	</Button>
+	<Button android:id="@+id/category"
+		android:text="Hot News"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		>
+	</Button>
+	<Button android:id="@+id/systemconfig"
+		android:text="Config"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		>
+	</Button>
 </LinearLayout>
