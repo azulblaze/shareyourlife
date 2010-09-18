@@ -46,4 +46,7 @@
 	<bean name="webSiteCollectionDAO" id="webSiteCollectionDAO" class="com.zhelazhela.db.dao.WebSiteCollectionDAOImpl" />
 	<bean name="urlRedirectionDAO" id="urlRedirectionDAO" class="com.zhelazhela.db.dao.UrlRedirectionDAOImpl" />
 	<bean name="userPrivacyDAO" id="userPrivacyDAO" class="com.zhelazhela.db.dao.UserPrivacyDAOImpl" />
+	
+	<bean name="providersDAO" id="providersDAO" class="com.zhelazhela.db.dao.ProvidersDAOImpl" />
+	<bean name="providersLogDAO" id="providersLogDAO" class="com.zhelazhela.db.dao.ProvidersLogDAOImpl" />
 </beans>
