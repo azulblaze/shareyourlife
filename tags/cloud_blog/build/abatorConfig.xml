@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration>
+	<classPathEntry
+				location="D:\workspace\zhela_web\WebContent\WEB-INF\lib\mysql-connector-java-5.1.5-bin.jar" />
+	<ibatorContext targetRuntime="Ibatis2Java5" id="newsreader">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://ww020453:3306/newsreader"
+			userId="root" password="rootroot" >
+		</jdbcConnection>
+		<javaModelGenerator targetPackage="com.tieto.newsreader.model.util"
+			targetProject="newsreader/src/main/java" />
+		<sqlMapGenerator targetPackage="com.tieto.newsreader.dao.util"
+			targetProject="newsreader/src/main/resources" />
+		<daoGenerator type="SPRING" targetPackage="com.tieto.newsreader.dao.util"
+			targetProject="newsreader/src/main/java" />
+		<table tableName="code" />
+	</ibatorContext>
+</ibatorConfiguration>
