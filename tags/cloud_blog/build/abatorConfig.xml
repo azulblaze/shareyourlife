@@ -3,17 +3,17 @@
 <ibatorConfiguration>
 	<classPathEntry
 				location="D:\workspace\zhela_web\WebContent\WEB-INF\lib\mysql-connector-java-5.1.5-bin.jar" />
-	<ibatorContext targetRuntime="Ibatis2Java5" id="newsreader">
+	<ibatorContext targetRuntime="Ibatis2Java5" id="cloudblog">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://ww020453:3306/newsreader"
-			userId="root" password="rootroot" >
+			connectionURL="jdbc:mysql://localhost:3306/cloudblog"
+			userId="root" password="654321" >
 		</jdbcConnection>
-		<javaModelGenerator targetPackage="com.tieto.newsreader.model.util"
-			targetProject="newsreader/src/main/java" />
-		<sqlMapGenerator targetPackage="com.tieto.newsreader.dao.util"
-			targetProject="newsreader/src/main/resources" />
-		<daoGenerator type="SPRING" targetPackage="com.tieto.newsreader.dao.util"
-			targetProject="newsreader/src/main/java" />
-		<table tableName="code" />
+		<javaModelGenerator targetPackage="com.zhela.cloudblog.model.provider"
+			targetProject="cloud_blog/src/main/java" />
+		<sqlMapGenerator targetPackage="com.zhela.cloudblog.dao.provider"
+			targetProject="cloud_blog/src/main/resources" />
+		<daoGenerator type="SPRING" targetPackage="com.zhela.cloudblog.dao.provider"
+			targetProject="cloud_blog/src/main/java" />
+		<table tableName="providers" />
 	</ibatorContext>
 </ibatorConfiguration>
