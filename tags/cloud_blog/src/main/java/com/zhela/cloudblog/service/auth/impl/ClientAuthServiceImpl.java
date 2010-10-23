@@ -23,7 +23,7 @@ public class ClientAuthServiceImpl implements ClientAuthService{
 				}
 				len = appkey.length();
 				int enc_len = enc_session.length();
-				Random r = new Random(enc_len);
+				Random r = new Random();
 				int enc_at = 0;
 				for(int i=0;i<len;i++){
 					enc_at = r.nextInt(enc_len);
@@ -40,25 +40,8 @@ public class ClientAuthServiceImpl implements ClientAuthService{
 	public boolean checkSerialID(String enc_serialid, String serialid) {
 		if(enc_serialid!=null&&serialid!=null&&serialid.length()>0){
 			try{
-				String md5 = getMD5Str(serialid);
-				char md5_array[] = md5.toCharArray();
-				md5 = "";
-				int len = md5_array.length;
-				char tmp;
-				for(int i=0;i<len;i++){
-					if(i%3==0&&(i+2)<len){
-						tmp = md5_array[i];
-						md5_array[i] = md5_array[i+2];
-						md5_array[i+2] = tmp;
-					}
-					if(i%2==0&&(i+1)<len){
-						tmp = md5_array[i];
-						md5_array[i] = md5_array[i+1];
-						md5_array[i+1] = tmp;
-					}
-					md5 = md5+md5_array[i];
-				}
-				if(md5.equals(enc_serialid)){
+				
+				if(getEncStr(serialid).equals(enc_serialid)){
 					return true;
 				}
 			}catch(Exception e){
@@ -68,6 +51,28 @@ public class ClientAuthServiceImpl implements ClientAuthService{
 		return false;
 	}
 
+	private String getEncStr(String serialid){
+		String md5 = getMD5Str(serialid);
+		char md5_array[] = md5.toCharArray();
+		md5 = "";
+		int len = md5_array.length;
+		char tmp;
+		for(int i=0;i<len;i++){
+			if(i%3==0&&(i+2)<len){
+				tmp = md5_array[i];
+				md5_array[i] = md5_array[i+2];
+				md5_array[i+2] = tmp;
+			}
+			if(i%2==0&&(i+1)<len){
+				tmp = md5_array[i];
+				md5_array[i] = md5_array[i+1];
+				md5_array[i+1] = tmp;
+			}
+			md5 = md5+md5_array[i];
+		}
+		return md5;
+	}
+	
 	private String getMD5Str(String str) {  
         MessageDigest messageDigest = null;  
         try {  
@@ -88,4 +93,5 @@ public class ClientAuthServiceImpl implements ClientAuthService{
         return md5StrBuff.toString();  
     }
 
+	
 }
