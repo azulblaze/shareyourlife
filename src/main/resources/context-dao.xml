@@ -11,7 +11,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/cloudblog?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
-		<property name="password" value="123456" />
+		<property name="password" value="654321" />
 	</bean>
 
 	<bean id="sqlMapClient" name="sqlMapClient"
@@ -26,5 +26,6 @@
 	<bean id="newsCategoryDAO" class="com.zhela.cloudblog.dao.internalnews.impl.NewsCategoryDAOImpl"/>
 	<bean id="textNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.TextNewsDAOImpl"/>
 	<bean id="videoNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.VideoNewsDAOImpl"/>
+	<bean id="deviceLogDAO" class="com.zhela.cloudblog.dao.device.impl.DeviceLogDAOImpl"/>
 
 </beans>
