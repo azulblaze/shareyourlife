@@ -10,7 +10,6 @@ public class RESTCategory {
 	private String name;
 	private String description;
 	private String path;
-	private String status;
 	private java.util.List<RESTCategory> subCategories;
 	public long getId() {
 		return id;
@@ -41,12 +40,6 @@ public class RESTCategory {
 	}
 	public void setPath(String path) {
 		this.path = path;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	@XmlElement(name="subCategories")
 	public java.util.List<RESTCategory> getSubCategories() {
