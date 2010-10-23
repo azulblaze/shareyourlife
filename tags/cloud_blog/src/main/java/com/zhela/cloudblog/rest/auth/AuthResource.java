@@ -68,19 +68,13 @@ public class AuthResource extends BaseResource{
 				String serialID = clientAuthService.getSerialID(appKey, sessionid);
 				if(serialID!=null&&serialID.trim().length()>0){
 					saveSession(SESSION_SERIALID, serialID);
-					response = Response.status(Status.OK)
-					.entity(new RESTResponse(Status.OK,serialID))
-					.build();
+					response = genOK(new RESTResponse(Status.OK,serialID));
 					return response;
 				}
 			}
-			response = Response.status(Status.UNAUTHORIZED)
-			.entity(new RESTResponse(Status.UNAUTHORIZED,"Not Allowed"))
-			.build();
+			response = RESPONSE_UNAUTHORIZED;
 		}catch(Exception e){
-			response = Response.status(Status.SERVICE_UNAVAILABLE)
-			.entity(new RESTResponse(Status.SERVICE_UNAVAILABLE,"System Exception"))
-			.build();
+			response = RESPONSE_SERVICE_UNAVAILABLE;
 		}
 		return response;
 	}
@@ -104,18 +98,12 @@ public class AuthResource extends BaseResource{
 				status.setTransID(enc_Key);
 				saveSession(SESSION_AUTH, status);
 				clientAuthService.insertDeviceLog(status, getSessionId(), DeviceStatus.ACTION_LOGIN);
-				response = Response.status(Status.OK)
-				.entity(new RESTResponse(Status.OK,"Success"))
-				.build();
+				response = genOK(new RESTResponse(Status.OK,"Success"));
 				return response;
 			}
-			response = Response.status(Status.UNAUTHORIZED)
-			.entity(new RESTResponse(Status.UNAUTHORIZED,"Not Allowed"))
-			.build();
+			response = RESPONSE_UNAUTHORIZED;
 		}catch(Exception e){
-			response = Response.status(Status.SERVICE_UNAVAILABLE)
-			.entity(new RESTResponse(Status.SERVICE_UNAVAILABLE,"System Exception"))
-			.build();
+			response = RESPONSE_SERVICE_UNAVAILABLE;
 		}
 		return response;
 	}
@@ -124,13 +112,14 @@ public class AuthResource extends BaseResource{
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/")
 	public Response delAuth(){
+		if(!isAuth()){
+			return RESPONSE_UNAUTHORIZED;
+		}
 		DeviceStatus status = (DeviceStatus) getSession(SESSION_AUTH);
 		clientAuthService.insertDeviceLog(status, getSessionId(), DeviceStatus.ACTION_LOGOUT);
 		clearSession(SESSION_AUTH);
 		servletRequest.getSession().invalidate();
-		return  Response.status(Status.OK)
-		.entity(new RESTResponse(Status.OK,"Success"))
-		.build();
+		return  genOK(new RESTResponse(Status.OK,"Success"));
 	}
 	
 	private ClientAuthService clientAuthService;
