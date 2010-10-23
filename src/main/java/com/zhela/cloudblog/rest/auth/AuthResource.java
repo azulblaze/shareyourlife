@@ -32,7 +32,8 @@ public class AuthResource extends BaseResource{
 	@Path("/{appKey}")
 	public Response getAuthSerialID(@PathParam("appKey") String appKey,@Context HttpServletRequest servletRequest){
 		Response response;
-		clearSession(servletRequest,SESSION_SERIALID);
+		//clearSession(servletRequest,SESSION_SERIALID);
+		servletRequest.getSession().invalidate();
 		try{
 			if(appKeys.contains(appKey)){
 				String sessionid = servletRequest.getSession().getId()+System.currentTimeMillis();

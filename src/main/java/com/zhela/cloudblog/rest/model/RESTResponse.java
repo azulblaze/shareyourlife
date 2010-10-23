@@ -1,7 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.ws.rs.core.Response.Status;
-
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+@XmlRootElement(name="response")
+@XmlType(propOrder={"status","description"})
 public class RESTResponse {
 
 	private Status status;
