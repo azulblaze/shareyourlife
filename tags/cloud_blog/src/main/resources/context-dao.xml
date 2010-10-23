@@ -21,10 +21,10 @@
 	</bean>
 
 	<bean id="providersDAO" class="com.zhela.cloudblog.dao.provider.impl.ProvidersDAOImpl" />
-	<bean id="categoryDAO" class="com.zhela.cloudblog.dao.intenalnews.CategoryDAOImpl"/>
-	<bean id="imageNewsDAO" class="com.zhela.cloudblog.dao.intenalnews.ImageNewsDAOImpl"/>
-	<bean id="newsCategoryDAO" class="com.zhela.cloudblog.dao.intenalnews.NewsCategoryDAOImpl"/>
-	<bean id="textNewsDAO" class="com.zhela.cloudblog.dao.intenalnews.TextNewsDAOImpl"/>
-	<bean id="videoNewsDAO" class="com.zhela.cloudblog.dao.intenalnews.VideoNewsDAOImpl"/>
+	<bean id="categoryDAO" class="com.zhela.cloudblog.dao.internalnews.impl.CategoryDAOImpl"/>
+	<bean id="imageNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.ImageNewsDAOImpl"/>
+	<bean id="newsCategoryDAO" class="com.zhela.cloudblog.dao.internalnews.impl.NewsCategoryDAOImpl"/>
+	<bean id="textNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.TextNewsDAOImpl"/>
+	<bean id="videoNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.VideoNewsDAOImpl"/>
 
 </beans>
