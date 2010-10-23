@@ -3,6 +3,9 @@ package com.zhela.cloudblog.service.auth.impl;
 import java.security.MessageDigest;
 import java.util.Random;
 
+import com.zhela.cloudblog.dao.device.DeviceLogDAO;
+import com.zhela.cloudblog.model.device.DeviceLog;
+import com.zhela.cloudblog.rest.auth.AuthResource.DeviceStatus;
 import com.zhela.cloudblog.service.auth.ClientAuthService;
 
 public class ClientAuthServiceImpl implements ClientAuthService{
@@ -93,5 +96,26 @@ public class ClientAuthServiceImpl implements ClientAuthService{
         return md5StrBuff.toString();  
     }
 
+	@Override
+	public void insertDeviceLog(DeviceStatus status, String sessionId,int action) {
+		if(status==null){
+			return;
+		}
+		DeviceLog record = new DeviceLog();
+		record.setAction(action);
+		record.setDeviceId(status.getDevice_id());
+		record.setDeviceName(status.getDevice_name());
+		record.setDeviceSystem(status.getDevice_sys());
+		record.setSessionId(sessionId);
+		record.setUpdateTime(new java.util.Date());
+		deviceLogDAO.insert(record);
+	}
+
+	
+	private DeviceLogDAO deviceLogDAO;
+	public void setDeviceLogDAO(DeviceLogDAO deviceLogDAO) {
+		this.deviceLogDAO = deviceLogDAO;
+	}
+	
 	
 }
