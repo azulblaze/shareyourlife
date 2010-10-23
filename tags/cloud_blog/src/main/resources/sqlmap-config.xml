@@ -6,7 +6,10 @@
 <sqlMapConfig>
 	
 	<settings lazyLoadingEnabled="true"  useStatementNamespaces="true" />
-	
-	<sqlMap resource="com/tieto/newsreader/dao/category/category_SqlMap.xml"/>
-
+	<sqlMap resource="com/zhela/cloudblog/dao/provider/providers_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/category_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/image_news_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/news_category_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/text_news_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/video_news_SqlMap.xml"/>
 </sqlMapConfig>
