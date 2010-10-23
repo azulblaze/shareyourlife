@@ -12,4 +12,5 @@
 	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/news_category_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/text_news_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/video_news_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/device/device_log_SqlMap.xml"/>
 </sqlMapConfig>
