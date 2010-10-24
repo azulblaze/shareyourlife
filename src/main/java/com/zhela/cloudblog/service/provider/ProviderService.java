@@ -6,4 +6,6 @@ public interface ProviderService {
 
 	public java.util.List<Providers> selectAllProviders() throws Exception;
 	
+	public Providers selectProviderByID(long id) throws Exception;
+	
 }
