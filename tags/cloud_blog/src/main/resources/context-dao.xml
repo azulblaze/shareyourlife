@@ -27,5 +27,7 @@
 	<bean id="textNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.TextNewsDAOImpl"/>
 	<bean id="videoNewsDAO" class="com.zhela.cloudblog.dao.internalnews.impl.VideoNewsDAOImpl"/>
 	<bean id="deviceLogDAO" class="com.zhela.cloudblog.dao.device.impl.DeviceLogDAOImpl"/>
-
+	<bean id="usersDAO" class="com.zhela.cloudblog.dao.users.impl.UsersDAOImpl"/>
+	<bean id="providerUserDAO" class="com.zhela.cloudblog.dao.users.impl.ProviderUserDAOImpl"/>
+	
 </beans>
