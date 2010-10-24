@@ -256,4 +256,13 @@ public class Providers {
     public void setRank(Integer rank) {
         this.rank = rank;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Providers){
+			Providers tmp = (Providers) obj;
+			return tmp.getId().equals(this.id);
+		}
+		return false;
+	}
 }

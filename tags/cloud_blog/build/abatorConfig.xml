@@ -8,12 +8,13 @@
 			connectionURL="jdbc:mysql://localhost:3306/cloudblog"
 			userId="root" password="654321" >
 		</jdbcConnection>
-		<javaModelGenerator targetPackage="com.zhela.cloudblog.model.device"
+		<javaModelGenerator targetPackage="com.zhela.cloudblog.model.users"
 			targetProject="cloud_blog/src/main/java" />
-		<sqlMapGenerator targetPackage="com.zhela.cloudblog.dao.device"
+		<sqlMapGenerator targetPackage="com.zhela.cloudblog.dao.users"
 			targetProject="cloud_blog/src/main/resources" />
-		<daoGenerator type="SPRING" targetPackage="com.zhela.cloudblog.dao.device"
+		<daoGenerator type="SPRING" targetPackage="com.zhela.cloudblog.dao.users"
 			targetProject="cloud_blog/src/main/java" />
-		<table tableName="device_log" />
+		<table tableName="users" />
+		<table tableName="provider_user" />
 	</ibatorContext>
 </ibatorConfiguration>

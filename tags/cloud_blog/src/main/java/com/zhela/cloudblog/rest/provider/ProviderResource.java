@@ -27,6 +27,21 @@ public class ProviderResource extends BaseResource{
 		}
 	}
 	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
+	@Path("/{providerId}/tweets")
+	public Response getTweets(){
+		if(!isAuth()){
+			return RESPONSE_UNAUTHORIZED;
+		}
+		try{
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return RESPONSE_SERVICE_UNAVAILABLE;
+		}
+	}
+	
 	private ProviderService providerService;
 	public void setProviderService(ProviderService providerService) {
 		this.providerService = providerService;
