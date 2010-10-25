@@ -14,7 +14,6 @@
 			targetProject="cloud_blog/src/main/resources" />
 		<daoGenerator type="SPRING" targetPackage="com.zhela.cloudblog.dao.users"
 			targetProject="cloud_blog/src/main/java" />
-		<table tableName="users" />
 		<table tableName="provider_user" />
 	</ibatorContext>
 </ibatorConfiguration>
