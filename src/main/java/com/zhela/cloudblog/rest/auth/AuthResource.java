@@ -16,39 +16,6 @@ import com.zhela.cloudblog.service.auth.ClientAuthService;
 @Path("/auth")
 public class AuthResource extends BaseResource{
 	
-	public class DeviceStatus{
-		public final static int ACTION_LOGIN = 1;
-		public final static int ACTION_LOGOUT = 2;
-		private String device_id;
-		private String device_name;
-		private String device_sys;
-		private String transID;
-		public String getDevice_id() {
-			return device_id;
-		}
-		public void setDevice_id(String deviceId) {
-			device_id = deviceId;
-		}
-		public String getDevice_name() {
-			return device_name;
-		}
-		public void setDevice_name(String deviceName) {
-			device_name = deviceName;
-		}
-		public String getDevice_sys() {
-			return device_sys;
-		}
-		public void setDevice_sys(String deviceSys) {
-			device_sys = deviceSys;
-		}
-		public String getTransID() {
-			return transID;
-		}
-		public void setTransID(String transID) {
-			this.transID = transID;
-		}
-		
-	}
 	
 	private static java.util.List<String> appKeys = new java.util.ArrayList<String>();
 	private final static String SESSION_SERIALID = "serialID";
@@ -129,5 +96,37 @@ public class AuthResource extends BaseResource{
 		this.clientAuthService = clientAuthService;
 	}
 	
-	
+	public class DeviceStatus{
+		public final static int ACTION_LOGIN = 1;
+		public final static int ACTION_LOGOUT = 2;
+		private String device_id;
+		private String device_name;
+		private String device_sys;
+		private String transID;
+		public String getDevice_id() {
+			return device_id;
+		}
+		public void setDevice_id(String deviceId) {
+			device_id = deviceId;
+		}
+		public String getDevice_name() {
+			return device_name;
+		}
+		public void setDevice_name(String deviceName) {
+			device_name = deviceName;
+		}
+		public String getDevice_sys() {
+			return device_sys;
+		}
+		public void setDevice_sys(String deviceSys) {
+			device_sys = deviceSys;
+		}
+		public String getTransID() {
+			return transID;
+		}
+		public void setTransID(String transID) {
+			this.transID = transID;
+		}
+		
+	}
 }
