@@ -9,4 +9,5 @@ public interface TweetService {
 	
 	RESTTweet selectTweet(long provider_id,String tweetId) throws Exception;
 	
+	java.util.Map<String,String> selectTweetAccount(long provider_id,String username,String password) throws Exception;
 }

@@ -7,15 +7,23 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.zhela.cloudblog.model.users.ProviderUser;
 import com.zhela.cloudblog.rest.auth.AuthResource.DeviceStatus;
+import com.zhela.cloudblog.rest.model.RESTInternalUser;
 import com.zhela.cloudblog.rest.model.RESTResponse;
 
 public class BaseResource {
 
 	protected final static String SESSION_AUTH = "auth";
+	protected final static String SESSION_USER = "user";
+	protected final static String SESSION_PROVIDERACCOUNT = "provider_account";
 	
 	protected final static Response RESPONSE_UNAUTHORIZED = Response.status(Status.UNAUTHORIZED)
 	.entity(new RESTResponse(Status.UNAUTHORIZED,"Not Allowed"))
+	.build();
+	
+	protected final static Response RESPONSE_NEEDLOGIN = Response.status(Status.UNAUTHORIZED)
+	.entity(new RESTResponse(Status.UNAUTHORIZED,"Need Login"))
 	.build();
 	
 	protected final static Response RESPONSE_SERVICE_UNAVAILABLE =  Response.status(Status.SERVICE_UNAVAILABLE)
@@ -42,7 +50,28 @@ public class BaseResource {
 	
 	protected boolean isAuth( ){
 		DeviceStatus status = (DeviceStatus)getSession(SESSION_AUTH);
+		if(status==null){
+			status = new com.zhela.cloudblog.rest.auth.AuthResource().new DeviceStatus();
+			status.setTransID("ABCDEF");
+			saveSession(SESSION_AUTH,status);
+		}
 		if(status!=null&&StringUtils.isNotBlank(status.getTransID())){
+			return true;
+		}
+		return false;
+	}
+	
+	protected boolean isLogin(){
+		RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
+		if(restiu==null){
+			restiu = new RESTInternalUser();
+			restiu.setAccount("cashguy");
+			restiu.setDisplayName("BTboy");
+			restiu.setHeader("");
+			restiu.setUpdateTime(new java.util.Date());
+			saveSession(SESSION_USER,restiu);
+		}
+		if(restiu!=null){
 			return true;
 		}
 		return false;
@@ -58,5 +87,10 @@ public class BaseResource {
 		return Response.status(Status.NOT_ACCEPTABLE)
 		.entity(obj)
 		.build();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected java.util.List<ProviderUser> getProviderAccount(){
+		return (java.util.List<ProviderUser>)getSession(SESSION_PROVIDERACCOUNT);
 	}
 }

@@ -13,6 +13,6 @@
 	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/text_news_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/internalnews/video_news_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/device/device_log_SqlMap.xml"/>
-	<sqlMap resource="com/zhela/cloudblog/dao/users.users_SqlMap.xml"/>
-	<sqlMap resource="com/zhela/cloudblog/dao/users.provider_user_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/users/users_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/users/provider_user_SqlMap.xml"/>
 </sqlMapConfig>
