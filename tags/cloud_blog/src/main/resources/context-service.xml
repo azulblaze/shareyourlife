@@ -8,5 +8,5 @@
 	<bean id="clientAuthService" class="com.zhela.cloudblog.service.auth.impl.ClientAuthServiceImpl"/>
 	<bean id="providerService" class="com.zhela.cloudblog.service.provider.impl.ProviderServiceImpl"/>
 	<bean id="tweetService" class="com.zhela.cloudblog.service.tweet.impl.TweetServiceImpl"/>
-
+	<bean id="internalUserService" class="com.zhela.cloudblog.service.internaluser.impl.InternalUserServiceImpl"/>
 </beans>
