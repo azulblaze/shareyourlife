@@ -89,6 +89,20 @@ public class AuthResource extends BaseResource{
 		return  genOK(new RESTResponse(Status.OK,"Success"));
 	}
 	
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/unauth")
+	public Response getUnAuth() {
+		return RESPONSE_UNAUTHORIZED;
+	}
+	
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/unlogin")
+	public Response getUnLogin() {
+		return RESPONSE_NEEDLOGIN;
+	}
+	
 	private ClientAuthService clientAuthService;
 
 

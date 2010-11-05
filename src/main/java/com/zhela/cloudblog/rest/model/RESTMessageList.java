@@ -14,7 +14,6 @@ public class RESTMessageList {
 	 */
 	private java.util.List<RESTMessage> messages;
 	private long start;
-	private int limit;
 	private int size;
 	private int type;
 	/**
@@ -33,12 +32,6 @@ public class RESTMessageList {
 	}
 	public void setStart(long start) {
 		this.start = start;
-	}
-	public int getLimit() {
-		return limit;
-	}
-	public void setLimit(int limit) {
-		this.limit = limit;
 	}
 	public int getSize() {
 		return size;
