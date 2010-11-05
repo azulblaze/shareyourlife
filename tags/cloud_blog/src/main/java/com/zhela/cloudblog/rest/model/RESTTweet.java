@@ -13,11 +13,13 @@ public class RESTTweet {
 	private String source;
 	private String content;
 	private RESTTweet forwardTweet;
-	private int commentCount;
-	private int forwardCount;
+	private long forwardId;
+	private long commentCount;
+	private long forwardCount;
 	private RESTCommentList comments;
 	private java.util.List<RESTImage> images;
 	private java.util.List<RESTVideo> videos;
+	private RESTCoordinate corrdinate;
 	
 	public RESTProvider getProvider() {
 		return provider;
@@ -61,16 +63,16 @@ public class RESTTweet {
 	public void setForwardTweet(RESTTweet forwardTweet) {
 		this.forwardTweet = forwardTweet;
 	}
-	public int getCommentCount() {
+	public long getCommentCount() {
 		return commentCount;
 	}
-	public void setCommentCount(int commentCount) {
+	public void setCommentCount(long commentCount) {
 		this.commentCount = commentCount;
 	}
-	public int getForwardCount() {
+	public long getForwardCount() {
 		return forwardCount;
 	}
-	public void setForwardCount(int forwardCount) {
+	public void setForwardCount(long forwardCount) {
 		this.forwardCount = forwardCount;
 	}
 	public RESTCommentList getComments() {
@@ -94,6 +96,19 @@ public class RESTTweet {
 	public String getDisplayDate() {
 		return displayDate;
 	}
+	public RESTCoordinate getCorrdinate() {
+		return corrdinate;
+	}
+	public void setCorrdinate(RESTCoordinate corrdinate) {
+		this.corrdinate = corrdinate;
+	}
+	public long getForwardId() {
+		return forwardId;
+	}
+	public void setForwardId(long forwardId) {
+		this.forwardId = forwardId;
+	}
+	
 	
 		
 }

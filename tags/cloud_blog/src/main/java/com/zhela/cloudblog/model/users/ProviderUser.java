@@ -123,4 +123,11 @@ public class ProviderUser extends ProviderUserKey {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	
+	
 }

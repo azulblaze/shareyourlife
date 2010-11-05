@@ -71,4 +71,15 @@ public class ProviderUserKey {
 	public void setProviderId(Long providerId) {
 		this.providerId = providerId;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof ProviderUserKey){
+			ProviderUserKey puk = (ProviderUserKey)obj;
+			return puk.getAccount().equals(this.account)&&puk.getProviderAccount().equals(this.providerAccount)&&puk.getProviderId().equals(this.providerId);
+		}
+		return false;
+	}
+	
+	
 }

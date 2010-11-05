@@ -7,6 +7,8 @@ public class RESTUserList {
 
 	private java.util.List<RESTUser> users;
 	private int size;
+	private long nextCursor;
+	private long previousCursor;
 	public java.util.List<RESTUser> getUsers() {
 		return users;
 	}
@@ -19,6 +21,18 @@ public class RESTUserList {
 	}
 	public void setSize(int size) {
 		this.size = size;
+	}
+	public long getNextCursor() {
+		return nextCursor;
+	}
+	public void setNextCursor(long nextCursor) {
+		this.nextCursor = nextCursor;
+	}
+	public long getPreviousCursor() {
+		return previousCursor;
+	}
+	public void setPreviousCursor(long previousCursor) {
+		this.previousCursor = previousCursor;
 	}
 	
 	

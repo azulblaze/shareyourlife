@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="message")
 public class RESTMessage {
 
-	private RESTProvider provider;
 	private RESTUser sender;
 	private RESTUser receiver;
 	private String title;
@@ -13,6 +12,8 @@ public class RESTMessage {
 	private java.util.Date sendDate;
 	private String displayDate;
 	private int status;
+	private long replyId;
+	private String id;
 	public RESTUser getSender() {
 		return sender;
 	}
@@ -52,11 +53,17 @@ public class RESTMessage {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public RESTProvider getProvider() {
-		return provider;
+	public long getReplyId() {
+		return replyId;
 	}
-	public void setProvider(RESTProvider provider) {
-		this.provider = provider;
+	public void setReplyId(long replyId) {
+		this.replyId = replyId;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}	
 	
 }
