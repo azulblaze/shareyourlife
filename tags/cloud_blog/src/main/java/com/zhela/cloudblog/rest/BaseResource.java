@@ -14,10 +14,15 @@ import com.zhela.cloudblog.rest.model.RESTResponse;
 
 public class BaseResource {
 
-	protected final static String SESSION_AUTH = "auth";
-	protected final static String SESSION_USER = "user";
+	public final static String SESSION_AUTH = "auth";
+	public final static String SESSION_USER = "user";
 	protected final static String SESSION_PROVIDERACCOUNT = "provider_account";
-	
+	public static java.util.List<String> authURLs = new java.util.ArrayList<String>();
+	public static java.util.List<String> loginURLs = new java.util.ArrayList<String>();
+	static{
+		authURLs.add("/auth");
+		loginURLs.add("/user_account");
+	}
 	protected final static Response RESPONSE_UNAUTHORIZED = Response.status(Status.UNAUTHORIZED)
 	.entity(new RESTResponse(Status.UNAUTHORIZED,"Not Allowed"))
 	.build();

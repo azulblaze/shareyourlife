@@ -4,18 +4,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="coordinate")
 public class RESTCoordinate {
-	private long longitude;
-	private long latitude;
-	public long getLongitude() {
+	private double longitude;
+	private double latitude;
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(long longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public long getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(long latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	

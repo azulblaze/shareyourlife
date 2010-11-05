@@ -5,6 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="user")
 public class RESTUser {
+	public final static int RELATION_BEFOLLOWED = 1;
+	public final static int RELATION_FOLLOW = 2;
+	public final static int RELATION_FRIEND = 3;
+	public final static int RELATION_NONE = 0;
 	private String id;
 	private String account;
 	private String name;
@@ -18,6 +22,11 @@ public class RESTUser {
 	private int relation;
 	private RESTAddress stayAddress;
 	private RESTAddress currentAddress;
+	private java.util.Date createDate;
+	private java.util.Date tweetDate;
+	private String latestTweetId;
+	private String description;
+	private String latestTweet;
 	public String getId() {
 		return id;
 	}
@@ -95,6 +104,36 @@ public class RESTUser {
 	}
 	public void setCurrentAddress(RESTAddress currentAddress) {
 		this.currentAddress = currentAddress;
+	}
+	public java.util.Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(java.util.Date createDate) {
+		this.createDate = createDate;
+	}
+	public java.util.Date getTweetDate() {
+		return tweetDate;
+	}
+	public void setTweetDate(java.util.Date tweetDate) {
+		this.tweetDate = tweetDate;
+	}
+	public String getLatestTweetId() {
+		return latestTweetId;
+	}
+	public void setLatestTweetId(String latestTweetId) {
+		this.latestTweetId = latestTweetId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getLatestTweet() {
+		return latestTweet;
+	}
+	public void setLatestTweet(String latestTweet) {
+		this.latestTweet = latestTweet;
 	}
 	
 	

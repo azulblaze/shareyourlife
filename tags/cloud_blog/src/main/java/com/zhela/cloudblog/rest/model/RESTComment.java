@@ -5,16 +5,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="comment")
 public class RESTComment {
 
-	private RESTTweet tweet;
+	private String tweetId;
+	private String replyUserId;
+	private String replyUserName;
 	private RESTUser createUser;
 	private java.util.Date createDate;
 	private String source;
 	private String content;
-	public RESTTweet getTweet() {
-		return tweet;
+	private String id;
+	private RESTCoordinate coordinate;
+	
+	public String getTweetId() {
+		return tweetId;
 	}
-	public void setTweet(RESTTweet tweet) {
-		this.tweet = tweet;
+	public void setTweetId(String tweetId) {
+		this.tweetId = tweetId;
+	}
+	public String getReplyUserId() {
+		return replyUserId;
+	}
+	public void setReplyUserId(String replyUserId) {
+		this.replyUserId = replyUserId;
+	}
+	public String getReplyUserName() {
+		return replyUserName;
+	}
+	public void setReplyUserName(String replyUserName) {
+		this.replyUserName = replyUserName;
 	}
 	public RESTUser getCreateUser() {
 		return createUser;
@@ -39,6 +56,18 @@ public class RESTComment {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public RESTCoordinate getCoordinate() {
+		return coordinate;
+	}
+	public void setCoordinate(RESTCoordinate coordinate) {
+		this.coordinate = coordinate;
 	}
 	
 	
