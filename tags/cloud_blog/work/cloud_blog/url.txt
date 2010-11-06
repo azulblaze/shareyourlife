@@ -1,0 +1,13 @@
+/auth/unauth
+/auth/unlogin
+
+System.out.println("filter:"+request.getContextPath());
+		System.out.println("filter:"+request.getPathInfo());
+		System.out.println("filter:"+request.getRequestURI());
+		System.out.println("filter:"+request.getServletPath());
+
+
+filter:/cloudblog
+filter:/auth/8ca4e82e189afbd.json
+filter:/cloudblog/api/auth/8ca4e82e189afbd.json
+filter:/api
