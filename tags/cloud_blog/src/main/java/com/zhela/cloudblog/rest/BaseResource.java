@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.commons.lang.StringUtils;
 
 import com.zhela.cloudblog.model.users.ProviderUser;
+import com.zhela.cloudblog.model.users.ProviderUserKey;
 import com.zhela.cloudblog.rest.auth.AuthResource.DeviceStatus;
 import com.zhela.cloudblog.rest.model.RESTInternalUser;
 import com.zhela.cloudblog.rest.model.RESTResponse;
@@ -21,7 +22,7 @@ public class BaseResource {
 	public static java.util.List<String> loginURLs = new java.util.ArrayList<String>();
 	static{
 		authURLs.add("/auth");
-		loginURLs.add("/user_account");
+		loginURLs.add("/user");
 	}
 	protected final static Response RESPONSE_UNAUTHORIZED = Response.status(Status.UNAUTHORIZED)
 	.entity(new RESTResponse(Status.UNAUTHORIZED,"Not Allowed"))
@@ -80,6 +81,29 @@ public class BaseResource {
 			return true;
 		}
 		return false;
+	}
+	
+	protected RESTInternalUser getUser(){
+		return (RESTInternalUser)getSession(SESSION_USER);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected java.util.List<ProviderUser> getProviderUser(){
+		return (java.util.List<ProviderUser>)getSession(SESSION_PROVIDERACCOUNT);
+	}
+	
+	protected ProviderUser getProviderUserByAccount(long providerId,String providerAccount){
+		ProviderUserKey puk = new ProviderUserKey();
+		RESTInternalUser user = getUser();
+		puk.setAccount(user.getAccount());
+		puk.setProviderAccount(providerAccount);
+		puk.setProviderId(providerId);
+		java.util.List<ProviderUser> pus = getProviderUser();
+		int index = pus.indexOf(puk);
+		if(index>=0){
+			return pus.get(index);
+		}
+		return null;
 	}
 	
 	protected Response genOK(Object obj){

@@ -1,0 +1,58 @@
+﻿bean:
+
+1. tweet
+3. user
+4. provider
+5. comment
+6. message
+
+
+fdbcad19eb31e8167be26108d6b94004
+2511fd402388db7ec2d34076c1bce0f7
+
+[Count{ id=2650016868, comments=7, rt=20, dm=0, mentions=0, followers=0}]
+
+
+"id":767661487,"comments":0,"rt":0},{"id":862204807,"comments":1,"rt":0},{"id":835662929,"comments":0,"rt":0},{"id":668697205,"comments":1,"rt":1},{"id":2025012459,"comments":0,"rt":0},{"id":1832277671,"comments":0,"rt":0},{"id":3287109015,"comments":0,"rt":0},{"id":1888403310,"comments":0,"rt":0},{"id":882186134,"comments":0,"rt":0},{"id":2896196895,"comments":0,"rt":0},{"id":774405384,"comments":0,"rt":0},{"id":668746454,"comments":0,"rt":0},{"id":2520505377,"comments":0,"rt":0},{"id":664357259,"comments":1,"rt":0},{"id":896339820,"comments":0,"rt":0},{"id":978067154,"comments":0,"rt":0},{"id":855705918,"comments":0,"rt":1},{"id":808981448,"comments":1,"rt":0}]
+
+
+
+
+twitter:
+
+boolean deleteTweet(String id,ProviderUser userconfig) throws Exception;
+RESTTweet publishTweet(String text, ProviderUser userconfig, java.io.File file) throws Exception;
+RESTTweet publishTweet(String text, ProviderUser userconfig, Double latitude, Double longitude,
+			Long replyTweetId) throws Exception;
+
+
+auth:
+java.util.Map<String,String> selectTweetAccount(long provider_id,String username,String password) throws Exception;
+
+
+
+user:
+boolean followUser(String id, boolean follow,ProviderUser userconfig) throws Exception;
+RESTUserList getFollows(String id, long position, int size, ProviderUser userconfig) throws Exception;
+RESTUserList getFirends(String id, long position, int size,ProviderUser userconfig) throws Exception;
+
+
+
+message:
+boolean delMessage(String id,ProviderUser userconfig) throws Exception;
+RESTMessage sendMessage(String userId, String text,ProviderUser userconfig) throws Exception;
+RESTMessageList getMessageOutbox(long position, int size,ProviderUser userconfig) throws Exception;
+RESTMessageList getMessageInbox(long position, int size, ProviderUser userconfig) throws Exception;
+RESTTweetList getMentions(long position, int direction, int size,
+			ProviderUser userconfig)
+			throws Exception;
+boolean resetCounts(String type,ProviderUser userconfig) throws Exception ;
+RESTCount getUnread(ProviderUser userconfig)throws Exception;
+
+
+comment:
+boolean deleteTweetComment(String commentId, ProviderUser userconfig) throws Exception;
+RESTComment commentTweet(String id, String commentId, String text,
+			ProviderUser userconfig)
+			throws Exception;
+RESTCommentList getTweetComment(String id, ProviderUser userconfig) throws Exception;
