@@ -18,38 +18,6 @@ fdbcad19eb31e8167be26108d6b94004
 
 
 
-twitter:
-
-boolean deleteTweet(String id,ProviderUser userconfig) throws Exception;
-RESTTweet publishTweet(String text, ProviderUser userconfig, java.io.File file) throws Exception;
-RESTTweet publishTweet(String text, ProviderUser userconfig, Double latitude, Double longitude,
-			Long replyTweetId) throws Exception;
-
-
-auth:
-java.util.Map<String,String> selectTweetAccount(long provider_id,String username,String password) throws Exception;
-
-
-
-user:
-boolean followUser(String id, boolean follow,ProviderUser userconfig) throws Exception;
-RESTUserList getFollows(String id, long position, int size, ProviderUser userconfig) throws Exception;
-RESTUserList getFirends(String id, long position, int size,ProviderUser userconfig) throws Exception;
-
-
-
-message:
-boolean delMessage(String id,ProviderUser userconfig) throws Exception;
-RESTMessage sendMessage(String userId, String text,ProviderUser userconfig) throws Exception;
-RESTMessageList getMessageOutbox(long position, int size,ProviderUser userconfig) throws Exception;
-RESTMessageList getMessageInbox(long position, int size, ProviderUser userconfig) throws Exception;
-RESTTweetList getMentions(long position, int direction, int size,
-			ProviderUser userconfig)
-			throws Exception;
-boolean resetCounts(String type,ProviderUser userconfig) throws Exception ;
-RESTCount getUnread(ProviderUser userconfig)throws Exception;
-
-
 comment:
 boolean deleteTweetComment(String commentId, ProviderUser userconfig) throws Exception;
 RESTComment commentTweet(String id, String commentId, String text,
