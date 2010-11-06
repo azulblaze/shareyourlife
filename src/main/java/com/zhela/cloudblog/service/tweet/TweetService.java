@@ -97,23 +97,21 @@ public interface TweetService {
 
 	/**
 	 * 
-	 * @param id: user ID
 	 * @param position: cursor
 	 * @param size: the page size
 	 * @return RESTUserList
 	 * @throws Exception
 	 */
-	RESTUserList getFollows(String id, long position, int size, ProviderUser userconfig) throws Exception;
+	RESTUserList getFollows(long position, int size, ProviderUser userconfig) throws Exception;
 
 	/**
-	 * 
-	 * @param id: user ID
+	 *  
 	 * @param position: cursor
 	 * @param size: the page size
 	 * @return RESTUserList
 	 * @throws Exception
 	 */
-	RESTUserList getFirends(String id, long position, int size,ProviderUser userconfig) throws Exception;
+	RESTUserList getFirends(long position, int size,ProviderUser userconfig) throws Exception;
 
 	/**
 	 * 

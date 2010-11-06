@@ -11,7 +11,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/cloudblog?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
-		<property name="password" value="654321" />
+		<property name="password" value="123" />
 	</bean>
 
 	<bean id="sqlMapClient" name="sqlMapClient"
