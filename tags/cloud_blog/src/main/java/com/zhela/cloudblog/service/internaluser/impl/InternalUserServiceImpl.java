@@ -91,6 +91,9 @@ public class InternalUserServiceImpl implements InternalUserService {
 			usersDAO.updateByPrimaryKeySelective(_user);
 			return pu;
 		}else{
+			if(password==null){
+				return null;
+			}
 			java.util.Map<String,String> result = tweetService.selectTweetAccount(providerId,username,password);
 			return insertProviderUser(providerId,account,
 					providerAccount,status,result.get("token"),result.get("tokenSecret"),
@@ -162,13 +165,13 @@ public class InternalUserServiceImpl implements InternalUserService {
 	}
 
 	@Override
-	public void delProviderUser(long providerId, String account,
+	public int delProviderUser(long providerId, String account,
 			String providerAccount) throws Exception {
 		ProviderUserKey puk = new ProviderUserKey();
 		puk.setAccount(account);
 		puk.setProviderAccount(providerAccount);
 		puk.setProviderId(providerId);
-		providerUserDAO.deleteByPrimaryKey(puk);
+		return providerUserDAO.deleteByPrimaryKey(puk);
 	}
 	
 	

@@ -426,19 +426,17 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 	}
 
 	private Paging genPaging(long position,int direction,int size){
-		if(position<=0){
-			 return null;
-		}else{
-			Paging paging = new Paging();
+		Paging paging = new Paging();
+		if(position>=0){
 			if(direction==1){
 				paging.setSinceId(position);
 			}
 			if(direction==-1){
 				paging.setMaxId(position);
 			}
-			paging.setCount(size);
-			return paging;
 		}
+		paging.setCount(size);
+		return paging;
 	}
 	private RESTTweet getForwardTweet(WeiboService weibo,java.util.List<Count> counts,String id, String token, String tokenSecret,
 			String tokenMore) throws Exception {

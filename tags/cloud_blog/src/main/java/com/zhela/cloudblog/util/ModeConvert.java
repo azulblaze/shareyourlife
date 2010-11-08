@@ -47,7 +47,7 @@ public class ModeConvert {
 	public static RESTProviderAccount ProviderUserToREST(ProviderUser puser){
 		RESTProviderAccount restpa = new RESTProviderAccount();
 		restpa.setProviderAccount(puser.getProviderAccount());
-		restpa.setProviderId(restpa.getProviderId());
+		restpa.setProviderId(puser.getProviderId());
 		restpa.setStatus(puser.getStatus());
 		restpa.setToken(puser.getToken());
 		restpa.setTokenMore(puser.getTokenMore());
