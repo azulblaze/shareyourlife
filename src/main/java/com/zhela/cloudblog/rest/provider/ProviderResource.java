@@ -31,6 +31,10 @@ import com.zhela.cloudblog.util.ModeConvert;
 @Path("/providers")
 public class ProviderResource extends BaseResource{
 
+	/**
+	 * 
+	 * @return all the providers
+	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/")
@@ -50,9 +54,13 @@ public class ProviderResource extends BaseResource{
 			@PathParam("providerAccount") String providerAccount){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
-			internalUserService.delProviderUser(providerId, restiu.getAccount(), providerAccount);
-			saveSession(SESSION_PROVIDERACCOUNT,internalUserService.getProviderAccount(restiu.getAccount()));
-			return genOK(new RESTResponse(Status.OK,"Success"));
+			int size = internalUserService.delProviderUser(providerId, restiu.getAccount(), providerAccount);
+			if(size>0){
+				saveSession(SESSION_PROVIDERACCOUNT,internalUserService.getProviderAccount(restiu.getAccount()));
+				return genOK(new RESTResponse(Status.OK,"Success"));
+			}else{
+				return genOK(new RESTResponse(Status.NOT_FOUND,"Fail"));
+			}
 		}catch(Exception e){
 			return RESPONSE_SERVICE_UNAVAILABLE;
 		}
@@ -66,9 +74,13 @@ public class ProviderResource extends BaseResource{
 			@PathParam("status") int status){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
-			internalUserService.updateProviderUser(providerId, restiu.getAccount(), providerAccount, status, null, null);
-			saveSession(SESSION_PROVIDERACCOUNT,internalUserService.getProviderAccount(restiu.getAccount()));
-			return genOK(new RESTResponse(Status.OK,"Success"));
+			if(internalUserService.updateProviderUser(providerId, restiu.getAccount(), providerAccount, status, null, null)!=null){
+				saveSession(SESSION_PROVIDERACCOUNT,internalUserService.getProviderAccount(restiu.getAccount()));
+				return genOK(new RESTResponse(Status.OK,"Success"));
+			}else{
+				return genOK(new RESTResponse(Status.NOT_FOUND,"Fail"));
+			}
+			
 		}catch(Exception e){
 			return RESPONSE_SERVICE_UNAVAILABLE;
 		}
@@ -111,6 +123,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.selectHomeTweetByProvider(position, direction, size, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -131,6 +144,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.selectUserTweetByProvider(userId,position, direction, size, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -148,6 +162,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.selectTweet(tweetId, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -170,6 +185,7 @@ public class ProviderResource extends BaseResource{
 				return genOK(new RESTResponse(Status.CONFLICT,"fail"));
 			}			
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -209,6 +225,7 @@ public class ProviderResource extends BaseResource{
 				return genOK(tweetService.publishTweet(text, pu, latitude, longitude, replyTweetId));
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -228,6 +245,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getFollows(position, size, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -246,6 +264,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getFirends(position, size, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -264,6 +283,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.followUser(userId, type, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -287,6 +307,7 @@ public class ProviderResource extends BaseResource{
 				return genOK(new RESTResponse(Status.CONFLICT,"fail"));
 			}			
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -305,6 +326,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getMessageInbox(position, size, pu));		
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -323,6 +345,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getMessageOutbox(position, size, pu));		
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -338,6 +361,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.sendMessage(userId, messageText, pu));		
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -357,6 +381,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getMentions(position, direction, size, pu));		
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -373,6 +398,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getUnread(pu));		
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -390,6 +416,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.resetCounts(type, pu));		
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -414,6 +441,7 @@ public class ProviderResource extends BaseResource{
 				return genOK(new RESTResponse(Status.CONFLICT,"fail"));
 			}	
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -431,6 +459,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getTweetComment(tweetId, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
@@ -450,6 +479,7 @@ public class ProviderResource extends BaseResource{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.commentTweet(tweetId, commentId, text, pu));
 		}catch(Exception e){
+			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}

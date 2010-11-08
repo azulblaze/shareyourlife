@@ -22,7 +22,7 @@ public class BaseResource {
 	public static java.util.List<String> loginURLs = new java.util.ArrayList<String>();
 	static{
 		authURLs.add("/auth");
-		loginURLs.add("/user");
+		loginURLs.add("/users");
 	}
 	protected final static Response RESPONSE_UNAUTHORIZED = Response.status(Status.UNAUTHORIZED)
 	.entity(new RESTResponse(Status.UNAUTHORIZED,"Not Allowed"))

@@ -3,7 +3,6 @@ package com.zhela.cloudblog.rest.user;
 import java.io.InputStream;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,7 +21,7 @@ import com.zhela.cloudblog.rest.model.RESTResponse;
 import com.zhela.cloudblog.service.internaluser.InternalUserService;
 import com.zhela.cloudblog.util.CommonMethod;
 import com.zhela.cloudblog.util.ModeConvert;
-@Path("/user")
+@Path("/users")
 public class UserResource extends BaseResource {
 
 	@GET
@@ -65,7 +64,7 @@ public class UserResource extends BaseResource {
 	
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Path("/privders")
+	@Path("/providers")
 	public Response getProviderUsers(){
 		if(!isLogin()){
 			return RESPONSE_NEEDLOGIN;
@@ -107,24 +106,6 @@ public class UserResource extends BaseResource {
 		}
 		return RESPONSE_SERVICE_UNAVAILABLE;
 	}
-	@DELETE
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Path("/providerId/providerAccount")
-	public Response delteProviderUser(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount){
-		if(!isLogin()){
-			return RESPONSE_NEEDLOGIN;
-		}
-		try{
-			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
-			internalUserService.delProviderUser(providerId, restiu.getAccount(), providerAccount);
-			return genOK(new RESTResponse(Status.OK,"Success"));
-		}catch(Exception e){
-			return RESPONSE_SERVICE_UNAVAILABLE;
-		}
-		
-	}
-	
 	
 	private InternalUserService internalUserService;
 	public void setInternalUserService(InternalUserService internalUserService) {
