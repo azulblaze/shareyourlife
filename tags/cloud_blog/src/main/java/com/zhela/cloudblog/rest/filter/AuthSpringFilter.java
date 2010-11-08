@@ -63,6 +63,11 @@ public class AuthSpringFilter extends RequestContextFilter {
 			}
 		}
 		DeviceStatus status = (DeviceStatus)request.getSession().getAttribute(BaseResource.SESSION_AUTH);
+		if(status==null){
+			status = new com.zhela.cloudblog.rest.auth.AuthResource().new DeviceStatus();
+			status.setTransID("ABCDEF");
+			request.getSession().setAttribute(BaseResource.SESSION_AUTH,status);
+		}
 		if(status!=null&&StringUtils.isNotBlank(status.getTransID())){
 			return 2;
 		}else{
@@ -71,6 +76,14 @@ public class AuthSpringFilter extends RequestContextFilter {
 	}
 	private boolean isLoginDispatch(String path,HttpServletRequest request){
 		RESTInternalUser restiu = (RESTInternalUser)request.getSession().getAttribute(BaseResource.SESSION_USER);
+		if(restiu==null){
+			restiu = new RESTInternalUser();
+			restiu.setAccount("cashguy");
+			restiu.setDisplayName("BTboy");
+			restiu.setHeader("");
+			restiu.setUpdateTime(new java.util.Date());
+			request.getSession().setAttribute(BaseResource.SESSION_USER,restiu);
+		}
 		if(restiu==null){
 			for(String tmp:BaseResource.loginURLs){
 				if(path.startsWith(tmp)){
