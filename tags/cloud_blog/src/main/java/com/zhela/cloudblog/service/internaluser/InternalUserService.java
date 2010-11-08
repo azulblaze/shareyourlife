@@ -21,5 +21,5 @@ public interface InternalUserService {
 	
 	public ProviderUser updateProviderUser(long provider_id,String account,String provider_account,Integer status,String username,String password) throws Exception;
 	
-	public void delProviderUser(long provider_id,String account,String provider_account) throws Exception;
+	public int delProviderUser(long provider_id,String account,String provider_account) throws Exception;
 }
