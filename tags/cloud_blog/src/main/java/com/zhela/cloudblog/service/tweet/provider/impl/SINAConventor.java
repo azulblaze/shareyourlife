@@ -41,9 +41,9 @@ public class SINAConventor {
 		tweet.setCreateUser(SINAConventor.UserToREST(status.getUser()));
 		tweet.setSource(status.getSource());
 		tweet.setCorrdinate(CoordinateToREST(status.getLatitude(),status.getLongitude()));
-		RetweetDetails retweet =  status.getRetweetDetails();
+		Status retweet =  status.getRetweetDetails();
 		if(retweet!=null){
-			tweet.setForwardId(retweet.getRetweetId());
+			tweet.setForwardId(retweet.getId());
 		}else{
 			tweet.setForwardId(-1);
 		}

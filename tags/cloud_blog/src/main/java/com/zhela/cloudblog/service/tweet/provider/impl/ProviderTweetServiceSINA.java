@@ -56,14 +56,12 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		RESTTweet tweet = SINAConventor.StatusToREST(status);
 		
 		RESTTweet forward = null;
-		if(tweet.getForwardId()>0){
+		if(status.getRetweetDetails()!=null){
 			if(counts==null){
-				counts = getCount(weibo,id+","+tweet.getForwardId());
+				counts = getCount(weibo,id+","+status.getRetweetDetails().getId());
 			}
-			forward = getForwardTweet(weibo,counts,""+tweet.getForwardId(),token,tokenSecret,tokenMore);
-			if(forward!=null){
-				tweet.setForwardTweet(forward);
-			}
+			forward = getForwardTweet(status.getRetweetDetails(),counts);
+			tweet.setForwardTweet(forward);
 		}
 		if(counts==null){
 			counts = getCount(weibo,id);
@@ -90,8 +88,8 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		java.util.List<Count> counts = getCount(weibo,ids);
 		for(Status _status:status){
 			tmp = SINAConventor.StatusToREST(_status);
-			if(tmp.getForwardId()>0){
-				tmp.setForwardTweet(getForwardTweet(weibo,counts,""+tmp.getForwardId(),token,tokenSecret,tokenMore));
+			if(_status.getRetweetDetails()!=null){
+				tmp.setForwardTweet(getForwardTweet(_status.getRetweetDetails(),counts));
 			}
 			list.add(tmp);
 		}
@@ -119,8 +117,8 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		for(Status _status:status){
 			tmp = SINAConventor.StatusToREST(_status);
 			System.out.println(_status);
-			if(tmp.getForwardId()>0){
-				tmp.setForwardTweet(getForwardTweet(weibo,counts,""+tmp.getForwardId(),token,tokenSecret,tokenMore));
+			if(_status.getRetweetDetails()!=null){
+				tmp.setForwardTweet(getForwardTweet(_status.getRetweetDetails(),counts));
 			}
 			list.add(tmp);
 		}
@@ -149,8 +147,8 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		java.util.List<Count> counts = getCount(weibo,ids);
 		for(Status _status:status){
 			tmp = SINAConventor.StatusToREST(_status);
-			if(tmp.getForwardId()>0){
-				tmp.setForwardTweet(getForwardTweet(weibo,counts,""+tmp.getForwardId(),token,tokenSecret,tokenMore));
+			if(_status.getRetweetDetails()!=null){
+				tmp.setForwardTweet(getForwardTweet(_status.getRetweetDetails(),counts));
 			}
 			list.add(tmp);
 		}
@@ -403,7 +401,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			for(Status _status:status){
 				tmp = tmp+","+_status.getId();
 				if(_status.getRetweetDetails()!=null){
-					tmp = tmp+","+_status.getRetweetDetails().getRetweetId();
+					tmp = tmp+","+_status.getRetweetDetails().getId();
 				}
 			}
 			if(tmp.length()>0){
@@ -416,7 +414,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 	private void setCount(java.util.List<Count> counts,RESTTweet tweet){
 		if(tweet!=null&&counts!=null){
 			for(Count _count:counts){
-				if(_count.equals(tweet.getId())){
+				if(_count.get.equals(tweet.getId())){
 					tweet.setCommentCount(_count.getComments());
 					tweet.setForwardCount(_count.getRt());
 					return;
@@ -438,9 +436,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		paging.setCount(size);
 		return paging;
 	}
-	private RESTTweet getForwardTweet(WeiboService weibo,java.util.List<Count> counts,String id, String token, String tokenSecret,
-			String tokenMore) throws Exception {
-		Status status = weibo.showStatus(Long.parseLong(id));
+	private RESTTweet getForwardTweet(Status status,java.util.List<Count> counts) throws Exception {
 		RESTTweet tweet = SINAConventor.StatusToREST(status);
 		setCount(counts,tweet);
 		return tweet;
