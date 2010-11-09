@@ -246,7 +246,7 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
      * @throws WeiboException when Weibo service or network is unavailable
      */
 
-    private Response get(String url, boolean authenticate) throws WeiboException {
+    public Response get(String url, boolean authenticate) throws WeiboException {
         return get(url, null, authenticate);
     }
 
@@ -333,6 +333,7 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
                     pagingParams.add(new PostParameter("count", String.valueOf(paging.getCount())));
                 }
             }
+            //pagingParams.add(new PostParameter("cursor","1653000417"));
             PostParameter[] newparams = null;
             PostParameter[] arrayPagingParams = pagingParams.toArray(new PostParameter[pagingParams.size()]);
             if (null != params) {
@@ -1588,6 +1589,21 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
     }
 
     /**
+     * 
+     * @param id
+     * @param cursor where to start, the first is 0
+     * @param count page size
+     * @return
+     * @throws WeiboException
+     */
+    public UserWapper getFriendsStatuses(String id,String cursor,int count) throws WeiboException {
+        /*return User.constructUsers(get(getBaseURL() + "statuses/friends/" + id + ".xml"
+                , false), this);*/
+    	return User.constructWapperUsers(get(getBaseURL() + "statuses/friends/" + id + ".json?cursor="+cursor+"&count="+count
+                , true));
+    }
+    
+    /**
      * Returns the user's friends, each with current status inline.
      * <br>This method calls http://api.t.sina.com.cn/statuses/friends.format
      *
@@ -1601,7 +1617,7 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
         /*return User.constructUsers(get(getBaseURL() + "statuses/friends/" + id + ".xml"
                 , false), this);*/
     	return User.constructUsers(get(getBaseURL() + "statuses/friends/" + id + ".json"
-                , false));
+                , true));
     }
 
     /**
@@ -1755,6 +1771,17 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
     public List<User> getFollowersStatuses(String id) throws WeiboException {
 //        return User.constructUsers(get(getBaseURL() + "statuses/followers/" + id + ".xml", true), this);
     	 return User.constructUsers(get(getBaseURL() + "statuses/followers/" + id + ".json", true));
+    }
+    /**
+     * 
+     * @param id
+     * @param cursor where to start, the first is 0
+     * @param count the page size
+     * @return
+     * @throws WeiboException
+     */
+    public UserWapper getFollowersStatuses(String id,String cursor,int count) throws WeiboException {
+  	 return User.constructWapperUsers(get(getBaseURL() + "statuses/followers/" + id + ".json?cursor="+cursor+"&count="+count, true));
     }
 
     /**
