@@ -46,7 +46,12 @@ public class ProviderResource extends BaseResource{
 			return RESPONSE_SERVICE_UNAVAILABLE;
 		}
 	}
-	
+	/**
+	 * delete the provider account
+	 * @param providerId
+	 * @param providerAccount
+	 * @return
+	 */
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
 	@Path("/{providerId}/{providerAccount}")
@@ -66,6 +71,13 @@ public class ProviderResource extends BaseResource{
 		}
 	}
 	
+	/**
+	 * change the provider account status
+	 * @param providerId
+	 * @param providerAccount
+	 * @param status
+	 * @return
+	 */
 	@PUT
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
 	@Path("/{providerId}/{providerAccount}/{status}")
@@ -365,10 +377,10 @@ public class ProviderResource extends BaseResource{
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
-	//mentions start, /{providerId}/{providerAccount}/mentions
+	//mentions start, /{providerId}/{providerAccount}/tweets/mentions
 	@GET
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/mentions")
+	@Path("/{providerId}/{providerAccount}/tweets/mentions")
 	/**
 	 * get mentions
 	 */
@@ -385,10 +397,10 @@ public class ProviderResource extends BaseResource{
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
-	//counts start,/{providerId}/{providerAccount}/counts
+	//counts start,/{providerId}/{providerAccount}/tweets/counts
 	@GET
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/counts")
+	@Path("/{providerId}/{providerAccount}/tweets/counts")
 	/**
 	 * get counts
 	 */
@@ -405,13 +417,12 @@ public class ProviderResource extends BaseResource{
 	
 	@PUT
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/counts/{type}")
 	/**
 	 * get counts
 	 */
 	public Response updateCounts(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
-			@PathParam("type") String type){
+			@QueryParam("type") String type){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.resetCounts(type, pu));		
@@ -422,10 +433,10 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	
-	//comment start,/{providerId}/{providerAccount}/tweets/{tweetId}/comments/
+	//comment start,/{providerId}/{providerAccount}/tweets/comments/
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/{tweetId}/comments/{commentId}")
+	@Path("/{providerId}/{providerAccount}/tweets/comments/{commentId}")
 	/**
 	 * get mentions
 	 */
@@ -448,13 +459,13 @@ public class ProviderResource extends BaseResource{
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/{tweetId}/comments")
+	@Path("/{providerId}/{providerAccount}/tweets/comments")
 	/**
 	 * get comment by tweet
 	 */
 	public Response getComment(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
-			@PathParam("tweetId") String tweetId){
+			@QueryParam("tweetId") String tweetId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getTweetComment(tweetId, pu));
@@ -466,15 +477,15 @@ public class ProviderResource extends BaseResource{
 	
 	@POST
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/{tweetId}/comments")
+	@Path("/{providerId}/{providerAccount}/tweets/comments")
 	/**
 	 * post comment
 	 */
 	public Response postComment(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
-			@PathParam("tweetId") String tweetId,
-			@DefaultValue("commentId") String commentId,
-			@DefaultValue("text") String text){
+			@QueryParam("tweetId") String tweetId,
+			@QueryParam("commentId") String commentId,
+			@QueryParam("text") String text){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.commentTweet(tweetId, commentId, text, pu));

@@ -93,6 +93,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			}
 			list.add(tmp);
 		}
+		setCount(counts,list);
 		restlist.setTweets(list);
 		return restlist;
 	}
@@ -116,12 +117,12 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		java.util.List<Count> counts = getCount(weibo,ids);
 		for(Status _status:status){
 			tmp = SINAConventor.StatusToREST(_status);
-			System.out.println(_status);
 			if(_status.getRetweetDetails()!=null){
 				tmp.setForwardTweet(getForwardTweet(_status.getRetweetDetails(),counts));
 			}
 			list.add(tmp);
 		}
+		setCount(counts,list);
 		restlist.setTweets(list);
 		return restlist;
 	}
@@ -136,9 +137,6 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			 status = weibo.getMentions();
 		}else{
 			 status = weibo.getMentions(paging);
-		}
-		for(Status tmp:status){
-			System.out.println(tmp.getId()+"#"+tmp);
 		}
 		RESTTweetList restlist = new RESTTweetList();
 		java.util.List<RESTTweet> list = new java.util.ArrayList<RESTTweet>();
@@ -414,11 +412,20 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 	private void setCount(java.util.List<Count> counts,RESTTweet tweet){
 		if(tweet!=null&&counts!=null){
 			for(Count _count:counts){
-				if(_count.get.equals(tweet.getId())){
+				System.out.println(_count.hashCode()+"="+tweet.getId());
+				if((_count.hashCode()+"").equals(tweet.getId())){
 					tweet.setCommentCount(_count.getComments());
 					tweet.setForwardCount(_count.getRt());
 					return;
 				}
+			}
+		}
+	}
+	
+	private void setCount(java.util.List<Count> counts,java.util.List<RESTTweet> tweets){
+		if(counts!=null&&tweets!=null){
+			for(RESTTweet tweet:tweets){
+				setCount(counts,tweet);
 			}
 		}
 	}
