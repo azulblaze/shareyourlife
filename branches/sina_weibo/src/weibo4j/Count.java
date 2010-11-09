@@ -27,7 +27,9 @@ public class Count implements java.io.Serializable{
 	private long comments;
 	
 	private long rt;
-	
+	/**
+	 * direct message
+	 */
 	private long dm;
 	
 	private long mentions;

@@ -59,7 +59,7 @@ public class Status extends WeiboResponse implements java.io.Serializable {
     private String thumbnail_pic;
     private String bmiddle_pic;
     private String original_pic;
-    private RetweetDetails retweetDetails;
+    private Status retweetDetails;
     private static final long serialVersionUID = 1608000492860584608L;
 
     /*package*/Status(Response res, Weibo weibo) throws WeiboException {
@@ -92,8 +92,8 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 			if(!json.isNull("user"))
 				user = new User(json.getJSONObject("user"));
 			inReplyToScreenName=json.getString("inReplyToScreenName");
-			if(!json.isNull("retweetDetails")){
-				retweetDetails = new RetweetDetails(json.getJSONObject("retweetDetails"));
+			if(!json.isNull("retweeted_status")){
+				retweetDetails = new Status(json.getJSONObject("retweeted_status"));
 			}
 		} catch (JSONException je) {
 			throw new WeiboException(je.getMessage() + ":" + json.toString(), je);
@@ -118,6 +118,9 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 		bmiddle_pic = json.getString("bmiddle_pic");
 		original_pic = json.getString("original_pic");
         user = new User(json.getJSONObject("user"));
+        if(!json.isNull("retweeted_status")){
+			retweetDetails = new Status(json.getJSONObject("retweeted_status"));
+		}
     }
     public Status(String str) throws WeiboException, JSONException {
         // StatusStream uses this constructor
@@ -135,6 +138,9 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 		bmiddle_pic = json.getString("bmiddle_pic");
 		original_pic = json.getString("original_pic");
         user = new User(json.getJSONObject("user"));
+        if(!json.isNull("retweeted_status")){
+			retweetDetails = new Status(json.getJSONObject("retweeted_status"));
+		}
     }
 
     private void init(Response res, Element elem, Weibo weibo) throws
@@ -162,7 +168,7 @@ public class Status extends WeiboResponse implements java.io.Serializable {
         }
         NodeList retweetDetailsNode = elem.getElementsByTagName("retweet_details");
         if(1 == retweetDetailsNode.getLength()){
-            retweetDetails = new RetweetDetails(res,(Element)retweetDetailsNode.item(0),weibo);
+            retweetDetails = new Status(res,(Element)retweetDetailsNode.item(0),weibo);
         }
     }
 
@@ -309,7 +315,7 @@ public class Status extends WeiboResponse implements java.io.Serializable {
      *
      * @since Weibo4J 2.0.10
      */
-    public RetweetDetails getRetweetDetails() {
+    public Status getRetweetDetails() {
         return retweetDetails;
     }
 
