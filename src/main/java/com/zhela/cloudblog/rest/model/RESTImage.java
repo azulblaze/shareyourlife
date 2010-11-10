@@ -1,5 +1,9 @@
 package com.zhela.cloudblog.rest.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+@XmlRootElement(name="image")
+@XmlType(propOrder={"thumb","middle","orignal"})
 public class RESTImage {
 
 	private String thumb;

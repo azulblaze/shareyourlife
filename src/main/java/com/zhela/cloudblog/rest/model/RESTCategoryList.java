@@ -2,8 +2,10 @@ package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="categoryList")
+@XmlType(propOrder={"size","categories"})
 public class RESTCategoryList {
 	private int size;
 	private java.util.List<RESTCategory> categories;

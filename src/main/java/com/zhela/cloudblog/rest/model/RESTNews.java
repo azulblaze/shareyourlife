@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="news")
+@XmlType(propOrder={"id","messages"})
 public class RESTNews {
 
 	private RESTProvider provider;

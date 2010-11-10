@@ -12,6 +12,7 @@ import com.zhela.cloudblog.rest.model.RESTMessage;
 import com.zhela.cloudblog.rest.model.RESTMessageList;
 import com.zhela.cloudblog.rest.model.RESTTweet;
 import com.zhela.cloudblog.rest.model.RESTTweetList;
+import com.zhela.cloudblog.rest.model.RESTUser;
 import com.zhela.cloudblog.rest.model.RESTUserList;
 import com.zhela.cloudblog.service.provider.ProviderService;
 import com.zhela.cloudblog.service.tweet.TweetService;
@@ -26,7 +27,9 @@ public class TweetServiceImpl implements TweetService {
 			throw new Exception("No this provider");
 		}
 		ProviderTweetService service = getProviderTweetService(_provider.getCode());
-		return service.getTweet(null, null, tweetId, userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore());
+		RESTTweet tweet = service.getTweet(null, null, tweetId, userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore());
+		tweet.setComments(service.getTweetComment(null, tweetId, 20, 1,userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore()));
+		return tweet;
 	}
 
 	@Override
@@ -243,6 +246,17 @@ public class TweetServiceImpl implements TweetService {
 		return service.sendMessage(userId, text, userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
 	}
 	
+	@Override
+	public RESTUser selectTweetUser(String userId, ProviderUser userconfig)
+			throws Exception {
+		Providers _provider = providerService.selectProviderByID(userconfig.getProviderId());
+		if(_provider==null){
+			throw new Exception("No this provider");
+		}
+		ProviderTweetService service = getProviderTweetService(_provider.getCode());
+		return service.getTweetUser(userId, userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
+	}
+	
 	
 	
 	
@@ -272,5 +286,6 @@ public class TweetServiceImpl implements TweetService {
 			throw new Exception("cannot support this provider");
 		}
 	}
+
 
 }
