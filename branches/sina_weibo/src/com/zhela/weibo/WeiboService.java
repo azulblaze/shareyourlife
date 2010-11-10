@@ -51,8 +51,8 @@ public class WeiboService {
 	public  List<Status> getMentions(Paging paging) throws Exception{
 		return weibo.getMentions(paging);
 	}
-	public List<Comment> getComments(String weiboId) throws Exception {
-		return weibo.getComments(weiboId);
+	public List<Comment> getComments(String weiboId,int page, int count) throws Exception {
+		return weibo.getComments(weiboId, page, count);
 	}
 	public Status updateStatus(String text, Long replyTweetId, Double latitude, Double longitude) throws Exception{
 		return weibo.updateStatus(text, replyTweetId, latitude, longitude);
@@ -97,7 +97,11 @@ public class WeiboService {
 		return weibo.destroyDirectMessage(msgId);
 	}
 	public User createFriendship(String userId, boolean follow) throws Exception {
-		return weibo.createFriendship(userId, follow);
+		if(follow){
+			return weibo.createFriendship(userId);
+		}else{
+			return weibo.destroyFriendship(userId);
+		}
 	}
 	public RequestToken getOAuthRequestToken() throws Exception {
 		return weibo.getOAuthRequestToken();
@@ -131,5 +135,4 @@ public class WeiboService {
 	public Count getUnread() throws Exception {
 		return weibo.getUnread();
 	}
-	
 }
