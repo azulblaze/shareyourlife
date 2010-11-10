@@ -102,7 +102,7 @@ public interface TweetService {
 	 * @return RESTUserList
 	 * @throws Exception
 	 */
-	RESTUserList getFollows(long position, int size, ProviderUser userconfig) throws Exception;
+	RESTUserList getFollows(String userId,long position, int size, ProviderUser userconfig) throws Exception;
 
 	/**
 	 *  
@@ -111,7 +111,7 @@ public interface TweetService {
 	 * @return RESTUserList
 	 * @throws Exception
 	 */
-	RESTUserList getFirends(long position, int size,ProviderUser userconfig) throws Exception;
+	RESTUserList getFirends(String userId,long position, int size,ProviderUser userconfig) throws Exception;
 
 	/**
 	 * 
@@ -168,7 +168,7 @@ public interface TweetService {
 	 * @return
 	 * @throws Exception
 	 */
-	RESTCommentList getTweetComment(String id, ProviderUser userconfig) throws Exception;
+	RESTCommentList getTweetComment(String id, int size, int position,ProviderUser userconfig) throws Exception;
 
 	/**
 	 * get '@username

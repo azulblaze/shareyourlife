@@ -17,7 +17,7 @@ public interface InternalUserService {
 	
 	public java.util.List<ProviderUser> getProviderAccount(String account) throws Exception;
 	
-	public ProviderUser insertProviderUser(long provider_id,String account,String provider_account,int status,String token,String token_secret,String token_more) throws Exception;
+	public ProviderUser insertProviderUser(long provider_id,String account,String provider_account,String provider_userId,int status,String token,String token_secret,String token_more) throws Exception;
 	
 	public ProviderUser updateProviderUser(long provider_id,String account,String provider_account,Integer status,String username,String password) throws Exception;
 	

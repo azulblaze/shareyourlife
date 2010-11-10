@@ -185,7 +185,7 @@ public interface ProviderTweetService {
 	 * @return
 	 * @throws Exception
 	 */
-	RESTCommentList getTweetComment(WeiboService _weibo, String id, String token,
+	RESTCommentList getTweetComment(WeiboService _weibo, String id,int size, int position, String token,
 			String tokenSecret, String tokenMore) throws Exception;
 
 	/**
