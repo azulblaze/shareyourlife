@@ -26,7 +26,7 @@ public class TweetServiceImpl implements TweetService {
 			throw new Exception("No this provider");
 		}
 		ProviderTweetService service = getProviderTweetService(_provider.getCode());
-		return service.getTweet(null, null, userconfig.getProviderId()+"", userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore());
+		return service.getTweet(null, null, tweetId, userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore());
 	}
 
 	@Override
@@ -117,25 +117,31 @@ public class TweetServiceImpl implements TweetService {
 	}
 
 	@Override
-	public RESTUserList getFirends(long position, int size,
+	public RESTUserList getFirends(String userId,long position, int size,
 			ProviderUser userconfig) throws Exception {
 		Providers _provider = providerService.selectProviderByID(userconfig.getProviderId());
 		if(_provider==null){
 			throw new Exception("No this provider");
 		}
+		if(userId==null){
+			userId = userconfig.getProviderUserid();
+		}
 		ProviderTweetService service = getProviderTweetService(_provider.getCode());
-		return service.getFirends(userconfig.getProviderAccount(), position, size, userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
+		return service.getFirends(userId, position, size, userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
 	}
 
 	@Override
-	public RESTUserList getFollows(long position, int size,
+	public RESTUserList getFollows(String userId,long position, int size,
 			ProviderUser userconfig) throws Exception {
 		Providers _provider = providerService.selectProviderByID(userconfig.getProviderId());
 		if(_provider==null){
 			throw new Exception("No this provider");
 		}
+		if(userId==null){
+			userId = userconfig.getProviderUserid();
+		}
 		ProviderTweetService service = getProviderTweetService(_provider.getCode());
-		return service.getFollows(userconfig.getProviderAccount(), position, size,userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
+		return service.getFollows(userId, position, size,userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
 	}
 
 	@Override
@@ -172,14 +178,14 @@ public class TweetServiceImpl implements TweetService {
 	}
 
 	@Override
-	public RESTCommentList getTweetComment(String id,
+	public RESTCommentList getTweetComment(String id,int size, int position,
 			ProviderUser userconfig) throws Exception {
 		Providers _provider = providerService.selectProviderByID(userconfig.getProviderId());
 		if(_provider==null){
 			throw new Exception("No this provider");
 		}
 		ProviderTweetService service = getProviderTweetService(_provider.getCode());
-		return service.getTweetComment(null, id, userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
+		return service.getTweetComment(null, id,size,position, userconfig.getToken(),userconfig.getTokenSecret(),userconfig.getTokenMore());
 	}
 
 	@Override

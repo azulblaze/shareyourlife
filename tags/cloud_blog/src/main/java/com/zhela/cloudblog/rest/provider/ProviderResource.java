@@ -252,10 +252,11 @@ public class ProviderResource extends BaseResource{
 	public Response getUserFollows(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
-			@DefaultValue("-1") @QueryParam("p") long position){
+			@DefaultValue("-1") @QueryParam("p") long position,
+			@QueryParam("userId") String userId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
-			return genOK(tweetService.getFollows(position, size, pu));
+			return genOK(tweetService.getFollows(userId,position, size, pu));
 		}catch(Exception e){
 			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
@@ -271,10 +272,11 @@ public class ProviderResource extends BaseResource{
 	public Response getUserFriends(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
-			@DefaultValue("-1") @QueryParam("p") long position){
+			@DefaultValue("-1") @QueryParam("p") long position,
+			@QueryParam("userId") String userId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
-			return genOK(tweetService.getFirends(position, size, pu));
+			return genOK(tweetService.getFirends(userId,position, size, pu));
 		}catch(Exception e){
 			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
@@ -283,17 +285,26 @@ public class ProviderResource extends BaseResource{
 	
 	@POST
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/relations/follow/")
+	@Path("/{providerId}/{providerAccount}/relations/followuser")
 	/**
 	 * get user's follow list.
 	 */
 	public Response postUserFollows(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
 			@QueryParam("userId") String userId,
-			@QueryParam("type") Boolean type){
+			@QueryParam("type") int type){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
-			return genOK(tweetService.followUser(userId, type, pu));
+			boolean result = true;
+			if(type<=0){
+				result = false;
+			}
+			result  = tweetService.followUser(userId, result, pu);
+			if(result){
+				return genOK(new RESTResponse(Status.OK,"success"));
+			}else{
+				return genOK(new RESTResponse(Status.CONFLICT,"fail"));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
@@ -364,11 +375,11 @@ public class ProviderResource extends BaseResource{
 	
 	@POST
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/messages/{userId}/{messageText}")
+	@Path("/{providerId}/{providerAccount}/messages")
 	public Response postMessage(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
-			@PathParam("userId") String userId,
-			@PathParam("messageText") String messageText){
+			@QueryParam("userId") String userId,
+			@QueryParam("messageText") String messageText){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.sendMessage(userId, messageText, pu));		
@@ -388,7 +399,7 @@ public class ProviderResource extends BaseResource{
 			@PathParam("providerAccount") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position,
-			@DefaultValue("1") @QueryParam("p") int direction){
+			@DefaultValue("1") @QueryParam("d") int direction){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getMentions(position, direction, size, pu));		
@@ -417,6 +428,7 @@ public class ProviderResource extends BaseResource{
 	
 	@PUT
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
+	@Path("/{providerId}/{providerAccount}/tweets/counts")
 	/**
 	 * get counts
 	 */
@@ -465,10 +477,12 @@ public class ProviderResource extends BaseResource{
 	 */
 	public Response getComment(@PathParam("providerId") long providerId,
 			@PathParam("providerAccount") String providerAccount,
-			@QueryParam("tweetId") String tweetId){
+			@QueryParam("tweetId") String tweetId,
+			@DefaultValue("20") @QueryParam("s") int size,
+			@DefaultValue("1") @QueryParam("p") int position){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
-			return genOK(tweetService.getTweetComment(tweetId, pu));
+			return genOK(tweetService.getTweetComment(tweetId,size,position, pu));
 		}catch(Exception e){
 			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));

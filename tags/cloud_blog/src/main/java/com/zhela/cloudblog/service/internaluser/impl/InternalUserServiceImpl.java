@@ -19,11 +19,12 @@ import com.zhela.cloudblog.util.CommonMethod;
 public class InternalUserServiceImpl implements InternalUserService {
 
 	@Override
-	public ProviderUser insertProviderUser(long providerId, String account,
-			String providerAccount, int status, String token, String tokenSecret,
+	public ProviderUser insertProviderUser(long providerId,String account,String providerAccount,String provider_userId, 
+			 int status, String token, String tokenSecret,
 			String tokenMore) throws Exception {
 		ProviderUser record = new ProviderUser();
 		record.setAccount(account);
+		record.setProviderUserid(provider_userId);
 		record.setProviderId(providerId);
 		record.setStatus(status);
 		record.setToken(token);
@@ -81,6 +82,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 				pu.setToken(result.get("token"));
 				pu.setTokenSecret(result.get("tokenSecret"));
 				pu.setTokenMore(result.get("tokenMore"));
+				pu.setProviderUserid(result.get("userId"));
 				
 			}
 			providerUserDAO.updateByPrimaryKey(pu);
@@ -96,7 +98,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 			}
 			java.util.Map<String,String> result = tweetService.selectTweetAccount(providerId,username,password);
 			return insertProviderUser(providerId,account,
-					providerAccount,status,result.get("token"),result.get("tokenSecret"),
+					providerAccount,result.get("userId"),status,result.get("token"),result.get("tokenSecret"),
 					result.get("tokenMore"));
 		}
 	}

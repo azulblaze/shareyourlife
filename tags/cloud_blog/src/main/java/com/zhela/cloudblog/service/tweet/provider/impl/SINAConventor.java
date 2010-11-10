@@ -141,6 +141,7 @@ public class SINAConventor {
 			rest.setId(comment.getId()+"");
 			rest.setReplyUserName(comment.getInReplyToScreenName());
 			rest.setReplyUserId(comment.getInReplyToUserId()+"");
+			rest.setCreateUser(UserToREST(comment.getUser()));
 			rest.setTweetId(comment.getInReplyToStatusId()+"");
 			rest.setCoordinate(CoordinateToREST(comment.getLatitude(),comment.getLongitude()));
 			rest.setSource(comment.getSource());
