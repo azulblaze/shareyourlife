@@ -11,6 +11,7 @@ import com.zhela.cloudblog.rest.model.RESTMessage;
 import com.zhela.cloudblog.rest.model.RESTMessageList;
 import com.zhela.cloudblog.rest.model.RESTTweet;
 import com.zhela.cloudblog.rest.model.RESTTweetList;
+import com.zhela.cloudblog.rest.model.RESTUser;
 import com.zhela.cloudblog.rest.model.RESTUserList;
 import com.zhela.cloudblog.rest.model.RESTCount;
 
@@ -279,4 +280,7 @@ public interface ProviderTweetService {
 	 */
 	RESTCount getUnread(String token, String tokenSecret,
 			String tokenMore)throws Exception;
+	
+	RESTUser getTweetUser(String userId,String token, String tokenSecret,
+			String tokenMore) throws Exception;
 }

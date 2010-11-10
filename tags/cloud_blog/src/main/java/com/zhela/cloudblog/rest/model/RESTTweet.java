@@ -1,11 +1,12 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="tweet")
+@XmlType(propOrder={"id","commentCount","forwardCount","commentCount","forwardId","source","content","images","videos","displayDate","createDate","createUser","corrdinate","forwardTweet"})
 public class RESTTweet {
 
-	private RESTProvider provider;
 	private RESTUser createUser;
 	private String id;
 	private java.util.Date createDate;
@@ -21,12 +22,6 @@ public class RESTTweet {
 	private java.util.List<RESTVideo> videos;
 	private RESTCoordinate corrdinate;
 	
-	public RESTProvider getProvider() {
-		return provider;
-	}
-	public void setProvider(RESTProvider provider) {
-		this.provider = provider;
-	}
 	public RESTUser getCreateUser() {
 		return createUser;
 	}
@@ -80,6 +75,9 @@ public class RESTTweet {
 	}
 	public void setComments(RESTCommentList comments) {
 		this.comments = comments;
+		if(comments!=null&&comments.getComments()!=null){
+			this.commentCount = comments.getComments().size();
+		}
 	}
 	public java.util.List<RESTImage> getImages() {
 		return images;

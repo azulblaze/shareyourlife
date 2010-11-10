@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="comment")
+@XmlType(propOrder={"id","tweetId","createDate","source","replyUserId","replyUserName","content","coordinate","createUser"})
 public class RESTComment {
 
 	private String tweetId;

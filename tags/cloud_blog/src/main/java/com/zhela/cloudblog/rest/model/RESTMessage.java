@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="message")
+@XmlType(propOrder={"id","replyId","status","displayDate","sendDate","title","content","sender","receiver"})
 public class RESTMessage {
 
 	private RESTUser sender;

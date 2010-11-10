@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="address")
+@XmlType(propOrder={"country","province","city","address","coordinate"})
 public class RESTAddress {
 	private String country;
 	private String province;

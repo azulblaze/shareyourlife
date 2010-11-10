@@ -28,6 +28,7 @@ import com.zhela.cloudblog.rest.model.RESTMessage;
 import com.zhela.cloudblog.rest.model.RESTMessageList;
 import com.zhela.cloudblog.rest.model.RESTTweet;
 import com.zhela.cloudblog.rest.model.RESTTweetList;
+import com.zhela.cloudblog.rest.model.RESTUser;
 import com.zhela.cloudblog.rest.model.RESTUserList;
 import com.zhela.cloudblog.rest.model.RESTCount;
 import com.zhela.cloudblog.service.tweet.provider.ProviderTweetService;
@@ -254,8 +255,6 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			msgs.add(rest);
 		}
 		list.setMessages(msgs);
-		list.setStart(position);
-		list.setType(RESTMessageList.TYPE_INBOX);
 		return list;
 	}
 	
@@ -276,8 +275,6 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			msgs.add(rest);
 		}
 		list.setMessages(msgs);
-		list.setStart(position);
-		list.setType(RESTMessageList.TYPE_OUTBOX);
 		return list;
 	}
 	
@@ -329,6 +326,25 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		weibo.setOAuthAccessToken(token, tokenSecret);
 		return SINAConventor.CountToREST(weibo.getUnread());
 	}
+	@Override
+	public RESTUser getTweetUser(String userId, String token,
+			String tokenSecret, String tokenMore) throws Exception {
+		WeiboService weibo = new WeiboService();
+		weibo.setOAuthAccessToken(token, tokenSecret);
+		return SINAConventor.UserToREST(weibo.getUserInfo(userId));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	private Map<String, String> authSina(String username,String password) throws Exception{
@@ -421,7 +437,6 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 	private void setCount(java.util.List<Count> counts,RESTTweet tweet){
 		if(tweet!=null&&counts!=null){
 			for(Count _count:counts){
-				System.out.println(_count.hashCode()+"="+tweet.getId());
 				if((_count.getId()+"").equals(tweet.getId())){
 					tweet.setCommentCount(_count.getComments());
 					tweet.setForwardCount(_count.getRt());
@@ -485,4 +500,6 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		//ptss.getTimeline("6520780175", "fdbcad19eb31e8167be26108d6b94004", "2511fd402388db7ec2d34076c1bce0f7", null);
 		
 	}
+
+	
 }

@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="internalUser")
+@XmlRootElement(name="iuser")
+@XmlType(propOrder={"account","displayName","header","email","updateTime"})
 public class RESTInternalUser {
 
 	private String account;

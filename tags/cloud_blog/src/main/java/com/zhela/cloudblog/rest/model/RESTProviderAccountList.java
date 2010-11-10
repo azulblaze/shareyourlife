@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="providerAccounts")
+@XmlType(propOrder={"size","providerAccounts"})
 public class RESTProviderAccountList {
 
 	private java.util.List<RESTProviderAccount> providerAccounts;
