@@ -3354,6 +3354,14 @@ public class Weibo extends WeiboSupport implements java.io.Serializable {
     	return Comment.constructComments(get(getBaseURL() + "statuses/comments.json?id="+id, true));
     }
 
+    public List<Comment> getComments(String id,int page,int pagesize) throws WeiboException {
+    	if(page>=0&&pagesize>=0){
+    		return Comment.constructComments(get(getBaseURL() + "statuses/comments.json?id="+id+"&count="+pagesize+"&page="+page, true));
+    	}else{
+    		return Comment.constructComments(get(getBaseURL() + "statuses/comments.json?id="+id, true));
+    	}
+    }
+    
     /**
      * Returns in chronological order to send and receive the latest n the comments section
      * @return a list of comments objects
