@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="provider")
+@XmlType(propOrder={"id","status","rank","name","code","logo","url","regUrl","description"})
 public class RESTProvider {
 	public static final int STATUS_OK = 1;
 	public static final int STATUS_EXPIRE = 0;
@@ -11,6 +13,7 @@ public class RESTProvider {
 	private String code;
 	private int status;
 	private String url;
+	private String regUrl;
 	private String description;
 	private String logo;
 	private int rank;
@@ -61,6 +64,12 @@ public class RESTProvider {
 	}
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+	public String getRegUrl() {
+		return regUrl;
+	}
+	public void setRegUrl(String regUrl) {
+		this.regUrl = regUrl;
 	}
 	
 	

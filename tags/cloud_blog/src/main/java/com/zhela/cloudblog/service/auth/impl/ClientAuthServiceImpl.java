@@ -83,7 +83,6 @@ public class ClientAuthServiceImpl implements ClientAuthService{
             messageDigest.reset();  
             messageDigest.update(str.getBytes("UTF-8"));  
         } catch (Exception e) {  
-            System.out.println("NoSuchAlgorithmException caught!");  
         }
         byte[] byteArray = messageDigest.digest();  
         StringBuffer md5StrBuff = new StringBuffer();  

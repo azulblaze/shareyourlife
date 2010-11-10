@@ -2,8 +2,10 @@ package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="category")
+@XmlType(propOrder={"id","name","path","rank","description","subCategories"})
 public class RESTCategory {
 	private long id;
 	private int rank;

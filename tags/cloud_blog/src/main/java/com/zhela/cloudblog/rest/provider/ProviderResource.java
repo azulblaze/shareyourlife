@@ -53,10 +53,10 @@ public class ProviderResource extends BaseResource{
 	 * @return
 	 */
 	@DELETE
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}")
 	public Response deleteProviderAccount(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount){
+			@QueryParam("pa") String providerAccount){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
 			int size = internalUserService.delProviderUser(providerId, restiu.getAccount(), providerAccount);
@@ -79,10 +79,10 @@ public class ProviderResource extends BaseResource{
 	 * @return
 	 */
 	@PUT
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/{status}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/{status}")
 	public Response updateProviderAccountStatus(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@PathParam("status") int status){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
@@ -99,14 +99,14 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@POST
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/{providerPassword}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}")
 	/**
 	 * Post provide user to system.
 	 */
 	public Response postProviderAccount(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
-			@PathParam("providerPassword") String providerPassword){
+			@QueryParam("pa") String providerAccount,
+			@QueryParam("providerPassword") String providerPassword){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
 			internalUserService.updateProviderUser(providerId, restiu.getAccount(),providerAccount, ProviderUser.STATUS_OK, providerAccount, providerPassword);
@@ -121,13 +121,13 @@ public class ProviderResource extends BaseResource{
 	
 	//tweet content start, /{providerId}/{providerAccount}/tweets/content
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/content/hometweet")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/content/hometweet")
 	/**
 	 * get Home Twitter.
 	 */
 	public Response getHomeTweet(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position,
 			@DefaultValue("1") @QueryParam("d") int direction){
@@ -141,13 +141,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/content/usertweet/{userId}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/content/usertweet/{userId}")
 	/**
 	 * get Home Twitter.
 	 */
 	public Response getUserTweet(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@PathParam("userId") String userId,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position,
@@ -162,13 +162,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/content/{tweetId}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/content/{tweetId}")
 	/**
 	 * get Twitter by ID.
 	 */
 	public Response getTweet(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@PathParam("tweetId") String tweetId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
@@ -180,13 +180,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@DELETE
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/content/{tweetId}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/content/{tweetId}")
 	/**
 	 * Delete Twitter by ID.
 	 */
 	public Response deleteTweet(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@PathParam("tweetId") String tweetId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
@@ -203,12 +203,12 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@SuppressWarnings("deprecation")
-	@Path("/{providerId}/{providerAccount}/tweets/content")
+	@Path("/{providerId}/tweets/content")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response postTweet(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@FormDataParam("text") String text,
 			@FormDataParam("latitude") Double latitude,
 			@FormDataParam("longitude") Double longitude,
@@ -242,15 +242,15 @@ public class ProviderResource extends BaseResource{
 		}
 	}
 	
-	//User relation start,/{providerId}/{providerAccount}/relations
+	//User relation start,/{providerId}/relations
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/relations/follow")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/relations/follow")
 	/**
 	 * get user's follow list.
 	 */
 	public Response getUserFollows(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position,
 			@QueryParam("userId") String userId){
@@ -264,13 +264,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/relations/friend")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/relations/friend")
 	/**
 	 * get user's friends list.
 	 */
 	public Response getUserFriends(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position,
 			@QueryParam("userId") String userId){
@@ -284,13 +284,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@POST
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/relations/followuser")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/relations/followuser")
 	/**
 	 * get user's follow list.
 	 */
 	public Response postUserFollows(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@QueryParam("userId") String userId,
 			@QueryParam("type") int type){
 		try{
@@ -311,15 +311,15 @@ public class ProviderResource extends BaseResource{
 		}
 	}
 	
-	// Message Start,/{providerId}/{providerAccount}/messages/
+	// Message Start,/{providerId}/messages/
 	@DELETE
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/messages/{msgId}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/messages/{msgId}")
 	/**
 	 * Delete message by ID.
 	 */
 	public Response deleteMessage(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@PathParam("msgId") String msgId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
@@ -336,13 +336,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/messages/inbox")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/messages/inbox")
 	/**
 	 * get inbox
 	 */
 	public Response getMessageInbox(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position){
 		try{
@@ -355,13 +355,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/messages/outbox")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/messages/outbox")
 	/**
 	 * get outbox
 	 */
 	public Response getMessageOutbox(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position){
 		try{
@@ -374,10 +374,10 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@POST
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/messages")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/messages")
 	public Response postMessage(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@QueryParam("userId") String userId,
 			@QueryParam("messageText") String messageText){
 		try{
@@ -388,15 +388,15 @@ public class ProviderResource extends BaseResource{
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
-	//mentions start, /{providerId}/{providerAccount}/tweets/mentions
+	//mentions start, /{providerId}/tweets/mentions
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/mentions")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/mentions")
 	/**
 	 * get mentions
 	 */
 	public Response getMentions(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("-1") @QueryParam("p") long position,
 			@DefaultValue("1") @QueryParam("d") int direction){
@@ -408,15 +408,15 @@ public class ProviderResource extends BaseResource{
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
-	//counts start,/{providerId}/{providerAccount}/tweets/counts
+	//counts start,/{providerId}/tweets/counts
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/counts")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/counts")
 	/**
 	 * get counts
 	 */
 	public Response getCounts(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount){
+			@QueryParam("pa") String providerAccount){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
 			return genOK(tweetService.getUnread(pu));		
@@ -427,13 +427,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@PUT
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/counts")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/counts")
 	/**
 	 * get counts
 	 */
 	public Response updateCounts(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@QueryParam("type") String type){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
@@ -445,15 +445,15 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	
-	//comment start,/{providerId}/{providerAccount}/tweets/comments/
+	//comment start,/{providerId}/tweets/comments/
 	@DELETE
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/comments/{commentId}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/comments/{commentId}")
 	/**
 	 * get mentions
 	 */
 	public Response deleteComment(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@PathParam("commentId") String commentId){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
@@ -470,13 +470,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/comments")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/comments")
 	/**
 	 * get comment by tweet
 	 */
 	public Response getComment(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@QueryParam("tweetId") String tweetId,
 			@DefaultValue("20") @QueryParam("s") int size,
 			@DefaultValue("1") @QueryParam("p") int position){
@@ -490,13 +490,13 @@ public class ProviderResource extends BaseResource{
 	}
 	
 	@POST
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XHTML_XML})
-	@Path("/{providerId}/{providerAccount}/tweets/comments")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/tweets/comments")
 	/**
 	 * post comment
 	 */
 	public Response postComment(@PathParam("providerId") long providerId,
-			@PathParam("providerAccount") String providerAccount,
+			@QueryParam("pa") String providerAccount,
 			@QueryParam("tweetId") String tweetId,
 			@QueryParam("commentId") String commentId,
 			@QueryParam("text") String text){
@@ -509,6 +509,23 @@ public class ProviderResource extends BaseResource{
 		}
 	}
 	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("/{providerId}/users/{userId}")
+	/**
+	 * get Twitter by ID.
+	 */
+	public Response getTweetUser(@PathParam("providerId") long providerId,
+			@QueryParam("pa") String providerAccount,
+			@PathParam("userId") String userId){
+		try{
+			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
+			return genOK(tweetService.selectTweetUser(userId, pu));
+		}catch(Exception e){
+			e.printStackTrace();
+			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
+		}
+	}
 	
 	
 	

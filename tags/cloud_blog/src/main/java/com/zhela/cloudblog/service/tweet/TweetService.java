@@ -8,6 +8,7 @@ import com.zhela.cloudblog.rest.model.RESTMessage;
 import com.zhela.cloudblog.rest.model.RESTMessageList;
 import com.zhela.cloudblog.rest.model.RESTTweet;
 import com.zhela.cloudblog.rest.model.RESTTweetList;
+import com.zhela.cloudblog.rest.model.RESTUser;
 import com.zhela.cloudblog.rest.model.RESTUserList;
 
 public interface TweetService {
@@ -198,4 +199,6 @@ public interface TweetService {
 	 * @throws Exception
 	 */
 	RESTCount getUnread(ProviderUser userconfig)throws Exception;
+	
+	RESTUser selectTweetUser(String userId,ProviderUser userconfig) throws Exception;
 }

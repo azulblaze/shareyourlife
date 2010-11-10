@@ -1,9 +1,11 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 @XmlRootElement(name="user")
+@XmlType(propOrder={"id","account","name","header","gender","friendsCount","befriendsCount","tweetCount","webSite","relation","stayAddress","currentAddress","description","createDate","tweetDate","latestTweetId","latestTweet"})
 public class RESTUser {
 	public final static int RELATION_BEFOLLOWED = 1;
 	public final static int RELATION_FOLLOW = 2;
@@ -12,7 +14,6 @@ public class RESTUser {
 	private String id;
 	private String account;
 	private String name;
-	private String authorization;
 	private RESTImage header;
 	private String gender;
 	private long friendsCount;
@@ -44,12 +45,6 @@ public class RESTUser {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getAuthorization() {
-		return authorization;
-	}
-	public void setAuthorization(String authorization) {
-		this.authorization = authorization;
 	}
 	public RESTImage getHeader() {
 		return header;

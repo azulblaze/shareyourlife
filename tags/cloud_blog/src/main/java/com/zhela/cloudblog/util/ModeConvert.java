@@ -13,8 +13,6 @@ public class ModeConvert {
 
 	public static RESTProviderList ProvidersListToREST(long start,int limit,java.util.List<Providers> providers){
 		RESTProviderList providerlist = new RESTProviderList();
-		providerlist.setStart(start);
-		providerlist.setLimit(limit);
 		providerlist.setSize(providers.size());
 		java.util.List<RESTProvider> rest_list = new java.util.ArrayList<RESTProvider>();
 		RESTProvider rest;

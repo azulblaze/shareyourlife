@@ -1,12 +1,15 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="providerAccount")
+@XmlType(propOrder={"providerId","providerAccount","providerUserId","status","token","tokenSecret","tokenMore","updateTime"})
 public class RESTProviderAccount {
 
 	private long providerId;
 	private String providerAccount;
+	private String providerUserId;
 	private int status;
 	private String token;
 	private String tokenSecret;
@@ -53,6 +56,12 @@ public class RESTProviderAccount {
 	}
 	public void setUpdateTime(java.util.Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getProviderUserId() {
+		return providerUserId;
+	}
+	public void setProviderUserId(String providerUserId) {
+		this.providerUserId = providerUserId;
 	}
 	
 }

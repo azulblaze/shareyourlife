@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="userList")
+@XmlType(propOrder={"size","nextCursor","previousCursor","users"})
 public class RESTUserList {
 
 	private java.util.List<RESTUser> users;

@@ -1,8 +1,10 @@
 package com.zhela.cloudblog.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="count")
+@XmlType(propOrder={"mentions","retweet","comments","message","followers"})
 public class RESTCount {
 	private long comments;
 	private long retweet;
