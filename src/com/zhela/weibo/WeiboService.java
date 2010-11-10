@@ -13,6 +13,7 @@ import weibo4j.UserWapper;
 import weibo4j.Weibo;
 import weibo4j.http.RequestToken;
 import weibo4j.http.Response;
+import weibo4j.org.json.JSONObject;
 
 public class WeiboService {
 	static{
@@ -108,6 +109,30 @@ public class WeiboService {
 	}
 	public List<Count> getCounts(String ids) throws Exception {
 		return weibo.getCounts(ids);
+	}
+	public User getUserInfo(String sourceId,String userId) throws Exception {
+		User user = weibo.showUser(userId);
+		JSONObject json = weibo.showFriendships(sourceId, userId);
+		try{
+			if(json.getJSONObject("target").getBoolean("followed_by")){
+				user.setFollowing(true);
+			}
+		}catch(Exception e){
+			
+		}
+		return user;
+	}
+	public User getUserInfo(String userId) throws Exception {
+		User user = weibo.showUser(userId);
+		JSONObject json = weibo.showFriendships(userId);
+		try{
+			if(json.getJSONObject("target").getBoolean("followed_by")){
+				user.setFollowing(true);
+			}
+		}catch(Exception e){
+			
+		}
+		return user;
 	}
 	/**
 	 * 
