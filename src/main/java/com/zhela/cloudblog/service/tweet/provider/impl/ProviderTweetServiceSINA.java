@@ -154,7 +154,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		return restlist;
 	}
 	
-	public RESTCommentList getTweetComment(WeiboService _weibo,String id, String token, String tokenSecret,
+	public RESTCommentList getTweetComment(WeiboService _weibo,String id,int size, int position, String token, String tokenSecret,
 			String tokenMore) throws Exception {
 		WeiboService weibo;
 		if(_weibo!=null){
@@ -163,7 +163,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			weibo = new WeiboService();
 			weibo.setOAuthAccessToken(token, tokenSecret);
 		}
-		java.util.List<Comment> comments = weibo.getComments(id);
+		java.util.List<Comment> comments = weibo.getComments(id, position, size);
 		return SINAConventor.CommentListToREST(comments);
 	}
 	
@@ -303,7 +303,15 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			String tokenMore) throws Exception {
 		WeiboService weibo = new WeiboService();
 		weibo.setOAuthAccessToken(token, tokenSecret);
-		User user = weibo.createFriendship(id, follow);
+		User user = null;
+		try{
+			user = weibo.createFriendship(id, follow);
+		}catch(Exception e){
+			if(follow&&e.getMessage().indexOf("already follow")>0){
+				return true;
+			}
+			throw e;
+		}
 		if(user!=null){
 			return true;
 		}
@@ -341,6 +349,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 			Map<String,String> result = new java.util.HashMap<String, String>();
 			result.put("token", accessToken.getToken());
 			result.put("tokenSecret", accessToken.getTokenSecret());
+			result.put("userId", ""+accessToken.getUserId());
 			return result;
 		} catch (Exception te) {
 			throw new Exception("unable to valid your account");
@@ -413,7 +422,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		if(tweet!=null&&counts!=null){
 			for(Count _count:counts){
 				System.out.println(_count.hashCode()+"="+tweet.getId());
-				if((_count.hashCode()+"").equals(tweet.getId())){
+				if((_count.getId()+"").equals(tweet.getId())){
 					tweet.setCommentCount(_count.getComments());
 					tweet.setForwardCount(_count.getRt());
 					return;
