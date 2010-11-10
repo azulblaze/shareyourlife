@@ -601,7 +601,11 @@ public class User extends WeiboResponse implements java.io.Serializable {
     }
 
 
-    @Override
+    public void setFollowing(boolean following) {
+		this.following = following;
+	}
+
+	@Override
     public int hashCode() {
         return id;
     }
