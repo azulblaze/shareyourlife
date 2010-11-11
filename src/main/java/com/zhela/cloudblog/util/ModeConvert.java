@@ -35,7 +35,7 @@ public class ModeConvert {
 	public static RESTInternalUser InternalUserToREST(Users user){
 		RESTInternalUser RESTIU = new RESTInternalUser();
 		RESTIU.setAccount(user.getAccount());
-		RESTIU.setDisplayName(RESTIU.getDisplayName());
+		RESTIU.setDisplayName(user.getDisplayName());
 		RESTIU.setEmail(user.geteMail());
 		RESTIU.setHeader(user.getHeader());
 		RESTIU.setUpdateTime(user.getUpdateTime());

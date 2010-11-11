@@ -12,6 +12,9 @@ public class RESTCategoryList {
 	public int getSize() {
 		return size;
 	}
+	public void setSize(int size) {
+		this.size = size;
+	}
 	@XmlElement(name="categories")
 	public java.util.List<RESTCategory> getCategories() {
 		return categories;

@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="tweet")
-@XmlType(propOrder={"id","commentCount","forwardCount","commentCount","forwardId","source","content","images","videos","displayDate","createDate","createUser","corrdinate","forwardTweet"})
+@XmlType(propOrder={"id","commentCount","forwardCount","forwardId","source","content","images","videos","displayDate","createDate","createUser","corrdinate","commentlist","forwardTweet"})
 public class RESTTweet {
 
 	private RESTUser createUser;
@@ -17,7 +17,7 @@ public class RESTTweet {
 	private long forwardId;
 	private long commentCount;
 	private long forwardCount;
-	private RESTCommentList comments;
+	private RESTCommentList commentlist;
 	private java.util.List<RESTImage> images;
 	private java.util.List<RESTVideo> videos;
 	private RESTCoordinate corrdinate;
@@ -70,13 +70,14 @@ public class RESTTweet {
 	public void setForwardCount(long forwardCount) {
 		this.forwardCount = forwardCount;
 	}
-	public RESTCommentList getComments() {
-		return comments;
+	
+	public RESTCommentList getCommentlist() {
+		return commentlist;
 	}
-	public void setComments(RESTCommentList comments) {
-		this.comments = comments;
-		if(comments!=null&&comments.getComments()!=null){
-			this.commentCount = comments.getComments().size();
+	public void setCommentlist(RESTCommentList commentlist) {
+		this.commentlist = commentlist;
+		if(commentlist!=null&&commentlist.getComments()!=null){
+			this.commentCount = commentlist.getComments().size();
 		}
 	}
 	public java.util.List<RESTImage> getImages() {
@@ -105,6 +106,9 @@ public class RESTTweet {
 	}
 	public void setForwardId(long forwardId) {
 		this.forwardId = forwardId;
+	}
+	public void setDisplayDate(String displayDate) {
+		this.displayDate = displayDate;
 	}
 	
 	
