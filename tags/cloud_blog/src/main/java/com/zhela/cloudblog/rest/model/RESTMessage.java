@@ -66,6 +66,9 @@ public class RESTMessage {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public void setDisplayDate(String displayDate) {
+		this.displayDate = displayDate;
 	}	
 	
 }

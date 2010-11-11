@@ -28,7 +28,7 @@ public class TweetServiceImpl implements TweetService {
 		}
 		ProviderTweetService service = getProviderTweetService(_provider.getCode());
 		RESTTweet tweet = service.getTweet(null, null, tweetId, userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore());
-		tweet.setComments(service.getTweetComment(null, tweetId, 20, 1,userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore()));
+		tweet.setCommentlist(service.getTweetComment(null, tweetId, 20, 1,userconfig.getToken(), userconfig.getTokenSecret(), userconfig.getTokenMore()));
 		return tweet;
 	}
 

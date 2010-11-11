@@ -14,5 +14,10 @@
 	<bean id="authResource" class="com.zhela.cloudblog.rest.auth.AuthResource"/>
 
 	<bean id="userResource" class="com.zhela.cloudblog.rest.user.UserResource"/>
+	
+	<bean id="defautlJAXBContextResolver" scope="singleton"
+	class="com.zhela.cloudblog.rest.filter.DefaultJAXBContextResolver">
+</bean>
+	
 
 </beans>
