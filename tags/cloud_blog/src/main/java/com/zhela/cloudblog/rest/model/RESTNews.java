@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="news")
-@XmlType(propOrder={"id","messages"})
+@XmlType(propOrder={"id","tweetId","tweetName","tweetHeader","readCount","publishCount","publishDate","category","provider","title","content"})
 public class RESTNews {
 
 	private RESTProvider provider;
@@ -17,7 +17,7 @@ public class RESTNews {
 	private long readCount;
 	private long publishCount;
 	private java.util.Date publishDate;
-	private RESTCategoryList categories;
+	private RESTCategory category;
 
 	public RESTProvider getProvider() {
 		return provider;
@@ -49,11 +49,12 @@ public class RESTNews {
 	public void setPublishDate(java.util.Date publishDate) {
 		this.publishDate = publishDate;
 	}
-	public RESTCategoryList getCategories() {
-		return categories;
+	
+	public RESTCategory getCategory() {
+		return category;
 	}
-	public void setCategories(RESTCategoryList categories) {
-		this.categories = categories;
+	public void setCategory(RESTCategory category) {
+		this.category = category;
 	}
 	public long getId() {
 		return id;

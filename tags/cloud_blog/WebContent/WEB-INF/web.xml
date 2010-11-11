@@ -36,7 +36,16 @@
 		<filter-name>AuthFilter</filter-name>
 		<url-pattern>/api/*</url-pattern>
 	</filter-mapping>
-
+	
+	<filter>
+	  <filter-name>GzipFilter</filter-name>
+	  <filter-class>com.cj.gzipflt.GzipFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	  <filter-name>GzipFilter</filter-name>
+	  <url-pattern>/api/*</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<servlet-name>Jersey Spring</servlet-name>
