@@ -208,7 +208,7 @@ public class ProviderResource extends BaseResource{
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response postTweet(@PathParam("providerId") long providerId,
-			@QueryParam("pa") String providerAccount,
+			@FormDataParam("pa") String providerAccount,
 			@FormDataParam("text") String text,
 			@FormDataParam("latitude") Double latitude,
 			@FormDataParam("longitude") Double longitude,
