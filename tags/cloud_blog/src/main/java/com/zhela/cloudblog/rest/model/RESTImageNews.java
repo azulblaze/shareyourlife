@@ -1,5 +1,8 @@
 package com.zhela.cloudblog.rest.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="imagenews")
 public class RESTImageNews extends RESTNews{
 	private String thumbUrl;
 	private String orignalUrl;

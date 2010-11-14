@@ -1,5 +1,8 @@
 package com.zhela.cloudblog.rest.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="videonews")
 public class RESTVideoNews extends RESTNews{
 
 	private String preview;
