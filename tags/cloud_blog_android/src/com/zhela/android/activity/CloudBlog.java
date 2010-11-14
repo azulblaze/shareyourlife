@@ -10,6 +10,7 @@ import com.zhela.android.core.net.HttpParse;
 import com.zhela.android.core.net.NetStatusException;
 import com.zhela.android.core.remote.model.RESTInternalUser;
 import com.zhela.android.core.remote.model.RESTTweet;
+import com.zhela.android.core.remote.model.RESTTweetList;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -32,8 +33,13 @@ public class CloudBlog extends Activity {
 				params.put("text", java.net.URLEncoder.encode("中文test","utf-8"));
 				String action = "http://124.14.140.249:8080/cloudblog/api/providers/1/tweets/content.json";
 				RESTTweet tweet = hp.getResponse(HttpParse.METHOD_MULTIPARTPOST, action, params, new File("sdcard/test.JPG"), "attachmentFile", RESTTweet.class);
-				if(tweet!=null){
-					tv.setText(tweet.getContent());
+				RESTTweetList tweets = hp.getResponse(HttpParse.METHOD_GET, "http://124.14.140.249:8080/cloudblog/api/providers/1/tweets/content/hometweet.json?pa=yan925%40gmail.com", null, null, null, RESTTweetList.class);
+				if(tweets!=null){
+					String str = "";
+					for(RESTTweet _tweet:tweets.getTweets()){
+						str = str+ _tweet.getCreateUser().getName()+"=="+_tweet.getContent()+"\r\n";
+					}
+					tv.setText(str);
 				}
 			}
 		} catch (Exception e) {
