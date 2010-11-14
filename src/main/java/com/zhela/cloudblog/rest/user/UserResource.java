@@ -37,7 +37,7 @@ public class UserResource extends BaseResource {
 			saveSession(SESSION_PROVIDERACCOUNT,internalUserService.getProviderAccount(account));
 			return genOK(restiu);
 		}catch(Exception e){
-			return genNotAcceptable(e.getMessage());
+			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class UserResource extends BaseResource {
 			saveSession(SESSION_USER,restiu);
 			return genOK(restiu);
 		}catch(Exception e){
-			return genNotAcceptable(e.getMessage());
+			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class UserResource extends BaseResource {
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
 			return genOK(ModeConvert.ProviderUserToREST(internalUserService.getProviderAccount(restiu.getAccount())));
 		}catch(Exception e){
-			return genNotAcceptable(e.getMessage());
+			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
 	}
 	
