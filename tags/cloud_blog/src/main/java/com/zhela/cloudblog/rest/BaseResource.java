@@ -113,7 +113,7 @@ public class BaseResource {
 	}
 	
 	protected Response genNotAcceptable(Object obj){
-		return Response.status(Status.NOT_ACCEPTABLE)
+		return Response.status(404)
 		.entity(obj)
 		.build();
 	}

@@ -106,7 +106,7 @@ public class ProviderResource extends BaseResource{
 	 */
 	public Response postProviderAccount(@PathParam("providerId") long providerId,
 			@QueryParam("pa") String providerAccount,
-			@QueryParam("providerPassword") String providerPassword){
+			@QueryParam("ppass") String providerPassword){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
 			internalUserService.updateProviderUser(providerId, restiu.getAccount(),providerAccount, ProviderUser.STATUS_OK, providerAccount, providerPassword);
@@ -205,7 +205,7 @@ public class ProviderResource extends BaseResource{
 	@SuppressWarnings("deprecation")
 	@Path("/{providerId}/tweets/content")
 	@POST
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes({MediaType.MULTIPART_FORM_DATA})
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response postTweet(@PathParam("providerId") long providerId,
 			@FormDataParam("pa") String providerAccount,

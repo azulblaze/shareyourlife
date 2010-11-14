@@ -385,7 +385,7 @@ public class ProviderTweetServiceSINA implements ProviderTweetService {
 		int index = str.indexOf(tag);
 		if(index>0){
 			str = str.substring(tag.length()+index);
-			index = str.indexOf("</p>");
+			index = str.indexOf("</b>");
 			if(index>0){
 				str = str.substring(0,index);
 				return str;
