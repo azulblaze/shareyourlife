@@ -1,5 +1,7 @@
 package com.zhela.android.exception;
 
+import com.zhela.android.core.remote.model.RESTResponse;
+
 @SuppressWarnings("serial")
 public class DefaultException extends Exception {
 	
@@ -17,12 +19,19 @@ public class DefaultException extends Exception {
 
 	private int action;
 	private String message;
+	private RESTResponse response;
 
 	public int getAction() {
 		return action;
 	}
 	public String getMessage() {
 		return message;
+	}
+	public RESTResponse getResponse() {
+		return response;
+	}
+	public void setResponse(RESTResponse response) {
+		this.response = response;
 	}
 	
 }
