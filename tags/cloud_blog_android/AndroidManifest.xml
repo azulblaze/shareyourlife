@@ -16,4 +16,5 @@
     <uses-sdk android:minSdkVersion="4" />
     <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
 		android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 </manifest> 
