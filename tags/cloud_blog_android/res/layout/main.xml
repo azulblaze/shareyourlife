@@ -3,11 +3,33 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="center_vertical"
     >
-<TextView
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    android:id="@+id/content"
-    />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+	<ImageView android:id="@+id/logo"
+		android:layout_gravity="center_horizontal"
+		android:src="@drawable/logo"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+	
+	<ProgressBar android:id="@+id/loading"
+		android:layout_marginTop="40dip"
+		android:layout_gravity="center_horizontal"
+		android:layout_width="32dip"
+		android:layout_height="32dip"/>
+
+	<TextView
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:text="@string/default_load_text"
+	    android:id="@+id/loadinfo"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginTop="5dip"/>
+	
+
+</LinearLayout>
 </LinearLayout>
