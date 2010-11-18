@@ -47,6 +47,18 @@ public class HttpParse {
 		this.httpclient = httpclient;
 	}
 	
+	/**
+	 * 
+	 * @param <T>
+	 * @param type
+	 * @param url
+	 * @param parameters
+	 * @param file
+	 * @param fileFormName
+	 * @param classOfT
+	 * @return
+	 * @throws NetStatusException
+	 */
 	public <T> T getResponse(int type,String url,Map<String,String> parameters,File file,String fileFormName,Class<T> classOfT) throws NetStatusException{
 		try{
 			switch(type){
@@ -60,7 +72,7 @@ public class HttpParse {
 				return gson.fromJson(POST(url,file,fileFormName,parameters),classOfT);
 			case METHOD_DELETE:
 				return gson.fromJson(DELETE(url),classOfT);
-			} 
+			}
 			return null;
 		}catch(NetStatusException e){
 			throw e;
