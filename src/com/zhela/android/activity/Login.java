@@ -28,69 +28,83 @@ public class Login extends DefaultActivity {
         account_password = (EditText)findViewById(R.id.login_password_input);
         notice = (TextView)findViewById(R.id.notice_text);
         Button cancel = (Button)this.findViewById(R.id.cancel_button);
-        cancel.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				Intent list = new Intent(Login.this,AccountList.class);
-				Login.this.startActivity(list);
-			}
-        });
+        cancel.setOnClickListener(cancel_listener);
         Button reg = (Button)this.findViewById(R.id.reg_button);
-        reg.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				Intent reg = new Intent(Login.this,RegAccount.class);
-				Login.this.startActivity(reg);
-			}
-        });
+        reg.setOnClickListener(reg_listener);
         Button login_button = (Button)this.findViewById(R.id.login_button);
-        account_input.setOnKeyListener(new OnKeyListener(){
-
-			@Override
-			public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
-				if(arg2.getAction()==KeyEvent.ACTION_UP){
-					String account_input_str = account_input.getText().toString();
-					account_input.setText(FilterStr(account_input_str));
-				}
-				return false;
-			}
-			
-			
-        });
-        account_password.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				String account_password_str = account_password.getText().toString();
-				account_password_str = account_password_str.length()>16?account_password_str.substring(0,16):account_password_str;
-				account_password.setText(FilterStr(account_password_str));
-			}
-        	
-        });
-        login_button.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				notice.setVisibility(View.GONE);
-				String account_input_str = account_input.getText().toString();
-				String account_password_str = account_password.getText().toString();
-				if(account_input_str==null||account_input_str.trim().length()<6){
-					notice.setText("帐号由大于6小于20的英文和数字组成");
-					notice.setVisibility(View.VISIBLE);
-					return;
-				}
-				if(account_password_str==null||account_password_str.trim().length()<6){
-					notice.setText("密码由大于6小于16的英文和数字组成");
-					notice.setVisibility(View.VISIBLE);
-					return;
-				}
-				
-			}
-        	
-        });
+        account_input.setOnKeyListener(account_input_listener);
+        account_password.setOnClickListener(account_password_listener);
+        login_button.setOnClickListener(login_button_listener);
+        
+        if(UtilInfo.loginusers!=null){
+        	account_input.setText(UtilInfo.loginusers.account);
+        	account_password.setText(UtilInfo.loginusers.account_password);
+        	if(UtilInfo.loginusers.want_login){
+        		
+        	}
+        }
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	private String FilterStr(String str){
 		str = UtilInfo.StringFilter(str);
 		str = str.length()>20?str.substring(0,20):str;
 		return str;
 	}
+	private OnClickListener reg_listener = new OnClickListener(){
+		@Override
+		public void onClick(View arg0) {
+			Intent reg = new Intent(Login.this,RegAccount.class);
+			Login.this.startActivity(reg);
+		}
+    };
+    private OnClickListener cancel_listener = new OnClickListener(){
+		@Override
+		public void onClick(View arg0) {
+			Intent list = new Intent(Login.this,AccountList.class);
+			Login.this.startActivity(list);
+		}
+    };
+    private OnKeyListener account_input_listener = new OnKeyListener(){
+		@Override
+		public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
+			if(arg2.getAction()==KeyEvent.ACTION_UP){
+				String account_input_str = account_input.getText().toString();
+				account_input.setText(FilterStr(account_input_str));
+			}
+			return false;
+		}
+    };
+    private OnClickListener account_password_listener = new OnClickListener(){
+		@Override
+		public void onClick(View v) {
+			String account_password_str = account_password.getText().toString();
+			account_password_str = account_password_str.length()>16?account_password_str.substring(0,16):account_password_str;
+			account_password.setText(FilterStr(account_password_str));
+		}
+    };
+    private OnClickListener login_button_listener = new OnClickListener(){
+		@Override
+		public void onClick(View v) {
+			notice.setVisibility(View.GONE);
+			String account_input_str = account_input.getText().toString();
+			String account_password_str = account_password.getText().toString();
+			if(account_input_str==null||account_input_str.trim().length()<6){
+				notice.setText("帐号由大于6小于20的英文和数字组成");
+				notice.setVisibility(View.VISIBLE);
+				return;
+			}
+			if(account_password_str==null||account_password_str.trim().length()<6){
+				notice.setText("密码由大于6小于16的英文和数字组成");
+				notice.setVisibility(View.VISIBLE);
+				return;
+			}	
+		}
+    };
 }
