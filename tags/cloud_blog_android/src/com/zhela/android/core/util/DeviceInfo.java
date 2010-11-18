@@ -4,6 +4,8 @@ import android.telephony.TelephonyManager;
 
 public class DeviceInfo {
 	
+	public static INFO systemInfo;
+	
 	public class INFO{
 		public String version = "android-unknown";
 		public String band = "unknown";
@@ -11,7 +13,7 @@ public class DeviceInfo {
 		public String IMEI = "000000000000000";
 	}
 	
-	public INFO getInfo(TelephonyManager tm){
+	public void getInfo(TelephonyManager tm){
 		INFO _info = new INFO();
 		Class<android.os.Build.VERSION> build_version_class;
 		try{
@@ -51,6 +53,6 @@ public class DeviceInfo {
 			}
 		}catch(Exception e){
 		}
-		return _info;
+		systemInfo = _info;
 	}
 }
