@@ -109,9 +109,9 @@ public class ProviderResource extends BaseResource{
 			@QueryParam("ppass") String providerPassword){
 		try{
 			RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
-			internalUserService.updateProviderUser(providerId, restiu.getAccount(),providerAccount, ProviderUser.STATUS_OK, providerAccount, providerPassword);
+			ProviderUser pu = internalUserService.updateProviderUser(providerId, restiu.getAccount(),providerAccount, ProviderUser.STATUS_OK, providerAccount, providerPassword);
 			saveSession(SESSION_PROVIDERACCOUNT,internalUserService.getProviderAccount(restiu.getAccount()));
-			return genOK(new RESTResponse(Status.OK,"Success"));
+			return genOK(ModeConvert.ProviderUserToREST(pu));
 		}catch(Exception e){
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
 		}
@@ -437,7 +437,12 @@ public class ProviderResource extends BaseResource{
 			@QueryParam("type") String type){
 		try{
 			ProviderUser pu = getProviderUserByAccount(providerId,providerAccount);
-			return genOK(tweetService.resetCounts(type, pu));		
+			boolean result = tweetService.resetCounts(type, pu);
+			if(result){
+				return genOK(new RESTResponse(Status.OK,"Success"));	
+			}else{
+				return genOK(new RESTResponse(Status.OK,"fail"));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));
@@ -450,7 +455,7 @@ public class ProviderResource extends BaseResource{
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Path("/{providerId}/tweets/comments/{commentId}")
 	/**
-	 * get mentions
+	 * delete comment
 	 */
 	public Response deleteComment(@PathParam("providerId") long providerId,
 			@QueryParam("pa") String providerAccount,
@@ -513,7 +518,7 @@ public class ProviderResource extends BaseResource{
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Path("/{providerId}/users/{userId}")
 	/**
-	 * get Twitter by ID.
+	 * get TwitterUser by userID.
 	 */
 	public Response getTweetUser(@PathParam("providerId") long providerId,
 			@QueryParam("pa") String providerAccount,
