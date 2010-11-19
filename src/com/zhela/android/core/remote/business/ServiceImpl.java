@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.zhela.android.activity.Login;
 import com.zhela.android.core.net.HttpParse;
 import com.zhela.android.core.net.NetStatusException;
 import com.zhela.android.core.remote.model.RESTComment;
@@ -26,6 +25,7 @@ import com.zhela.android.core.remote.model.RESTTweetList;
 import com.zhela.android.core.remote.model.RESTUser;
 import com.zhela.android.core.remote.model.RESTUserList;
 import com.zhela.android.core.util.DeviceInfo;
+import com.zhela.android.core.util.UtilInfo;
 import com.zhela.android.exception.DefaultException;
 
 public class ServiceImpl implements Service {
@@ -120,7 +120,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return createRelation(providerId,providerAccount,userId,type);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -148,7 +148,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return delProviderAccount(providerId,providerAccount);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -176,7 +176,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return deleteComment(providerId,providerAccount,commentId);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -204,7 +204,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return deleteTweet(providerId,providerAccount,tweetId);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -232,7 +232,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return delteMessage(providerId,providerAccount,msgId);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -256,7 +256,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getAllProviders();
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -282,7 +282,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getCommentByTweet(providerId,providerAccount,tweetId,size,page);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -307,7 +307,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getCount(providerId,providerAccount);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -333,7 +333,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getFollows(providerId,providerAccount,userId,size,position,direction);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -359,7 +359,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getFriends(providerId,providerAccount,userId,size,position,direction);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -384,7 +384,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getHomeTweet(providerId,providerAccount,size,position,direction);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -409,7 +409,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getMentions(providerId,providerAccount,size,position,direction);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -434,7 +434,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getMsgInbox(providerId,providerAccount,size,position);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -460,7 +460,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getMsgOutbox(providerId,providerAccount,size,position);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -485,7 +485,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getTweet(providerId,providerAccount,tweetId);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -511,7 +511,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getUserInfo(providerId,providerAccount,userId);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -536,7 +536,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getUserProviderAccount();
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -562,7 +562,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return getUserTweet(providerId,providerAccount,userId,size,position,direction);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -592,7 +592,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return postCommentByTweet(providerId,providerAccount,tweetId,text,replyComentId);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -617,7 +617,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return postProviderAccount(providerId,providerAccount,password);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -655,7 +655,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return postTweet(providerId,providerAccount,text,latitude,longitude,replyTweetId,image) ;
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -683,7 +683,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return reSetCount(providerId,providerAccount,type);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -709,7 +709,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return regUser(account,password,email,name);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -734,7 +734,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return sendMessage(providerId,providerAccount,userId,messageText);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -762,7 +762,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return updateProviderAccount(providerId,providerAccount,status);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
@@ -788,7 +788,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(Login.loginUser.account,Login.loginUser.account_password)!=null){
+					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
 						return updateUserHeader(image);
 					}else{
 						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");

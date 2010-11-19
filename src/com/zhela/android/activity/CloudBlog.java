@@ -9,7 +9,6 @@ import com.zhela.android.core.db.SQLiteSupport;
 import com.zhela.android.core.db.Users;
 import com.zhela.android.core.remote.business.Service;
 import com.zhela.android.core.remote.business.ServiceImpl;
-import com.zhela.android.core.remote.model.RESTComment;
 import com.zhela.android.core.util.DeviceInfo;
 import com.zhela.android.core.util.UtilInfo;
 import com.zhela.android.exception.DefaultException;
@@ -37,21 +36,21 @@ public class CloudBlog extends DefaultActivity {
         tv = (TextView)this.findViewById(R.id.loadinfo);
         tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         init.start();
-      //for test
-        try{
-        	ServiceImpl sss = new ServiceImpl();
-        	new DeviceInfo().getInfo(tm);
-        	sss.authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI);
-        	sss.login("cashguy", "chenyan");
-        	//String id = sss.postTweet(1l, "yan925@gmail.com", "来自android4444444444444", null, null, null, new java.io.File("sdcard/test.JPG")).getId();
-        	RESTComment comment = sss.postCommentByTweet(1l, "yan925@gmail.com", "3716914277", "尝试恢复评论lkfsfdfdsf", "4593256463");
-        	if(comment!=null){
-        		System.out.println("===================");
-        	}
-        }catch(Exception e){
-        	e.printStackTrace();
-        }
-        //init
+//      //for test
+//        try{
+//        	ServiceImpl sss = new ServiceImpl();
+//        	new DeviceInfo().getInfo(tm);
+//        	sss.authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI);
+//        	sss.login("cashguy", "chenyan");
+//        	//String id = sss.postTweet(1l, "yan925@gmail.com", "来自android4444444444444", null, null, null, new java.io.File("sdcard/test.JPG")).getId();
+//        	RESTComment comment = sss.postCommentByTweet(1l, "yan925@gmail.com", "3716914277", "尝试恢复评论lkfsfdfdsf", "4593256463");
+//        	if(comment!=null){
+//        		System.out.println("===================");
+//        	}
+//        }catch(Exception e){
+//        	e.printStackTrace();
+//        }
+//        //init
     }
     
     
@@ -120,7 +119,7 @@ public class CloudBlog extends DefaultActivity {
         			loadHandler.sendMessage(message);
     			}
     			//init database
-    			SQLiteSupport sqlHelper = new SQLiteSupport(CloudBlog.this,"bole",null,UtilInfo.bole_version);  
+    			SQLiteSupport sqlHelper = new SQLiteSupport(CloudBlog.this,"bole.db",null,UtilInfo.bole_version);  
     			SQLiteFactory.instance = sqlHelper;
     			//load users account
     			message = new Message();
@@ -132,8 +131,8 @@ public class CloudBlog extends DefaultActivity {
     			Intent login = new Intent(CloudBlog.this,Login.class); 
     			Users users = sqls.getDefaultUsers();
 				if(users!=null){
-					users.want_login = true;
-					login.getExtras().putSerializable("loginUser", users);
+					UtilInfo.loginusers = users;
+					UtilInfo.loginusers.want_login = true;
 				}
     			CloudBlog.this.startActivity(login); 
     			CloudBlog.this.finish();

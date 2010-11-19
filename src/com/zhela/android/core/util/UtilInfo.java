@@ -13,6 +13,9 @@ public class UtilInfo {
 	public static Users loginusers;
 	
 	public static String StringFilter(String str) throws PatternSyntaxException {
+		if(str==null){
+			return "";
+		}
 		String regEx = "[^a-zA-Z0-9_]";
 		Pattern p = Pattern.compile(regEx);
 		Matcher m = p.matcher(str);
