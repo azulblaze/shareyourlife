@@ -1,6 +1,7 @@
 package com.zhela.android.core.db;
 
 import java.util.List;
+import java.util.Set;
 
 public class SQLService {
 
@@ -26,7 +27,23 @@ public class SQLService {
 	public int getUserCount(){
 		return sqf.loadModelCount("select count(*) from users"); 
 	}
-	public int updateUser(Users users,String where,String []whereargs){
-		return sqf.updateModel(users, where, whereargs);
+	@SuppressWarnings("unchecked")
+	public int updateOrInsertUser(Users users,String where,Set<String> field){
+		int size = 0;
+		try {
+			size = ((java.util.List<Users>)sqf.loadList("select * from users where account='"+users.account+"'", Users.class)).size();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(size>0){
+			return sqf.updateModel(users, where, field);
+		}else{
+			users.update_time = new java.util.Date();
+			sqf.saveModel(users);
+			return 1;
+		}
+	}
+	public void reSetDefaultUser(){
+		sqf.equals("update users set is_default='false' where is_default='true'");
 	}
 }
