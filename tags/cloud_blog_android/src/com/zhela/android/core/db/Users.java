@@ -2,6 +2,7 @@ package com.zhela.android.core.db;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.util.Set;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -39,22 +40,58 @@ public class Users implements DBModel,Serializable{
 	public boolean want_login;
 	
 	
-	public ContentValues getContentValues(){
+	public ContentValues getContentValues(Set<String> field){
 		ContentValues cv = new ContentValues();
-		cv.put("account", account);
-		cv.put("display_name", display_name);
-		cv.put("is_password", is_password);
-		cv.put("is_default", is_default);
-		cv.put("account_password", account_password);
-		cv.put("email", email);
-		cv.put("header_url", header_url);
-		if(update_time!=null){
-			cv.put("update_time", update_time.toString());
-		}
-		if(header_img!=null&&header_url!=null){
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			header_img.compress(Bitmap.CompressFormat.PNG, 100, out);
-			cv.put("header_img", out.toByteArray());
+		if(field!=null){
+			if(field.contains("account")){
+				cv.put("account", account);
+			}
+			if(field.contains("display_name")){
+				cv.put("display_name", display_name);
+			}
+			if(field.contains("is_password")){
+				cv.put("is_password", Boolean.toString(is_password));
+			}
+			if(field.contains("is_default")){
+				cv.put("is_default", Boolean.toString(is_default));
+			}
+			if(field.contains("account_password")){
+				cv.put("account_password", account_password);
+			}
+			if(field.contains("email")){
+				cv.put("email", email);
+			}
+			if(field.contains("header_url")){
+				cv.put("header_url", header_url);
+			}
+			if(field.contains("update_time")){
+				if(update_time!=null){
+					cv.put("update_time", update_time.toString());
+				}
+			}
+			if(field.contains("header_img")){
+				if(header_img!=null&&header_url!=null){
+					ByteArrayOutputStream out = new ByteArrayOutputStream();
+					header_img.compress(Bitmap.CompressFormat.PNG, 100, out);
+					cv.put("header_img", out.toByteArray());
+				}
+			}
+		}else{
+			cv.put("account", account);
+			cv.put("display_name", display_name);
+			cv.put("is_password", Boolean.toString(is_password));
+			cv.put("is_default", Boolean.toString(is_default));
+			cv.put("account_password", account_password);
+			cv.put("email", email);
+			cv.put("header_url", header_url);
+			if(update_time!=null){
+				cv.put("update_time", update_time.toString());
+			}
+			if(header_img!=null&&header_url!=null){
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				header_img.compress(Bitmap.CompressFormat.PNG, 100, out);
+				cv.put("header_img", out.toByteArray());
+			}
 		}
 		return cv;
 	}
@@ -69,7 +106,7 @@ public class Users implements DBModel,Serializable{
 		}
 		account = cur.getString(cur.getColumnIndex("account"));
 		display_name = cur.getString(cur.getColumnIndex("display_name"));
-		boolean is_password = Boolean.parseBoolean(cur.getString(cur.getColumnIndex("is_password")));
+		is_password = Boolean.parseBoolean(cur.getString(cur.getColumnIndex("is_password")));
 		if(is_password){
 			account_password = cur.getString(cur.getColumnIndex("account_password"));
 		}

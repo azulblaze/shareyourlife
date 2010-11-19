@@ -1,5 +1,7 @@
 package com.zhela.android.core.db;
 
+import java.util.Set;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -41,7 +43,7 @@ public class SQLiteFactory {
 	
 	public void saveModel(DBModel model){
 		open();
-		sqlite.insert(model.getTableName(), null, model.getContentValues());
+		sqlite.insert(model.getTableName(), null, model.getContentValues(null));
 		close();
 	}
 	
@@ -50,16 +52,22 @@ public class SQLiteFactory {
 		open();
 		Cursor cur = sqlite.rawQuery(sql, null);
 		if(cur.moveToNext()){
-			size = cur.getInt(1);
+			size = cur.getInt(0);
 		}
 		cur.close();
 		close();
 		return size;
 	}
 	
-	public int updateModel(DBModel model,String where,String []whereargs){
+	public void executeSQL(String sql){
 		open();
-		int size = sqlite.update(model.getTableName(), model.getContentValues(), where, whereargs);
+		sqlite.execSQL(sql);
+		close();
+	}
+	
+	public int updateModel(DBModel model,String where,Set<String> field){
+		open();
+		int size = sqlite.update(model.getTableName(), model.getContentValues(field), where, null);
 		close();
 		return size;
 	}
