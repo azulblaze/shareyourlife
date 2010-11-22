@@ -3,6 +3,8 @@ package com.zhela.android.core.db;
 import java.util.List;
 import java.util.Set;
 
+import com.zhela.android.core.db.model.Users;
+
 public class SQLService {
 
 	private SQLiteFactory sqf;

@@ -1,13 +1,11 @@
-package com.zhela.android.core.db;
+package com.zhela.android.core.db.model;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 public class Users implements DBModel,Serializable{
 	
@@ -15,17 +13,17 @@ public class Users implements DBModel,Serializable{
 
 	private final static String TABLE_NAME = "users";
 	
-	public final static String createSQL = "CREATE  TABLE IF NOT EXISTS users ("+
-	  "account VARCHAR(100) NOT NULL ,"+
-	  "display_name VARCHAR(45) NOT NULL ,"+
-	  "is_password boolean  NULL DEFAULT true ,"+
-	  "is_default boolean  NULL DEFAULT false ,"+
-	  "account_password VARCHAR(200) NULL ,"+
-	  "email VARCHAR(45) NULL ,"+
-	  "header_url VARCHAR(200) NULL ,"+
-	  "header_img BLOB NULL ,"+
-	  "update_time TIMESTAMP NULL ,"+
-	  "PRIMARY KEY (account) )";
+	public final static String createSQL = "CREATE  TABLE IF NOT EXISTS users ("
+			+ "account VARCHAR(100) NOT NULL ,"
+			+ "display_name VARCHAR(45) NOT NULL ,"
+			+ "is_password boolean  NULL DEFAULT true ,"
+			+ "is_default boolean  NULL DEFAULT false ,"
+			+ "account_password VARCHAR(200) NULL ,"
+			+ "email VARCHAR(45) NULL ,"
+			+ "header_url VARCHAR(200) NULL ,"
+			+ "header_img BLOB NULL ,"
+			+ "update_time TIMESTAMP NULL ,"
+			+ "PRIMARY KEY (account) )";
 	public final static String dropSQL = "drop table if not exists users";
 	
 	public String account;
@@ -35,7 +33,6 @@ public class Users implements DBModel,Serializable{
 	public String account_password;
 	public String email;
 	public String header_url;
-	public Bitmap header_img;
 	public java.util.Date update_time;
 	public boolean want_login;
 	
@@ -65,15 +62,10 @@ public class Users implements DBModel,Serializable{
 				cv.put("header_url", header_url);
 			}
 			if(field.contains("update_time")){
-				if(update_time!=null){
+				if(update_time==null){
+					cv.putNull("update_time");
+				}else{
 					cv.put("update_time", update_time.toString());
-				}
-			}
-			if(field.contains("header_img")){
-				if(header_img!=null&&header_url!=null){
-					ByteArrayOutputStream out = new ByteArrayOutputStream();
-					header_img.compress(Bitmap.CompressFormat.PNG, 100, out);
-					cv.put("header_img", out.toByteArray());
 				}
 			}
 		}else{
@@ -84,13 +76,10 @@ public class Users implements DBModel,Serializable{
 			cv.put("account_password", account_password);
 			cv.put("email", email);
 			cv.put("header_url", header_url);
-			if(update_time!=null){
+			if(update_time==null){
+				cv.putNull("update_time");
+			}else{
 				cv.put("update_time", update_time.toString());
-			}
-			if(header_img!=null&&header_url!=null){
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				header_img.compress(Bitmap.CompressFormat.PNG, 100, out);
-				cv.put("header_img", out.toByteArray());
 			}
 		}
 		return cv;
@@ -98,12 +87,6 @@ public class Users implements DBModel,Serializable{
 	
 	public void setContentValues(Cursor cur){
 		header_url = cur.getString(cur.getColumnIndex("header_url"));
-		if(header_url!=null){
-			byte[] blob = cur.getBlob(cur.getColumnIndex("header_img"));
-			if(blob!=null&&blob.length>0){
-				header_img = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			}
-		}
 		account = cur.getString(cur.getColumnIndex("account"));
 		display_name = cur.getString(cur.getColumnIndex("display_name"));
 		is_password = Boolean.parseBoolean(cur.getString(cur.getColumnIndex("is_password")));
@@ -112,6 +95,7 @@ public class Users implements DBModel,Serializable{
 		}
 		is_default = Boolean.parseBoolean(cur.getString(cur.getColumnIndex("is_default")));
 		email = cur.getString(cur.getColumnIndex("email"));
+		update_time = new Date(cur.getString(cur.getColumnIndex("update_time")));
 	}
 
 	@Override

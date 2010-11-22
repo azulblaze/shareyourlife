@@ -1,4 +1,4 @@
-package com.zhela.android.core.db;
+package com.zhela.android.core.db.model;
 
 import java.util.Set;
 
@@ -8,6 +8,6 @@ import android.database.Cursor;
 public interface DBModel{
 
 	public String getTableName();
-	public ContentValues getContentValues(Set<String> filed);
+	public ContentValues getContentValues(Set<String> field);
 	public void setContentValues(Cursor cur);
 }
