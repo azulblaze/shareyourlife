@@ -6,7 +6,7 @@ import com.zhela.android.R;
 import com.zhela.android.core.db.SQLService;
 import com.zhela.android.core.db.SQLiteFactory;
 import com.zhela.android.core.db.SQLiteSupport;
-import com.zhela.android.core.db.Users;
+import com.zhela.android.core.db.model.Users;
 import com.zhela.android.core.remote.business.Service;
 import com.zhela.android.core.remote.business.ServiceImpl;
 import com.zhela.android.core.util.DeviceInfo;

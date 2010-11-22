@@ -1,5 +1,7 @@
 package com.zhela.android.core.db;
 
+import com.zhela.android.core.db.model.Users;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
