@@ -2,6 +2,8 @@ package com.zhela.android.core.db;
 
 import java.util.Set;
 
+import com.zhela.android.core.db.model.DBModel;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 

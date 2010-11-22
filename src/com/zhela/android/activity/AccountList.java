@@ -9,7 +9,7 @@ public class AccountList extends DefaultActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.accountlist);
+		setContentView(R.layout.account_list);
 	}
 
 }

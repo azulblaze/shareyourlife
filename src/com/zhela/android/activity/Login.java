@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.zhela.android.R;
 import com.zhela.android.core.db.SQLService;
-import com.zhela.android.core.db.Users;
+import com.zhela.android.core.db.model.Users;
 import com.zhela.android.core.remote.business.Service;
 import com.zhela.android.core.remote.business.ServiceImpl;
 import com.zhela.android.core.remote.model.RESTInternalUser;
@@ -16,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +55,10 @@ public class Login extends DefaultActivity {
         login_button.setOnClickListener(login_button_listener);
         if(UtilInfo.loginusers!=null){
         	account_input.setText(UtilInfo.loginusers.account);
+        	if(UtilInfo.loginusers.account!=null){
+        		int _len = account_input.getEditableText().length();
+            	Selection.setSelection(account_input.getEditableText(), _len);
+        	}
         	account_password.setText(UtilInfo.loginusers.account_password);
         	account_savepassword.setChecked(UtilInfo.loginusers.is_password);
         	updateDB = false;
@@ -171,7 +176,7 @@ public class Login extends DefaultActivity {
 			Intent index = new Intent(Login.this,Index.class);
 			progeress.dismiss();
 			Login.this.startActivity(index);
-			//Login.this.finish();
+			Login.this.finish();
 		} catch (DefaultException e) {
 			if(e.getAction()==DefaultException.NEEDLOGIN){
 				notice.setText("登录失败,请检查您的帐号和密码");
