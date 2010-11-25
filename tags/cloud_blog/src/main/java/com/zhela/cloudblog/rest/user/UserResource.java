@@ -1,6 +1,7 @@
 package com.zhela.cloudblog.rest.user;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
+import com.zhela.cloudblog.model.users.ProviderUser;
 import com.zhela.cloudblog.model.users.Users;
 import com.zhela.cloudblog.rest.BaseResource;
 import com.zhela.cloudblog.rest.model.RESTInternalUser;
@@ -56,6 +58,7 @@ public class UserResource extends BaseResource {
 		try{
 			RESTInternalUser restiu = ModeConvert.InternalUserToREST(internalUserService.insertUsers(account, password, email, name));
 			saveSession(SESSION_USER,restiu);
+			saveSession(SESSION_PROVIDERACCOUNT,new ArrayList<ProviderUser>());
 			return genOK(restiu);
 		}catch(Exception e){
 			return genNotAcceptable(new RESTResponse(Status.NOT_ACCEPTABLE,e.getMessage()));

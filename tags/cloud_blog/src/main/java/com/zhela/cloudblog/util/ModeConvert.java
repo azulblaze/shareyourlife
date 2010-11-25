@@ -37,7 +37,11 @@ public class ModeConvert {
 		RESTIU.setAccount(user.getAccount());
 		RESTIU.setDisplayName(user.getDisplayName());
 		RESTIU.setEmail(user.geteMail());
-		RESTIU.setHeader(user.getHeader());
+		if(user.getHeader()!=null&&!user.getHeader().startsWith("http")){
+			RESTIU.setHeader(SystemConfig.domain + user.getHeader());
+		}else{
+			RESTIU.setHeader(user.getHeader());
+		}
 		RESTIU.setUpdateTime(user.getUpdateTime());
 		return RESTIU;
 	}
@@ -46,6 +50,7 @@ public class ModeConvert {
 		RESTProviderAccount restpa = new RESTProviderAccount();
 		restpa.setProviderAccount(puser.getProviderAccount());
 		restpa.setProviderId(puser.getProviderId());
+		restpa.setProviderUserId(puser.getProviderUserid());
 		restpa.setStatus(puser.getStatus());
 		restpa.setToken(puser.getToken());
 		restpa.setTokenMore(puser.getTokenMore());
