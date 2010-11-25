@@ -56,11 +56,6 @@ public class BaseResource {
 	
 	protected boolean isAuth( ){
 		DeviceStatus status = (DeviceStatus)getSession(SESSION_AUTH);
-		if(status==null){
-			status = new com.zhela.cloudblog.rest.auth.AuthResource().new DeviceStatus();
-			status.setTransID("ABCDEF");
-			saveSession(SESSION_AUTH,status);
-		}
 		if(status!=null&&StringUtils.isNotBlank(status.getTransID())){
 			return true;
 		}
@@ -69,14 +64,6 @@ public class BaseResource {
 	
 	protected boolean isLogin(){
 		RESTInternalUser restiu = (RESTInternalUser)getSession(SESSION_USER);
-		if(restiu==null){
-			restiu = new RESTInternalUser();
-			restiu.setAccount("cashguy");
-			restiu.setDisplayName("BTboy");
-			restiu.setHeader("");
-			restiu.setUpdateTime(new java.util.Date());
-			saveSession(SESSION_USER,restiu);
-		}
 		if(restiu!=null){
 			return true;
 		}
