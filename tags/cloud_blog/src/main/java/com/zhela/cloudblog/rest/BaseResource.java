@@ -15,6 +15,7 @@ import com.zhela.cloudblog.rest.model.RESTResponse;
 
 public class BaseResource {
 
+	public static String ROOT_PATH = null;
 	public final static String SESSION_AUTH = "auth";
 	public final static String SESSION_USER = "user";
 	protected final static String SESSION_PROVIDERACCOUNT = "provider_account";
