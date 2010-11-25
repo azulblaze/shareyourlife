@@ -17,10 +17,17 @@ import com.zhela.cloudblog.rest.model.RESTInternalUser;
 
 public class AuthSpringFilter extends RequestContextFilter {
 
+	public static boolean initPath = false;
+	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		if(!initPath){
+			initPath = true;
+			BaseResource.ROOT_PATH = request.getRealPath("/");
+		}
 		String path = request.getPathInfo();
 		int result = isAuthDispatch(path,request);
 		String suffix = "";
