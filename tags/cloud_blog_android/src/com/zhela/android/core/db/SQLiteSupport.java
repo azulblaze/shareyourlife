@@ -1,6 +1,9 @@
 package com.zhela.android.core.db;
 
-import com.zhela.android.core.db.model.Users;
+import com.zhela.android.core.db.model.Image;
+import com.zhela.android.core.db.model.Provider;
+import com.zhela.android.core.db.model.ProviderAccount;
+import com.zhela.android.core.db.model.User;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,14 +19,18 @@ public class SQLiteSupport extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
 		//create users
-		arg0.execSQL(Users.createSQL);
-		
+		arg0.execSQL(User.createSQL);
+		arg0.execSQL(Image.createSQL);
+		arg0.execSQL(Provider.createSQL);
+		arg0.execSQL(ProviderAccount.createSQL);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		arg0.execSQL(Users.dropSQL);
+		arg0.execSQL(User.dropSQL);
+		arg0.execSQL(Image.dropSQL);
+		arg0.execSQL(Provider.dropSQL);
+		arg0.execSQL(ProviderAccount.dropSQL);
 		onCreate(arg0);
 	}
 		

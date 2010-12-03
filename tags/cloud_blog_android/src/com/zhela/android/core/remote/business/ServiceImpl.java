@@ -709,11 +709,7 @@ public class ServiceImpl implements Service {
 				throw new DefaultException(DefaultException.EXIT,"网络链接错误");
 			}else if(e.getCode()==401){
 				if(authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-					if(login(UtilInfo.loginusers.account,UtilInfo.loginusers.account_password)!=null){
-						return regUser(account,password,email,name);
-					}else{
-						throw new DefaultException(DefaultException.NEEDLOGIN,"帐号登录失败");
-					}
+					return regUser(account,password,email,name);
 				}else{
 					throw new DefaultException(DefaultException.EXIT,"客户端验证失败");
 				}

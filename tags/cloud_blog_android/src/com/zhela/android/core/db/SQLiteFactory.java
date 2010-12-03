@@ -32,45 +32,64 @@ public class SQLiteFactory {
 	public Object loadList(String sql,Class classOf) throws Exception{
 		java.util.List<DBModel> models = new java.util.ArrayList<DBModel>();
 		open();
-		Cursor cur = sqlite.rawQuery(sql, null);
-		while(cur.moveToNext()){
-			DBModel model = (DBModel)classOf.newInstance();
-			model.setContentValues(cur);
-			models.add(model);
+		Cursor cur = null;
+		try{
+			cur = sqlite.rawQuery(sql, null);
+			while(cur.moveToNext()){
+				DBModel model = (DBModel)classOf.newInstance();
+				model.setContentValues(cur);
+				models.add(model);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			cur.close();
+			close();
 		}
-		cur.close();
-		close();
 		return models;
 	}
 	
 	public void saveModel(DBModel model){
 		open();
-		sqlite.insert(model.getTableName(), null, model.getContentValues(null));
+		try{
+			sqlite.insert(model.getTableName(), null, model.getContentValues(null));
+		}catch(Exception e){
+		}
 		close();
 	}
 	
 	public int loadModelCount(String sql){
 		int size = 0;
 		open();
-		Cursor cur = sqlite.rawQuery(sql, null);
-		if(cur.moveToNext()){
-			size = cur.getInt(0);
+		try{
+			Cursor cur = sqlite.rawQuery(sql, null);
+			if(cur.moveToNext()){
+				size = cur.getInt(0);
+			}
+			cur.close();
+		}catch(Exception e){
+			
 		}
-		cur.close();
 		close();
 		return size;
 	}
 	
 	public void executeSQL(String sql){
 		open();
-		sqlite.execSQL(sql);
+		try{
+			sqlite.execSQL(sql);
+		}catch(Exception e){
+		}
 		close();
 	}
 	
 	public int updateModel(DBModel model,String where,Set<String> field){
 		open();
-		int size = sqlite.update(model.getTableName(), model.getContentValues(field), where, null);
+		try{
+			return sqlite.update(model.getTableName(), model.getContentValues(field), where, null);
+		}catch(Exception e){
+		}
 		close();
-		return size;
+		return 0;
 	}
 }
