@@ -1,17 +1,16 @@
 package com.zhela.android.core.db.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-public class Users implements DBModel,Serializable{
+public class User implements DBModel,Serializable{
 	
 	private static final long serialVersionUID = 4712138648251409930L;
 
-	private final static String TABLE_NAME = "users";
+	public final static String TABLE_NAME = "users";
 	
 	public final static String createSQL = "CREATE  TABLE IF NOT EXISTS users ("
 			+ "account VARCHAR(100) NOT NULL ,"
@@ -21,7 +20,6 @@ public class Users implements DBModel,Serializable{
 			+ "account_password VARCHAR(200) NULL ,"
 			+ "email VARCHAR(45) NULL ,"
 			+ "header_url VARCHAR(200) NULL ,"
-			+ "header_img BLOB NULL ,"
 			+ "update_time TIMESTAMP NULL ,"
 			+ "PRIMARY KEY (account) )";
 	public final static String dropSQL = "drop table if not exists users";
@@ -65,7 +63,7 @@ public class Users implements DBModel,Serializable{
 				if(update_time==null){
 					cv.putNull("update_time");
 				}else{
-					cv.put("update_time", update_time.toString());
+					cv.put("update_time",iso8601Format.format(update_time));
 				}
 			}
 		}else{
@@ -79,7 +77,7 @@ public class Users implements DBModel,Serializable{
 			if(update_time==null){
 				cv.putNull("update_time");
 			}else{
-				cv.put("update_time", update_time.toString());
+				cv.put("update_time", iso8601Format.format(update_time));
 			}
 		}
 		return cv;
@@ -95,7 +93,13 @@ public class Users implements DBModel,Serializable{
 		}
 		is_default = Boolean.parseBoolean(cur.getString(cur.getColumnIndex("is_default")));
 		email = cur.getString(cur.getColumnIndex("email"));
-		update_time = new Date(cur.getString(cur.getColumnIndex("update_time")));
+		String update_time_str = cur.getString(cur.getColumnIndex("update_time"));
+		try {
+			if(update_time_str!=null){
+				update_time = iso8601Format.parse(update_time_str);
+			}
+		} catch (java.text.ParseException e) {
+		}
 	}
 
 	@Override

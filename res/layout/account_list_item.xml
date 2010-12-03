@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:padding="2dip">
+	<ImageView android:maxWidth="50dip"
+		android:maxHeight="50dip"
+		android:src="@drawable/default_header"
+		android:layout_width="50dip"
+		android:layout_height="fill_parent"
+		android:layout_gravity="fill_horizontal"
+		android:id="@+id/header"/>
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_weight="1"
+		android:padding="2dip">
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="Hellow"
+			android:id="@+id/provider_account_name"
+			android:layout_marginLeft="2dip"
+			android:padding="2dip"/>
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="Helldslla;kfjow"
+			android:id="@+id/provider_name"
+			android:layout_marginLeft="2dip"
+			android:padding="2dip"/>
+	</LinearLayout>
+	<ImageButton android:layout_width="30dip"
+		android:id="@+id/more_action"
+		android:layout_height="30dip"
+		android:padding="2dip"
+		android:layout_gravity="center_vertical"
+		android:src="@drawable/expander_default"
+		android:layout_marginRight="10dip"
+		/>
+</LinearLayout>

@@ -13,4 +13,5 @@
     <string name="app_name">博乐</string>
     <string name="add_account">增加帐号</string>
     <string name="reg_account">注册帐号</string>
+    <string name="refresh">刷新</string>
 </resources>

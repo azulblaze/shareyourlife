@@ -6,23 +6,22 @@ import java.util.Set;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-public class Providers implements DBModel ,Serializable{
+public class Provider implements DBModel ,Serializable{
 	
-	private static final long serialVersionUID = 2649492093263108032L;
-	private final static String TABLE_NAME = "users";
+	public static final long serialVersionUID = 2649492093263108032L;
+	public final static String TABLE_NAME = "providers";
 	public final static String createSQL = "CREATE  TABLE IF NOT EXISTS providers ("
-			+ "id INT NOT NULL ,"
+			+ "id LONG NOT NULL ,"
 			+ "rank INT NULL ,"
 			+ "name VARCHAR(45) NULL ,"
 			+ "web_url VARCHAR(200) NULL ,"
 			+ "reg_url VARCHAR(200) NULL ,"
 			+ "description VARCHAR(500) NULL ,"
 			+ "logo VARCHAR(200) NULL ,"
-			+ "logo_img BLOB NULL ,"
 			+ "status INT NULL ," + "PRIMARY KEY (id) )";
 	public final static String dropSQL = "drop table if not exists providers";
 	
-	public int id;
+	public long id;
 	public int rank;
 	public String name;
 	public String web_url;
@@ -74,7 +73,7 @@ public class Providers implements DBModel ,Serializable{
 
 	@Override
 	public void setContentValues(Cursor cur) {
-		id = cur.getInt(cur.getColumnIndex("id"));
+		id = cur.getLong(cur.getColumnIndex("id"));
 		rank = cur.getInt(cur.getColumnIndex("rank"));
 		name = cur.getString(cur.getColumnIndex("name"));
 		web_url = cur.getString(cur.getColumnIndex("web_url"));
