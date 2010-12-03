@@ -1,0 +1,127 @@
+﻿#zl_container{
+	clear:both;
+	width:500px;
+	font-size:12px;
+	background-color:#fff;
+	text-align: left;
+	padding:10px;
+}
+#zl_container #zl_info{
+    border-bottom: 1px dotted #CCCCCC;
+    clear: both;
+	height:24px;
+	margin:0px 0px 10px 0px;
+	line-height:24px;
+}
+#zl_container form ul,#zl_container ul#zl_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#zl_container ul#zl_list{
+	border-top: 1px dotted #CCCCCC;
+}
+#zl_container ul#zl_list li{
+	width:100%;
+	clear:both;
+	line-height:20px;
+}
+#zl_container ul#zl_list li label{
+	font-weight:bold;
+	color:#222222;
+	margin:10px 0px 0px 0px;
+}
+#zl_container ul#zl_list li label span{
+	font-weight:normal;
+	padding:0px 5px;
+}
+#zl_container ul#zl_list li div{
+	font-weight:normal;
+	color:#222222;
+	margin:0px 0px 0px 0px;
+}
+#zl_container ul#zl_list li.page{
+	padding:10px 0px 0px 0px;
+	text-align:right;
+}
+#zl_container ul#zl_list li.page a{
+	padding:5px;
+	padding-right:10px;
+}
+#zl_container form ul li{
+	padding-top: 9px;
+    width: 98% !important;
+	background-color: transparent;
+    clear: both;
+    margin: 0;
+    padding: 6px 1% 9px;
+	position: relative;
+}
+#zl_container form ul li label.zl_label{
+	float: left;
+    margin: 0 15px 0 0;
+    width: 11%;
+    color: #222222;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 0 3px;
+	display: block;
+}
+#zl_container form ul li label span{
+	color: red !important;
+	font-weight: bold;
+    margin: 0;
+    padding: 0;
+	display: inline !important;
+    float: none !important;
+}
+#zl_container form ul li div{
+	float: left;
+    width: 85%;
+	color: #444444;
+    margin: 0;
+    padding: 0;
+}
+#zl_container form ul li span{
+	color: #444444;
+    float: left;
+    padding:0px;
+	margin: 0px;
+}
+#zl_container form ul li div input[type="text"],#zl_container form ul li div input[type="password"],#zl_container form ul li span input[type="text"],#zl_container form ul li span input[type="password"],#zl_container form ul li div textarea{
+	border-color: #7C7C7C #C3C3C3 #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+	width:100%;
+}
+#zl_container form ul li span.zl_login_label{
+	margin-right: 1%;
+	width:42%;
+}
+#zl_container form ul li span input[type="text"].zl_login_label,#zl_container form ul li span input[type="password"].zl_login_label{
+	border-color: #7C7C7C #C3C3C3 #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+	width:100%;
+	
+}
+#zl_container form ul li span label.zl_login_label{
+    clear: both;
+    color: #444444;
+    display: block;
+    margin: 0;
+	width:100%;
+	height:20px;
+	line-height:20px;
+    padding-top: 3px;
+}
+#zl_container .zl_button{
+	width:80px;
+	clear:both;
+	height:24px;
+	line-height:24px;
+	margin-left:11%;
+}
+#zl_container .zl_focused{
+	background-color: #FFF7C0;
+}
