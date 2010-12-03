@@ -1,0 +1,21 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+	<package name="default" extends="struts-default">
+
+		<global-results>
+			<result name="exception">/html/error.html</result>
+			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
+		</global-results>
+		
+		<action name="signup" class="userAction" method="postUser">
+			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
+		</action>
+		
+	</package>
+	<!-- 
+	<include file="struts-service.xml"></include>
+	 -->
+</struts>

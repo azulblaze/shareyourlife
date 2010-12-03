@@ -148,7 +148,7 @@ public class CommentServiceImpl implements CommentService {
 				}
 				
 			}
-			this.content = name+" 评论了我的博文("+url+")："+comment;
+			this.content = name+" 评论了我的博文( "+"http://"+url+" )："+comment;
 		}
 		
 		@Override

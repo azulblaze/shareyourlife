@@ -18,6 +18,7 @@
       classpath:context-rest.xml
       classpath:context-service.xml
       classpath:context-dao.xml
+      classpath:context-struts.xml
     </param-value>
 	</context-param>
 	<listener>
@@ -43,8 +44,19 @@
 	
 	<filter-mapping>
 	  <filter-name>GzipFilter</filter-name>
-	  <url-pattern>/api/*</url-pattern>
+	  <url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+	
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/web/*</url-pattern>
+    </filter-mapping>
+	
 	<servlet>
 		<servlet-name>Jersey Spring</servlet-name>
 		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
