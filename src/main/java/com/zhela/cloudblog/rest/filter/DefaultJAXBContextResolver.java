@@ -14,6 +14,7 @@ import com.zhela.cloudblog.rest.model.RESTMessageList;
 import com.zhela.cloudblog.rest.model.RESTNewsList;
 import com.zhela.cloudblog.rest.model.RESTProviderAccountList;
 import com.zhela.cloudblog.rest.model.RESTProviderList;
+import com.zhela.cloudblog.rest.model.RESTServiceCommentList;
 import com.zhela.cloudblog.rest.model.RESTTweet;
 import com.zhela.cloudblog.rest.model.RESTTweetList;
 import com.zhela.cloudblog.rest.model.RESTUserList;
@@ -24,12 +25,12 @@ public class DefaultJAXBContextResolver implements ContextResolver<JAXBContext> 
 
     private JAXBContext context;
      @SuppressWarnings("unchecked")
-	private Class[] types = {RESTCategory.class,RESTCategoryList.class,RESTCommentList.class,RESTMessageList.class,RESTNewsList.class,RESTProviderAccountList.class,RESTProviderList.class,RESTTweet.class,RESTTweetList.class,RESTUserList.class};
+	private Class[] types = {RESTCategory.class,RESTCategoryList.class,RESTCommentList.class,RESTMessageList.class,RESTNewsList.class,RESTProviderAccountList.class,RESTProviderList.class,RESTTweet.class,RESTTweetList.class,RESTUserList.class,RESTServiceCommentList.class};
  
      public DefaultJAXBContextResolver() throws Exception {
         //these tags should be treated as array type.
     	 this.context = new JSONJAXBContext( 
-	    JSONConfiguration.mapped().arrays("subCategories","categories","comments","messages","newses","providerAccounts","providers","images","videos","tweets","users").rootUnwrapping(true).build(), types); 
+	    JSONConfiguration.mapped().arrays("subCategories","categories","comments","messages","newses","providerAccounts","providers","images","videos","tweets","users","s_comments").rootUnwrapping(true).build(), types); 
      }
 
      @SuppressWarnings("unchecked")

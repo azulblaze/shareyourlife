@@ -15,4 +15,7 @@
 	<sqlMap resource="com/zhela/cloudblog/dao/device/device_log_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/users/users_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/users/provider_user_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/comment_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/our_service_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/service_bind_SqlMap.xml"/>
 </sqlMapConfig>

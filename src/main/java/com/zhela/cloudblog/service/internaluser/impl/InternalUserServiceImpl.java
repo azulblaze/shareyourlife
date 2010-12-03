@@ -38,7 +38,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 		_user.setAccount(account);
 		_user.setUpdateTime(new java.util.Date());
 		usersDAO.updateByPrimaryKeySelective(_user);
-		return record;
+		return getProviderAccount(account,providerId,providerAccount);
 	}
 
 	@Override
@@ -48,19 +48,35 @@ public class InternalUserServiceImpl implements InternalUserService {
 		pue.createCriteria().andAccountEqualTo(account);
 		return providerUserDAO.selectByExample(pue);
 	}
+	
+	private ProviderUser getProviderAccount(String account,long providerId,String providerAccount)
+			throws Exception {
+		ProviderUserExample pue = new ProviderUserExample();
+		pue.createCriteria().andAccountEqualTo(account).andProviderIdEqualTo(providerId).andProviderAccountEqualTo(providerAccount);
+		List<ProviderUser> list = providerUserDAO.selectByExample(pue);
+		if(list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
 
 	@Override
 	public Users getUsers(String account, String password) throws Exception {
+		Users u = getUsers(account);
+		if(u.getPassword().equals(password)){
+			return u;
+		}else{
+			throw new Exception("Your password is wrong");
+		}
+	}
+	
+	private Users getUsers(String account) throws Exception {
 		UsersExample ue = new UsersExample();
 		ue.createCriteria().andAccountEqualTo(account);
 		java.util.List<Users> list = usersDAO.selectByExample(ue);
 		if(list.size()>0){
 			Users u = list.get(0);
-			if(u.getPassword().equals(password)){
-				return u;
-			}else{
-				throw new Exception("Your password is wrong");
-			}
+			return u;
 		}else{
 			throw new Exception("No this account");
 		}
@@ -142,7 +158,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 		_users.setPassword(password);
 		_users.setUpdateTime(new java.util.Date());
 		usersDAO.insert(_users);
-		return _users;
+		return getUsers(account);
 	}
 
 	@Override

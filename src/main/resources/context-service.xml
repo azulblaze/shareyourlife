@@ -9,4 +9,6 @@
 	<bean id="providerService" class="com.zhela.cloudblog.service.provider.impl.ProviderServiceImpl"/>
 	<bean id="tweetService" class="com.zhela.cloudblog.service.tweet.impl.TweetServiceImpl"/>
 	<bean id="internalUserService" class="com.zhela.cloudblog.service.internaluser.impl.InternalUserServiceImpl"/>
+	<bean id="commentService" class="com.zhela.cloudblog.service.ourservice.impl.CommentServiceImpl"/>
+	<bean id="serviceManage" class="com.zhela.cloudblog.service.ourservice.impl.ServiceManageImpl"/>
 </beans>
