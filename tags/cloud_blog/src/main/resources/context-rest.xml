@@ -15,6 +15,8 @@
 
 	<bean id="userResource" class="com.zhela.cloudblog.rest.user.UserResource"/>
 	
+	<bean id="commentResource" class="com.zhela.cloudblog.rest.service.CommentResource"/>
+	
 	<bean id="defautlJAXBContextResolver" scope="singleton"
 	class="com.zhela.cloudblog.rest.filter.DefaultJAXBContextResolver"/>
 	

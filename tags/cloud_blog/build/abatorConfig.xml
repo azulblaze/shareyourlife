@@ -6,14 +6,16 @@
 	<ibatorContext targetRuntime="Ibatis2Java5" id="cloudblog">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/cloudblog"
-			userId="root" password="654321" >
+			userId="root" password="123" >
 		</jdbcConnection>
-		<javaModelGenerator targetPackage="com.zhela.cloudblog.model.users"
+		<javaModelGenerator targetPackage="com.zhela.cloudblog.model.ourservice"
 			targetProject="cloud_blog/src/main/java" />
-		<sqlMapGenerator targetPackage="com.zhela.cloudblog.dao.users"
+		<sqlMapGenerator targetPackage="com.zhela.cloudblog.dao.ourservice"
 			targetProject="cloud_blog/src/main/resources" />
-		<daoGenerator type="SPRING" targetPackage="com.zhela.cloudblog.dao.users"
+		<daoGenerator type="SPRING" targetPackage="com.zhela.cloudblog.dao.ourservice"
 			targetProject="cloud_blog/src/main/java" />
-		<table tableName="provider_user" />
+		<table tableName="service_bind" />
+		<table tableName="our_service" />
+		<table tableName="comment" />
 	</ibatorContext>
 </ibatorConfiguration>
