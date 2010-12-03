@@ -1,4 +1,4 @@
-﻿var zl_domain="http://wl034829:8080/cloudblog/";
+var zl_domain="http://zhelazhela.com/";
 var zl_head=document.getElementsByTagName('HEAD').item(0);
 var zl_style=document.createElement('link');
 zl_style.href=zl_domain+"zl_css/zl_css.css";

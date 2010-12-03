@@ -1,4 +1,4 @@
-﻿var zl_domain="http://wl034829:8080/cloudblog/";
+var zl_domain="http://zhelazhela.com/";
 function newXMLHttpRequest() {
 	var xmlreq = false;
 	if (window.XMLHttpRequest) {
@@ -19,16 +19,19 @@ var submit = document.getElementById("zl_submit");
 var zl_display_name = document.getElementById("zl_display_name");
 var zl_comment = document.getElementById("zl_comment");
 var zl_list = document.getElementById("zl_list");
-var post_comment_addr = zl_domain+"api/services/comments/post/fasohfsdfld";
+var post_comment_addr = zl_domain+"api/services/comments/post/129134358831101";
 var post_request = newXMLHttpRequest();
 var get_request = newXMLHttpRequest();
-var get_comment_addr = zl_domain+"api/services/comments/fasohfsdfld/";
+var get_comment_addr = zl_domain+"api/services/comments/129134358831101/";
 var web_url = location.href;
 if(web_url.substring(0,7)=="http://"){
 	web_url= web_url.substring(7);
 }
 if(web_url.substring(0,8)=="https://"){
 	web_url= web_url.substring(8);
+}
+if(web_url.substring(0,4)=="www."){
+	web_url= web_url.substring(4);
 }
 function createLine(_json){
 	var _utime = _json.update_time;
