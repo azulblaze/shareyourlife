@@ -1,40 +1,31 @@
 package com.zhela.android.activity;
 
-
-
 import com.zhela.android.R;
+import com.zhela.android.component.ConfigureLoad;
 import com.zhela.android.core.db.SQLService;
-import com.zhela.android.core.db.SQLiteFactory;
-import com.zhela.android.core.db.SQLiteSupport;
-import com.zhela.android.core.db.model.Users;
+import com.zhela.android.core.db.model.User;
 import com.zhela.android.core.remote.business.Service;
 import com.zhela.android.core.remote.business.ServiceImpl;
+import com.zhela.android.core.util.CommonResource;
 import com.zhela.android.core.util.DeviceInfo;
 import com.zhela.android.core.util.UtilInfo;
 import com.zhela.android.exception.DefaultException;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.TelephonyManager;
 import android.widget.TextView;
 
 public class CloudBlog extends DefaultActivity {
 	private TextView tv;
-	private TelephonyManager tm;
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         tv = (TextView)this.findViewById(R.id.loadinfo);
-        tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         init.start();
 //      //for test
 //        try{
@@ -87,49 +78,27 @@ public class CloudBlog extends DefaultActivity {
 	};
     Thread init = new Thread(new Runnable(){
     	public void run(){
-    		Message message = new Message();
     		try{
-    			message.what = 0;
-    			message.obj = "配置文件读取 ···";
-    			loadHandler.sendMessage(message);
-    			PackageManager manager = CloudBlog.this.getPackageManager();
-    			ApplicationInfo info = manager.getApplicationInfo(CloudBlog.this.getPackageName(), 128);
-    			if (info != null){
-    				 ServiceImpl.BASE_URL = info.metaData.getString("BOLE_SERVER");
-    			}
-    			message = new Message();
-    			message.what = 0;
-    			message.obj = "服务加载中 ···";
-    			loadHandler.sendMessage(message);
+    			loadHandler.sendMessage(CommonResource.getMessage(0,"配置文件读取 ···"));
+    			ConfigureLoad cl = new ConfigureLoad(CloudBlog.this);
+    			cl.loadServerInfo();
+    			loadHandler.sendMessage(CommonResource.getMessage(0,"服务加载中 ···"));
                 Service service = new ServiceImpl();
-                new DeviceInfo().getInfo(tm);
-                message = new Message();
-                message.what = 0;
-    			message.obj = "验证客户端中 ···";
-    			loadHandler.sendMessage(message);
+                cl.loadDeviceInfo();
+    			loadHandler.sendMessage(CommonResource.getMessage(0,"验证客户端中 ···"));
     			if(service.authClient(DeviceInfo.systemInfo.band+DeviceInfo.systemInfo.model, DeviceInfo.systemInfo.version, DeviceInfo.systemInfo.IMEI)){
-    				message = new Message();
-    				message.what = 0;
-        			message.obj = "客户端验证成功";
-        			loadHandler.sendMessage(message);
+        			loadHandler.sendMessage(CommonResource.getMessage(0,"客户端验证成功"));
     			}else{
-    				message = new Message();
-    				message.what = -1;
-        			message.obj = "客户端验证失败";
-        			loadHandler.sendMessage(message);
+        			loadHandler.sendMessage(CommonResource.getMessage(-1,"客户端验证失败"));
     			}
     			//init database
-    			SQLiteSupport sqlHelper = new SQLiteSupport(CloudBlog.this,"bole.db",null,UtilInfo.bole_version);  
-    			SQLiteFactory.instance = sqlHelper;
+    			cl.initDB();
     			//load users account
-    			message = new Message();
-				message.what = 0;
-    			message.obj = "读取帐号信息···";
-    			loadHandler.sendMessage(message);
+    			loadHandler.sendMessage(CommonResource.getMessage(0,"读取帐号信息···"));
     			SQLService sqls = new SQLService();
     			UtilInfo.usersCount = sqls.getUserCount();
     			Intent login = new Intent(CloudBlog.this,Login.class); 
-    			Users users = sqls.getDefaultUsers();
+    			User users = sqls.getDefaultUsers();
 				if(users!=null){
 					UtilInfo.loginusers = users;
 					UtilInfo.loginusers.want_login = true;
@@ -137,10 +106,7 @@ public class CloudBlog extends DefaultActivity {
     			CloudBlog.this.startActivity(login); 
     			CloudBlog.this.finish();
     		}catch(Exception e){
-    			message = new Message();
-    			message.what = -1;
-    			message.obj = e;
-    			loadHandler.sendMessage(message);
+    			loadHandler.sendMessage(CommonResource.getMessage(-1,e));
     		}
     	}
     });

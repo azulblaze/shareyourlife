@@ -4,8 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.zhela.android.R;
+import com.zhela.android.component.ConfigureLoad;
 import com.zhela.android.core.db.SQLService;
-import com.zhela.android.core.db.model.Users;
+import com.zhela.android.core.db.model.User;
 import com.zhela.android.core.remote.business.Service;
 import com.zhela.android.core.remote.business.ServiceImpl;
 import com.zhela.android.core.remote.model.RESTInternalUser;
@@ -32,7 +33,7 @@ public class Login extends DefaultActivity {
 	private EditText account_password;
 	private CheckBox account_savepassword;
 	private ProgressDialog progeress;
-	TextView notice;
+	private TextView notice;
 	private boolean updateDB = false;
 	
 	@Override
@@ -68,16 +69,23 @@ public class Login extends DefaultActivity {
         }
 	}
 	
-	
-	
-	
-	
-	
-	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		finish();
+	}
+
+
+
+
+
+
+
 	private OnClickListener reg_listener = new OnClickListener(){
 		@Override
 		public void onClick(View arg0) {
-			Intent reg = new Intent(Login.this,RegAccount.class);
+			Intent reg = new Intent(Login.this,AccountReg.class);
 			Login.this.startActivity(reg);
 		}
     };
@@ -133,21 +141,22 @@ public class Login extends DefaultActivity {
     };
     
     private void login(){
+    	UtilInfo.provider_account = null;
     	notice.setVisibility(View.GONE);
     	progeress.setTitle(R.string.default_load_text);
 		String account_input_str = account_input.getText().toString();
 		String account_password_str = account_password.getText().toString();
 		if(UtilInfo.loginusers==null){
-    		UtilInfo.loginusers = new Users();
+    		UtilInfo.loginusers = new User();
     		UtilInfo.loginusers.is_default = false;
     	}
-		if(account_input_str==null||account_input_str.trim().length()<6){
-			notice.setText("帐号由大于6小于20的英文和数字组成");
+		if(!UtilInfo.StringFilter(account_input_str)||account_input_str.trim().length()<3){
+			notice.setText("帐号由大于3小于20的英文和数字组成");
 			notice.setVisibility(View.VISIBLE);
 			return;
 		}
-		if(account_password_str==null||account_password_str.trim().length()<6){
-			notice.setText("密码由大于6小于16的英文和数字组成");
+		if(!UtilInfo.PasswordFilter(account_password_str)||account_password_str.trim().length()<6){
+			notice.setText("密码由大于6小于16的英文字符组成");
 			notice.setVisibility(View.VISIBLE);
 			return;
 		}
@@ -163,9 +172,12 @@ public class Login extends DefaultActivity {
 			UtilInfo.loginusers.email = myuser.getEmail();
 			UtilInfo.loginusers.header_url = myuser.getHeader();
 			UtilInfo.loginusers.update_time = myuser.getUpdateTime();
+			ConfigureLoad cl = new ConfigureLoad(Login.this);
+			cl.loadProviders();
 			if(!UtilInfo.loginusers.is_default||updateDB){
 				SQLService sqls = new SQLService();
 				sqls.reSetDefaultUser();
+				UtilInfo.loginusers.is_default = true;
 				Set<String> field = new HashSet<String>();
 				field.add("account_password");
 				field.add("is_password");
@@ -173,10 +185,17 @@ public class Login extends DefaultActivity {
 				field.add("is_default");
 				sqls.updateOrInsertUser(UtilInfo.loginusers, " account='"+UtilInfo.loginusers.account+"'", null);
 			}
-			Intent index = new Intent(Login.this,Index.class);
-			progeress.dismiss();
-			Login.this.startActivity(index);
-			Login.this.finish();
+			
+			UtilInfo.provider_account = new SQLService().loadProviderAccount(UtilInfo.loginusers.account);
+			if(UtilInfo.provider_account.size()==0){
+				Intent accountinfo = new Intent(Login.this,AccountInfo.class);
+				progeress.dismiss();
+				Login.this.startActivity(accountinfo);
+			}else{
+				Intent index = new Intent(Login.this,Index.class);
+				progeress.dismiss();
+				Login.this.startActivity(index);
+			}
 		} catch (DefaultException e) {
 			if(e.getAction()==DefaultException.NEEDLOGIN){
 				notice.setText("登录失败,请检查您的帐号和密码");

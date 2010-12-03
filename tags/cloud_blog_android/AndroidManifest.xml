@@ -4,7 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
-    	<meta-data android:value="http://10.80.3.151:8080/cloudblog/api/" android:name="BOLE_SERVER"></meta-data>
+    	<meta-data android:value="http://211.162.143.19:8080/cloudblog/api/" android:name="BOLE_SERVER"></meta-data>
         <activity android:name=".activity.CloudBlog"
                   android:label="@string/app_name"> 
             <intent-filter>
@@ -12,13 +12,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Login"/>
+        
         <activity android:name=".activity.AccountList"/>
-        <activity android:name=".activity.RegAccount"/>
-        <activity android:name=".activity.RegAccount"/>
+        <activity android:name=".activity.AccountInfo"/>
         <activity android:name=".activity.Index"/>
+        <activity android:name=".activity.Login"/>
+        <activity android:name=".activity.ProviderAccountAdd"/>
+        <activity android:name=".activity.ProviderList"/>
+        <activity android:name=".activity.AccountReg"/>
+        
+        
     </application>
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="4" />
     <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
 		android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />

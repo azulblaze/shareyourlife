@@ -1,7 +1,6 @@
 package com.zhela.android.core.db.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 import android.content.ContentValues;
@@ -10,7 +9,7 @@ import android.database.Cursor;
 public class ProviderAccount implements DBModel,Serializable{
 	private static final long serialVersionUID = 7453610318960104864L;
 
-	private final static String TABLE_NAME = "provider_account";
+	public final static String TABLE_NAME = "provider_account";
 	public final static String createSQL = "CREATE  TABLE IF NOT EXISTS provider_account ("
 			+ "account VARCHAR(20) NOT NULL ,"
 			+ "provider_id INT NOT NULL ,"
@@ -61,7 +60,7 @@ public class ProviderAccount implements DBModel,Serializable{
 				if(update_time==null){
 					cv.putNull("update_time");
 				}else{
-					cv.put("update_time", update_time.toString());
+					cv.put("update_time",iso8601Format.format(update_time));
 				}
 			}
 		}else{
@@ -75,7 +74,7 @@ public class ProviderAccount implements DBModel,Serializable{
 			if(update_time==null){
 				cv.putNull("update_time");
 			}else{
-				cv.put("update_time", update_time.toString());
+				cv.put("update_time", iso8601Format.format(update_time));
 			}
 		}
 		return cv;
@@ -95,7 +94,22 @@ public class ProviderAccount implements DBModel,Serializable{
 		provider_userHeader = cur.getString(cur.getColumnIndex("provider_userHeader"));
 		provider_userName = cur.getString(cur.getColumnIndex("provider_userName"));
 		status = cur.getInt(cur.getColumnIndex("status"));
-		update_time = new Date(cur.getString(cur.getColumnIndex("update_time")));
+		String update_time_str = cur.getString(cur.getColumnIndex("update_time"));
+		try {
+			if(update_time_str!=null){
+				update_time = iso8601Format.parse(update_time_str);
+			}
+		} catch (java.text.ParseException e) {
+		}
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof ProviderAccount){
+			ProviderAccount puk = (ProviderAccount)obj;
+			return puk.account.equals(this.account)&&puk.provider_account.equals(this.provider_account)&&puk.provider_id.equals(this.provider_id);
+		}
+		return false;
 	}
 
 }

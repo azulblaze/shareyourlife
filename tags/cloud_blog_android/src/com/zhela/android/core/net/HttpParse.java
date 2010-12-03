@@ -253,7 +253,7 @@ public class HttpParse {
 		HttpConnectionParams.setSoTimeout(httpParameters, 70000);
 		hm.setParams(httpParameters);
 		hm.addHeader("User-Agent","Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.9) Gecko/20100824 Firefox/3.6.9 ( .NET CLR 3.5.30729)");
-		hm.addHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		hm.addHeader("Accept","application/x-www-form-urlencode");
 		hm.addHeader("Accept-Language", "en-us,en;q=0.5");
 		hm.addHeader("Accept-Encoding", "gzip,deflate");
 		hm.addHeader("Accept-Charset", "ISO-8859-1,utf-8;q=0.7,*;q=0.7");
