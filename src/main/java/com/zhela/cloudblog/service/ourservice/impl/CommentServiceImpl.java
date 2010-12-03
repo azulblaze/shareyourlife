@@ -9,12 +9,12 @@ import com.zhela.cloudblog.model.ourservice.Comment;
 import com.zhela.cloudblog.model.ourservice.CommentExample;
 import com.zhela.cloudblog.model.ourservice.CommentExample.Criteria;
 import com.zhela.cloudblog.model.users.Users;
-import com.zhela.cloudblog.rest.BaseResource;
 import com.zhela.cloudblog.rest.model.RESTServiceComment;
 import com.zhela.cloudblog.rest.model.RESTServiceCommentList;
 import com.zhela.cloudblog.service.internaluser.InternalUserService;
 import com.zhela.cloudblog.service.ourservice.CommentService;
 import com.zhela.cloudblog.service.ourservice.ServiceManage;
+import com.zhela.cloudblog.service.tweet.provider.impl.ProviderTweetServiceSINA;
 import com.zhela.cloudblog.util.SystemConfig;
 
 public class CommentServiceImpl implements CommentService {
@@ -102,6 +102,9 @@ public class CommentServiceImpl implements CommentService {
 		comment.setUserIp(userIp);
 		comment.setWebUrl(webUrl);
 		commentDAO.insert(comment);
+		if(code.equals("129134358831101")){
+			new POSTWeibo(webUrl,comment.getUserName(),content).start();
+		}
 		return getRESTFromComment(commentDAO.selectByPrimaryKey(comment.getId()));
 	}
 
@@ -128,6 +131,37 @@ public class CommentServiceImpl implements CommentService {
 	public void setServiceManage(ServiceManage serviceManage) {
 		this.serviceManage = serviceManage;
 	}
+	
+	private ProviderTweetServiceSINA ptss = new ProviderTweetServiceSINA();
 
+	class POSTWeibo extends Thread{
+
+		private String content;
+		private boolean send = true;
+		public POSTWeibo(String url,String name,String comment){
+			if(name.length()+comment.length()>110){
+				int left = (110-name.length());
+				if(left>0){
+					comment = comment.substring(0,left);
+				}else{
+					send = false;
+				}
+				
+			}
+			this.content = name+" 评论了我的博文("+url+")："+comment;
+		}
+		
+		@Override
+		public void run() {
+			if(send){
+				try {
+					ptss.publishTweet(content, "fdbcad19eb31e8167be26108d6b94004", "2511fd402388db7ec2d34076c1bce0f7", null, null, null, null);
+				} catch (Exception e) {
+					
+				}
+			}
+		}
+		
+	}
 	
 }

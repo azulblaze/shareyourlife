@@ -52,9 +52,6 @@ public class RESTServiceCommentList {
 	}
 	
 	public static void main(String args[]) throws Exception{
-		String _tmp = "sdfsdl\\sfds\\fsdf\\n";
-		System.out.println(_tmp);
-		String str = StringUtils.replace(_tmp,"\\","\\\\");
-		System.out.println(str);
+		System.out.println(System.currentTimeMillis());
 	}
 }
