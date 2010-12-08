@@ -302,7 +302,9 @@ form .section_break p
 input.button_text
 {
 	overflow:visible;
-	padding:0 7px;
+	padding:0 15px;
+	height:30px;
+	line-height:30px;
 	width:auto;
 }
 
