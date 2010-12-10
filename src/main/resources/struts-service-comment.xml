@@ -1,0 +1,34 @@
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+	<package name="service-comment" namespace="/web/service/comment" extends="default">
+		
+		<!-- for comment -->
+		<action name="info" class="serviceCommentAction" method="info">
+			<result name="success">/WEB-INF/pages/service/comment_info.jsp</result>
+		</action>
+		
+		<action name="status" class="serviceCommentAction" method="status">
+			<result name="success">/WEB-INF/pages/service/comment_status.jsp</result>
+		</action>
+		
+		<action name="list" class="serviceCommentAction" method="myComments">
+			<result name="success">/WEB-INF/pages/service/comment_ofmine.jsp</result>
+		</action>
+		
+		<action name="addservice" class="serviceCommentAction" method="postService">
+			<result name="input">/WEB-INF/pages/service/comment_add.jsp</result>
+			<result name="success" type="redirect-action">status</result>
+		</action>
+		
+		<action name="deleteservice" class="serviceCommentAction" method="deleteService"/>
+		
+		<action name="loadcount" class="serviceCommentAction" method="loadCount"/>
+		
+		<action name="updateservice" class="serviceCommentAction" method="updateStatus"/>
+		
+		<action name="deletecomment" class="serviceCommentAction" method="deleteComments"/>
+	</package>
+</struts>
