@@ -18,4 +18,5 @@
 	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/comment_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/our_service_SqlMap.xml"/>
 	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/service_bind_SqlMap.xml"/>
+	<sqlMap resource="com/zhela/cloudblog/dao/ourservice/make_better_SqlMap.xml"/>
 </sqlMapConfig>

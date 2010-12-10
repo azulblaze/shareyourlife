@@ -32,4 +32,5 @@
 	<bean id="commentDAO" class="com.zhela.cloudblog.dao.ourservice.impl.CommentDAOImpl"/>
 	<bean id="ourServiceDAO" class="com.zhela.cloudblog.dao.ourservice.impl.OurServiceDAOImpl"/>
 	<bean id="serviceBindDAO" class="com.zhela.cloudblog.dao.ourservice.impl.ServiceBindDAOImpl"/>
+	<bean id="makeBetterDAO" class="com.zhela.cloudblog.dao.ourservice.impl.MakeBetterDAOImpl"/>
 </beans>
