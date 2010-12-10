@@ -81,7 +81,7 @@ $(document).ready(function(){
 			var tds = $(this).find("td");
 			loadCount(code,tds.eq(3));
 			var aes = $(this).find("a");
-			aes.eq(0).bind("click",function(event){
+			aes.eq(1).bind("click",function(event){
 				event.preventDefault();
 				if($(this).html()=="停止"){
 					updateStatus($(this),code,"-1","开启",tds.eq(2));
@@ -89,7 +89,7 @@ $(document).ready(function(){
 					updateStatus($(this),code,"1","停止",tds.eq(2));
 				}
 			});
-			aes.eq(1).bind("click",function(event){
+			aes.eq(2).bind("click",function(event){
 				event.preventDefault();
 				deleteService($(this),code);
 			});
@@ -141,7 +141,7 @@ $(document).ready(function(){
 			<tbody id="list">
 				<s:iterator value="list">
 				<tr id="<s:property value='code'/>">
-					<td><s:property value='code'/></td>
+					<td><a href="/web/service/comment/list.do?code=<s:property value='code'/>"><s:property value='code'/></a></td>
 					<td><s:property value='parms'/></td>
 					<td><s:if test="status==1">使用中</s:if><s:if test="status==-1">已停止</s:if></td>
 					<td><s:property value='code'/></td>
