@@ -1,28 +1,8 @@
 var zl_domain="http://zhelazhela.com/";
-function newXMLHttpRequest() {
-	var xmlreq = false;
-	if (window.XMLHttpRequest) {
-		xmlreq = new XMLHttpRequest();
-	} else if (window.ActiveXObject) {
-		try { 
-			xmlreq = new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e1) { 
-			try {
-				xmlreq = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e2) {
-			} 
-		}
-	}
-	return xmlreq;
-} 
 var submit = document.getElementById("zl_submit");
 var zl_display_name = document.getElementById("zl_display_name");
 var zl_comment = document.getElementById("zl_comment");
 var zl_list = document.getElementById("zl_list");
-var post_comment_addr = zl_domain+"api/services/comments/post/129134358831101";
-var post_request = newXMLHttpRequest();
-var get_request = newXMLHttpRequest();
-var get_comment_addr = zl_domain+"api/services/comments/129134358831101/";
 var web_url = location.href;
 if(web_url.substring(0,7)=="http://"){
 	web_url= web_url.substring(7);
@@ -82,9 +62,6 @@ var ZLloadComment = function(json_text) {
  }
 function get_comment(page){
 	ZLappendScript(encodeURI(get_comment_addr+page+"?u="+web_url+"&t="+new Date().getTime()));
-	//get_request.open("GET", encodeURI(get_comment_addr+page+"?u="+web_url+"&t="+new Date().getTime()), true);
-	//get_request.onreadystatechange = loadComment;
-	//get_request.send(null);
 }
 get_comment(1);
 

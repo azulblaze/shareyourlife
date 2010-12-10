@@ -61,13 +61,13 @@ public class CommentResource extends BaseResource{
 			return RESPONSE_SERVICE_UNAVAILABLE;
 		}
 	}
-	
+	/**
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Path("/{id}")
 	public Response postComments(@PathParam("id") long id){
 		try{
-			RESTServiceComment rest = commentService.deleteComment(id);
+			RESTServiceComment rest = commentService.deleteComment(null,id);
 			if(rest!=null){
 				return genOK(rest);
 			}else{
@@ -77,7 +77,7 @@ public class CommentResource extends BaseResource{
 			return RESPONSE_SERVICE_UNAVAILABLE;
 		}
 	}
-
+	**/
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
 	}

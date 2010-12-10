@@ -13,6 +13,9 @@ public class RESTServiceComment {
 	private String username;
 	private String userheader;
 	private String content;
+	private String web_url;
+	private String service_code;
+	private String ip;
 	private java.util.Date update_time;
 	public String loadJSON(){
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -49,6 +52,24 @@ public class RESTServiceComment {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public String getWeb_url() {
+		return web_url;
+	}
+	public void setWeb_url(String webUrl) {
+		web_url = webUrl;
+	}
+	public String getService_code() {
+		return service_code;
+	}
+	public void setService_code(String serviceCode) {
+		service_code = serviceCode;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 	

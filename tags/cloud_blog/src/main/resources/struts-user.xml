@@ -3,31 +3,32 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 	
 <struts>
-	<package name="user" extends="struts-default">
-
-		<global-results>
-			<result name="exception">/html/error.html</result>
-			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
-		</global-results>
-		
-		<action name="signup" class="userAction" method="postUser">
-			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
+	<package name="user" namespace="/web/user" extends="default">
+	
+		<action name="signinsuccess" class="userAction" method="signinsuccess">
+			<result name="success">/WEB-INF/pages/user/welcome.jsp</result>
 		</action>
 		
-		<action name="signin" class="userAction" method="getUser">
-			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
+		<action name="signup" class="userAction" method="postUser">
+			<result name="input">/WEB-INF/pages/user/signup.jsp</result>
+			<result name="success" type="redirect-action">signinsuccess</result>
+		</action>
+		
+		<action name="signin" class="userAction" method="loadUser">
+			<result name="login">/WEB-INF/pages/user/signin.jsp</result>
+			<result name="success" type="redirect-action">signinsuccess</result>
 		</action>
 		
 		<action name="signout" class="userAction" method="deleteUser">
-			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
 		</action>
 		
 		<action name="changepassword" class="userAction" method="updatePassword">
-			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
+			<result name="input">/WEB-INF/pages/user/update_password.jsp</result>
+			<result name="login">/WEB-INF/pages/user/signin.jsp</result>
 		</action>
 		
 		<action name="changeheader" class="userAction" method="updateHeader">
-			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
+			<result name="input">/WEB-INF/pages/user/update_header.jsp</result>
 		</action>
 	</package>
 

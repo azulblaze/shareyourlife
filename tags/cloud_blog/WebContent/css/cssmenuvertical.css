@@ -1,0 +1,101 @@
+/* Root = Horizontal, Secondary = Vertical */
+ul#navmenu {
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+  width: 610px; /*For KHTML*/
+  list-style: none;
+  height: 30px;
+  background: #223344;
+  z-index:1000;
+}
+ul#navmenu .focused,ul#navmenu .focused:hover{
+	color:#556677;
+}
+ul#navmenu li {
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+  float: left; /*For Gecko*/
+  display: inline;
+  list-style: none;
+  position: relative;
+  height: 30px;
+  z-index:1000;
+}
+ul#navmenu ul {
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+  width:160px;
+  list-style: none;
+  display: none;
+  position: absolute;
+  left: 0;
+}
+
+ul#navmenu ul li {
+  float: none; /*For Gecko*/
+  display: block !important;
+  display: inline; /*For IE*/
+  border: 1px solid #ccc;
+}
+/* Root Menu */
+ul#navmenu a {
+  padding: 0px 20px 0px 10px;
+  float: none !important; /*For Opera*/
+  float: left; /*For IE*/
+  display: block;
+  color: #EEEEEE;
+  font: bold 12px/30px Verdana, Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  height: auto !important;
+  height: 100%; /*For IE*/
+}
+ul#navmenu li ul a{
+	background: #223344;
+} 
+ul#navmenu li a.navheader,ul#navmenu a.navheader:hover{
+	background:#4B75B3;
+	color:#fff;
+	padding-left:0px;
+}
+ul#navmenu a.navheader img{
+	width:28px;
+	height:28px;
+	margin-right:10px;
+	float:left;
+	padding:1px;
+}
+/* Root Menu Hover Persistence */
+ul#navmenu a:hover,
+ul#navmenu li:hover a,
+ul#navmenu li.iehover a {
+  color: #fc3;
+}
+ul#navmenu ul ul,
+ul#navmenu ul ul ul {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 160px;
+}
+/* Do Not Move - Must Come Before display:block for Gecko */
+ul#navmenu li:hover ul ul,
+ul#navmenu li:hover ul ul ul,
+ul#navmenu li.iehover ul ul,
+ul#navmenu li.iehover ul ul ul {
+  display: none;
+}
+
+ul#navmenu li:hover ul,
+ul#navmenu ul li:hover ul,
+ul#navmenu ul ul li:hover ul,
+ul#navmenu li.iehover ul,
+ul#navmenu ul li.iehover ul,
+ul#navmenu ul ul li.iehover ul {
+  display: block;
+}
+ul#navmenu ul li ul a{
+	width:160px;
+}

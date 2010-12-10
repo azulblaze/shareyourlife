@@ -66,7 +66,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 		if(u.getPassword().equals(password)){
 			return u;
 		}else{
-			throw new Exception("Your password is wrong");
+			throw new Exception("密码错误");
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 			Users u = list.get(0);
 			return u;
 		}else{
-			throw new Exception("No this account");
+			throw new Exception("不存在该帐号");
 		}
 	}
 
@@ -132,10 +132,10 @@ public class InternalUserServiceImpl implements InternalUserService {
 				usersDAO.updateByPrimaryKey(u);
 				return u;
 			}else{
-				throw new Exception("Your password is wrong");
+				throw new Exception("原始密码错误");
 			}
 		}else{
-			throw new Exception("No this account");
+			throw new Exception("不存在该账号");
 		}
 	}
 
@@ -143,12 +143,12 @@ public class InternalUserServiceImpl implements InternalUserService {
 	public Users insertUsers(String account, String password, String email,
 			String displayName) throws Exception {
 		if(usersDAO.selectByPrimaryKey(account)!=null){
-			throw new Exception("account exist");
+			throw new Exception("帐号已经存在");
 		}
 		UsersExample ue = new UsersExample();
 		ue.createCriteria().andDisplayNameEqualTo(displayName);
 		if(usersDAO.selectByExample(ue).size()>0){
-			throw new Exception("displayName exist");
+			throw new Exception("名字已经存在");
 		}
 		Users _users = new Users();
 		_users.setAccount(account);
@@ -173,7 +173,7 @@ public class InternalUserServiceImpl implements InternalUserService {
 			}
 			path = commonmethod.saveImg(header, root_path, "/upload/header", filetype);
 		}catch(Exception e){
-			throw new Exception("save header error");
+			throw new Exception("保持图片失败");
 		}
 		Users _users = new Users();
 		_users.setAccount(account);

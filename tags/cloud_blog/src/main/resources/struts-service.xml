@@ -3,18 +3,14 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 	
 <struts>
-	<package name="service" extends="struts-default">
-
-		<global-results>
-			<result name="exception">/html/error.html</result>
-			<result name="json">/WEB-INF/pages/common/json_response_tile.jsp</result>	
-		</global-results>
-		<!-- for comment -->
+	<package name="service" namespace="/web/service" extends="default">
 		
-		<action name="signout" class="serviceComment" method="deleteUser">
-			<result name="success">/WEB-INF/pages/main/signup.jsp</result>
+		<action name="allservice" class="serviceAction" method="allservice">
+			<result name="success">/WEB-INF/pages/service/my_service.jsp</result>
 		</action>
 		
-		
+		<action name="myservice" class="serviceAction" method="myservice">
+			<result name="success">/WEB-INF/pages/service/my_service.jsp</result>
+		</action>
 	</package>
 </struts>
