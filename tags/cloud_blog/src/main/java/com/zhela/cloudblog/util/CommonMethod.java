@@ -29,13 +29,17 @@ import com.zhela.cloudblog.service.image.ImageService;
 public class CommonMethod {
 
 	private static java.util.Map<String, String> picture_type = new java.util.HashMap<String, String>();
-
 	public static final SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
 	static {
 		picture_type.put("png", "png");
 		picture_type.put("gif", "gif");
 		picture_type.put("jpg", "jpg");
 		picture_type.put("jpeg", "jpg");
+		picture_type.put("image/png", "png");
+		picture_type.put("image/gif", "gif");
+		picture_type.put("image/jpeg", "jpg");
+		picture_type.put("image/pjpeg", "jpg");
+		picture_type.put("image/x-png", "png");
 	}
 
 	private CommonMethod() {

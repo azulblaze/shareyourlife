@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public abstract class BaseAction extends ActionSupport {
-	
+	protected final static String session_user = "user";
 	protected final static String ROOT_PARENT_ID = "0";
 	protected String urlBack;
 	protected String JSON = "json";

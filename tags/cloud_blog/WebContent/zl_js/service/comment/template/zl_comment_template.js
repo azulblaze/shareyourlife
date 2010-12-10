@@ -1,6 +1,6 @@
 var zl_domain="http://zhelazhela.com/";
-var post_comment_addr = zl_domain+"api/services/comments/post/129134358831101";
-var get_comment_addr = zl_domain+"api/services/comments/129134358831101/";
+var post_comment_addr = zl_domain+"api/services/comments/post/zlIDzl";
+var get_comment_addr = zl_domain+"api/services/comments/zlIDzl/";
 var zl_head=document.getElementsByTagName('HEAD').item(0);
 var zl_style=document.createElement('link');
 zl_style.href=zl_domain+"zl_css/zl_css.css";
