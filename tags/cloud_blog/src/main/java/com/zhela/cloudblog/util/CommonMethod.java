@@ -40,6 +40,8 @@ public class CommonMethod {
 		picture_type.put("image/jpeg", "jpg");
 		picture_type.put("image/pjpeg", "jpg");
 		picture_type.put("image/x-png", "png");
+		picture_type.put("application/octet-stream", "zip");
+		picture_type.put("application/gzip", "gz");
 	}
 
 	private CommonMethod() {
@@ -77,6 +79,21 @@ public class CommonMethod {
 
 		String base_name = getLogoName();
 		String path = dir + base_name + "." + filetype;
+		File _file = new File(root_path + path);
+		File folder = _file.getParentFile();
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		try {
+			file.renameTo(_file);
+		} catch (Exception e) {
+			throw new Exception("保存文件失败");
+		}
+		return path;
+	}
+	
+	public synchronized String saveFile(File file,String root_path, String path,String filetype) throws Exception {
+		path = path + getFileName()+"."+filetype;
 		File _file = new File(root_path + path);
 		File folder = _file.getParentFile();
 		if (!folder.exists()) {
