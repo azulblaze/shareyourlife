@@ -84,7 +84,7 @@ $(document).ready(function(){
 					<td><s:property value="ip"/></td>
 					<td><s:property value="username"/></td>
 					<td><s:property value="content"/></td>
-					<td><a href="<s:property value="id"/>">删除</a></a></td>
+					<td><a href="<s:property value="id"/>">删除</a></td>
 				</tr>
 				</s:iterator>
 			</tbody>

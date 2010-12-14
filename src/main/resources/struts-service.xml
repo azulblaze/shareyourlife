@@ -12,5 +12,15 @@
 		<action name="myservice" class="serviceAction" method="myservice">
 			<result name="success">/WEB-INF/pages/service/my_service.jsp</result>
 		</action>
+		
+		<action name="makebetter" class="serviceAction" method="makeBetter">
+			<result name="input">/WEB-INF/pages/service/make_better.jsp</result>
+		</action>
+		
+		<action name="betterinfo" class="serviceAction" method="BetterInfo">
+			<result name="success">/WEB-INF/pages/service/better_info.jsp</result>
+		</action>
+		
+		<action name="deletebetterinfo" class="serviceAction" method="delBetterInfo"/>
 	</package>
 </struts>
