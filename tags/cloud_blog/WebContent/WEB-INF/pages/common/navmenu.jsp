@@ -19,6 +19,10 @@
 					  <li><a href="/web/service/comment/list.do">我的评论</a></li>
 					</ul>
 				  </li>
+				  <li><a href="/web/service/makebetter.do">改善服务</a></li>
+				  <s:if test="#session.user.account=='admin'">
+				  <li><a href="/web/service/betterinfo.do">改善信息</a></li>
+				  </s:if>
 				</ul>
 			  </li>
 			  <li><a href="/web/user/signout.do">退出</a></li>
