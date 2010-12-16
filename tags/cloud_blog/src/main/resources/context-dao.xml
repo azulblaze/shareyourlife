@@ -33,4 +33,8 @@
 	<bean id="ourServiceDAO" class="com.zhela.cloudblog.dao.ourservice.impl.OurServiceDAOImpl"/>
 	<bean id="serviceBindDAO" class="com.zhela.cloudblog.dao.ourservice.impl.ServiceBindDAOImpl"/>
 	<bean id="makeBetterDAO" class="com.zhela.cloudblog.dao.ourservice.impl.MakeBetterDAOImpl"/>
+	<bean id="surveyDAO" class="com.zhela.cloudblog.dao.ourservice.impl.SurveyDAOImpl"/>
+	<bean id="questionDAO" class="com.zhela.cloudblog.dao.ourservice.impl.QuestionDAOImpl"/>
+	<bean id="otherAnswerDAO" class="com.zhela.cloudblog.dao.ourservice.impl.OtherAnswerDAOImpl"/>
+	<bean id="answerDAO" class="com.zhela.cloudblog.dao.ourservice.impl.AnswerDAOImpl"/>
 </beans>
