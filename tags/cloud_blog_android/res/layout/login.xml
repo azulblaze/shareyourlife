@@ -6,36 +6,28 @@
     android:gravity="center_vertical"
     android:background="@drawable/bg"
     >
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
+	    android:background="@drawable/header_background"
 	    >
-	    <Button
-			android:layout_width="80dip" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/button_cancel"
-		    android:id="@+id/cancel_button"
-		    android:layout_alignParentLeft ="true"/>
 		<TextView
-			android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/add_account"
-		    android:id="@+id/addAccount_text"
-		    android:layout_marginLeft="100dip"
-		    android:layout_centerInParent="true"/>
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:singleLine="true"
+		    android:text="@string/header_login"
+		    android:textSize="16dip"
+		    android:textStyle="bold"
+		    android:layout_gravity="center"
+		    android:textColor="@color/white"
 		/>
-		<Button
-			android:layout_width="80dip" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/button_reg"
-		    android:id="@+id/reg_button"
-		    android:layout_alignParentRight ="true"/>
-	</RelativeLayout>
+	</LinearLayout>
 	<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:orientation="vertical"
 		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent">
+		    android:layout_height="fill_parent"
+		    android:background="@color/background_color">
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:orientation="vertical"
 		    android:layout_width="fill_parent"
@@ -43,54 +35,77 @@
 		    android:layout_marginLeft="10dip"
 		    android:layout_marginRight="10dip"
 		    >
-		<ImageView android:id="@+id/logo"
-			android:layout_gravity="left"
-			android:src="@drawable/logo"
-			android:layout_width="100dip"
-			android:layout_height="wrap_content"/>
 	    <TextView
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/login_account"
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"
+		    android:singleLine="true"
+		    android:text="@string/user_account"
 		    android:id="@+id/login_account"
 		    android:layout_gravity="left"
+		    android:textColor="@color/font_black"
+		    android:textSize="14dip"
+		    android:textStyle="bold"
 		    android:layout_marginTop="20dip"/>
 		<EditText
 			android:layout_width="fill_parent" 
-		    android:layout_height="wrap_content" 
-		    android:id="@+id/login_account_input"
+		    android:layout_height="fill_parent" 
+		    android:id="@+id/user_account_input"
+		    android:background="@drawable/input_box"
+		     android:singleLine="true"
 		    android:layout_marginTop="5dip"/>
 		<TextView
 		    android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content" 
-		    android:text="@string/login_password"
-		    android:id="@+id/login_password"
+		    android:text="@string/user_password"
+		    android:textColor="@color/font_black"
+		    android:textSize="14dip"
+		    android:textStyle="bold"
+		    android:singleLine="true"
 		    android:layout_gravity="left"
 		    android:layout_marginTop="20dip"/>
 		<EditText android:layout_width="fill_parent" 
 		    android:layout_height="wrap_content" 
-		    android:id="@+id/login_password_input"
+		    android:id="@+id/user_password_input"
+		    android:background="@drawable/input_box"
 		    android:password="true"
+		    android:singleLine="true"
 		    android:layout_marginTop="5dip"/>
-		<CheckBox android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
+		<CheckBox android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content"
 		    android:text="@string/remember_password"
-		    android:id="@+id/savepassword_input"
+		    android:id="@+id/remember_password_input"
+		    android:button="@drawable/checkbox_bg"
+		    android:textColor="@color/font_black"
+		    android:textSize="14dip"
+		    android:textStyle="bold"
 		    android:layout_gravity="left"
 		    android:layout_marginTop="5dip"/>
-		<TextView android:layout_width="wrap_content" 
+		<TextView android:layout_width="fill_parent" 
 		    android:layout_height="wrap_content" 
 		    android:id="@+id/notice_text"
 		    android:visibility="gone"
+		    android:textColor="@color/logo_color"
+		    android:textSize="14dip"
+		    android:textStyle="bold"
 		    android:layout_gravity="left"
 		    android:layout_marginTop="10dip"/>
 		<Button
-			android:layout_width="wrap_content" 
+			android:layout_width="fill_parent" 
 		    android:layout_height="wrap_content" 
+		    android:width="100dip"
 		    android:text="@string/button_ok"
 		    android:id="@+id/login_button"
-		    android:layout_gravity="left"
+		    android:layout_gravity="right"
+		    android:textColor="@color/white"
+		    android:textSize="14dip"
+		    android:textStyle="bold"
+		    android:background="@drawable/button_bg_green"
 		    android:layout_marginTop="20dip"/>
+		<ImageView android:layout_width="fill_parent"
+			android:layout_height="1dip"
+			android:src="@drawable/line"
+			android:layout_marginTop="5dip"
+			android:layout_marginBottom="5dip"/>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

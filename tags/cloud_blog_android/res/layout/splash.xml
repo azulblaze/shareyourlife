@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/background"
     >
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="vertical"
@@ -13,6 +13,7 @@
 	    >
 	<ImageView android:id="@+id/logo"
 		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="0dip"
 		android:src="@drawable/logo"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"/>

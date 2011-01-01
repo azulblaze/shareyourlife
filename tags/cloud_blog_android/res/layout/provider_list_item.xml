@@ -6,7 +6,7 @@
 	android:padding="2dip">
 	<ImageView android:maxWidth="200dip"
 		android:maxHeight="70dip"
-		android:src="@drawable/default_header"
+		android:src="@drawable/default_avatar"
 		android:layout_width="fill_parent"
 		android:layout_height="80dip"
 		android:layout_gravity="center"

@@ -41,14 +41,10 @@ public class Login extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         progeress = new ProgressDialog(this);
-        account_input = (EditText)findViewById(R.id.login_account_input);
-        account_password = (EditText)findViewById(R.id.login_password_input);
-        account_savepassword = (CheckBox)findViewById(R.id.savepassword_input);
+        account_input = (EditText)findViewById(R.id.user_account_input);
+        account_password = (EditText)findViewById(R.id.user_password_input);
+        account_savepassword = (CheckBox)findViewById(R.id.remember_password_input);
         notice = (TextView)findViewById(R.id.notice_text);
-        Button cancel = (Button)this.findViewById(R.id.cancel_button);
-        cancel.setOnClickListener(cancel_listener);
-        Button reg = (Button)this.findViewById(R.id.reg_button);
-        reg.setOnClickListener(reg_listener);
         Button login_button = (Button)this.findViewById(R.id.login_button);
         account_input.addTextChangedListener(account_input_watcher);
         account_password.addTextChangedListener(account_password_watcher);
@@ -76,26 +72,6 @@ public class Login extends DefaultActivity {
 		finish();
 	}
 
-
-
-
-
-
-
-	private OnClickListener reg_listener = new OnClickListener(){
-		@Override
-		public void onClick(View arg0) {
-			Intent reg = new Intent(Login.this,AccountReg.class);
-			Login.this.startActivity(reg);
-		}
-    };
-    private OnClickListener cancel_listener = new OnClickListener(){
-		@Override
-		public void onClick(View arg0) {
-			Intent list = new Intent(Login.this,AccountList.class);
-			Login.this.startActivity(list);
-		}
-    };
     private TextWatcher account_input_watcher = new TextWatcher(){
 		@Override
 		public void afterTextChanged(Editable arg0) {
