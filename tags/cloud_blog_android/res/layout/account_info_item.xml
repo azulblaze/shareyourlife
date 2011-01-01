@@ -6,7 +6,7 @@
 	android:padding="2dip">
 	<ImageView android:maxWidth="50dip"
 		android:maxHeight="50dip"
-		android:src="@drawable/default_header"
+		android:src="@drawable/default_avatar"
 		android:layout_width="50dip"
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill_horizontal"
@@ -34,7 +34,7 @@
 		android:layout_height="30dip"
 		android:padding="2dip"
 		android:layout_gravity="center_vertical"
-		android:src="@drawable/expander_default"
+		android:src="@drawable/checkbox"
 		android:layout_marginRight="10dip"
 		/>
 </LinearLayout>

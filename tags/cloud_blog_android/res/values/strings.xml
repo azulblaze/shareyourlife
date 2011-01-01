@@ -11,7 +11,10 @@
     <string name="button_reg">注册</string>
     <string name="button_cancel">取消</string>
     <string name="app_name">博乐</string>
-    <string name="add_account">增加帐号</string>
+    <string name="add_account">注册帐号</string>
     <string name="reg_account">注册帐号</string>
     <string name="refresh">刷新</string>
+    <string name="header_login">登陆</string>
+    <string name="user_account">帐号</string>
+    <string name="user_password">密码</string>
 </resources>
