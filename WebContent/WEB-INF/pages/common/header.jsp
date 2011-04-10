@@ -4,10 +4,10 @@
 <div id="logo">
 	<div class="wapper">
 		<div class="logo_img">
-			<a href="/index.do" class="guangsantong"><img alt="广三通综合信息平台" src="images/logo.png"/></a>
+			<a href="index.do" class="guangsantong"><img alt="广三通综合信息平台" src="images/logo.png"/></a>
 		</div>
 		<div class="link_account">
-			提示：没有登录
+			<a href="login.do">退出</a>
 		</div>
 	</div>
 </div>
